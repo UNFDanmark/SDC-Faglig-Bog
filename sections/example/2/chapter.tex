@@ -1,0 +1,50 @@
+\chapter{Generelle LaTeX tips}
+Her gennemgår jeg nogle generelle LaTeX tips, så der er mindre ``Googling'' 
+involveret.
+
+Det burde ikke være nødvendigt for jer at ændre på strukturen af dokumentet. 
+Alle de nødvendige features skulle gerne være inkluderet, hvis ikke skal vi 
+sørge for at få dem tilføjet. Så kontakt venligst \LaTeX guruerne for at få 
+tilføjet manglende features. Såsom highlighting af et programmeringssprog eller 
+et tip til hvordan man løser et problem.
+
+\section{Linjeskift}
+I \LaTeX er det velanset at adskille sine paragraffer ved at bruge to 
+linjeskift. F.eks.
+\begin{verbatim}
+Første paragraf
+
+Anden paragraf
+\end{verbatim}
+Ved at bruge denne teknik, kan man indstille hvordan linjeskift fungerer 
+igennem indstillinger fra preamblen. Hvis man bruger 
+\textbackslash\textbackslash kan man tvinge \LaTeX til at lave et linjeskift 
+uden at indentere den næste paragraf. Dette skal dog undgås, og generelt ville 
+det være at foretrække at gøre det på følgende måde:
+\begin{verbatim}
+Første paragraf
+
+\noindent Anden paragraf
+\end{verbatim}
+
+\noindent Du kan styre præcis hvor meget rum der er mellem dine paragraffer ved 
+hjælp af 
+\textbackslash vspace makroen.
+\begin{verbatim}
+Første paragraf
+\vspace{5mm}
+Anden paragraf
+\end{verbatim}
+
+\section{Billeder og figurer}
+Du kan inkludere forskellige former for grafik i dine dokumenter ved hjælp af 
+\textbackslash includegraphics makroen. Dette er standard \LaTeX, og en Google 
+søgning vil tjene dig godt her.
+
+\section{Tabeller}
+
+\section{Matematik}
+
+\section{Formatering af tekst}
+
+\section{Referencer}

@@ -1,0 +1,77 @@
+%%
+% CODE HIGHLIGHTING LaTeX file, DO NOT TOUCH
+% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde 
+% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections'' 
+% som du skal bruge.
+
+%% Primitiv syntax rendering
+\usepackage{fancyvrb}
+
+%% Mere fancy syntax rendering
+\usepackage{listings}
+%% lstautogobble er en custom package, der fjerner leading spaces i lstlisting 
+%% miljøer.
+\usepackage{lstautogobble}
+
+\usepackage{xcolor}
+
+\newif\ifsyntaxcolor
+\syntaxcolortrue
+\ifsyntaxcolor
+\definecolor{code-back}{RGB}{249,245,249}
+\definecolor{code-comment}{RGB}{57,93,161}
+\definecolor{code-keyword}{RGB}{127,0,85}
+\definecolor{code-number}{RGB}{51,51,51}
+\definecolor{code-string}{RGB}{51,151,51}
+\else
+\definecolor{code-back}{rgb}{1,1,1}
+\definecolor{code-comment}{rgb}{0.5,0.5,0.5}
+\definecolor{code-keyword}{rgb}{0.5,0.5,0.5}
+\definecolor{code-number}{rgb}{0.5,0.5,0.5}
+\definecolor{code-string}{rgb}{0.5,0.5,0.5}
+\fi
+
+\lstdefinestyle{basic}{
+	%% Syntax color
+	backgroundcolor=\color{code-back},
+	commentstyle=\color{code-comment},
+	keywordstyle=\color{code-keyword},
+	numberstyle=\color{code-number},
+	stringstyle=\color{code-string},
+	basicstyle=\footnotesize,
+	%% Line numbers
+	numbers=left,
+	numbersep=5pt,
+	frame=leftline,
+	%% Place caption
+	captionpos=b,
+	%% Hide spaces in strings
+	showstringspaces=false,
+	%% Tabsize
+	tabsize=4,
+	autogobble
+}
+
+\lstnewenvironment{JavaCode}[2]
+	{\lstset{language=Java, style=basic, caption=#1, label=#2}}
+	{}
+
+%\newenvironment{JavaCode}[2]
+%	{\begin{XJavaCode}{#1}{#2}}
+%	{\end{XJavaCode}}
+	
+\lstnewenvironment{XmlCode}[2]
+	{\lstset{language=XML, style=basic, caption=#1, label=#2}}
+	{}
+	
+%\newenvironment{XmlCode}[2]
+%	{\begin{XXmlCode}{#1}{#2}}
+%	{\end{XXmlCode}}
+	
+\lstnewenvironment{LaTeXCode}[2]
+	{\lstset{language=[LaTeX]TeX, style=basic, caption=#1, label=#2}}
+	{}
+	
+%\newenvironment{LaTeXCode}[2]
+%	{\begin{XJavaCode}{#1}{#2}}
+%	{\end{XJavaCode}}

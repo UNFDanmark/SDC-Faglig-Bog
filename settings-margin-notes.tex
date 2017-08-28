@@ -1,0 +1,28 @@
+%%
+% MARGINNOTE LaTeX file, DO NOT TOUCH
+% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde 
+% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections'' 
+% som du skal bruge.
+
+\usepackage{marginnote}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+
+\newcommand{\marginfigure}[2]{
+	\marginnote{
+		\begin{center}
+			\includegraphics[width=\marginparwidth]{#1}
+			\captionof{figure}{#2}
+		\end{center}
+	}
+}
+
+\newcommand{\bottomfigure}[2]{
+	\begin{figure*}[b]
+		\centering
+		\includegraphics[width=\textwidth,height=2cm,keepaspectratio]{#1}
+		\caption{#2}
+	\end{figure*}
+}

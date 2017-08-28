@@ -1,0 +1,123 @@
+\chapter{Introduktion til bogens stil}
+Dette kapitel er beskrevet i filen \texttt{sections/example/1/chapter.tex}.
+
+\vspace{5mm}
+
+Vi kan bruge \texttt{\textbackslash marginfigure\{billede\}\{Caption\}} til at 
+indsætte et billede i margen. Her er et eksempel hvor vi skriver 
+\texttt{\textbackslash marginfigure\{sample\} \{Some margin note here.\}}, hvor 
+``sample'' er et billede i den ``figures'' mappe der passer til dette dokument. 
+Altså \texttt{sections/example/1/figures/}. 
+\marginfigure{sample}{Some margin note here.}
+Ligeledes kan vi bruge \texttt{\textbackslash 
+bottomfigure\{billede\}\{Caption\}} 
+til at indsætte et billede i bunden af siden.
+\bottomfigure{sample}{Some bottom note here.}
+
+Grundet \LaTeX\xspace magi, kan man komme ud for at skulle compile dokumentet 
+to gange for at noter i margen virker. Det skal du ikke tænke for meget over.
+
+\clearpage
+
+JavaCode miljøet, lader os skrive Java-kode ind i vores .TeX fil, og få koden 
+syntax-highlighted. Således kommer følgende LaTeX kode:
+\begin{LaTeXCode}{caption}{label}
+\begin{JavaCode}{The fish class}{snippet1}
+	public class Fish {
+		public static void main(String[] args) {
+			doAThing();
+			int a = 32;
+			String fish = tish;
+			Abe b = new Abe(fish, a, "AbeMand");
+			return;
+		}
+	}
+\end{JavaCode}
+\end{LaTeXCode}
+Til at se så flot ud:
+\begin{JavaCode}{The fish class}{lst:snippet1}
+	public class Fish {
+		public static void main(String[] args) {
+			doAThing();
+			int a = 32;
+			String fish = tish;
+			Abe b = new Abe(fish, a, "AbeMand");
+			return;
+		}
+	}
+\end{JavaCode}
+
+Der er et tilsvarende miljø til XML, ved navn XmlCode.
+\begin{XmlCode}{A XML document}{lst:xmlsnippet1}
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout 
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical" >
+		<TextView android:id="@+id/text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hello, I am a TextView" />
+		<Button android:id="@+id/button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hello, I am a Button" />
+	</LinearLayout>
+\end{XmlCode}
+
+Læg mærke til hvordan vi gav den en caption ``The fish class'' og en label 
+``lst:snippet1'' således at vi nu kan referere til \autoref{lst:snippet1}, ved 
+at skrive \texttt{\textbackslash autoref\{lst:snippet1\}}.
+\vspace{2mm}
+Vi kan også nøjes med at indsætte tekst i margen ved \texttt{\textbackslash 
+	marginnote\{Tekst\}}.
+\marginnote{Sej note her}
+
+
+Vi kan lave pæne sektioner ved hjælp af makroen \texttt{\textbackslash section}.
+
+\section{Boxes}
+Ligeledes kan vi lave under-sektioner ved hjælp af makroen 
+\texttt{\textbackslash subsection}.
+
+Her vil vi vise nogle eksempler på nogle content-boxes der kan laves.
+\begin{samepage}
+	\subsection{Example}
+	\begin{LaTeXCode}{caption}{label}
+	\begin{example}
+		An example here
+	\end{example}
+	\end{LaTeXCode}
+	\begin{example}
+		An example here
+	\end{example}
+\end{samepage}
+
+\subsection{Exercise}
+\begin{LaTeXCode}{caption}{label}
+\begin{exercise}
+	An exercise here7
+\end{exercise}
+\end{LaTeXCode}
+\begin{exercise}
+	An exercise here
+\end{exercise}
+
+\subsection{Remark}
+\begin{LaTeXCode}{caption}{label}
+\begin{remark}
+	Some remark here
+\end{remark}
+\end{LaTeXCode}
+\begin{remark}
+	Some remark here
+\end{remark}
+
+\section{Index i slutningen af bogen}
+I slutningen af bogen er der mulighed for at tilføje en ``index'' over emnerne 
+i bogen.
+Disse emner kan blive tilføjet ved at bruge makroen \texttt{\textbackslash 
+index}, du skriver blot \texttt{\textbackslash index\{emne\}}. Har du brug for 
+at have et emne med et underemne, kan du bruge et ! til at adskille dem. 
+\texttt{\textbackslash index\{Fisk!Makrel\}}.

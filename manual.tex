@@ -1,0 +1,44 @@
+% !TeX spellcheck = da_DK
+
+%% MAIN LaTeX file, DO NOT TOUCH
+%% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde 
+%% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections'' 
+%% som du skal bruge.
+
+%% Sæt dokumentet til draft-mode. Dette har pt. begrænset betydning.
+\newif\ifdraftmode
+\draftmodetrue
+
+%% Dette indlæser vores ``preamble'' som er den fil der sørger for opsætningen 
+%% af vores dokument.
+\input{preamble}
+
+
+%% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af 
+%% bogen.
+\begin{document}
+
+	%% Indsæt forsiden.	
+	\input{title-page}
+	
+	%% Print indholdsfortegnelsen
+	\tableofcontents
+	
+	%% Herfra begynder det egentlige indhold. Vi bruger ``graphicspath'' til at 
+	%% isolere forskellige emners figurer fra hinanden, så der ikker bliver 
+	%% pillet i andres figurer, eller slettet figurer man ikke vidste andre 
+	%% brugte.
+	%
+	%% Filstrukturen er designet til at være:
+	%% sections/<part>/<chapter>/chapter.tex
+	%% sections/<part>/<chapter>/figures/
+	
+	\part{Bogens stil}
+	
+	\graphicspath{{sections/example/custom-macros/figures/}}
+	\input{sections/example/custom-macros/chapter}
+	
+	%\graphicspath{{sections/example/2/figures/}}
+	%\input{sections/example/2/chapter}
+	
+\end{document}
