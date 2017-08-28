@@ -1,16 +1,15 @@
 \chapter{Introduktion til bogens stil}
-Dette kapitel er beskrevet i filen \texttt{sections/example/1/chapter.tex}.
+Dette kapitel er skrevet i filen \texttt{sections/example/1/chapter.tex}.
 
 \vspace{5mm}
 
-Vi kan bruge \texttt{\textbackslash marginfigure\{billede\}\{Caption\}} til at 
+Vi kan bruge \LaTeXInline|\marginfigure{billede}{Caption}| til at 
 indsætte et billede i margen. Her er et eksempel hvor vi skriver 
-\texttt{\textbackslash marginfigure\{sample\} \{Some margin note here.\}}, hvor 
+\LaTeXInline|\marginfigure{sample}{Some margin note here.}|, hvor 
 ``sample'' er et billede i den ``figures'' mappe der passer til dette dokument. 
 Altså \texttt{sections/example/1/figures/}. 
 \marginfigure{sample}{Some margin note here.}
-Ligeledes kan vi bruge \texttt{\textbackslash 
-bottomfigure\{billede\}\{Caption\}} 
+Ligeledes kan vi bruge \LaTeXInline|\bottomfigure{billede}{Caption}|
 til at indsætte et billede i bunden af siden.
 \bottomfigure{sample}{Some bottom note here.}
 
@@ -20,7 +19,7 @@ to gange for at noter i margen virker. Det skal du ikke tænke for meget over.
 \clearpage
 
 JavaCode miljøet, lader os skrive Java-kode ind i vores .TeX fil, og få koden 
-syntax-highlighted. Således kommer følgende LaTeX kode:
+syntax-highlighted. Således kommer følgende \LaTeX kode:
 \begin{LaTeXCode}{caption}{label}
 \begin{JavaCode}{The fish class}{snippet1}
 	public class Fish {
@@ -68,18 +67,20 @@ Der er et tilsvarende miljø til XML, ved navn XmlCode.
 
 Læg mærke til hvordan vi gav den en caption ``The fish class'' og en label 
 ``lst:snippet1'' således at vi nu kan referere til \autoref{lst:snippet1}, ved 
-at skrive \texttt{\textbackslash autoref\{lst:snippet1\}}.
+at skrive \LaTeXInline|\autoref{lst:snippet1}|.
 \vspace{2mm}
-Vi kan også nøjes med at indsætte tekst i margen ved \texttt{\textbackslash 
-	marginnote\{Tekst\}}.
+Vi kan også nøjes med at indsætte tekst i margen ved 
+\LaTeXInline|\marginnote{Tekst}|.
 \marginnote{Sej note her}
 
+\vspace{5mm}
 
-Vi kan lave pæne sektioner ved hjælp af makroen \texttt{\textbackslash section}.
+Vi kan lave pæne sektioner ved hjælp af makroen \LaTeXInline|\section|, som 
+illustreret herunder:
 
 \section{Boxes}
 Ligeledes kan vi lave under-sektioner ved hjælp af makroen 
-\texttt{\textbackslash subsection}.
+\LaTeXInline|\subsection|.
 
 Her vil vi vise nogle eksempler på nogle content-boxes der kan laves.
 \begin{samepage}
@@ -117,7 +118,8 @@ Her vil vi vise nogle eksempler på nogle content-boxes der kan laves.
 \section{Index i slutningen af bogen}
 I slutningen af bogen er der mulighed for at tilføje en ``index'' over emnerne 
 i bogen.
-Disse emner kan blive tilføjet ved at bruge makroen \texttt{\textbackslash 
-index}, du skriver blot \texttt{\textbackslash index\{emne\}}. Har du brug for 
+Disse emner kan blive tilføjet ved at bruge makroen \LaTeXInline|\index|, 
+du 
+skriver blot \LaTeXInline|\index{emne}|. Har du brug for 
 at have et emne med et underemne, kan du bruge et ! til at adskille dem. 
-\texttt{\textbackslash index\{Fisk!Makrel\}}.
+\LaTeXInline|\index{Fisk!Makrel}|.
