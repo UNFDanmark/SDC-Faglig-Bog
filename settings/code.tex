@@ -55,23 +55,19 @@
 \lstnewenvironment{JavaCode}[2]
 	{\lstset{language=Java, style=basic, caption=#1, label=#2}}
 	{}
-
-%\newenvironment{JavaCode}[2]
-%	{\begin{XJavaCode}{#1}{#2}}
-%	{\end{XJavaCode}}
+	
+\newcommand{\JavaInline}{\lstset{language=Java, style=basic}\lstinline}
 	
 \lstnewenvironment{XmlCode}[2]
 	{\lstset{language=XML, style=basic, caption=#1, label=#2}}
 	{}
 	
-%\newenvironment{XmlCode}[2]
-%	{\begin{XXmlCode}{#1}{#2}}
-%	{\end{XXmlCode}}
+\newcommand{\XmlInline}{\lstset{language=Xml, style=basic}\lstinline}
 	
 \lstnewenvironment{LaTeXCode}[2]
 	{\lstset{language=[LaTeX]TeX, style=basic, caption=#1, label=#2}}
 	{}
+
+\newcommand{\LaTeXInline}{\lstset{language=[LaTeX]TeX, style=basic}\lstinline}
+
 	
-%\newenvironment{LaTeXCode}[2]
-%	{\begin{XJavaCode}{#1}{#2}}
-%	{\end{XJavaCode}}
