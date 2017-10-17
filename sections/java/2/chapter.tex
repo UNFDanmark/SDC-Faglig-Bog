@@ -1,0 +1,139 @@
+\chapter{Kontrol og Metoder}
+
+	I programmering kan nogle problemer ikke udtrykkes blot med linæer kode. Vi
+	behøver mere udtrykskraft, end hvad aritmetik og basal beslutningsevner kan give
+	os. For eksempel vil vi gerne kunne sige ting som ``gør \emph{det her} indtil
+	\emph{dette} sker'' eller ``gør \emph{dette}, først for \emph{1}, så for
+	\emph{2}, og så videre, indtil vi rammer \emph{n}.''
+
+	Derfor indeholder Java mekanismer for at kunne udtrykke sådanne problemer, og
+	det er disse vi vil dække i dette kapitel:
+
+	\begin{enumerate}
+		\item Looping: Sådan går du mere kontrol
+		\item Funktioner: Forbedre dine metoder
+		\item Algoritmer: Effektivitet og Kløgtighed
+	\end{enumerate}
+
+\section{Looping}
+
+	\begin{remark}  Arbejds-note:
+		Dækker \javaInline{for}, \javaInline{while} og \javaInline{break}.
+	\end{remark}
+
+	\begin{remark}  Arbejds-note:
+		Som bonus vil jeg gerne have noter om \javaInline{repeat} og
+		\javaInline{continue}, da disse er niché, men er samtidige nemme at
+		forstå.
+
+		Jeg vil ikke have noter om mere niché ting, som f.eks
+		\emph{named-breaks}, da disse kræver introduktion til nye koncepter.
+	\end{remark}
+
+	\begin{remark}  Arbejds-note:
+		Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
+		historien om \emph{structured programming}, og hvorfor \javaInline{goto}
+		ikke er en ting i Java.
+	\end{remark}
+
+	\begin{exercise}
+		Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
+		lærers plan om at få ham til at tie stille. Hun bedte ham lægge tallene
+		fra \(1\) til \(100\) sammen, i håbet at dette ville optage det unge
+		geni i lidt tid. Gauss realiserede dog at der måtte være en bedre måde
+		at løse problemet på, og udledte formularen \(\fract{n\cdot(n+1)}{2}\).
+		Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
+		kedelig opgave.
+
+		Brug et \emph{for-loop} til at beregne \(1^2+2^2+\dots+100^2\).
+	\end{exercise}
+
+	\begin{exercise}
+		Der er selvfølgelig ikke noget som forhindrer at du bruger et
+		\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
+		være vældig praktisk.
+
+		Hvis vi lader \(f(n) = 1+2+\dots+n\), så beregn
+		\(f(1)+f(2)+\dots+f(100)\), ved at bruge et \emph{for-loop} i et andet
+		\emph{for-loop}.
+
+		\marginnote{Arbejds-note: Jeg er ikke helt tilfreds med denne opgave, da man kan løse den med copy-paste, og den kræver mere involveret matematisk notation at formulere. Til gengæld kunne den være sjov at komme tilbage til i algoritme-delen, da der eksistere en algoritme som kan gøre det med et enkelt for-loop.}
+	\end{exercise}
+
+
+\blindtext
+
+\section{Funktioner}
+
+	\begin{remark}  Arbejds-note:
+		Dækker \emph{metode-definitioner}, \emph{retur-typer},
+		\emph{argument-lister} og \javaInline{return}.
+		Jeg vil ikke dække statiske metoder, overloading, eller andre advanceret
+		emner, da disse igen er ret niché, og kræver introduktion til nye
+		koncepter.
+	\end{remark}
+
+	\begin{remark}  Arbejds-note:
+		Et emne som er \emph{meget vigtigt} men som ikke er relevant før de
+		kender til klasser, og som jeg ikke ser bliver et problem før projektet,
+		er \emph{pass-by-value} vs. \emph{pass-by-reference}.
+		Jeg er ikke vild med at introducere dem til sådanne niché fagtermer, men
+		selve problematikken bør nævnes, da det garenteret vil komme op, og det
+		vil være nemmere for en hjælper at kunne sige ``læs dette stykke om
+		hvorfor dit program ikke fungere korrekt.''
+	\end{remark}
+
+\blindtext
+
+\section{Algoritmer eller Lister}
+
+	\begin{remark}  Arbejds-note:
+		Jeg kan ikke helt beslutte mig, hvad den sidste del skal være om; enten
+		kort om algoritmer; eller røre ved lister.
+		Understående giver pitches for begge.
+	\end{remark}
+
+	\begin{remark}  Arbejds-note:
+		Denne forlæsning og sektion dækker kort hvad Fanden en algoritme er, og
+		giver simple eksempler, som viser hvordan man kan anvende dette kapitels
+		tidligere emner.
+		Et klart eksempel er fakultet-funktionen (eller muligvis fibonnaci,)
+		da denne både kan udtrykkes med en for-lykke, rekursivt, og endda
+		tail-rekursivt med en akkumulator! (Denne sidste er klart for
+		advanceret, men min indre Olivier kan ikke lade vær.)
+	\end{remark}
+
+	\begin{remark}  Arbejds-note:
+		Lister er en fundamentel datastruktur, sandeligt er datamaten selv en
+		kæmpe liste af data.
+		Denne sektion vil dække \javaInline{ArrayList} eller måske bare
+		\javaInline{int[]}? Jeg ved det ikke. Den første kræver introduktion til
+		objekter, og den anden kræver introduktion til arrays og subscripts.
+	\end{remark}
+
+
+	\begin{JavaCode}{Iterativ Fakultet}{lst:factorial-iterative}
+public int factorial (int n) {
+	int a = 1;
+	for (int i = 1; i <= n; i++)
+		a = a * i;
+	return a;
+}
+	\end{JavaCode}
+
+	\begin{JavaCode}{Rekursiv Fakultet}{lst:factorial-recursive}
+public int factorial (int n) {
+	if (n <= 1)  return 1;
+	return n * factorial(n-1);
+}
+	\end{JavaCode}
+
+	\begin{JavaCode}{Akkumulator Fakultet}{lst:factorial-accumulator}
+public int factorial (int n, int a) {
+	if (n <= 1)  return a;
+	return factorial(n-1, n * a);
+}
+	\end{JavaCode}
+
+
+\blindtext
