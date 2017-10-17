@@ -1,29 +1,35 @@
 \chapter{Kontrol og Metoder}
 
-	I programmering kan nogle problemer ikke udtrykkes blot med linæer kode. Vi
-	behøver mere udtrykskraft, end hvad aritmetik og basal beslutningsevner kan give
-	os. For eksempel vil vi gerne kunne sige ting som ``gør \emph{det her} indtil
-	\emph{dette} sker'' eller ``gør \emph{dette}, først for \emph{1}, så for
-	\emph{2}, og så videre, indtil vi rammer \emph{n}.''
+	I sidste kapitel blev variabler, aritmetiske udtryk og \emph{if-statements}
+	introduceret. Med disse dele kan man lave det der heder et
+	\emph{straight-line program}. Men vi er ofte stillede over for problemer som
+	ikke kan løses ekslusivt med sådanne programmer. Vi behøver mere
+	udtrykskraft, end hvad aritmetik og basal beslutningsevner kan give os.
+	For eksempel vil vi gerne kunne sige ting som ``gør \emph{det her} indtil
+	\emph{dette} sker'' eller ``gør \emph{dette}, først for \emph{1}, og så for
+	\emph{2}, osv.''
 
-	Derfor indeholder Java mekanismer for at kunne udtrykke sådanne problemer, og
-	det er disse vi vil dække i dette kapitel:
+	Af denne grund indeholder mange programmerings-sprog, inklusiv Java,
+	mekanismer for at kunne udtrykke sådanne problemer, og det er disse
+	mekanismer vi vil dække i dette kapitel.
 
-	\begin{enumerate}
-		\item Looping: Sådan går du mere kontrol
-		\item Funktioner: Forbedre dine metoder
-		\item Algoritmer: Effektivitet og Kløgtighed
-	\end{enumerate}
+	Emner i dette kapitel:
+
+	\begin{itemize} % Denne udgiver har også følgende selvhjælps-bøger på markedet:
+		\item Looping: Sådan får du mere kontrol
+		\item Funktioner: Dig og dine metoder
+		\item Algoritmer: Find din indre effektivitet
+	\end{itemize}
 
 \section{Looping}
 
 	\begin{remark}  Arbejds-note:
-		Dækker \javaInline{for}, \javaInline{while} og \javaInline{break}.
+		Denne sektion vil dække \JavaInline{for}, \JavaInline{while} og \JavaInline{break}.
 	\end{remark}
 
 	\begin{remark}  Arbejds-note:
-		Som bonus vil jeg gerne have noter om \javaInline{repeat} og
-		\javaInline{continue}, da disse er niché, men er samtidige nemme at
+		Som bonus vil jeg gerne have noter om \JavaInline{do ... while} og
+		\JavaInline{continue}, da disse er niché, men er samtidige nemme at
 		forstå.
 
 		Jeg vil ikke have noter om mere niché ting, som f.eks
@@ -32,8 +38,8 @@
 
 	\begin{remark}  Arbejds-note:
 		Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
-		historien om \emph{structured programming}, og hvorfor \javaInline{goto}
-		ikke er en ting i Java.
+		historien om \emph{structured programming}, og hvorfor \JavaInline{goto}
+		ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
 	\end{remark}
 
 	\begin{exercise}
@@ -41,7 +47,7 @@
 		lærers plan om at få ham til at tie stille. Hun bedte ham lægge tallene
 		fra \(1\) til \(100\) sammen, i håbet at dette ville optage det unge
 		geni i lidt tid. Gauss realiserede dog at der måtte være en bedre måde
-		at løse problemet på, og udledte formularen \(\fract{n\cdot(n+1)}{2}\).
+		at løse problemet på, og udledte formularen \(\frac{n\cdot(n+1)}{2}\).
 		Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
 		kedelig opgave.
 
@@ -53,11 +59,7 @@
 		\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
 		være vældig praktisk.
 
-		Hvis vi lader \(f(n) = 1+2+\dots+n\), så beregn
-		\(f(1)+f(2)+\dots+f(100)\), ved at bruge et \emph{for-loop} i et andet
-		\emph{for-loop}.
-
-		\marginnote{Arbejds-note: Jeg er ikke helt tilfreds med denne opgave, da man kan løse den med copy-paste, og den kræver mere involveret matematisk notation at formulere. Til gengæld kunne den være sjov at komme tilbage til i algoritme-delen, da der eksistere en algoritme som kan gøre det med et enkelt for-loop.}
+		TODO: Find på opgave!
 	\end{exercise}
 
 
@@ -66,8 +68,8 @@
 \section{Funktioner}
 
 	\begin{remark}  Arbejds-note:
-		Dækker \emph{metode-definitioner}, \emph{retur-typer},
-		\emph{argument-lister} og \javaInline{return}.
+		Denne sektion vil dække \emph{metode-definitioner}, \emph{retur-typer},
+		\emph{argument-lister} og \JavaInline{return}.
 		Jeg vil ikke dække statiske metoder, overloading, eller andre advanceret
 		emner, da disse igen er ret niché, og kræver introduktion til nye
 		koncepter.
@@ -88,8 +90,8 @@
 \section{Algoritmer eller Lister}
 
 	\begin{remark}  Arbejds-note:
-		Jeg kan ikke helt beslutte mig, hvad den sidste del skal være om; enten
-		kort om algoritmer; eller røre ved lister.
+		Jeg kan ikke helt beslutte mig, hvad denne sidste sektion skal være om; enten
+		kort om algoritmer; eller røre lidt ved lister.
 		Understående giver pitches for begge.
 	\end{remark}
 
@@ -106,11 +108,14 @@
 	\begin{remark}  Arbejds-note:
 		Lister er en fundamentel datastruktur, sandeligt er datamaten selv en
 		kæmpe liste af data.
-		Denne sektion vil dække \javaInline{ArrayList} eller måske bare
-		\javaInline{int[]}? Jeg ved det ikke. Den første kræver introduktion til
+		Denne sektion vil dække \JavaInline{ArrayList} eller måske bare
+		\JavaInline{int[]}? Jeg ved det ikke. Den første kræver introduktion til
 		objekter, og den anden kræver introduktion til arrays og subscripts.
+		Ingen af dem er elegante eller simple.
 	\end{remark}
 
+	\marginnote{Note til Lukas: Kan vi bruge en mono-spaced font til kode, både
+	inline og til blokke? Den nuværende er hæslig til begge dele.}
 
 	\begin{JavaCode}{Iterativ Fakultet}{lst:factorial-iterative}
 public int factorial (int n) {
@@ -135,5 +140,9 @@ public int factorial (int n, int a) {
 }
 	\end{JavaCode}
 
+	\begin{JavaCode}{Fakultet funktionen hvis Java var godt}{lst:factorial-good}
+fun factorial 0  =  1
+  | factorial n  =  n * factorial (n - 1)
+	\end{JavaCode}
 
 \blindtext
