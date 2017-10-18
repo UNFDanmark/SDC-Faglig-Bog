@@ -1,3 +1,49 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Hov! Hej. Undskyld for rodet, det er bare sådan at jeg kan have pæne TODO
+% kasser, og som er nemme at se blandt al den skide tekst.
+
+\newtheoremstyle{redbox}% % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{red}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{red}\thmname{#1}%\@ifnotempty{#1}{}\@upn{#2}}%
+	% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}}
+
+\theoremstyle{redbox}
+\newtheorem{todoT}{TODO}
+
+% Exercise box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=red!10,
+linecolor=red,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{todoBox}
+
+\newcommand{\todo}[1]{
+	\begin{todoBox}\begin{todoT}
+		#1
+	\end{todoT}\end{todoBox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{Kontrol og Metoder}
 
 	I sidste kapitel blev variabler, aritmetiske udtryk og \emph{if-statements}
@@ -23,24 +69,24 @@
 
 \section{Looping}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Denne sektion vil dække \JavaInline{for}, \JavaInline{while} og \JavaInline{break}.
-	\end{remark}
+	}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Som bonus vil jeg gerne have noter om \JavaInline{do ... while} og
 		\JavaInline{continue}, da disse er niché, men er samtidige nemme at
 		forstå.
 
 		Jeg vil ikke have noter om mere niché ting, som f.eks
 		\emph{named-breaks}, da disse kræver introduktion til nye koncepter.
-	\end{remark}
+	}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
 		historien om \emph{structured programming}, og hvorfor \JavaInline{goto}
 		ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
-	\end{remark}
+	}
 
 	\begin{exercise}
 		Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
@@ -67,35 +113,34 @@
 
 \section{Funktioner}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Denne sektion vil dække \emph{metode-definitioner}, \emph{retur-typer},
 		\emph{argument-lister} og \JavaInline{return}.
 		Jeg vil ikke dække statiske metoder, overloading, eller andre advanceret
 		emner, da disse igen er ret niché, og kræver introduktion til nye
 		koncepter.
-	\end{remark}
+	}
 
-	\begin{remark}  Arbejds-note:
-		Et emne som er \emph{meget vigtigt} men som ikke er relevant før de
-		kender til klasser, og som jeg ikke ser bliver et problem før projektet,
-		er \emph{pass-by-value} vs. \emph{pass-by-reference}.
+	\todo{
+		\emph{pass-by-value} vs. \emph{pass-by-reference} bør nok dækkes, da det
+		garenteret vil dukke op. Det er bare ikke specielt relevant før de kender
+		til objekter. Antager ikke de vil rende ind i problemet før under projektet.
 		Jeg er ikke vild med at introducere dem til sådanne niché fagtermer, men
-		selve problematikken bør nævnes, da det garenteret vil komme op, og det
-		vil være nemmere for en hjælper at kunne sige ``læs dette stykke om
+		det vil være nemmere for en hjælper at kunne sige ``læs dette stykke om
 		hvorfor dit program ikke fungere korrekt.''
-	\end{remark}
+	}
 
 \blindtext
 
 \section{Algoritmer eller Lister}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Jeg kan ikke helt beslutte mig, hvad denne sidste sektion skal være om; enten
 		kort om algoritmer; eller røre lidt ved lister.
 		Understående giver pitches for begge.
-	\end{remark}
+	}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Denne forlæsning og sektion dækker kort hvad Fanden en algoritme er, og
 		giver simple eksempler, som viser hvordan man kan anvende dette kapitels
 		tidligere emner.
@@ -103,46 +148,46 @@
 		da denne både kan udtrykkes med en for-lykke, rekursivt, og endda
 		tail-rekursivt med en akkumulator! (Denne sidste er klart for
 		advanceret, men min indre Olivier kan ikke lade vær.)
-	\end{remark}
+	}
 
-	\begin{remark}  Arbejds-note:
+	\todo{
 		Lister er en fundamentel datastruktur, sandeligt er datamaten selv en
 		kæmpe liste af data.
 		Denne sektion vil dække \JavaInline{ArrayList} eller måske bare
 		\JavaInline{int[]}? Jeg ved det ikke. Den første kræver introduktion til
 		objekter, og den anden kræver introduktion til arrays og subscripts.
 		Ingen af dem er elegante eller simple.
-	\end{remark}
+	}
 
-	\marginnote{Note til Lukas: Kan vi bruge en mono-spaced font til kode, både
-	inline og til blokke? Den nuværende er hæslig til begge dele.}
+	\todo{Note til Lukas: Kan vi bruge en mono-spaced font til kode, både
+	inline og til blokke? Den nuværende er hæslig til begge dele. Er meget tilfreds med lstautogobble!}
 
 	\begin{JavaCode}{Iterativ Fakultet}{lst:factorial-iterative}
-public int factorial (int n) {
-	int a = 1;
-	for (int i = 1; i <= n; i++)
-		a = a * i;
-	return a;
-}
+		public int factorial (int n) {
+			int a = 1;
+			for (int i = 1; i <= n; i++)
+				a = a * i;
+			return a;
+		}
 	\end{JavaCode}
 
 	\begin{JavaCode}{Rekursiv Fakultet}{lst:factorial-recursive}
-public int factorial (int n) {
-	if (n <= 1)  return 1;
-	return n * factorial(n-1);
-}
+		public int factorial (int n) {
+			if (n <= 1)  return 1;
+			return n * factorial(n-1);
+		}
 	\end{JavaCode}
 
 	\begin{JavaCode}{Akkumulator Fakultet}{lst:factorial-accumulator}
-public int factorial (int n, int a) {
-	if (n <= 1)  return a;
-	return factorial(n-1, n * a);
-}
+		public int factorial (int n, int a) {
+			if (n <= 1)  return a;
+			return factorial(n-1, n * a);
+		}
 	\end{JavaCode}
 
 	\begin{JavaCode}{Fakultet funktionen hvis Java var godt}{lst:factorial-good}
-fun factorial 0  =  1
-  | factorial n  =  n * factorial (n - 1)
+		fun factorial 0  =  1
+		  | factorial n  =  n * factorial (n - 1)
 	\end{JavaCode}
 
 \blindtext
