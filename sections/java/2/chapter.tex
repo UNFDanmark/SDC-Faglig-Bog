@@ -1,48 +1,5 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Hov! Hej. Undskyld for rodet, det er bare sådan at jeg kan have pæne TODO
-% kasser, og som er nemme at se blandt al den skide tekst.
-
-\newtheoremstyle{redbox}% % Theorem style name
-{0pt}% Space above
-{0pt}% Space below
-{\normalfont}% % Body font
-{}% Indent amount
-{\small\bf\sffamily\color{red}}% % Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\small\sffamily\color{red}\thmname{#1}%\@ifnotempty{#1}{}\@upn{#2}}%
-	% Theorem text (e.g. Theorem 2.1)
-	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}}
-
-\theoremstyle{redbox}
-\newtheorem{todoT}{TODO}
-
-% Exercise box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=red!10,
-linecolor=red,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{todoBox}
-
-\newcommand{\todo}[1]{
-	\begin{todoBox}\begin{todoT}
-		#1
-	\end{todoT}\end{todoBox}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Kontrol og Metoder}
 
@@ -62,52 +19,133 @@ linewidth=4pt]{todoBox}
 	Emner i dette kapitel:
 
 	\begin{itemize} % Denne udgiver har også følgende selvhjælps-bøger på markedet:
-		\item Looping: Sådan får du mere kontrol
-		\item Funktioner: Dig og dine metoder
+		\item Løkker: Sådan får du mere kontrol
+		\item Funktioner: Forbedre dine metoder
 		\item Algoritmer: Find din indre effektivitet
 	\end{itemize}
 
-\section{Looping}
+\section{Løkker}
 
-	\todo{
-		Denne sektion vil dække \JavaInline{for}, \JavaInline{while} og \JavaInline{break}.
-	}
+	\subsection{While-løkker}
 
-	\todo{
-		Som bonus vil jeg gerne have noter om \JavaInline{do ... while} og
-		\JavaInline{continue}, da disse er niché, men er samtidige nemme at
-		forstå.
+		\JavaInline{while} er den simpleste af løkkerne. Dette er ligesom at
+		sige: ``Mens at A gælder, sørg for at gøre B.'' For eksempel:
+		``Mens at gulvet er beskidt, bør du feje gulvet.''
 
-		Jeg vil ikke have noter om mere niché ting, som f.eks
-		\emph{named-breaks}, da disse kræver introduktion til nye koncepter.
-	}
+		Dette er i modsætning til \JavaInline{if}-udstryk, hvor der udtrykkes
+		``Hvis A gælder, gør B èn enkelt gang.''
 
-	\todo{
-		Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
-		historien om \emph{structured programming}, og hvorfor \JavaInline{goto}
-		ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
-	}
+		\todo{ Skal fyldes mere på. Sektion: \JavaInline{while} }
 
-	\begin{exercise}
-		Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
-		lærers plan om at få ham til at tie stille. Hun bedte ham lægge tallene
-		fra \(1\) til \(100\) sammen, i håbet at dette ville optage det unge
-		geni i lidt tid. Gauss realiserede dog at der måtte være en bedre måde
-		at løse problemet på, og udledte formularen \(\frac{n\cdot(n+1)}{2}\).
-		Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
-		kedelig opgave.
+		\todo{ En illustration som denne kunne være brugbar:
+		\url{https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg} }
 
-		Brug et \emph{for-loop} til at beregne \(1^2+2^2+\dots+100^2\).
-	\end{exercise}
+		Anatomien af en \JavaInline{while}-udstryk er meget lig det af et
+		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
+		\JavaInline{while}, som kan ses i eksempel~\ref{lst:while-example-1}.
 
-	\begin{exercise}
-		Der er selvfølgelig ikke noget som forhindrer at du bruger et
-		\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
-		være vældig praktisk.
+		\begin{JavaCode}{``Fej Gulvet'' pseudo-Java.}{lst:while-example-1}
+			while (gulvet er beskidt) {
+				fej gulvet;
+			}
+		\end{JavaCode}
 
-		TODO: Find på opgave!
-	\end{exercise}
+		Man kalder koden mellem paranteserne for while-udtrykkets ``betingelse'',
+		koden mellem tuborg-klammerne for ``kroppen'' af
+		\JavaInline{while}-udtrykket, og man kalder hver gennemgang af kroppen
+		for en ``iteration''.
 
+		Nu kan man spørge: ``Hvis jeg kan lave et program som aldrig stopper, en
+		såkaldt uendelig løkke?'' Ja, det er faktisk ret nemt. Så nemt at mange
+		kommer til at lave en ueønsket uendelig løkke, nu og da. Se
+		eksempel~\ref{lst:while-hello-world}
+		for et program som gentagende skriver ``hej''. Det er selvfølgelig ikke
+		så brugbart et program, men det viser en problematik: Hvad gør vi hvis
+		vores program aldrig stopper? \todo{Svar på ``Hvad gør vi hvis
+		vores program aldrig stopper?''} \footnote{Dette stiller selvfølgelig spørgsmålet ``kan man lave et program som kan sige om et program stopper eller ej?''. Det er muligt at lave et program, som svarer for \emph{nogle} programmer, men umuligt at lave en som kan svare for \emph{alle} programmer. Denne problematik kaldes for \emph{The Halting Problem}, og blev bevist af \emph{Allan Turing}.}
+
+		\begin{JavaCode}{Et program der aldrig ender}{lst:while-hello-world}
+			System.out.println("Hello World!");
+			while (true) {
+				System.out.println("Hello again!");
+			}
+		\end{JavaCode}
+
+		 Oftests vil man bruge
+		en betingelse som kan variere mellem iterationerne. I
+		eksempel~\ref{lst:while-example-3} kan ses hvordan man kan tælle op fra
+		1 til 10.
+
+		\begin{JavaCode}{Et ``brugbart'' while program}{lst:while-example-3}
+			int n = 1;
+			while (n <= 10) {
+				System.out.println(n + " linjer af ligegyldig data.");
+				n++;
+			}
+		\end{JavaCode}
+
+
+
+	\subsection{For-løkker}
+
+		I sidste sektion så vi kan tælle op med et \JavaInline{while}-udtryk.
+		Dette er da ikke en idéel måde at tælle på, da \JavaInline{n}
+		defineres, sammenlignes og opdateres på helt forskellige steder i koden.
+		Det kan blive svært at holde styr på i store programmer, hvilket er
+		hvorfor Java har \JavaInline{for}-løkken, som samler den information i
+		èt sted: \JavaInline{for (before_loop; condition_of_loop; after_every_iteration)}
+
+		\todo{ Uddyb og udfyl. Sektion: \JavaInline{for} }
+
+
+		For strukturen af for-løkker er ret involveret, men det hjælper at
+		sammenligne med \JavaInline{while}-udstryk, og se hvordan at forskellige
+		dele af koden som tidligere var sprædt, nu er samlet.
+
+		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{while-example-3}.}{lst:for-example-1}
+			for (int n = 1; n <= 10; n++) {
+				System.out.println(n + " linjer af ligegyldig data.");
+			}
+		\end{JavaCode}
+
+		\begin{exercise}
+			Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
+			lærers plan om at få ham til at tie stille. Hun bedte ham lægge tallene
+			fra \(1\) til \(100\) sammen, i håbet at dette ville optage det unge
+			geni i lidt tid. Gauss realiserede dog at der måtte være en bedre måde
+			at løse problemet på, og udledte formularen \(\frac{n\cdot(n+1)}{2}\).
+			Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
+			kedelig opgave.
+
+			Brug et \emph{for-loop} til at beregne \(1^2+2^2+\dots+100^2\).
+		\end{exercise}
+
+		\begin{exercise}
+			Der er selvfølgelig ikke noget som forhindrer at du bruger et
+			\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
+			være vældig praktisk.
+
+			TODO: Find på opgave!
+		\end{exercise}
+
+	\subsection{Break-udtryk}
+
+		\todo{ Sektion: \JavaInline{break} }
+
+		\todo{
+			Som bonus vil jeg gerne have noter om \JavaInline{do ... while} og
+			\JavaInline{continue}, da disse er niché, men er samtidige nemme at
+			forstå.
+
+			Jeg vil ikke have noter om mere niché ting, som f.eks
+			\emph{named-breaks}, da disse kræver introduktion til nye koncepter.
+		}
+
+		\todo{
+			Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
+			historien om \emph{structured programming}, og hvorfor \JavaInline{goto}
+			ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
+		}
 
 \blindtext
 
