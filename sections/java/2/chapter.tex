@@ -84,7 +84,10 @@
 			}
 		\end{JavaCode}
 
-
+		\begin{exercise}
+			Copenhagen Suborbitals har kontaktet dig, for at lave en maskine til
+			at tæller ned fra 10, og vise "Affyring!", i stedet for 0.
+		\end{exercise}
 
 	\subsection{For-løkker}
 
@@ -147,9 +150,12 @@
 			ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
 		}
 
-\blindtext
 
 \section{Funktioner}
+
+	Vi er ofte interesseret i at \emph{enkapsulere} noget kode i såkaldt
+	\emph{funktioner}\footnote{Også kaldet \emph{metoder} eller \emph{procedurer}.},
+	for at kunne gentage arbejde på en anderledes måde end løkker tillader os.
 
 	\todo{
 		Denne sektion vil dække \emph{metode-definitioner}, \emph{retur-typer},
@@ -168,7 +174,101 @@
 		hvorfor dit program ikke fungere korrekt.''
 	}
 
-\blindtext
+	For eksempel: Hvis vi har skrevet noget kode som beregner faktorialet af
+	\(10\), som vi har gjort i listing~\ref{lst:factorial-of-10}. Men hvis vi
+	også gerne ville beregne faktorialet af \(20\) skulle vi kopiere koden og
+	ærstatte \(10\) med \(20\). Alternativt kunne vi lave en funktion, som
+	beregner faktorialet for et hvilkårligt tal, og giver os svaret.
+
+	\begin{JavaCode}{Kode som beregner faktorialet af \(10\) og viser det.}{lst:factorial-of-10}
+		int a = 1;
+		for (int i = 1; i <= 10; i++)
+			a = a * i;
+		System.out.println(a);
+	\end{JavaCode}
+
+	\todo{Snak om Java-filer og deres forhold til funktioner.}
+
+	\begin{JavaCode}{Java-fil med fakultet funktion og main}{lst:factorial-with-main}
+	class Factorial {
+
+		public int factorial (int n) {
+			int a = 1;
+			for (int i = 1; i <= n; i++)
+				a = a * i;
+			return a;
+		}
+
+		public static void main(String[] args) {
+			int fac_of_10 = factorial(10);
+			int fac_of_20 = factorial(20);
+		}
+
+	}
+	\end{JavaCode}
+
+
+	\subsection{En funktions udseene}
+
+	\todo{Skriv denne undersektion}
+
+	\subsection{Procedurer: Eller funktioner som ikke returnerer noget}
+
+	\todo{
+		Skriv denne undersektion.
+		Spørgsmål at svare på:
+
+		(1.) Hvorfor er void funktioner interessante? Nok best at demonstrere
+		ved brug af print. Har de lært om class variabler? Så er de også gode
+		kandidater.
+		(2.) Hvordan ser void functioner ud?
+	}
+
+	\subsection{Rekursion}
+
+	\todo{Dette kaldes rekursion, og det minder lidt om induktion, som i nok kender til
+
+	-- Kurt til Datalogi-russerne, under deres først forelæsning.}
+
+	\todo{
+		Kort forklaring om hvad rekursion er. Regner ikke med at de forstår det.
+		Stadig brugbart at dække kort. Meget vigtigt at det er så nede til
+		jorden som muligt. Faktorial-funktionen er idéel.
+	}
+
+	\begin{exercise}
+		Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
+		Ulige tal er så alle de andre heltal. Disse to mængder kan også defineres
+		rekursivt.
+
+		Vi ved at et tal er lige, hvis det forrige tal var ulige. Så hvis vi ved
+		at \(5\) er ulige, så ved vi at \(6\) er lige. Ulige tal er omvendt, vi
+		ved at \(5\) er ulige, hvis vi ved at \(4\) er lige.
+
+		Men vi er nødt til at stoppe på et tidspunkt. Derfor definerer vi
+		\(0\) til at være lige.
+
+		Lav to funktioner \JavaInline{odd} og \JavaInline{even}, som modellere
+		denne process ved at kalde hinanden. Begge bør tage et heltal, og give
+		tilbage en boolesk værdi.
+
+		\todo{
+			Jeg er ikke helt tilfreds med denne opgave. (mutual) Rekursion er
+			måske lidt for advanceret. Desuden tvivler jeg på at forholdet
+			mellem lige og ulige tal forklares ordentligt. Syntes hellerer ikke
+			at der lægges godt nok op til hvad de skal gøre.
+		}
+
+	\end{exercise}
+
+	\todo{
+		Vil gerne have en opgave som direkte takler hvordan funktioner og løkker
+		er forskellige.
+
+		``Kan jeg ikke bare gøre det med en for-løkke?''
+	}
+
+
 
 \section{Algoritmer eller Lister}
 
@@ -228,4 +328,3 @@
 		  | factorial n  =  n * factorial (n - 1)
 	\end{JavaCode}
 
-\blindtext
