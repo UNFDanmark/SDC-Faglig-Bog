@@ -1,0 +1,43 @@
+\usepackage{float}
+
+\usepackage{caption}
+\usepackage{calc}
+
+\makeatletter
+
+\def\figureboxcolor{ocre!60}
+
+\DeclareCaptionOption{boxwidth}{\def\caption@boxwidth{#1}}
+
+\DeclareCaptionFormat{color-box}{%
+	\fcolorbox{\figureboxcolor}{\figureboxcolor}{
+		\makebox[\caption@boxwidth]{
+			#1#2#3
+		}
+	}
+}
+
+\makeatother
+
+\newcommand{\IncludeWithFrame}[3]{
+	\captionsetup{%
+		slc=off,%
+		format=color-box,%
+		skip=0pt,%
+		labelfont={color=white},%
+		font={color=white},%
+		boxwidth=#3,
+	}
+
+	\fcolorbox{\figureboxcolor}{\figureboxcolor}{
+		\includegraphics[width=#3]{#1}
+	}
+	\caption{#2}
+}
+
+\newenvironment{ImageLeftOfText}[2]{
+	\newlength{\rightwidth}
+	\setlength{\rightwidth}{\textwidth - #1\textwidth}
+	\begin{minipage}{#1\textwidth}
+			#2
+	\end{minipage}\begin{minipage}{\rightwidth}}{\end{minipage}}
