@@ -17,6 +17,8 @@ Når man skal beskrive hvad en "Android app" er, så kan det gøres lidt simpler
 
 I Android verdenen, er stort set alt apps. Lige fra låseskærmen og "indstillinger" menuen til Super Mario Go, og Farmville. Derfor er der meget få grænser for hvad man kan opnå ved app-udvikling til Android.
 
+\marginfigure{xkcd_app.png}{Billede lånt af: \url{https://xkcd.com}}
+
 \subsection{Anatomien af en Android app}
 Android apps består af mange forskellige dele. De primære dele kan dog deles op i følgende tre kategorier:
 
@@ -49,23 +51,33 @@ Det er vigtigt at man altid lukker sine tags. Man må aldrig have et opening-tag
 Man kan tilknytte "attributter" til sine opening-tags. Det gør man ved at skrive navnet på attributten, efterfulgt af et lig-med tegn, efterfulgt af attributtens værdi. Denne værdi er typisk skrevet inden i to gåse-øjne ("). Et eksempel på et opening-tag med en attribut er følgende: \XmlInline|<Button Text="Hej med dig!">|.
 
 Et eksempel på et XML dokument ses herunder. Det beskriver et vindue, med en "label" dvs. et kort stykke tekst, med to knapper. Vi har skrevet de tags, der hører til vores label og knapperne, imellem vinduets opening- og closing-tags. Dette betyder at de kommer til at høre til vinduet, altså at vinduet har en label og to knapper. Denne relation bliver ofte beskrevet som at vinduet er forældreren til de tre børn (label og de to knapper).
-\begin{XmlCode}{Et lille XML dokument}{first-valid-xml-document}
-	<Window>
-		<Label Text="Vil du lukke vinduet?"></Label>
-		<Button Text="Ja"></Button>
-		<Button Text="Nej"></Button>
-	</Window>
-\end{XmlCode}
+
+\begin{example}\noindent
+	\begin{XmlCode}{Et lille XML dokument}{first-valid-xml-document}
+		<Window>
+			<Label Text="Vil du lukke vinduet?"></Label>
+			<Button Text="Ja"></Button>
+			<Button Text="Nej"></Button>
+		</Window>
+	\end{XmlCode}
+\end{example}
+
 
 For at simplificere XML dokumentet, kan vi udnytte os af et så-kaldt self-closing tag. Altså et opening-tag der lukkes med det samme, uden man behøver at bruge et closing-tag. Dette skrives ved at putte en skrå-streg ind før "større-end" tegnet:
 
-\begin{XmlCode}{Et lille XML dokument med self-closing tags}{self-closing-tags-dokument}
-	<Window>
-		<Label Text="Vil du lukke vinduet?"/>
-		<Button Text="Ja"/>
-		<Button Text="Nej"/>
-	</Window>
-\end{XmlCode}
+\begin{example}\noindent
+	\begin{XmlCode}{Et lille XML dokument med self-closing tags}{self-closing-tags-dokument}
+		<Window>
+			<Label Text="Vil du lukke vinduet?"/>
+			<Button Text="Ja"/>
+			<Button Text="Nej"/>
+		</Window>
+	\end{XmlCode}
+\end{example}
+
+\begin{remark}
+	Bemærk at vi ikke kunne bruge et self-closing tag til vores \XmlInline|<Window>| tag, fordi at det ikke skulle lukkes med det samme, da det skulle indeholde dets tre børn.
+\end{remark}
 
 Bemærk at vi ikke kunne bruge et self-closing tag til vores \XmlInline|<Window>| tag, fordi at det ikke skulle lukkes med det samme, da det skulle indeholde dets tre børn.
 
@@ -89,7 +101,8 @@ Herunder er der et eksempel på hvordan man kan have to børn indeni et frame la
 
 \begin{figure}[H]
 	\begin{center}
-		\IncludeWithFrame{frame_layout.png}{Et frame-layout i en app}{0.45\textwidth}
+		\includegraphics[width=5cm]{frame_layout.png}
+		\caption{Et frame layout i en app}
 		\label{fig:android:layouts:frame-layout}
 	\end{center}
 \end{figure}
@@ -125,5 +138,13 @@ Herunder er der et eksempel på hvordan man kan have to børn indeni et frame la
 \subsubsection{Linear layouts}
 
 \subsubsection{Tabular layouts}
+
+\begin{exercise}
+	Lav et tabular-lignende layout ved hjælp af linear layouts.
+\end{exercise}
+
+\begin{exercise}
+	Lav et linear-lignende layout ved hjælp af tabular layouts (både horisontalt og vertikalt).
+\end{exercise}
 
 \subsubsection{Relative layouts}
