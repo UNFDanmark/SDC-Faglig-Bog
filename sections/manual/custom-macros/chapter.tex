@@ -1,7 +1,9 @@
 \chapter{Introduktion til bogens stil}
-Dette kapitel er skrevet i filen \texttt{sections/example/1/chapter.tex}.
+Dette kapitel er skrevet i filen \texttt{sections/manual/1/chapter.tex}.
 
 \vspace{5mm}
+
+\section{Noter i margen}
 
 Vi kan bruge \LaTeXInline|\marginfigure{billede}{Caption}| til at 
 indsætte et billede i margen. Her er et eksempel hvor vi skriver 
@@ -16,7 +18,15 @@ til at indsætte et billede i bunden af siden.
 Grundet \LaTeX\xspace magi, kan man komme ud for at skulle compile dokumentet 
 to gange for at noter i margen virker. Det skal du ikke tænke for meget over.
 
+\vspace{1cm}
+
+Vi kan også nøjes med at indsætte tekst i margen ved 
+\LaTeXInline|\marginnote{Tekst}|.
+\marginnote{Sej note her}
+
 \clearpage
+
+\section{Kode og syntax highlighting}
 
 JavaCode miljøet, lader os skrive Java-kode ind i vores .TeX fil, og få koden 
 syntax-highlighted. Således kommer følgende \LaTeX kode:
@@ -68,19 +78,10 @@ Der er et tilsvarende miljø til XML, ved navn XmlCode.
 Læg mærke til hvordan vi gav den en caption ``The fish class'' og en label 
 ``lst:snippet1'' således at vi nu kan referere til \autoref{lst:snippet1}, ved 
 at skrive \LaTeXInline|\autoref{lst:snippet1}|.
-\vspace{2mm}
-Vi kan også nøjes med at indsætte tekst i margen ved 
-\LaTeXInline|\marginnote{Tekst}|.
-\marginnote{Sej note her}
 
 \vspace{5mm}
 
-Vi kan lave pæne sektioner ved hjælp af makroen \LaTeXInline|\section|, som 
-illustreret herunder:
-
 \section{Boxes}
-Ligeledes kan vi lave under-sektioner ved hjælp af makroen 
-\LaTeXInline|\subsection|.
 
 Her vil vi vise nogle eksempler på nogle content-boxes der kan laves.
 \begin{samepage}

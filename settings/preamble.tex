@@ -43,7 +43,10 @@
 %% ``example''
 \input{settings/content-boxes}
 
-%% Dette er en grim fil, der definerer udseendet af dokumentet. Hvis man
+%% Denne fil, indeholder opsætning af figurer og tabeller
+\input{settings/figures-and-tables}
+
+%% Dette er en grim fil, der definerer udseendet af dokumentet. Hvis man 
 %% sletter denne fil, får dokumentet et standard ``LaTeX look''.
 \input{settings/book-style}
 
@@ -55,3 +58,8 @@
 %% ``settings-book-style'' og den generelle inklusion af biblioteket her,
 %% bliver vi nødt til at indsætte den efter.
 \usepackage{hyperref}
+
+%% Indsæt et xspace efter \LaTeX, dette gør at der kommer et mellemrum efter 
+%% \LaTeX, når det giver mening.
+\let\oldlatex\LaTeX
+\renewcommand{\LaTeX}{\oldlatex\xspace}
