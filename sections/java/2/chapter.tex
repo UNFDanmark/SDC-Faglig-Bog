@@ -128,7 +128,7 @@
 			\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
 			være vældig praktisk.
 
-			TODO: Find på opgave!
+			\todo{Find på opgave!}
 		\end{exercise}
 
 	\subsection{Break-udtryk}
@@ -153,9 +153,16 @@
 
 \section{Funktioner}
 
-	Vi er ofte interesseret i at \emph{enkapsulere} noget kode i såkaldt
-	\emph{funktioner}\footnote{Også kaldet \emph{metoder} eller \emph{procedurer}.},
-	for at kunne gentage arbejde på en anderledes måde end løkker tillader os.
+	Sidste kapitel introducerede \emph{funktioner}\footnote{Også kaldet \emph{metoder} eller \emph{procedurer}.}
+	som sorte-bokse, der gør arbejde for dig. For eksempel \JavaInline{Math.abs}
+	som giver den absolutte værdi af hvadend den bliver givet. I denne sektion
+	beskrives hvordan man definerer sine egne funktioner, en færdighed som viser
+	sig at være meget brugbar, da funktioner kan gentage arbejde på en
+	anderledes måde end løkker kan.
+
+	Vi kalder hvad en funktion giver tilbage for dens \emph{retur-værdi} eller
+	hvad funktionen \emph{returnerer}. Vi kalder hvad vi giver den, dvs. det som
+	sættes mellem paranteser, for funktionens \emph{argumenter}.
 
 	\todo{
 		Denne sektion vil dække \emph{metode-definitioner}, \emph{retur-typer},
@@ -173,6 +180,8 @@
 		det vil være nemmere for en hjælper at kunne sige ``læs dette stykke om
 		hvorfor dit program ikke fungere korrekt.''
 	}
+
+\iffalse% havde glemt at funktioner allerede var defineret tidligere, og behøver derfor ikke en motivation.
 
 	For eksempel: Hvis vi har skrevet noget kode som beregner faktorialet af
 	\(10\), som vi har gjort i listing~\ref{lst:factorial-of-10}. Men hvis vi
@@ -207,10 +216,82 @@
 	}
 	\end{JavaCode}
 
+\fi
 
 	\subsection{En funktions udseene}
 
-	\todo{Skriv denne undersektion}
+	I har allerede set en funktion, nemlig \JavaInline{main}-funktionen, hvor i
+	indtil videre har skrevet alle jeres programmer i:
+
+	\begin{JavaCode}{Main funktion}{lst:main-function}
+		public static void main(String[] args) {
+			// Ting her...
+		}
+	\end{JavaCode}
+
+	En funktion består af dens \emph{signatur} og dens \emph{krop}.
+
+	Dens signatur er \JavaInline{public static void main(String[] args)} delen.
+	Dette fortælles os lidt om funktionen: dens navn \emph{main}; dens
+	retur-værdi, \emph{void}, hvilket står for ingenting; og dens argumenter,
+	\emph{String[] args}, en liste af strenge, som funktionen kalder \emph{args}.
+	Signaturen for \emph{main} siger også at den er \emph{static} og
+	\emph{public}. Disse egenskaber kan i ignorere for nu, da de først bliver
+	relevant i næste kapitel.
+
+	En funktions krop er \JavaInline{// Ting her...} delen. Alt mellem
+	krølleparanteserne er funktionens krop, og beskriver hvad funktionen gør.
+	Hvis funktionen har en retur-værdi, skal \JavaInline{return}-keywordet opstå
+	mindst én gang i kroppen. Det er denne som stopper funktionen, og returnerer.
+
+	Du kan se det som at signaturen er hvordan vi snakker med funktionen, men
+	dens krop er hvad den gør.
+
+	Hvis vi skulle skrive \emph{faktoriel}-funktionen som en funktion i Java,
+	ville vi først spørge os selv: ``hvad returnerer faktoriel og hvad er dens
+	argumenter?'' Det virker måske trivielt, i dette eksempel, men stadig et
+	vigtigt spørgsmål. Derefter skal vi spørge: ``Men hvad er det den gør?''
+
+	Faktoriellen er defineret som \(a! = a \cdot (a-1) \cdot \dots \cdot 2 \cdot 1\),
+	f.eks. \(5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1\). Ud fra definitionen er det
+	tydeligt at den får et enkelt heltal, og giver et enkelt heltal tilbage. Så
+	faktoriellens signatur ser sådan ud:
+
+	\begin{JavaCode}{Signaturen af en faktoriel-funktion}{lst:factorial-signature}
+		int factorial (int a)
+	\end{JavaCode}
+
+	Men hvad gør faktoriel funktionen? Den ganger det givne heltal med alle mindre
+	heltal. Vi behøver at finde alle mindre heltal og gange det på. En version
+	af faktorial-kroppen kunne ligne:
+
+	\begin{JavaCode}{Kroppen af en faktoriel-funktion}{lst:factorial-body}
+		int product = 1;
+		for (int i = a; i >= 1; i--)
+			product *= i;
+		return product;
+	\end{JavaCode}
+
+	Kombinationen af signaturen og kroppen resulterer i:
+
+	\begin{JavaCode}{En faktoriel-funktion}{lst:factorial-function}
+		int factorial (int a) {
+			int product = 1;
+			for (int i = a; i >= 1; i--)
+				product *= i;
+			return product;
+		}
+	\end{JavaCode}
+
+	Det er vigtigt at notere at kroppen kunne have set meget anderledes ud, da
+	der er utallige ækvivalte kroppe, men hvordan kroppen ser ud er ligegyldigt for
+	hvadend der anvender funktionen, så længe signaturen stadig passer.
+
+	\todo{Skriv mere på denne undersektion}
+
+	\todo{Hvordan skriver vi til deltagerne? Skriver vi \emph{I}? Undgår vi at rette os mod dem?}
+
+	\todo{Er det mig som skal forklare \emph{private} og \emph{public}? Det er næste mere relevant i klasser kapitlet.}
 
 	\subsection{Procedurer: Eller funktioner som ikke returnerer noget}
 
