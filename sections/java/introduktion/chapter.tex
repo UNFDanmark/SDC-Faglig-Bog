@@ -1,0 +1,95 @@
+\chapter{Introduktion til Java}
+Java er det programmeringssprog som I vil lære at bruge til at programmere apps med. Det er vidt anvendeligt. Det har i mange år været, og er stadig, det mest anvendte programmeringssprog på verdensplan.
+
+\section{Hvad er et program, egentlig?}
+Et program er en serie af instruktioner som skal udføres i rækkefølge. Typisk skrives instruktionerne som helt almindelig tekst, hvor hver instruktion står på sin egen linje.
+
+\section{Hello World!}
+Et "Hello World!" program er typisk det første man prøver i et nyt programmeringssprog, for at få en lille smule føling med, hvordan sproget skrives.
+
+\begin{JavaCode}{A Hello World program}{lst:helloworld}
+	public class Hello {
+		public static void main(String[] args) {
+			System.out.println("Hello World!");
+		}
+	}
+\end{JavaCode}
+
+
+\section{Variabler}
+Tit vil man gerne referere til en bestemt værdi flere gange, og måske vil man gerne ændre den undervejs i sit program, til det bruger man variabler. Det kan være nyttigt at se på en variabel som en flyttekasse, hvor man skriver udenpå, hvad for noget der er indeni, eksempelvis "penge". Ved at referere til "penge" kan man finde ud af, hvor mange penge man har i kassen. Man kan også lægge penge til dem man har i kassen, eller trække fra. Man skal dog passe på man ikke kommer til at overskrive sine penge, for kassen kan kun huske det sidste man har lagt i den.
+
+\section{Typer}
+Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel på tekst og tal. Man siger at tekst og tal er forskellige typer. Der er nogle grundlæggende typer som man bliver nødt til at lære sig, men det er nemt nok, når man øver sig.
+
+\begin{itemize}
+	\item \texttt{int} er standard typen for heltal, altså 1, 2, 3, osv. Det er forkortet af det engelske ord "integer" som betyder netop heltal.
+	\item \texttt{double} er standard typen for kommatal/decimaltal, altså 0.1, 1.5, 3.14, osv. Normaltvis hed kommatal "float", men da man ønskede at kunne repræsentere flere decimaler for at øge præcisionen, lavede man en ny type med dobbelt så mange bits, dermed navnet "double".
+	\item \texttt{String} er standard typen for tekst, som vi nogen gange kalder tekst-strenge. Det skyldes at tekst egentlig bare er en sekvens (streng) af enkelte tegn.
+	\item \texttt{boolean} er typen for sandhedsværdier også kaldet boolske værdier, dvs. \texttt{true} eller \texttt{false}. Navnet kommer fra manden George Boole, som var den første til at formalisere denne form for logik.
+\end{itemize}
+
+\section{Logik}
+Nu hvor vi har lært om typen \texttt{boolean}, så kan vi lære om forskellige logiske udtryk. Man kan f.eks. få en boolsk værdi ved at "spørge", om 1 er større end 2, hvilket vi ved er falsk, så den boolske værdi er \texttt{false}. Det smarte er, at når vi sammensætter forskellige logiske udtryk, så får vi et nyt logisk udtryk som til sidst giver en boolsk værdi. Vi sammensætter som regel enten med AND eller OR. Husk at man også her kan bruge variabler, f.eks. kan det være man gerne vil vide om man skal købe et hus, så man spørger om man har penge nok og om man i forvejen har nok huse.
+
+\begin{JavaCode}{Logik}{lst:logik}
+	boolean buyHouse = money > 1000000 && houses < 1;
+\end{JavaCode}
+
+\section{IF-THEN-ELSE}
+Når man har styr på logiske udtryk kan man bruge dem til at vælge, hvilken vej i programmet computeren skal gå. Man siger simpelthen at \textbf{hvis} et eller andet er sandt \textbf{så} vil man gøre noget \textbf{ellers} vil man gøre noget andet. F.eks. \textbf{hvis} man har penge nok \textbf{så} vil man gerne købe en bil \textbf{ellers} vil man tjene flere penge.
+
+\begin{JavaCode}{If-else statement}{lst:if-intro}
+	if (money > 100000) {
+		buyCar();
+	} else {
+		earnMoney();
+	}
+\end{JavaCode}
+
+\section{Metoder}
+Nogen gange har man noget kode som man gerne vil genbruge flere steder i sin kode, så kan det være en god idé at lave det til en såkaldt funktion. I Java er alle funktioner også kaldet metoder, så det er ikke så vigtigt, hvad man siger. Heldigvis er der nogen der har lavet nogle brugbare for os, så vi kan lære, hvordan man bruger dem, før vi selv skal lære at lave dem. 
+
+Kendetegnende for metoder er, at der er parenteser efter navnet. Det man skriver inden i parentesen kaldes for argumenter (det kan også ske nogle kalder dem for parametre), og er input som metoden skal bruge til arbejde med. En metode som vi har set nogle gange er print-metoden. Det, den tager som input-argument, er den tekst-streng vi gerne vil have skrevet ud på skærmen.
+
+\section{Exceptions}
+Syntaks, run-time, semantisk?
+
+
+%\blindtext
+%\marginfigure{sample}{Some margin note here.}
+%
+%\bottomfigure{sample}{Some bottom note here.}
+%
+%
+%\begin{JavaCode}{The Fish class}{lst:fish-class}
+%	public class Fish {
+%		public static void main(String[] args) {
+%			doAThing();
+%			int a = 32;
+%			String fish = tish;
+%			Abe b = new Abe(fish, a, "AbeMand");
+%			return;
+%		}
+%	}
+%\end{JavaCode}
+%\marginnote{Sej note her}
+%
+%\blindtext
+%
+%\section{Boxes}
+%
+%\subsection{Example}
+%\begin{example}
+%	An example here
+%\end{example}
+%
+%\subsection{Exercise}
+%\begin{exercise}
+%	An exercise here
+%\end{exercise}
+%
+%\subsection{Remark}
+%\begin{remark}
+%	Some remark here
+%\end{remark}
