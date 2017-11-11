@@ -1,0 +1,22 @@
+\chapter{Introduktion til \LaTeX}
+Dette kapitel er skrevet i filen 
+\texttt{sections/manual/intro-to-latex/chapter.tex}.
+
+\vspace{5mm}
+
+\section{Billeder og figurer}
+
+For at indsætte billeder i \LaTeX, bruger man 
+\LaTeXInline|\includegraphics[options]{billedefil}|. Dette wrapper man ofte i 
+et \texttt{figure} miljø, sådan at det placeres et sted der giver mening. 
+\LaTeX har en holdning til hvor billeder skal være og oftest skal man bare lade 
+\LaTeX styre det for at få de bedste resultater. 
+
+Det er dog sådan, at \LaTeX prøver at designe en bog for dig, hvor det 
+forventes at der er mere tekst end figurer. Derfor skal man nogle gange hjælpe 
+den lidt på vej, hvis man gerne vil have det til at se godt ud med mange 
+figurer.
+
+\begin{figure}[H]
+	\IncludeWithFrame{handout-layout-pl}{Some caption here}{5cm}
+\end{figure}

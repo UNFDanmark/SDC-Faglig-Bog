@@ -1,46 +1,56 @@
 % !TeX spellcheck = da_DK
 
 %% MAIN LaTeX file, DO NOT TOUCH
-%% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde 
-%% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections'' 
+%% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde
+%% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections''
 %% som du skal bruge.
 
 %% Sæt dokumentet til draft-mode. Dette har pt. begrænset betydning.
 \newif\ifdraftmode
 \draftmodetrue
 
-%% Dette indlæser vores ``preamble'' som er den fil der sørger for opsætningen 
+%% Dette indlæser vores ``preamble'' som er den fil der sørger for opsætningen
 %% af vores dokument.
 \input{settings/preamble}
 
 
-%% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af 
+%% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
 \begin{document}
-
-	%% Indsæt forsiden.	
-	\input{title-page}
 	
+	%% Indsæt forsiden.
+	\input{title-page}
+
 	%% Print indholdsfortegnelsen
 	\tableofcontents
-	
-	%% Herfra begynder det egentlige indhold. Vi bruger ``graphicspath'' til at 
-	%% isolere forskellige emners figurer fra hinanden, så der ikker bliver 
-	%% pillet i andres figurer, eller slettet figurer man ikke vidste andre 
+
+	%% Herfra begynder det egentlige indhold. Vi bruger ``graphicspath'' til at
+	%% isolere forskellige emners figurer fra hinanden, så der ikker bliver
+	%% pillet i andres figurer, eller slettet figurer man ikke vidste andre
 	%% brugte.
 	%
 	%% Filstrukturen er designet til at være:
 	%% sections/<part>/<chapter>/chapter.tex
 	%% sections/<part>/<chapter>/figures/
-	
+
 	\part{Java udvikling}
 	
 	\graphicspath{{sections/java/introduktion/figures/}}
 	\input{sections/java/introduktion/chapter}
 	
+	\graphicspath{{sections/java/2/figures/}}
+	\input{sections/java/2/chapter}
+	
+	\part{Android apps}
+	
+	\graphicspath{{sections/android/layouts/figures/}}
+	\input{sections/android/layouts/chapter}
+	
+	\graphicspath{{sections/android/activities/figures/}}
+	\input{sections/android/activities/chapter}
 	
 	%% Indsæt ``indexet'' som er et overblik over emner bogen indeholder, der 
 	%% skabes ved hjælp af \index makroen.
 	\input{index}
-	
+
 \end{document}
