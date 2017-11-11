@@ -1,6 +1,6 @@
 %% PREAMBLE LaTeX file, DO NOT TOUCH
-%% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde 
-%% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections'' 
+%% Denne fil skal ikke ændres af andre end LaTeX guruerne. Du skal holde
+%% nallerne væk, og ændre i den fil der ligger i den undermappe af ``sections''
 %% som du skal bruge.
 
 %% Sæt dokumentet op til at være skrift-størrelse 12 og af typen 'book'.
@@ -11,7 +11,7 @@
 %% Brug UTF8 encoding.
 \usepackage[utf8]{inputenc}
 %% Brug 8-bit encoding der har 256 glyphs, something something accenter.
-\usepackage[T1]{fontenc} 
+\usepackage[T1]{fontenc}
 
 %% blindtext lader os generere place-holder ``lorem-ipsum'' tekst.
 \usepackage{blindtext}
@@ -19,19 +19,21 @@
 %% xcolor lader os navngive vores farver
 \usepackage{xcolor}
 
-%% tikz bliver brugt til at tegne forskellige figurer, som kan bruges til 
+%% tikz bliver brugt til at tegne forskellige figurer, som kan bruges til
 %% f.eks. forsiden
 \usepackage{tikz}
 
-%% imakeidx lader os lave et overblik over referencer til vigtige emner i vores 
-%% bog. Se det som en slags indholdsfortegnelse, af den slags der er 
+%% imakeidx lader os lave et overblik over referencer til vigtige emner i vores
+%% bog. Se det som en slags indholdsfortegnelse, af den slags der er
 %% bagerst i fagbøger.
 \usepackage{imakeidx}
 \makeindex % Fortæller LaTeX at den skal generere filerne der bruges til index.
 
-%% Dette er den gennemgående farve i dokumentet som vores ``settings'' filer 
+%% Dette er den gennemgående farve i dokumentet som vores ``settings'' filer
 %% benytter. Den er pt. sat til ``UNF-blå'' fra logoet.
 \definecolor{ocre}{RGB}{19,67,149}
+
+\input{settings/danish}
 
 %% Dette indeholder al vores opsætning af code-highlighting.
 \input{settings/code}
@@ -39,16 +41,27 @@
 %% Dette indeholder opsætning og makroer af noter i margin.
 \input{settings/margin-notes}
 
-%% Denne fil, indeholder opsætning af ``boxes'' såsom ``exercise'' eller 
+%% Denne fil, indeholder opsætning af ``boxes'' såsom ``exercise'' eller
 %% ``example''
 \input{settings/content-boxes}
+
+%% Denne fil, indeholder opsætning af figurer og tabeller
+\input{settings/figures-and-tables}
 
 %% Dette er en grim fil, der definerer udseendet af dokumentet. Hvis man 
 %% sletter denne fil, får dokumentet et standard ``LaTeX look''.
 \input{settings/book-style}
 
+% En lille fil som giver flotte \todo makroer.
+\input{settings/todo}
+
 %% hyperref sørger for at vi kan lave links og referencer i vores dokument.
-%% Pga. et problem med timing mellem opsætning af hyperref i 
-%% ``settings-book-style'' og den generelle inklusion af biblioteket her, 
+%% Pga. et problem med timing mellem opsætning af hyperref i
+%% ``settings-book-style'' og den generelle inklusion af biblioteket her,
 %% bliver vi nødt til at indsætte den efter.
 \usepackage{hyperref}
+
+%% Indsæt et xspace efter \LaTeX, dette gør at der kommer et mellemrum efter 
+%% \LaTeX, når det giver mening.
+\let\oldlatex\LaTeX
+\renewcommand{\LaTeX}{\oldlatex\xspace}
