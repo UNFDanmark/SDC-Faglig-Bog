@@ -34,7 +34,7 @@
 	\begin{itemize} % Denne udgiver har også følgende selvhjælps-bøger på markedet:
 		\item Løkker: Sådan får du mere kontrol
 		\item Funktioner: Forbedre dine metoder
-		\item Arrays: ???
+		\item Arrays: Få styr på dine variabler.
 	\end{itemize}
 
 \section{Løkker}
@@ -155,16 +155,21 @@
 
 	\subsection{Break-udtryk}
 
-		\todo{ Sektion: \JavaInline{break} }
+		\todo{Udvid sektion}
 
-		\todo{
-			Som bonus vil jeg gerne have noter om \JavaInline{do ... while} og
-			\JavaInline{continue}, da disse er niché, men er samtidige nemme at
-			forstå.
+		Sommetider vil man gerne gå ud af en løkke tidligt. Dette tillader
+		\JavaInline{break}-keywordet os at gøre.
 
-			Jeg vil ikke have noter om mere niché ting, som f.eks
-			\emph{named-breaks}, da disse kræver introduktion til nye koncepter.
-		}
+		%
+		\begin{JavaCode}{Et brugbart while program som stopper efter 10 linjer{,} på trods af et uendeligt loop.}{lst:break-example-1}
+			int n = 1;
+			while (true) {
+				System.out.println(n + " linjer af ligegyldig data.");
+				n++;
+				if (n == 10)  break;
+			}
+		\end{JavaCode}
+
 
 		\todo{
 			Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
@@ -174,9 +179,53 @@
 
 	\subsection{!EXTRA! Do ... while}
 
-		\todo{Skriv sektion.}
+		\todo{Udvid sektion}
+
+		While-løkker tjekker om den burde fortsætte før iterationerne, men nogle
+		gang vil vi gerne tjekke om vi fortsætter, efter vi har kørt
+		iterationen. For eksempel kunne vi lave en beregning, og baseret på den
+		beslutte om vi ville videre. Dette løser \emph{do-while} udtryk på en
+		pæn måde.
+
+		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:unknown-bc}
+			while (false) {
+				System.out.println("Hej med dig");
+			}
+		\end{JavaCode}
+
+		\begin{JavaCode}{Vil skrive ``Hej med dig'' en enkelt gang.}{lst:unknown-b}
+			do {
+				System.out.println("Hej med dig");
+			} while (false)
+		\end{JavaCode}
+
+		For eksempel:
+
+		\begin{JavaCode}{Todo}{lst:unknown-c}
+			String a = "";
+			do {
+				a = " " + a.length();
+			} while (a.length <= 10);
+			System.out.println(a);
+		\end{JavaCode}
 
 		\todo{Giv historien om at while-løkker var for dyre i forhold til do-while.}
+
+	\subsection{Continue}
+
+		I visse situationer giver det mening at hoppe over en iteration af en
+		løkke. Dette kan gøres ved brug af \JavaInline{continue}-keyworded.
+
+		\begin{JavaCode}{Kode der anvender \emph{continue} til at kun vise de lige tal.}{lst:unknown-a}
+			for (int i = 1; i <= 10; i++) {
+				if (i % 2 == 0)  continue;
+				System.out.println(i);
+			}
+		\end{JavaCode}
+
+		\todo{Skriv mere?}
+
+		\todo{Lav opgave}
 
 \section{Funktioner}
 
