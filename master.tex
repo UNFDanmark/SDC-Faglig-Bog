@@ -17,7 +17,7 @@
 %% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
 \begin{document}
-
+	
 	%% Indsæt forsiden.
 	\input{title-page}
 
@@ -35,9 +35,13 @@
 
 	\part{Java udvikling}
 
-	\graphicspath{{sections/java/1/figures/}}
-	\input{sections/java/1/chapter}
-
+	% Hvis vi arbejder i draft mode, så inkluderer vi en eksempel side der 
+	% viser nogle af de elementer der er i denne bog.
+	\ifdraftmode
+		\graphicspath{{sections/manual/example/figures/}}
+		\input{sections/manual/example/chapter}
+	\fi
+	
 	\graphicspath{{sections/java/2/figures/}}
 	\input{sections/java/2/chapter}
 	
@@ -45,6 +49,9 @@
 	
 	\graphicspath{{sections/android/layouts/figures/}}
 	\input{sections/android/layouts/chapter}
+	
+	\graphicspath{{sections/android/activities/figures/}}
+	\input{sections/android/activities/chapter}
 	
 	%% Indsæt ``indexet'' som er et overblik over emner bogen indeholder, der 
 	%% skabes ved hjælp af \index makroen.
