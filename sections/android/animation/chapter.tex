@@ -1,14 +1,67 @@
 % !TeX spellcheck = da_DK
 
 \chapter{Animation}
-
+Animation handler om at få ting til at bevæge sig og ændre udseende. Mere specifikt lærer I at få Views til at flytte sig på skærmen, rotere, ændre størrelse og på andre måder ændre udseende.
 \section{Grundlæggende teori om animation}
-\subsection{En række af billeder}
-\subsection{Din animation er en funktion}
-\section{En helt simpel animation}
-\subsection{Opsættelse af funktion}
+Før vi går igang med at lave animationer i Android skal vi lige have på plads hvordan animationer virker.
+Animationer og video generelt er en række af billeder som skifter så hurtigt at det ligner en flydende bevægelse. \\
+%Illustration af still frames i række
+Når man laver en animation foregår det altså ved at man laver en små ændringer af billedet så hurtigt efter hinanden at det bliver "flydende". En anden måde at sige det på er at billedet ændrer sig i små hak, og man gør de hak så små at det ikke kan ses at der arbejdes i hak. \\
+Grunden til at man arbejder i hak er at det tager en hel del arbejde for en computer \marginnote{En mobil er også en computer} at udregne hvordan den skal vise et billede, så det gælder om at finde en balance mellem udseende og hvor meget af computerens regnekraft animationen tager. Det animation vi arbejder med har nu et fastsat tempo for hvor hurtigt billedet ændrer sig, så det skal I ikke overveje.
+\subsection{Animationens rammer}
+En animation starter et sted og slutter på et andet sted. Det kan både være at den ændrer sin position på skærmen, at starter med at være lille og slutter med at være stor eller at det er et ImageView som går igennem en række billeder i resource mappen. \\
+%Illustration af ansigt der ændrer sig
+Animationen tager også et stykke tid. Det kunne være et halvt sekund eller ti sekunder det tager for den at nå fra start til slut. Her gælder det om at lave en balance mellem at animationen tager tid nok så brugeren kan nå at se hvad der sker, og at brugeren ikke sidder og venter på at animationen bliver færdig. Hvis der ikke er stor forskel på start og slut i din animation kan det være at det slet ikke er nødvendigt at sætte en animation op, men bare at sætte dit View til slutpunktet med det samme. \marginnote{Hvis du bare vil have en oversigt over ting der kan ændres så se sektion Hvad kan vi ændre} \\
+
+Ud fra det kan vi så regne hvor langt vi skal være nået på et givet tidspunkt i animationen. 
+\begin{example}
+	Vi skal rykke et View fra 30 til 50 pixels horizontalt på 2 sekunder. Vi skal vide hvilken pixel vi er kommet til efter 0,5 sekunder, 1 sekund, 1,23 sekunder etc. Det vi kan gøre er at plotte en funktion, hvilket er meget simpelt hvis den er lineær:
+	\begin{equation}
+	pixel=10\cdot tid+30
+	\end{equation}
+	Hvor 10 er antallet af pixels Viewet bevæger sig i sekundet og 30 er startværdien
+\end{example}
+Vi skal nu ikke til at udregene en hel masse funktioner for animationen. Det gør Android for os.
+\section{En helt simpel animation i Android}
+For at lave en animation bruger vi den klasse der hedder ValueAnimator. Du kan tænke på et objekt af ValueAnimator som en animation. Du opretter en ValueAnimator således:
+\begin{JavaCode}{Oprettelse af ValueAnimator}{animation1}
+	ValueAnimator minAnimation = ValueAnimator.ofInt(startInt, slutInt);
+\end{JavaCode}
+Noter at du ikke skal skrive new. Den tekniske grund hertil er at ofInt() er en metode som returnerer en ny ValueAnimator. \\
+ofInt() tager to integers som er din startværdi og din slutværdi. Det kunne f.eks. være 0 og 360 hvis man ville lave en animere et View til at rotere 360 grader. \\
+Det næste din animation har brug for er hvor lang tid den skal køre. Den sættes således:
+\begin{JavaCode}{Sæt duration}{animation2}
+	minAnimation.setDuration(1000);	
+\end{JavaCode}
+Her betyder "1000" et sekund. Fem sekunder ville være 5000 og et kvart sekund ville være 250. Værdien skal være et heltal. 
 \subsection{At lave et billede}
-\subsection{Fuldt eksempel}
+Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid animationen skal tage. Det den så gør er at hver gang det er tid til at udregne et nyt billede, kalder den en funktion som vi definerer. Altså skal vi programmere hvad der sker hver gang det er tid til et nyt billede. Koden ser således ud:
+\begin{JavaCode}{Opsæt metode til at lave et billede}{animation3}
+	minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+		@Override
+		public void onAnimationUpdate(ValueAnimator animation) {
+			int vaerdiTilBillede = (int) animation.getAnimatedValue();
+			
+			mitView.setRotation(vaerdiTilBillede);
+		}
+	});
+\end{JavaCode}
+Hvad der sker er lidt advanceret og I behøver ikke at forstå det. Den korte version er at vi opretter et objekt af en ny klasse og fortæller ValueAnimator at den skal kalde onAnimationUpdate() i dette objekt når den vil have et nyt billede.\\
+Det der er vigtigt at forstå er at det der skal ændres for det nye billede skal skrives i onAnimationUpdate(). I eksemplet sætter jeg rotationen af et View. \\
+Men hvordan ved vi hvor langt i animationen vi er nået? Det ved Android, og den har også lavet en funktion for at give den værdi vi skal bruge istedet for tiden der er gået. Du får den ved at kalde getAnimatedValue() som der står i koden ovenover. Så kan du bruge den værdi til lige det du vil. Mulighederne for det kommer om lidt. \\
+Til sidst skal du kalde .start() på din ValueAnimator og så kører animationen. Her er et fuldt eksempel på en animation: 
+\begin{JavaCode}{420 Rotate it}{animation4}
+	ValueAnimator minAnimation = ValueAnimator.ofInt(0, 420);
+	minAnimation.setDuration(1337);
+	minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+		@Override
+		public void onAnimationUpdate(ValueAnimator animation) {
+			int vaerdiTilBillede = (int) animation.getAnimatedValue();
+			mitView.setRotation(vaerdiTilBillede);
+		}
+	});
+	minAnimation.start();
+\end{JavaCode}
 \section{Flere grundteknikker}
 \subsection{Størrelsen af skærmen}
 \subsection{Interpolatorer}
