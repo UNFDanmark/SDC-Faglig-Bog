@@ -73,6 +73,7 @@ Der findes mange forskellige Android mobiler, og de har mange forskellige skærm
 Det gælder derfor om altid at arbejde ud fra skærmens størrelse. Jeres view i eksemplet skal bevæge sig en hel skærmbredde. En figur som står i baggrunden og hopper skal hoppe 1/3 af skærmenhøjden. Etc.\\
 
 Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at få fat på. Men nej, koden for at få skærmstørrelsen ser således ud:
+%TODO få det her til at virke
 %\begin{JavaCode}
 %	final View layout = findViewById(R.id.layout);
 %	ViewTreeObserver observer = layout.getViewTreeObserver();
@@ -87,13 +88,49 @@ Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at f
 %	});
 %\end{JavaCode}
 
-Dette skal stå inde i onCreate(). I skal også give jeres yderste layout et ID (Her er dette id layout). Og så skal i have screenHeight og screenWidth som feltvariabler. Og hvis I skal bruge størrelsen af skærmen i onCreate() skal den kode også stå inde i onGlobalLayout().
-\marginnote{Grunden hertil er at Android ikke har udregnet hvordan grafikken placeres når OnCreate bliver kaldt. Vi får den så til at kalde onGlobalLayout når den har fundet størrelsen af layoutet}
+Dette skal stå inde i onCreate(). I skal også give jeres yderste layout et ID og hente det med findViewByID(). Og så skal i have screenHeight og screenWidth som feltvariabler. Og hvis I skal bruge størrelsen af skærmen i onCreate() skal den kode også stå inde i onGlobalLayout().
+Grunden hertil er at Android ikke har udregnet hvordan grafikken placeres når OnCreate bliver kaldt. Vi får den så til at kalde onGlobalLayout når den har fundet størrelsen af layoutet.
 \subsection{Interpolatorer}
+Det vi har defineret for Android er egentlig kun startpunkt, slutpunkt og tid imellem dem. Hvordan funktionen mellem de to punkter ser ud kan også defineres. Det kan være at den bare er lineær, men den kunne også være en exponentionel funktion hvor hastigheden starter med at være er langsom og så derefter bliver hurtigere. 
+Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator således: \\
+%TODO: Javakode med setInterpolator
+\\
+De helt basale muligheder er LinearInterpolator, AccelerateInterpolator, DecelerateInterpolator og så selvfølgelig AccelerateDecelerateInterpolator. Der findes dog flere som man kan finde online.
+%Illustrationer tii interpolators
 \subsection{Hvad kan vi ændre}
-\subsection{At lave et delay}
-\subsection{At stoppe animationen}
-\section{Yderligere kontrol over animationer}
+Her er der så en liste over hvad man kan lave med Views:
+\begin{itemize}
+	\item Rotation \\
+		I kan sætte et views rotation med: \\
+		%TODO javakode.
+			mitView.setRotation(jeresRotation);\\
+		Rotationen er i grader. 0 er normal rotation og 180 grader er på hovedet. Rotationen er en float.
+	\item Position \\
+		Her sættes vertikal og horizontal position seperat. Koden er således:\\
+			mitView.setTranslationX(jeresPositionX);\\
+			mitView.setTranslationY(jeresPositionY);\\
+		Her skal det noteres at det er \textbf{øverste} venstre hjørne der er position (0,0). Ligeledes er det viewets øverste venstre hjørne der placeres. Hvis I vil placere et view op af skærmens højre side skal i altså sætte X til skærmbredden minus viewets bredde. I kan få bredden af jeres view med:\\
+			mitView.getWidth();\\
+	\item Størrelse
+		I kan sætte størrelsen med: \\
+		mitView.setScaleX(jeresStoerlseX);\\
+		mitView.setScaleY(jeresStoerlseY);\\
+		Her er 1 den størrelse som viewet starter med. Skal størrelsen fordobles skal I give slutværdien 2. Skal den halveres skal I give slutværdi 0.5 etc.
+	\item Gennemsigtighed
+		Et view kan gøres gennemsigtigt (Man kan stadig interagere med det) med denne metode:\\
+		mitView.setAlpha(jeresGennemsigtighed);\\
+		Her er 0 usynlig og 1 er fuldt synlig. Værdien som tages er selvfølgelig en float.
+\end{itemize}
+\subsection{Ændring af billeder}
+Hvis man vil ændre billedet i et ImageView kræver det lidt mere arbejde. 
+%TODO. SKal lige teste det her
+\subsection{Startdelay, pause, resume og andre kontrolmetoder}
+Animator har yderligere en række metoder som går den lettere at arbejde med. Du kan sætte animationen til først at starte noget tid efter at du kalder .start() ved at kalde: \\
+minAnimation.setStartDelay(minForsinkelse);
+Forsinkelsen er igen i millisekunder, præcist som setDuration. 
+Yderligere er der metoderne .pause(), .resume(), .cancel,  .end() og .reverse() som meget vel giver sig selv. .end() sætter animationen til slutværdien mens de andre efterlader animationen ved den værdi den er på når de bliver kaldt.
+\section{Mere advancerede teknikker}
+Her kommer vi omkring nogle lidt mere advancerede teknikker
 \subsection{Flere animationer samlet}
 \subsection{Gentagelser}
 \subsection{Reaktion på at animation slutter eller stopper}
