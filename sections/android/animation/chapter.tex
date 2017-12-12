@@ -132,7 +132,80 @@ Yderligere er der metoderne .pause(), .resume(), .cancel,  .end() og .reverse() 
 \section{Mere advancerede teknikker}
 Her kommer vi omkring nogle lidt mere advancerede teknikker
 \subsection{Flere animationer samlet}
+Vi kan samle flere animationer i en, så vi kan flytte vores view diagonalt, eller få det til at ændre farve og rotere samtidig. Til dette bruger vi AnimatorSet. Det virker sådan her:\\
+%TODO javaCode
+	AnimatorSet mitAnimationSet = new AnimatorSet();
+	mitAnimatorSet.playTogether(minAnimation, minAndenAnimation);
+	mitAnimatorSet.start();
+Vi laver altså et AnimatorSet og så kalder vi .playTogether() med vores animationer som argumenter. Derefter starter vi vores sæt af animationer. Her skal det noteres at AnimatorSet opfører sig meget ligesom ValueAnimator og man kan stadig pause den og give den et startDelay m.m. 
+Desuden kan man lave et AnimatorSet af andre AnimatorSets. Altså give et AnimatorSet som parameter til .playTogether(). Man kan desuden give playTogether lige så mange animationer som man har lyst til.\\
+%TODO javaCode
+	mitAnimatorSet.playTogether(minAnimation, minAndenAnimation, hans, grete);
+
+\subsection{Animationer i rækkefølge}
+Vi kan også spille animationer efter hinanden. Her bruger vi igen AnimatorSet:
+%TODO javaCode
+	AnimatorSet mitAnimationSet = new AnimatorSet();
+	mitAnimatorSet.playSequentially(minAnimation, minAndenAnimation);
+	mitAnimatorSet.start();
+Så kører minAnimation først og derefter kører minAndenAnimation. Igen kan man give lige så mange animationer som man vil. 
+%todo javacode
+	mitAnimatorSet.playSequentially(minAnimation, minAndenAnimation, minTrejdeAnimation);
 \subsection{Gentagelser}
-\subsection{Reaktion på at animation slutter eller stopper}
-\section{Opsummering}
+Vi kan også sætte vores animationer til at gentage. Det er meget simpelt:
+%todo javacode
+	minAnimation.setRepeatCount(antalGentagelser);
+Her er det værd at notere at hvis man sætter antalGentagelser til 1 så afspiller animationen \textbf{2 gange} i alt.
+Man kan også sætte at:
+%todo javacode
+	minAnimation.setRepeatMode(ValueAnimator.REVERSE);
+Hvilket gør at den på gentagelsen ikke går tilbage og kører forfra, men går fra slutværdien til startværdien. Den vil så igen gå fra start til slut på anden gentagelse etc.
+\section{Hurtig guide} %TODO bedre navn
+Her er en lille 4 skridts guide til at lave en animation.
+\begin{enumerate}
+	\item Opret en ValueAnimator med enten ofInt() eller ofFloat() \\
+		%todo javacode
+		ValueAnimator minAnimation = ValueAnimator.ofInt(startInt, slutInt);
+	\item Sæt en varighed i millisekunder \\
+		minAnimation.setDuration(varighed);
+	\item Lav onAnimationUpdate og få den til at lave din ændring
+		minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(ValueAnimator animation) {
+				int vaerdiTilBillede = (int) animation.getAnimatedValue();
+				//Ændr dit view her
+				mitView.setRotation(vaerdiTilBillede);
+			}
+		});
+	\item Start animationen
+		minAnimation.start();
+\end{enumerate}
 \section{Opgaver}
+Der er ingen tid afsat til specifikt at lave opgaver i animation, men programmering er et praktisk fag så det gælder om at øve sig. Her er nogle forslag til ting at øve sig med.
+\begin{exercise}
+	Start helt fra bunden. Få en knap til at rotere 360 grader når du trykker på den.
+\end{exercise}
+\begin{exercise}
+	Giv rotationen et startdelay så der går et øjeblik før den begynder at rotere.
+\end{exercise}
+\begin{exercise}
+	Sæt din knap til at starte i venstre side af skærmen og så bevæge sig til midt på skærmen når du trykker på den.
+\end{exercise}
+\begin{exercise}
+	Sæt bevægelsens interpolator til at være lineær
+\end{exercise}
+\begin{exercise}
+	Kombiner de to første animationer så knappen først bevæger sig sidelæns og så derefter roterer
+\end{exercise}
+\begin{exercise}
+	Sæt nu knappen til at starte i øverste højre hjørne. Få den til at bevæge sig lodret og vandret samtidigt til midt på skærmen, og derefter rotere en omgang. Noter hvordan at den lodrette bevægelse er starter og slutter langsomt fordi den bruger den normale interpolator mens den horizontale bevægelse er lineær
+\end{exercise}
+\begin{exercise}
+	Få rotationen til at gentage sig selv 2 gange. Sæt derefter dens repeatMode til at være reverse.
+\end{exercise}
+\begin{exercise}
+	TODO øvelse om billeder
+\end{exercise}
+\begin{exercise}
+	Få helt styr på at arbejde med skærmens størrelse. Placer en knap i øverste venstre hjørne, og få den til at tage en runde langs telefonens kant når du trykker på den. 
+\end{exercise}
