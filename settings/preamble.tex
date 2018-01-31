@@ -48,7 +48,7 @@
 %% Denne fil, indeholder opsætning af figurer og tabeller
 \input{settings/figures-and-tables}
 
-%% Dette er en grim fil, der definerer udseendet af dokumentet. Hvis man 
+%% Dette er en grim fil, der definerer udseendet af dokumentet. Hvis man
 %% sletter denne fil, får dokumentet et standard ``LaTeX look''.
 \input{settings/book-style}
 
@@ -61,7 +61,13 @@
 %% bliver vi nødt til at indsætte den efter.
 \usepackage{hyperref}
 
-%% Indsæt et xspace efter \LaTeX, dette gør at der kommer et mellemrum efter 
+%% Indsæt et xspace efter \LaTeX, dette gør at der kommer et mellemrum efter
 %% \LaTeX, når det giver mening.
 \let\oldlatex\LaTeX
 \renewcommand{\LaTeX}{\oldlatex\xspace}
+
+%% AMS-Math: Har makroer til forskellige matematiske notationer, for
+%% eksempel parvise funktioner, hvilket bruges til at diskutere
+%% rekursion.
+\usepackage{amsmath}
+

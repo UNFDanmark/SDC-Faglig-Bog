@@ -1,5 +1,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tikz Intro:
+
+\usetikzlibrary{shapes,arrows}
+
+\tikzstyle{statement}  = [rectangle, draw, rounded corners, fill=blue!20, text centered, very thick, minimum size=1cm]
+\tikzstyle{expression} = [ellipse, draw, text badly centered, fill=red!20, very thick, minimum size=1cm, text width=2cm]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Kontrol og Metoder}
 
@@ -11,6 +19,8 @@
 	inline og til blokke? Den nuværende er hæslig til begge dele. Er meget tilfreds med lstautogobble!}
 
 	\todo{Hvordan skriver vi til deltagerne? Skriver vi \emph{I}? Undgår vi at rette os mod dem?}
+
+	\todo{@Beatrice: Kan du ikke tage for-each løkker? Måske som ekstra?}
 
     I sidste kapitel blev variabler, aritmetiske udtryk og
     \emph{if-statements} introduceret. Med disse dele kan man lave det
@@ -53,11 +63,9 @@
     simple løkker og kigger lidt på nogle mere advanceret måder at
     bruge løkker på.
 
-	\todo{Hvad gør jeg med for-each løkker?}
-
 	\subsection{While-løkker}
 
-		\JavaInline{while} er den simpleste af løkkerne. Dette er ligesom at
+        \JavaInline{while} er den simpleste type af løkke. Dette er ligesom at
 		sige: ``Mens at A gælder, sørg for at gøre B.'' For eksempel:
 
 		``Mens at gulvet er beskidt, bør du feje gulvet.''
@@ -89,6 +97,25 @@
         køre løkken. Hvis man til gengæld har kørt kroppen, og er nået
         enden, så spørger man igen om betingelsen er \emph{sand}, hvis
         ja, kør kroppen igen, hvis ikke, fortsætter vi efter løkken.
+
+        \begin{figure}
+        \center
+        \tikzstyle{flow} = [draw, very thick, rounded corners]
+        \begin{tikzpicture}[node distance = 4cm, auto]
+            \node[statement] (previous) {Tidligere kode};
+            \node[expression, right of=previous] (condition) {Betingelse};
+            \node[statement, below of=condition, node distance=1.5cm] (body) {Krop};
+            \node[statement, right of=condition] (after) {Senere kode};
+
+            \path [flow, ->] (previous.east) -- (condition.west);
+            \path [flow, ->] (condition.east) -- node[auto, swap] {false} (after.west);
+            \path [flow, <-] (condition.west) -- +(left:3mm) |- (body.west) ;
+            \path [flow, ->] (condition.east) -- +(right:1mm) |- node {true} (body.east);
+        \end{tikzpicture}
+        \caption{While-løkker}
+        \label{fig:while-loop-illustrated}
+        \end{figure}
+
 
         Nu kan man spørge: ``Man kan vel lave en løkke, hvis
         betingelse altid er \emph{sand}? Et program som aldrig
@@ -316,7 +343,9 @@
 		mindst én gang i kroppen. Det er denne som stopper funktionen, og returnerer.
 
         Signaturen er hvordan man skal snakke med funktionen, og
-        kroppen er hvad den egentlig gør.
+        kroppen er hvad den egentlig gør. Læg mærke til at hvis
+        funktionen ikke skal have en retur-værdi, skal den gives
+        retur-typen \emph{void}.
 
 	\subsection{Eksempel funktion: faktoriel}
 
@@ -370,24 +399,13 @@
 
         \todo{Tilføj 3-4 opgaver.}
 
-	\subsection{Procedurer: Funktioner uden retur-værdier}
-
-        Du husker nok \JavaInline{main} og dens underlige
-        \JavaInline{void} retur-type. \JavaInline{void} er den
-        retur-type man giver til funktioner som ikke burde give et
-        resultat. Det giver god mening at \JavaInline{main} har denne
-        type, da der ikke er noget vi kan give tilbage til hvadend der
-        kaldte \JavaInline{main}.
-
-        Hvornår bruger man void? Det gør man når funktionen kun bør
-        ændre i verden. For eksempel hvis en funktion bør skrive til
-        skærmen, eller hvis den vil skrive til en fil. I disse
-        situationer er der ikke noget interessant at få tilbage, så
-        derfor lader vi typen være void.
-
-        \todo{Giv eksempel på en void funktion.}
-
-        \todo{Lav en enkelt opgave.}
+        \begin{exercise}
+            Lav en funktion med signaturen \JavaInline{void f ()}. Lad
+            kroppen af denne funktion være et kald til funktionen
+            selv. Sørg for at funktionen kaldes fra \JavaInline{main}.
+            Hvad kunne der ske når koden køres? Hvad sker der når
+            koden køres?
+        \end{exercise}
 
     \subsection{!Extra! Call-by-reference}
 
@@ -445,35 +463,62 @@
 
 	\subsection{!Extra! Rekursion}
 
-	\todo{Dette kaldes rekursion, og det minder lidt om induktion, som i nok kender til
+        \todo{Dette kaldes rekursion, og det minder lidt om induktion, som i nok kender til
 
-	-- Kurt til Datalogi-russerne, under deres først forelæsning.}
+        -- Kurt til Datalogi-russerne, under deres først forelæsning.}
 
-	\todo{
-		Kort forklaring om hvad rekursion er. Regner ikke med at de forstår det.
-		Stadig brugbart at dække kort. Meget vigtigt at det er så nede til
-		jorden som muligt. Faktorial-funktionen er idéel.
-	}
+        En af opgaverne længere \todo{Ref til opgaven?} oppe
+        involverer at lave en funktion som kalder sig selv. Dette er
+        lidt sejt, da man ofte ser matematiske formler som udtrykkes i
+        forhold til sig selv. For eksempel kan faktoriel funktionen
+        udtrykkes matematisk som:
 
+        \begin{equation}
+            n! = \begin{cases}
+                       1 & \text{hvis} \quad n = 1 \\
+                       n\cdot(n-1)! & \text{ellers} \\
+                  \end{cases}
+        \end{equation}
 
-	\begin{JavaCode}{Rekursiv Fakultet}{lst:factorial-recursive}
-		public int factorial (int n) {
-			if (n <= 1)  return 1;
-			return n * factorial(n-1);
-		}
-	\end{JavaCode}
+        Denne måde at definere ting ud fra sig selv, kaldes for
+        ``rekursion'', og sådanne objekter dukker ofte op i matematik
+        og datalogi.
 
-	\begin{JavaCode}{Akkumulator Fakultet}{lst:factorial-accumulator}
-		public int factorial (int n, int a) {
-			if (n <= 1)  return a;
-			return factorial(n-1, n * a);
-		}
-	\end{JavaCode}
+        \todo{Illustration: Sierpinski Trekanten}
 
-	\begin{JavaCode}{Fakultet funktionen hvis Java var godt}{lst:factorial-good}
-		fun factorial 0  =  1
-		  | factorial n  =  n * factorial (n - 1)
-	\end{JavaCode}
+        Selvom vi tidligere har skrevet en version af
+        faktorial-funktionen som virker ved en \JavaInline{for}-løkke,
+        kan vi sagtens lave version som kalder sig selv rekursivt. Se
+        nedenfor. Læg mærke til hvor tæt på den overstående
+        matematiske defintion, denne kode er:
+
+        \begin{JavaCode}{Rekursiv Fakultet}{lst:factorial-recursive}
+            public int factorial (int n) {
+                if (n == 1)   return 1;
+                return n * factorial(n-1);
+            }
+        \end{JavaCode}
+
+        \begin{exercise}
+            Fibonnaci sekvensen er en liste af tal (\(1, 1, 2, 3, 5,
+            8, 13, 21, \dots\)), hvor de to første elementer er
+            begge \(1\), og derefter er hvert element i listen,
+            summen af de to foregående tal. Vi kan formulere dette
+            matematisk som:
+
+            \begin{equation}
+                fib(n) = \begin{cases}
+                             1                   & \text{hvis} \quad n = 1 \\
+                             1                   & \text{hvis} \quad n = 2 \\
+                             fib(n-2)+fib(n-1)   & \text{ellers} \\
+                      \end{cases}
+            \end{equation}
+
+            Skriv din egen rekursive \JavaInline{fib} funktion i Java,
+            ud fra overstånde definition. Hvis du har lyst, kan du
+            bagefter forsøge en version uden rekursion.
+        \end{exercise}
+
 
 	\begin{exercise}
 		Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
@@ -518,10 +563,72 @@
 		Kræver introduktion til arrays og subscripts.
 	}
 
+    Indtil videre har I kun arbejdet med enkelte værdier. Disse er
+    brugbare, men hvad gør du hvis du har rigtig mange værdier? Har du
+    en enkelt variable for hver værdi? Det bliver mange variabler, og
+    store udtryk. Derfor er der noget der hedder \emph{arrays} ellers
+    \emph{lister}. Disse har typen \JavaInline{undertype[]}. Læg mærke til
+    \JavaInline|[]|-delen.
+
+    For eksempel er en variable med typen \JavaInline{int[]} en liste
+    af tal, og \JavaInline{String[]} er en liste af strenge. Vi kan
+    tilgå element nummer \(n\) i listen \(a\) med \JavaInline{a[n]}.
+    Lister i Java er underlige, de er nemlig nul-indekseret. Det betyder
+    at det første element i listen har index \(0\), det andet element har
+    index \(1\), ovs.\footnote{Tilbage i 1960erne, var det vigtigt at
+    bruge computere så effektivt som muligt. Nogle kloge hoveder
+    fandt ud af at det var hurtigere på deres computere at starte
+    lister med 0. Nu-til-dags er det ikke meget hurtigere, og
+    bibevares blot for traditionens skyld.}
+
+    \begin{JavaCode}{Et eksempel på at arbejde med lister af tal. Læg specielt mærke til hvordan listen laves, og nul-indekseringen.}{lst:array-example}
+        public static void main(String[] args) {
+            int[] tal = new int[3];
+            tal[0] = 10;
+            tal[1] = 20;
+            tal[2] = 30;
+            for (i = 0; i < 3; i++) {
+                System.out.println((i+1) + ". tal: "
+                                         + tal[i]);
+            }
+        }
+    \end{JavaCode}
+
+    I tilfælde af at vi gerne vil finde længden af en liste, kan den findes med
+    \JavaInline{a.length}.
+
+    \begin{JavaCode}{Alternativ til overstående. Anvender alternativ måde at lave listen på, og bruger længden af listen, i stedet for en tilfældig konstant.}{lst:array-example-2}
+        public static void main(String[] args) {
+            int[] tal = { 10, 20, 30 };
+            for (i = 0; i < tal.length; i++) {
+                System.out.println((i+1) + ". tal: "
+                                         + tal[i]);
+            }
+        }
+    \end{JavaCode}
+
+
 	\begin{exercise}
 		Lav en funktion, som givet en liste af tal, finder det største tal i den
 		liste.
 	\end{exercise}
+
+    \begin{exercise}
+        Det er ikke muligt at gøre en liste mindre eller størrre efter
+        den er skabt, den er evigt af en vis længde.  Det er dog
+        muligt at lave en ny liste med en anden størrelse, og kopiere
+        elementer fra den gamle ind i den nye.
+        Lav en funktion \JavaInline{append} der tager en liste af tal
+        \(l\), og et tal \(n\), og giver en ny liste af tal med \(n\)
+        smidt på enden.
+    \end{exercise}
+
+    \begin{exercise}
+        Det er muligt at have lister af lister. For eksempel
+        \JavaInline{int[][]}.  Lav en funktion som givet en liste af
+        lister af tal, finder det største tal i denne liste af lister
+        af tal. Brug gerne jeres funktion fra overstående opgave.
+    \end{exercise}
 
 	\begin{exercise}
 		\todo{Forbedre første sætning.}
