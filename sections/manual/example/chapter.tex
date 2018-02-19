@@ -4,23 +4,97 @@ Java er det programmeringssprog som I vil lære at bruge til at programmere apps
 \section{Hvad er et program, egentlig?}
 Et program er en serie af instruktioner som skal udføres i rækkefølge. Typisk skrives instruktionerne som helt almindelig tekst, hvor hver instruktion står på sin egen linje.
 
-\section{Hello World!}
-Et "Hello World!" program er typisk det første man prøver i et nyt programmeringssprog, for at få en lille smule føling med, hvordan sproget skrives.
+\section{Sådan skriver du programmer}
+Når du skal skrive programmer kan du i princippet gøre det i næsten hvilket som helst skriveprogram som ikke er Word, eksempelvis Notesblok på Windows. 
 
-\begin{JavaCode}{A Hello World program}{lst:helloworld}
-	public class Hello {
-		public static void main(String[] args) {
-			System.out.println("Hello World!");
-		}
+Det kan dog være lidt besværligt, og derfor har nogle valgt at udvikle programmer specielt til at skrive kode i, som kan hjælpe med alt muligt smart. 
+
+Et program I kommer til at bruge til at skrive Java-kode i, er IntelliJ. Det kan blandt mange andre ting, hjælpe med at man får skrevet gyldige Java-programmer og køre dit program ved et enkelt klik på en knap.
+
+\begin{remark}
+	Hvis du har lyst til en lille udfordring, så prøv at skriv et program i notesblok eller tilsvarende, og kør programmet ved at bruge en terminal (kaldet kommandoprompt på Windows). 
+	
+	Dette gør du ved først at navigere til den mappe, hvor du har gemt dit program ved hjælp af commandoen \texttt{cd} (change directory), skriv \texttt{cd test} hvis du vil ind i mappen der hedder test. Hvis du gerne vil se hvilke mapper du har i den mappe du er i, så brug kommandoen \texttt{dir} på Windows, eller \texttt{ls} på de fleste andre systemer. 
+	
+	Når du er i den rigtige mappe skal du kompilere dit program ved at skrive \texttt{javac Test.java} (c'et er for compile), hvis dit program hedder "Test" (det er vigtigt at Java-programmer slutter på ".java"), dette laver en fil ved navn \texttt{Test.class}, som er dit færdige program. 
+	
+	Til sidst kan du køre programmet ved at skrive \texttt{java Test}.
+\end{remark}
+
+\section{Hello World!}
+Et "Hello World!" program er ofte det første man prøver i et nyt programmeringssprog, for at få en lille smule føling med, hvordan sproget skrives.
+
+\begin{JavaCode}{A Hello World program in Java}{lst:helloworld}
+public class Hello {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
 	}
+}
 \end{JavaCode}
 
+Til at starte med ser dette måske lidt skræmmende ud, men bare rolig, vi guider dig igennem det hele, skridt for skridt. Hvis du har programmet i Listing \ref{lst:helloworld} til at fungere, vil det sige \texttt{Hello World!} som output, men hvis du synes det er lidt kedeligt skal du bare ændre teksten imellem anførselstegnene på linje 3, til noget du synes er sjovere.
+
+\begin{remark}
+	Husk at programmet skal gemmes som "Test.java" med stort forbogstav, og skal hedde det samme som det der står på linjen, hvor der står \texttt{public class Test \{}
+\end{remark}
+
+Det eneste der sker i dit program er præcis de ting der står mellem \{ \} efter linjen \texttt{public static void main(String[] args) \{}, så husk at hvis ikke det står der (eller bliver refereret derfra) så bliver det ikke udført.
+
+\begin{remark}
+	Undervejs kan det være du har lyst til at skrive noter/kommentarer til dine kodelinjer. Dette er heldigvis nemt at gøre, og bruges rigtig meget i virkeligheden. I Java er der to slags kommentarer. En en-linjes kommentar starter med \texttt{//} og gør resten af linjen til en kommentar, det vil altså sige at det ikke bliver "set" af computeren som en del af programmet. En fler-linjes kommentar starter med \texttt{/*} og slutter med \texttt{*/}. Et par eksempler på kommentarer kan ses i Listing \ref{lst:comments}.
+\end{remark}
+
+\begin{JavaCode}{Eksempler på kommentarer}{lst:comments}
+public class Comments {
+	public static void main(String[] args) {
+		/*
+		  This 
+		  is
+		  a 
+		  multiline 
+		  comment
+		*/
+		System.out.println("Hello World!");	// This is a single line comment after some code
+
+		// This line contains no code, only this comment
+		
+		/* A multiline comment doesn't need to span multiple lines */
+	}
+}
+\end{JavaCode}
 
 \section{Variabler}
-Tit vil man gerne referere til en bestemt værdi flere gange, og måske vil man gerne ændre den undervejs i sit program, til det bruger man variabler. Det kan være nyttigt at se på en variabel som en flyttekasse, hvor man skriver udenpå, hvad for noget der er indeni, eksempelvis "penge". Ved at referere til "penge" kan man finde ud af, hvor mange penge man har i kassen. Man kan også lægge penge til dem man har i kassen, eller trække fra. Man skal dog passe på man ikke kommer til at overskrive sine penge, for kassen kan kun huske det sidste man har lagt i den.
+Tit vil man gerne referere til en bestemt værdi flere gange, og måske vil man gerne ændre værdien undervejs i sit program, til det bruger man variabler. 
+
+Det kan være nyttigt at se på en variabel som en slags papkasse, hvor man skriver udenpå, hvad for noget der er indeni, eksempelvis "penge". Ved at referere til "penge" kan man finde ud af, hvor mange penge man har i kassen. Man kan også lægge penge til dem man har i kassen, eller trække fra. Man skal dog passe på man ikke kommer til at overskrive sine penge, for kassen kan kun huske det sidste man har lagt i den.
+
+\begin{JavaCode}{Penge eksempel kode}{lst:money}
+public class Money {
+	public static void main(String[] args) {
+		int penge = 50;
+		
+		System.out.println("Jeg starter med kr " + penge);
+		
+		penge = penge + 20;
+		
+		System.out.println("Nu har jeg kr " + penge);
+		
+		penge = 30;
+
+		System.out.println("Til sidst har jeg kr " + penge);
+	}
+}
+\end{JavaCode}
+\todo{Linjerne er for lange, skal de wrappes eller hvad gør vi?}
+
+I Listing \ref{lst:money} kan man se et lille program der viser brugen af en variabel. I linje 3 opretter vi variablen, og med det samme lægger vi tallet 50 i, som repræsentation af 50 kr. Det vil også fremgå af outputtet fra programmet, fra linje 5. Java sørger for at hvis vi har noget tekst og skriver + bagved så bliver det næste også tolket som tekst og derfor sat bagved. Det der står bagved er penge, og fordi det står uden anførselstegn er det en reference til variablen (eller papkassen) med navnet penge, og når det bliver refereret bruger man så det der er gemt i den.
+
+På linje 7 opdaterer vi, hvad der er i variablen penge. Vi refererer variablen penge og bruger = som tegn på at penge skal opdateres til hvad end der kommer bagefter. Det er altså væsentligt forskelligt fra det = vi kender fra matematik. Vi siger altså at penge skal opdateres til at være den værdi, der var i penge i forvejen og så lægge 20 til. Det vil altså sige at der gerne skulle være 70 kr i den nu, hvilket også fremgår af outputtet efterfølgende.
+
+Til sidst demonstreres vigtigheden af at "papkassen" kun kan "huske", hvad der sidst blev lagt i den. Hvis vi lader som om vi lige har "tjent" 30 kr som vi gerne vil gemme i "papkassen", så skal vi lægge det til det der var i i forvejen. Hvis ikke vi gør det, så bliver det gamle "glemt" fordi det bliver overskrevet. Det kan ses på linje 11, hvor penge opdateres til 30. Det vil fremgå af output at vi til sidst kun har 30 kr, men måske var meningen i virkeligheden at de skulle være lagt til, så vi havde 100 kr.
 
 \section{Typer}
-Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel på tekst og tal. Man siger at tekst og tal er forskellige typer. Der er nogle grundlæggende typer som man bliver nødt til at lære sig, men det er nemt nok, når man øver sig.
+Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel på tekst og tal. Man siger at tekst og tal er forskellige typer. Der er nogle grundlæggende typer som man bliver nødt til at lære sig, men det er ikke så slemt, når man har brugt dem lidt.
 
 \begin{itemize}
 	\item \texttt{int} er standard typen for heltal, altså 1, 2, 3, osv. Det er forkortet af det engelske ord "integer" som betyder netop heltal.
@@ -29,22 +103,113 @@ Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel
 	\item \texttt{boolean} er typen for sandhedsværdier også kaldet boolske værdier, dvs. \texttt{true} eller \texttt{false}. Navnet kommer fra manden George Boole, som var den første til at formalisere denne form for logik.
 \end{itemize}
 
+Der findes flere men dette er de mest anvendte.
+
+Java kræver at man fortæller hvilken type en variabel har, første gang man refererer den, man kan sige at det er idet man "opretter" den. Det er derfor der står \texttt{int} foran \texttt{penge} i linje 3 i Listing \ref{lst:money}. Det kan måske virke lidt besværligt i starten at man skal huske at gøre det første gang, men ikke må gøre det andre gange, men i det lange løb betyder det faktisk at Java kan hjælpe én rigtig meget, når man laver fejl. I Listing \ref{lst:types} kan du se nogle flere eksempler på oprettelse af variabler med de forskellige typer.
+
+\begin{remark}
+	Bemærk, at \texttt{String} modsat de andre typer står med stort forbogstav. Dette skyldes (lidt teknisk) at strenge er objekter og ikke primitive typer, som de andre kaldes. Som sagt er de opbygget af tegn/karakterer, disse tegn er af den primitive type kaldet \texttt{char}. Når vi senere hen skaber vores egne "typer" vil de også være skrevet med stort forbogstav.
+\end{remark}
+
+\begin{JavaCode}{Eksempler på oprettelse og anvendelse af variabler med forskellige typer}{lst:types}
+public class Types {
+	public static void main(String[] args) {
+		int answer = 42;
+		double price = 4.95;
+		String name = "Bill Gates";
+		boolean running = true;
+		
+		System.out.println("The ultimate answer to life, universe and everything: " + answer);
+		System.out.println("An apple in my shop kosts: " + price);
+		System.out.println("Founder of Microsoft: " + name);
+		System.out.println("Is the program running? " + running);
+	}
+}
+\end{JavaCode}
+
+\subsection{Aritmetik/regneregler}
+Her er nogle eksempler på forskellige operationer og brug af operatorer på de typer vi har set. Mange af dem virker nok ret indlysende.
+
+\begin{itemize}
+	\item Plus, minus, gange og division med heltal: \\
+	\texttt{int a = 19+23;} \\
+	\texttt{int b = 4-1;} \\
+	\texttt{int c = 3*4;} \\
+	\texttt{int d = 23/5;} Bemærk at der her bruges såkaldt heltalsdivision, hvilket vil sige at den sidste rest som 5 ikke kan dele bliver ignoreret, dermed bliver \texttt{d} i dette eksempel 4, da 4*5 giver 20 og 5 ikke kan dele de sidste 3 i hele dele.
+	
+	\item Plus, minus, gange og division med kommatal:\\
+	\texttt{double e = 1.23+3.45;}\\
+	\texttt{double f = 4.0-0.86;}\\
+	\texttt{double g = 5.0*0.5;}\\
+	\texttt{double h = 6.0/2.0;} Bemærk brugen af "6.0" og "2.0" for at sikre kommatals division.
+	
+	\item Plus mellem strenge sætter dem efter hinanden, også kaldet konkatenering.\\
+	\texttt{String i = "hello " + "there";} Husk at inkludere mellemrum i en af strengene, ellers bliver de sat helt op ad hinanden.
+	
+	\item AND og OR mellem boolske udtryk:\\
+	\texttt{boolean j = true \&\& true;} giver \texttt{true}.\\
+	\texttt{boolean k = false || false;} giver \texttt{false}.
+	
+	\item Sammenlignings operatorer mellem tal, resulterer i en \texttt{boolean}:\\
+	\texttt{boolean l = 1 < 2;}\\
+	\texttt{boolean m = 3.5 >= 4.2;} giver \texttt{false}.\\
+	\texttt{boolean n = 5 == 5;} dette er en præcis sammenlignings operator, altså er udtrykket kun \texttt{true} når de to ting er præcis lig med hinanden. Bruges ikke til sammenligninger mellem strenge, der bruges istedet \texttt{.equals()}. Det vender vi tilbage til senere.\\
+	\texttt{boolean o = 1.5 != 2.3;} betyder det modsatte af \texttt{==} altså "ikke lig med" eller "forskellig fra".
+\end{itemize}
+
+\todo{Ovenstående skal måske anvende noget JavaCode i stedet...}
+
 \section{Logik}
-Nu hvor vi har lært om typen \texttt{boolean}, så kan vi lære om forskellige logiske udtryk. Man kan f.eks. få en boolsk værdi ved at "spørge", om 1 er større end 2, hvilket vi ved er falsk, så den boolske værdi er \texttt{false}. Det smarte er, at når vi sammensætter forskellige logiske udtryk, så får vi et nyt logisk udtryk som til sidst giver en boolsk værdi. Vi sammensætter som regel enten med AND eller OR. Husk at man også her kan bruge variabler, f.eks. kan det være man gerne vil vide om man skal købe et hus, så man spørger om man har penge nok og om man i forvejen har nok huse.
+Nu hvor vi har lært om typen \texttt{boolean}, så kan vi lære om forskellige logiske udtryk. Man kan f.eks. få en boolsk værdi ved at "spørge", om 1 er større end 2, hvilket vi ved er falsk, så den boolske værdi er \texttt{false}. Det smarte er, at når vi sammensætter forskellige logiske udtryk, så får vi et nyt logisk udtryk som til sidst giver en boolsk værdi. Vi sammensætter som regel enten med AND eller OR, i Java repræsenteret med hhv. \texttt{\&\&} og \texttt{||}. Husk at man også her kan bruge variabler, f.eks. kan det være man gerne vil vide om man skal købe et hus, så man spørger om man har penge nok og om man i forvejen har nok huse. 
 
 \begin{JavaCode}{Logik}{lst:logik}
 	boolean buyHouse = money > 1000000 && houses < 1;
 \end{JavaCode}
 
-\section{IF-THEN-ELSE}
-Når man har styr på logiske udtryk kan man bruge dem til at vælge, hvilken vej i programmet computeren skal gå. Man siger simpelthen at \textbf{hvis} et eller andet er sandt \textbf{så} vil man gøre noget \textbf{ellers} vil man gøre noget andet. F.eks. \textbf{hvis} man har penge nok \textbf{så} vil man gerne købe en bil \textbf{ellers} vil man tjene flere penge.
+Listing \ref{lst:merelogik} kunne være et eksempel på brugen af udtrykket i Listing \ref{lst:logik}.
+
+\begin{JavaCode}{Anvendelse af logik fra Listing \ref{lst:logik}}{lst:merelogik}
+public class Logic {
+	public static void main(String[] args) {
+		int money = 2000000;
+		int houses = 0;
+		boolean buyHouse = money > 1000000 && houses < 1;
+		System.out.println("Should I buy a house? " + buyHouse);
+	}
+}
+\end{JavaCode}
+
+\begin{remark}
+	For at et udtryk sammensat med AND kan være sandt skal begge sider være sande, dette betyder faktisk at hvis den venstre side (som bliver evalueret først i programmet) er falsk, bliver den højre side ikke evalueret.
+	
+	Et udtryk sammensat med OR er sandt, hvis bare én af siderne er sande, derfor gælder det tilsvarende, at hvis venstre side er sand, bliver den højre side ikke evalueret.
+\end{remark}
+
+\section{if-else sætninger}
+Når man har styr på logiske udtryk kan man bruge dem til at vælge, hvilken vej i programmet computeren skal gå. Man siger simpelthen at \textbf{hvis} et eller andet er sandt så vil man gøre noget \textbf{ellers} vil man gøre noget andet. F.eks. \textbf{hvis} man har penge nok så vil man gerne købe en bil \textbf{ellers} vil man tjene flere penge. Et eksempel på hvordan det kunne skrives er vist i Listing \ref{lst:if-intro}.
 
 \begin{JavaCode}{If-else statement}{lst:if-intro}
 	if (money > 100000) {
-		buyCar();
+		System.out.println("Buy the car!");
 	} else {
-		earnMoney();
+		System.out.println("You need to earn more money.");
 	}
+\end{JavaCode}
+
+Jeg håber du kan se at denne mulighed skaber mange flere muligheder for at skrive interessante programmer end tidligere, da vi pludselig kan tage beslutninger baseret på "ukendt" input. If-else sætninger kan både gøres kortere og længere, hvis man kun vil gøre en ekstra ting, i et specialtilfælde, eller hvis man har brug for at vælge mellem flere ting, begge dele kan ses i Listing \ref{lst:elseif}.
+
+\begin{JavaCode}{Eksempler på if-sætninger og else-if-sætninger}{lst:elseif}
+if (money > 100000) {
+	System.out.println("Buy the car!");
+}
+
+if (age >= 70) {
+	System.out.println("You are old.");
+} else if ( age >= 30) {
+	System.out.println("You are an adult.");
+} else {
+	System.out.println("You are young.");
+}
 \end{JavaCode}
 
 \section{Metoder}
@@ -52,9 +217,60 @@ Nogen gange har man noget kode som man gerne vil genbruge flere steder i sin kod
 
 Kendetegnende for metoder er, at der er parenteser efter navnet. Det man skriver inden i parentesen kaldes for argumenter (det kan også ske nogle kalder dem for parametre), og er input som metoden skal bruge til arbejde med. En metode som vi har set nogle gange er print-metoden. Det, den tager som input-argument, er den tekst-streng vi gerne vil have skrevet ud på skærmen.
 
-\section{Exceptions}
-Syntaks, run-time, semantisk?
+\begin{JavaCode}{Print-metoden, tager en tekst-streng som argument/input.}{lst:helloagain}
+System.out.println("Hello World!");
+\end{JavaCode}
 
+Tidligere nævnte vi også at at for at sammenligne strenge skulle man helst skrive \texttt{.equals()}. Dette er også et eksempel på en metode, igen skal man give en tekst-streng som argument. I Listing \ref{lst:equals} er et eksempel på brugen af \texttt{.equals()}-metoden.
+
+\begin{JavaCode}{Eksempel på brug af \texttt{.equals()}}{lst:equals}
+String x = "Horse";
+if (x.equals("Horse")) {
+	System.out.println("Yeehaaw!");
+}
+\end{JavaCode}
+
+\section{Fejl og exceptions}
+Det er menneskeligt at fejle, og programmering er et sted, hvor det er umuligt at undgå. Selv verdens bedste programmør vil lave fejl en gang imellem. Overordnet findes der tre typer fejl.
+
+\begin{enumerate}
+	\item Syntaks fejl
+	\item Run-time fejl
+	\item Semantiske fejl
+\end{enumerate}
+
+\subsection{Syntaks fejl}
+Syntaks handler om den meget bestemte måde Java kræver man skriver programmer. F.eks. skal man huske semikolon efter en endt instruktion og en if-sætning skal have et boolsk udtryk imellem parenteserne. Syntaks i et Java program bliver tjekket når programmet kompileres (og i visse programmer undervejs mens man skriver), hvilket betyder at man slet ikke kan køre et Java program, der er syntaktisk ukorrekt. En syntaks fejl I næsten garanteret kommer til at lave på et tidspunkt er at skrive noget i retningen af \texttt{if (x = y) \{}, hvor I skulle have brugt \texttt{==} til at sammenligne. Den fejl kan også siges at være en semantisk fejl.
+
+\subsection{Run-time fejl}
+Run-time fejl er de fejl, der sker mens programmet kører. Et godt eksempel er hvis man f.eks. har skrevet noget lignende \texttt{int x = 100 / y;}, men inden denne linje udføres er \texttt{y} blevet lig med 0 og division er derfor udefineret, det skal selvfølgelig resultere i en fejl. Alle run-time fejl kaldes exceptions og Java tilbyder faktisk mulighed for at håndtere dem, hvis man ønsker det. Dette gøres med en try-catch konstruktion, se et eksempel i Listing \ref{lst:trycatch}
+
+\begin{JavaCode}{Eksempel på try-catch}{lst:trycatch}
+public class TryCatch {
+	public static void main(String[] args) {
+		int y = 0;
+		try {
+			int x = 100 / y;
+			System.out.println("Result: " + x); 
+		} catch (Exception e) {
+			System.out.println("An error occured");
+			System.out.println(e);
+		}
+	}
+}
+
+\end{JavaCode}
+
+\begin{remark}
+	Som du kan se printer vi \texttt{e} på linje 9, det er selve fejlen, som er blevet fanget, defineret i linje 7. Det er muligt at definere sine egne fejl-typer (exceptions), hvis man laver mere komplicerede programmer.
+	
+	Det er også muligt at forlænge sin try-catch konstruktion med en finally blok. Det er blot kode man vil køre uanset om der blev fanget en exception eller ej.
+\end{remark}
+
+\subsection{Semantiske fejl}
+Semantiske fejl er den slags fejl som ikke kan fanges af computeren, ligesom de to andre slags fejl kan. Det handler om at man ikke har skrevet præcist det man mente. Som tidligere nævnt kan et eksempel være at man har lavet en "sammenligning" med \texttt{=} istedet for \texttt{==} og derfor laver man en tildeling af værdier istedet for sammenligning. Et andet eksempel som vi tidligere har stødt på, er hvor man opdaterer en variabel med en fast værdi, i stedet for at lægge til. 
+
+Det er i virkeligheden en slags semantisk fejl der ligger bag joken om konen der beder manden gå ned og købe to mælk, og hvis der er æg, så skal han købe ti. Da han kommer tilbage med ti mælk, spørger konen forvirret, hvorfor han har ti mælk, hvortil han svarer "der var æg".
 
 %\blindtext
 %\marginfigure{sample}{Some margin note here.}
