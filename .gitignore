@@ -14,4 +14,6 @@ master.pdf
 **.log
 **.gz*
 **.glo
+**.glg
+**.gls
 **.ist
