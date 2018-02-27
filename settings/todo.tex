@@ -37,7 +37,9 @@ rightmargin=0cm,
 linewidth=4pt]{todoBox}
 
 \newcommand{\todo}[1]{
+	\ifdraftmode
 	\begin{todoBox}\begin{todoT}
 		#1
 	\end{todoT}\end{todoBox}
+	\fi
 }
