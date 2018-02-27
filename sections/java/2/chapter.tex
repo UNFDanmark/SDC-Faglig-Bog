@@ -2,10 +2,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tikz Intro:
 
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows,graphs}
 
 \tikzstyle{statement}  = [rectangle, draw, rounded corners, fill=blue!20, text centered, very thick, minimum size=1cm]
-\tikzstyle{expression} = [ellipse, draw, text badly centered, fill=red!20, very thick, minimum size=1cm, text width=2cm]
+\tikzstyle{expression} = [rectangle, draw, rounded corners, fill=red!20,  text centered, very thick, minimum size=1cm]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -81,21 +81,24 @@
 		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
 		\JavaInline{while}, som kan ses i eksempel~\ref{lst:while-example-1}.
 
-		\begin{JavaCode}{``Fej Gulvet'' pseudo-Java.}{lst:while-example-1}
-			while (gulvet er beskidt) {
-				fej gulvet;
+		\begin{JavaCode}{???}{lst:while-example-1}
+			while (betingelse) {
+				krop;
 			}
 		\end{JavaCode}
 
         Man kalder koden mellem paranteserne for while-udtrykkets
-        ``betingelse'', koden mellem tuborg-klammerne for ``kroppen''
-        af \JavaInline{while}-udtrykket, og man kalder hver gennemgang
-        af kroppen for en ``iteration''. Første gang løkken ses,
-        kigges der på betingelsen, og hvis denne er \emph{sand} så
-        køres kroppen, ellers hopper man over og fortsætter uden at
-        køre løkken. Hvis man til gengæld har kørt kroppen, og er nået
+        ``betingelse'', koden mellem tuborg-klammerne for ``kroppen''.
+        Her gennemgang af kroppen er en ``'iteration'.  Første gang
+        løkken ses, kigges der på betingelsen, og hvis denne er
+        \emph{sand} så køres kroppen, ellers hopper man over og
+        fortsætter uden at køre løkken. Hvis man til gengæld har kørt
+        kroppen, enten første gang eller efterfølgende, og er nået
         enden, så spørger man igen om betingelsen er \emph{sand}, hvis
-        ja, kør kroppen igen, hvis ikke, fortsætter vi efter løkken.
+        ja, køres kroppen igen, hvis ikke, fortsætter vi efter løkken.
+        Denne process er illustreret i
+        tegning~\ref{fig:while-loop-illustrated}. Et eksempel på en
+        løkke kan findes i eksempel~\ref{lst:white-example-3}.
 
         \begin{figure}
         \center
@@ -109,34 +112,41 @@
             \path [flow, ->] (previous.east) -- (condition.west);
             \path [flow, ->] (condition.east) -- node[auto, swap] {false} (after.west);
             \path [flow, <-] (condition.west) -- +(left:3mm) |- (body.west) ;
-            \path [flow, ->] (condition.east) -- +(right:1mm) |- node {true} (body.east);
+            \path [flow, ->] (condition.east) -- +(right:3mm) |- node {true} (body.east);
         \end{tikzpicture}
         \caption{While-løkker}
         \label{fig:while-loop-illustrated}
         \end{figure}
 
+		\begin{JavaCode}{Et program der næsten kun består af en while-løkke. Den gennemgår 10 iterationer, før den stopper. Læg mærke til at n er alle tal op til 10, på forskellige tidspunkter.}{lst:while-example-3}
+			int n = 1;
+			while (n <= 10) {
+				System.out.println(n + " linjer af ligegyldig data.");
+				n++;
+			}
+		\end{JavaCode}
 
-        Nu kan man spørge: ``Man kan vel lave en løkke, hvis
-        betingelse altid er \emph{sand}? Et program som aldrig
-        stopper, en uendelig løkke?'' Ja, det er faktisk ret nemt. Så
-        nemt at alle programmører laver en nu og da, ved uheld.
-        kommer til at lave en uønsket uendelig løkke, nu og da. Se
-        eksempel~\ref{lst:while-hello-world} for et program som
+        Eksempel~\ref{lst:white-example-3} stopper efter 10
+        iterationer, men det er muligt at lave while-løkker der aldrig
+        stopper.  Det er faktisk så nemt at de fleste, ved uheld,
+        kommer til at lave en nu og da. Se
+        eksempel~\ref{lst:while-hello-forever} for et program som
         gentagende skriver ``hej''. Det er selvfølgelig ikke så
         brugbart et program, men det viser en problematik: Hvad gør vi
-        hvis vores program aldrig stopper? \todo{Svar på ``Hvad gør vi
-        hvis vores program aldrig stopper?''}
+        hvis vores program aldrig stopper? I har sikkert oplevet et
+        program der stoppede med at reagere, og var nød til at blive
+        ``drabt'', for at I kunne fortsætte. Det er præcis det samme
+        med jeres egne programmer, hvis de indeholder uendelige
+        løkker. \footnote{Et relateret spørgsmåle er ``kan man lave et
+        program som siger om et program stopper eller ej?''. Det er
+        muligt at lave et program, som svarer for \emph{nogle}
+        programmer, men umuligt at lave en som kan svare for
+        \emph{alle} programmer.  (Læg mærke til at programmet skulle
+        svare om det selv stoppede.) Denne problematik kaldes for
+        \emph{The Halting Problem}, og blev bevist af \emph{Allan
+        Turing} i 1936.}
 
-        \footnote{Dette stiller selvfølgelig spørgsmålet ``kan man
-        lave et program som kan sige om et program stopper eller
-        ej?''. Det er muligt at lave et program, som svarer for
-        \emph{nogle} programmer, men umuligt at lave en som kan svare
-        for \emph{alle} programmer.  (Læg mærke til at programmet
-        skulle svare om det selv stoppede. Dette er del af beviset.)
-        Denne problematik kaldes for \emph{The Halting Problem}, og
-        blev bevist af \emph{Allan Turing}.}
-
-		\begin{JavaCode}{Et program der aldrig ender.}{lst:while-hello-world}
+		\begin{JavaCode}{Et program der aldrig ender.}{lst:while-hello-forever}
 			System.out.println("Hello World!");
 			while (true) {
 				System.out.println("Hello again!");
@@ -145,35 +155,29 @@
 
         Det giver sjældent mening at have sådanne uendelige
         løkker\footnote{De fleste programmer du kører på din computer
-        eller smartphone har dog uendelige løkker, da disse alligevel
-        skal køre indtil brugeren lukker dem.}, og de fleste løkkers
-        betingelser blive \emph{falske} på et tidspunkt. I
-        eksempel~\ref{lst:while-example-3} kan ses hvordan man kan
-        tælle op fra 1 til 10.
-
-		\begin{JavaCode}{Et ``brugbart'' while program.}{lst:while-example-3}
-			int n = 1;
-			while (n <= 10) {
-				System.out.println(n + " linjer af ligegyldig data.");
-				n++;
-			}
-		\end{JavaCode}
+        eller smartphone har uendelige løkker, gemt dybt i koden, da
+        disse programmer skal køre indtil brugeren lukker dem.}, og de
+        fleste løkkers betingelser blive \emph{falsk} på et
+        tidspunkt.
 
 		\begin{exercise}
 			Copenhagen Suborbitals har kontaktet dig, for at lave en maskine til
-			at tæller ned fra 10, og vise "Affyring!", i stedet for 0.
+            at tæller ned fra 10, og vise "Affyring!", i stedet for 0.
+            Tag gerne inspiration fra
+            eksempel~\ref{lst:while-example-3}.
 		\end{exercise}
 
 		\begin{exercise}
             Brug en \JavaInline{while}-løkke til at summerer tallene
-            fra 1 til 100, og viser det.
+            fra 1 til 100, og derefter viser det på skærmen.
 		\end{exercise}
 
 		\begin{exercise}
             Brug en \JavaInline{while}-løkke til at summerer tallene
-            fra 1 til 100, og viser det, men ignorer tal der ikke
-            deles af 3 eller 5. Så \(1, 2, 4, 7, 8, \dots\) skal ikke
-            inkluderes, mens at \(3, 5, 6, 9, 10, 12, \dots\) skal.
+            fra 1 til 100, men ignorer tal der ikke deles af 3 eller
+            5. Så \(1, 2, 4, 7, 8, \dots\) skal ikke inkluderes, mens
+            at \(3, 5, 6, 9, 10, 12, \dots\) skal. I får brug for et
+            \JavaInline{if}-udtryk.
 		\end{exercise}
 
 		\begin{exercise}
@@ -186,11 +190,40 @@
 	\subsection{For-løkker}
 
 		I sidste sektion så vi kan tælle op med et \JavaInline{while}-udtryk.
-		Dette er da ikke en idéel måde at tælle på, da \JavaInline{n}
-		defineres, sammenlignes og opdateres på helt forskellige steder i koden.
-		Det kan blive svært at holde styr på i store programmer, hvilket er
-		hvorfor Java har \JavaInline{for}-løkken, som samler den information i
-		èt sted: \JavaInline{for (before_loop; condition_of_loop; after_every_iteration)}
+        De fleste programmører syntes ikke det er en god måde at tælle
+        på, da \JavaInline{n} defineres, sammenlignes og opdateres på
+        helt forskellige steder i koden.  Det kan blive svært at holde
+        styr på i store programmer, hvilket er hvorfor Java har
+        \JavaInline{for}-løkken, som samler den information i
+		èt sted.
+
+		\begin{JavaCode}{???}{lst:for-example-1}
+			for (definition; betingelse; opdatering) {
+				krop;
+			}
+		\end{JavaCode}
+
+        \begin{figure}
+        \center
+        \tikzstyle{flow} = [draw, very thick, rounded corners]
+        \begin{tikzpicture}[node distance = 4cm, auto]
+            \node[statement] (previous) {Før};
+            \node[expression, right of=previous]   (definition) {Definition};
+            \node[expression, right of=definition] (condition)  {Betingelse};
+            \node[expression, below of=definition, node distance=1.5cm]  (update)     {Opdatering};
+            \node[statement, below of=condition, node distance=1.5cm] (body) {Krop};
+            \node[statement, right of=condition] (after) {Efter};
+
+            \path [flow, ->] (previous.east)   -- (definition.west);
+            \path [flow, ->] (definition.east) -- (condition.west);
+            \path [flow, ->] (condition.east) -- node[auto, swap, near end] {false} (after.west);
+            \path [flow, ->] (condition.east) -- +(right:3mm) |- node {true} (body.east);
+            \path [flow, ->] (body.west) -- (update.east);
+            \path [flow, ->] (update.north) -- (condition.west);
+        \end{tikzpicture}
+        \caption{For-løkker}
+        \label{fig:for-loop-illustrated}
+        \end{figure}
 
 		\todo{ Uddyb og udfyl. }
 
@@ -198,11 +231,23 @@
 		sammenligne med \JavaInline{while}-udstryk, og se hvordan at forskellige
 		dele af koden som tidligere var sprædt, nu er samlet.
 
-		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{while-example-3}.}{lst:for-example-1}
+        For-løkker inkluderer ``definitioner'', ``betingelse'',
+        ``krop'' og ``opdatering''. Når en for-løkke først ses, vil
+        definitionen køres. Denne sætter ofte en variable til en
+        bestem værdi. Derefter testes betingelsen som i while-løkker.
+        Hvis denne er \emph{sand}, køres kroppen. Når kroppen er
+        færdi, køres opdateringen. Denne sætte værdien af variablen
+        til hvad den skal være i den næste iteration.
+
+		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{lst:while-example-3}.}{lst:for-example-1}
 			for (int n = 1; n <= 10; n++) {
 				System.out.println(n + " linjer af ligegyldig data.");
 			}
 		\end{JavaCode}
+
+        For-løkker er bare en anderledes måde at skrive while-løkker
+        på, hvor al informationen som løkken anvender, samles i et
+        sted, og gør det derfor nemmere at læse koden.
 
 		\begin{exercise}
 			Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
@@ -229,9 +274,11 @@
 		\todo{Udvid sektion}
 
 		Sommetider vil man gerne gå ud af en løkke tidligt. Dette tillader
-		\JavaInline{break}-keywordet os at gøre.
+        \JavaInline{break}-keywordet os at gøre. Når koden rammer en
+        \JavaInline{break}, vil den straks hoppe ud af den
+        \emph{inderste} løkke.
 
-		\begin{JavaCode}{Et brugbart while program som stopper efter 10 linjer, på trods af et uendeligt løkke.}{lst:break-example-1}
+        \begin{JavaCode}{Et brugbart while program som stopper efter 10 linjer, på trods af at betingelsen aldrig bliver \emph{falsk}.}{lst:break-example-1}
 			int n = 1;
 			while (true) {
 				System.out.println(n + " linjer af ligegyldig data.");
@@ -240,32 +287,34 @@
 			}
 		\end{JavaCode}
 
+        Læg mærke til at eksempel~\ref{lst:break-example-1},
+        \ref{lst:for-example-1} og \ref{lst:while-example-3}, alle
+        sammen gør præcis det samme når de køres, selvom de ser
+        anderledes ud. Dette illustrerer hvordan der altid er flere
+        måder at gøre ting på.
+
         \todo{Tilføj en opgave, som viser at man godt kan klare sig
         uden break, men at break er pænere.}
-
-		\todo{
-			Som perspektiverende bonus kunne jeg tænke mig at fortælle lidt af
-			historien om \emph{structured programming}, og hvorfor \JavaInline{goto}
-			ikke er en ting i Java. \emph{Ikke pensum, bare for sjov.}
-		}
 
 	\subsection{!EXTRA! Do ... while}
 
 		\todo{Udvid sektion}
 
-		While-løkker tjekker om den burde fortsætte før iterationerne, men nogle
-		gang vil vi gerne tjekke om vi fortsætter, efter vi har kørt
-		iterationen. For eksempel kunne vi lave en beregning, og baseret på den
-		beslutte om vi ville videre. Dette løser \emph{do-while} udtryk på en
-		pæn måde.
+        While-løkker tjekker betingelsen før hver iteration, men nogle
+        gang vil vi gerne tjekke betingelsen, efter vi har kørt
+        iterationen. For eksempel kunne vi lave en beregning, og
+        baseret på den beslutte om vi ville videre. Dette løser
+        \emph{do-while} udtryk på en pæn måde. Sammenlign
+        eksempel~\ref{lst:dowhile-example-1} og
+        \ref{lst:dowhile-example-2}.
 
-		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:unknown-bc}
+		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
 			while (false) {
 				System.out.println("Hej med dig");
 			}
 		\end{JavaCode}
 
-		\begin{JavaCode}{Vil skrive ``Hej med dig'' en enkelt gang.}{lst:unknown-b}
+		\begin{JavaCode}{Vil skrive ``Hej med dig'' en enkelt gang.}{lst:dowhile-example-2}
 			do {
 				System.out.println("Hej med dig");
 			} while (false)
@@ -273,7 +322,7 @@
 
 		For eksempel:
 
-		\begin{JavaCode}{Todo}{lst:unknown-c}
+		\begin{JavaCode}{Konstruerer en streng som måler længen af sig selv i de forskellige iterationer.}{lst:dowhile-example-3}
 			String a = "";
 			do {
 				a = " " + a.length();
@@ -281,12 +330,15 @@
 			System.out.println(a);
 		\end{JavaCode}
 
-		\todo{Giv historien om at while-løkker var for dyre i forhold til do-while.}
+        I gamle dage var \JavaInline{do ... while} mere populært end
+        \JavaInline{while}, da \JavaInline{do ... while} var
+        hurtigere, idé at den ikke behøver at tjekke om betingelsen er
+        sand, før første iteration.
 
 	\subsection{Continue}
 
-		I visse situationer giver det mening at hoppe over en iteration af en
-		løkke. Dette kan gøres ved brug af \JavaInline{continue}-keyworded.
+        Ligesom man ind i mellem gerne vil hoppe ud af en løkke, vil
+        vi ind i mellem gerne oppe over en specifik iteration. Dette gøres med \JavaInline{continue}-keyword.
 
 		\begin{JavaCode}{Kode der anvender \emph{continue} til at kun vise de lige tal.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
@@ -294,8 +346,6 @@
 				System.out.println(i);
 			}
 		\end{JavaCode}
-
-		\todo{Skriv mere?}
 
         \todo{Tilføj en opgave, som viser at man godt kan klare sig
         uden continue, men at continue er pænere.}
