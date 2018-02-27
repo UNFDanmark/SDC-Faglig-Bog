@@ -11,3 +11,7 @@ del *.ptc
 del *.run.xml
 del *.toc
 del *.synctex.gz
+del *.glo
+del *.gls
+del *.glg
+del *.ist

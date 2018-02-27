@@ -13,6 +13,8 @@
 %% af vores dokument.
 \input{settings/preamble}
 
+\input{glossary}
+
 
 %% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
@@ -52,6 +54,11 @@
 	
 	\graphicspath{{sections/android/activities/figures/}}
 	\input{sections/android/activities/chapter}
+	
+	\ifdraftmode
+		\glsaddall
+	\fi
+	\printglossary
 	
 	%% Indsæt ``indexet'' som er et overblik over emner bogen indeholder, der 
 	%% skabes ved hjælp af \index makroen.
