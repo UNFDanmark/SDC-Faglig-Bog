@@ -57,11 +57,10 @@
 
 \section{Løkker}
 
-    En klassisk problemstilling er ``hvordan gentager jeg noget, og
-    hvordan får jeg det til at vare præcis så længe jeg har brug det
-    det?'' Dette er præcis hvad løkker gør for dig. Her dækker vi
-    simple løkker og kigger lidt på nogle mere advanceret måder at
-    bruge løkker på.
+    En klassisk problemstilling er at gøre gentage noget kode en hvis
+    mængden af gange. Der er mange løsninger, hvoraf løkker er en af
+    de simpleste. I denne sektion dækker vi simple løkker og kigger
+    lidt på nogle mere advanceret måder at bruge løkker på.
 
 	\subsection{While-løkker}
 
@@ -166,10 +165,22 @@
 		\end{exercise}
 
 		\begin{exercise}
-			Skriv et program som tæller op fra \(1\) til \(100\), og for hvert
-			tal, printer tallet, og printer ``foo'' hvis det kan divideres med 3,
-			og ``bar'' hvis det kan divideres med 5. Hvis det kan divideres med
-			både 3 og 5, print ``foobar''.
+            Brug en \JavaInline{while}-løkke til at summerer tallene
+            fra 1 til 100, og viser det.
+		\end{exercise}
+
+		\begin{exercise}
+            Brug en \JavaInline{while}-løkke til at summerer tallene
+            fra 1 til 100, og viser det, men ignorer tal der ikke
+            deles af 3 eller 5. Så \(1, 2, 4, 7, 8, \dots\) skal ikke
+            inkluderes, mens at \(3, 5, 6, 9, 10, 12, \dots\) skal.
+		\end{exercise}
+
+		\begin{exercise}
+            Skriv et program som tæller op fra \(1\) til \(100\), og
+            for hvert tal, vis tallet, og hvis det kan deles af 3 vis
+            ``foo'', og hvis det kan deles af 5 vis ``bar''. Hvis det
+            deles af både 3 og 5, vis ``foobar''.
 		\end{exercise}
 
 	\subsection{For-løkker}
@@ -202,12 +213,12 @@
 			Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
 			kedelig opgave.
 
-			Brug et \emph{for-loop} til at beregne \(1^2+2^2+\dots+100^2\).
+			Brug et \emph{for-løkke} til at beregne \(1^2+2^2+\dots+100^2\).
 		\end{exercise}
 
 		\begin{exercise}
 			Der er selvfølgelig ikke noget som forhindrer at du bruger et
-			\emph{for-loop} ind i et andet \emph{for-loop}, og dette kan nogle gang
+			\emph{for-løkke} ind i et andet \emph{for-løkke}, og dette kan nogle gang
 			være vældig praktisk.
 
 			\todo{Find på opgave!}
@@ -220,7 +231,7 @@
 		Sommetider vil man gerne gå ud af en løkke tidligt. Dette tillader
 		\JavaInline{break}-keywordet os at gøre.
 
-		\begin{JavaCode}{Et brugbart while program som stopper efter 10 linjer, på trods af et uendeligt loop.}{lst:break-example-1}
+		\begin{JavaCode}{Et brugbart while program som stopper efter 10 linjer, på trods af et uendeligt løkke.}{lst:break-example-1}
 			int n = 1;
 			while (true) {
 				System.out.println(n + " linjer af ligegyldig data.");
@@ -645,6 +656,17 @@
 		Implementer \emph{Eratosthenes' si} op til \(100\) ved brug af et
 		array, og to for-løkker. Bare sæt ikke-primtal til \(0\).
 	\end{exercise}
+
+    \begin{exercise}
+        En alternative måde at finde primtal på, er at gå igennem alle
+        tal, tjekke om det deles af en liste af primtal du allerede
+        har. Hvis ikke så er det et primtal, og du tilføjer det til
+        listen. Listen starter ud med at have tallene \(2\) og \(3\),
+        men skal selvfølgelig have plads til at indeholde flere
+        primtal.
+
+        Find de første 100 primtal.
+    \end{exercise}
 
 \section{!Extra! Checked Exceptions}
 

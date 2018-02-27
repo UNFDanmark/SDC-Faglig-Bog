@@ -6,4 +6,6 @@
 -   **argumenter** (_arguments_, _input_): Hvad der sættes mellem
     paranteserne.
 -   **streng** (_string_): Typen af tekst værdier.
+-   **løkke** (_loop_): F.eks. en `for` løkke eller en `while` løkke.
+    Man kan godt konstruere løkker gennem rekursion.
 
