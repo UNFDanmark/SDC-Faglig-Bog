@@ -352,27 +352,26 @@
 
 \section{Funktioner}
 
-	Sidste kapitel introducerede \emph{funktioner}\footnote{Også kaldet \emph{metoder} eller \emph{procedurer}.}
-	som sorte-bokse, der gør arbejde for dig. For eksempel \JavaInline{Math.abs}
-	som giver den absolutte værdi af hvadend den bliver givet. I denne sektion
-	viser vi hvordan man laver sine egne funktioner, en færdighed som viser
-	sig at være meget brugbar.
+    Sidste kapitel introducerede \emph{funktioner}\footnote{Også
+    kaldet \emph{metoder} eller \emph{procedurer}.} som sorte-bokse,
+    der gør arbejde for dig. For eksempel \JavaInline{Math.abs} som
+    giver den absolutte værdi af hvadend den bliver givet. I denne
+    sektion viser vi hvordan man laver sine egne funktioner, en
+    færdighed som viser sig at være meget brugbar.
 
     Vi kalder hvad en funktion giver tilbage for dens
     \emph{retur-værdi} eller hvad funktionen \emph{returnerer}. Vi
     kalder hvad vi giver den, dvs. det som sættes mellem paranteser,
     for funktionens \emph{argumenter}.
 
-    \todo{@Bamse: Dækker du disse definitioner?}
-    \todo{@Beatrice: Husk at forklare \emph{private} og \emph{public}.}
+    \todo{@Bamse: Dækker du disse definitioner?} \todo{@Beatrice: Husk
+    at forklare \emph{private} og \emph{public}.}
 
-	\todo{
-		Denne sektion vil dække \emph{metode-definitioner}, \emph{retur-typer},
-		\emph{argument-lister} og \JavaInline{return}.
-		Jeg vil ikke dække statiske metoder, overloading, eller andre advanceret
-		emner, da disse igen er ret niché, og kræver introduktion til nye
-		koncepter.
-	}
+    \todo{ Denne sektion vil dække \emph{metode-definitioner},
+    \emph{retur-typer}, \emph{argument-lister} og \JavaInline{return}.
+    Jeg vil ikke dække statiske metoder, overloading, eller andre
+    advanceret emner, da disse igen er ret niché, og kræver
+    introduktion til nye koncepter.  }
 
 	\todo{Snak om Java-filer og deres forhold til funktioner?}
 
@@ -398,10 +397,13 @@
         \emph{public}. Disse egenskaber kan ignoreres for nu, da de
         først bliver relevant når man kender til klasser.
 
-		En funktions krop er \JavaInline{// Ting her...} delen. Alt mellem
-		krølleparanteserne er funktionens krop, og beskriver hvad funktionen gør.
-		Hvis funktionen har en retur-værdi, skal \JavaInline{return}-keywordet opstå
-		mindst én gang i kroppen. Det er denne som stopper funktionen, og returnerer.
+        En funktions krop er \JavaInline{// Ting her...} delen. Alt
+        mellem krølleparanteserne er funktionens krop, og beskriver
+        hvad funktionen gør.  Hvis funktionen har en retur-type, skal
+        \JavaInline{return}-keywordet opstå mindst én gang i kroppen.
+        Det er denne som stopper funktionen, og returnerer. Man kan se
+        \JavaInline{return} som en \JavaInline{break} for funktioner,
+        i stedet for løkker.
 
         Signaturen er hvordan man skal snakke med funktionen, og
         kroppen er hvad den egentlig gør. Læg mærke til at hvis
@@ -410,15 +412,18 @@
 
 	\subsection{Eksempel funktion: faktoriel}
 
-		Hvis vi skulle skrive \emph{faktoriel}-funktionen som en funktion i Java,
-		ville vi først spørge os selv: ``hvad returnerer faktoriel og hvad er dens
-		argumenter?'' Det virker måske trivielt, i dette eksempel, men stadig et
-		vigtigt spørgsmål. Derefter skal vi spørge: ``Men hvad er det den gør?''
+        Hvis vi skulle skrive \emph{faktoriel}-funktionen som en
+        funktion i Java, ville vi først spørge os selv: ``hvad
+        returnerer faktoriel og hvad er dens argumenter?'' Det virker
+        måske trivielt, i dette eksempel, men stadig et vigtigt
+        spørgsmål. Derefter skal vi spørge: ``Men hvad er det den
+        gør?''
 
-		Faktoriellen er defineret som \(a! = a \cdot (a-1) \cdot \dots \cdot 2 \cdot 1\),
-		f.eks. \(5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1\). Ud fra definitionen er det
-		tydeligt at den får et enkelt heltal, og giver et enkelt heltal tilbage. Så
-		faktoriellens signatur ser sådan ud:
+        Faktoriellen er defineret som \(a! = a \cdot (a-1) \cdot \dots
+        \cdot 2 \cdot 1\), f.eks. \(5! = 5 \cdot 4 \cdot 3 \cdot 2
+        \cdot 1\). Ud fra definitionen er det tydeligt at den får et
+        enkelt heltal, og giver et enkelt heltal tilbage. Så
+        faktoriellens signatur ser sådan ud:
 
 		\begin{JavaCode}{Signaturen af en faktoriel-funktion}{lst:factorial-signature}
 			int factorial (int a)
@@ -464,8 +469,8 @@
             Lav en funktion med signaturen \JavaInline{void f ()}. Lad
             kroppen af denne funktion være et kald til funktionen
             selv. Sørg for at funktionen kaldes fra \JavaInline{main}.
-            Hvad kunne der ske når koden køres? Hvad sker der når
-            koden køres?
+            Hvad tror du der sker når programmet køres? Kør
+            programmet. Hvad sker der?
         \end{exercise}
 
     \subsection{!Extra! Call-by-reference}
@@ -479,6 +484,7 @@
             hvorfor dit program ikke fungere korrekt.''
         }
 
+        \todo{Ved ikke om det giver mening at have denne subsektion her!?!?}
 
         \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \emph{num} ikke ændrer sig, når man ændrer i \emph{a}.}{lst:call-by-value-example}
             public int f (int a) {
@@ -549,16 +555,21 @@
 
         Selvom vi tidligere har skrevet en version af
         faktorial-funktionen som virker ved en \JavaInline{for}-løkke,
-        kan vi sagtens lave version som kalder sig selv rekursivt. Se
-        nedenfor. Læg mærke til hvor tæt på den overstående
-        matematiske defintion, denne kode er:
+        kan vi sagtens lave en version som kalder sig selv rekursivt.
+        Se eksempel~\ref{lst:factorial-recursive} nedenfor.
 
-        \begin{JavaCode}{Rekursiv Fakultet}{lst:factorial-recursive}
+        \begin{JavaCode}{Rekursiv Fakultet. Læg specielt mærke til hvor meget kode ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
                 if (n == 1)   return 1;
                 return n * factorial(n-1);
             }
         \end{JavaCode}
+
+        Rekursion er et kraftigt værktøj, som bruges til at skrive
+        nogle meget elegante programmer. Visse programmeringssprog har
+        ikke løkker på samme måde som \emph{Java} har, og vil hellere
+        at man bruger rekursion.  Det er samtidigt et svært koncept at
+        forstå, og det forventes ikke at I bruger det i jeres projekt.
 
         \begin{exercise}
             Fibonnaci sekvensen er en liste af tal (\(1, 1, 2, 3, 5,
@@ -580,38 +591,30 @@
             bagefter forsøge en version uden rekursion.
         \end{exercise}
 
+        \begin{exercise}
+            Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
+            Ulige tal er så alle de andre heltal. Disse to mængder kan også defineres
+            rekursivt.
 
-	\begin{exercise}
-		Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
-		Ulige tal er så alle de andre heltal. Disse to mængder kan også defineres
-		rekursivt.
+            Vi ved at et tal er lige, hvis det forrige tal var ulige. Så hvis vi ved
+            at \(5\) er ulige, så ved vi at \(6\) er lige. Ulige tal er omvendt, vi
+            ved at \(5\) er ulige, hvis vi ved at \(4\) er lige.
 
-		Vi ved at et tal er lige, hvis det forrige tal var ulige. Så hvis vi ved
-		at \(5\) er ulige, så ved vi at \(6\) er lige. Ulige tal er omvendt, vi
-		ved at \(5\) er ulige, hvis vi ved at \(4\) er lige.
+            Men vi er nødt til at stoppe på et tidspunkt. Derfor definerer vi
+            \(0\) til at være lige.
 
-		Men vi er nødt til at stoppe på et tidspunkt. Derfor definerer vi
-		\(0\) til at være lige.
+            Lav to funktioner \JavaInline{odd} og \JavaInline{even}, som modellere
+            denne process ved at kalde hinanden. Begge bør tage et heltal, og give
+            tilbage en boolesk værdi.
 
-		Lav to funktioner \JavaInline{odd} og \JavaInline{even}, som modellere
-		denne process ved at kalde hinanden. Begge bør tage et heltal, og give
-		tilbage en boolesk værdi.
+            \todo{
+                Jeg er ikke helt tilfreds med denne opgave. (mutual) Rekursion er
+                måske lidt for advanceret. Desuden tvivler jeg på at forholdet
+                mellem lige og ulige tal forklares ordentligt. Syntes hellerer ikke
+                at der lægges godt nok op til hvad de skal gøre.
+            }
 
-		\todo{
-			Jeg er ikke helt tilfreds med denne opgave. (mutual) Rekursion er
-			måske lidt for advanceret. Desuden tvivler jeg på at forholdet
-			mellem lige og ulige tal forklares ordentligt. Syntes hellerer ikke
-			at der lægges godt nok op til hvad de skal gøre.
-		}
-
-	\end{exercise}
-
-	\todo{
-		Vil gerne have en opgave som direkte takler hvordan funktioner og løkker
-		er forskellige.
-
-		``Kan jeg ikke bare gøre det med en for-løkke?''
-	}
+        \end{exercise}
 
 \section{Arrays}
 
@@ -625,19 +628,23 @@
 	}
 
     Indtil videre har I kun arbejdet med enkelte værdier. Disse er
-    brugbare, men hvad gør du hvis du har rigtig mange værdier? Har du
-    en enkelt variable for hver værdi? Det bliver mange variabler, og
-    store udtryk. Derfor er der noget der hedder \emph{arrays} ellers
-    \emph{lister}. Disse har typen \JavaInline{undertype[]}. Læg mærke til
+    brugbare, men hvad gøres man har rigtig mange værdier? Har du
+    en enkelt variable for hver værdi? Det bliver mange variabler.
+    Derfor er der noget der hedder \emph{arrays} ellers \emph{lister}.
+    Disse har typen \JavaInline{undertype[]}. Læg mærke til
     \JavaInline|[]|-delen.
 
     For eksempel er en variable med typen \JavaInline{int[]} en liste
-    af tal, og \JavaInline{String[]} er en liste af strenge. Vi kan
-    tilgå element nummer \(n\) i listen \(a\) med \JavaInline{a[n]}.
-    Lister i Java er underlige, de er nemlig nul-indekseret. Det betyder
-    at det første element i listen har index \(0\), det andet element har
-    index \(1\), ovs.\footnote{Tilbage i 1960erne, var det vigtigt at
-    bruge computere så effektivt som muligt. Nogle kloge hoveder
+    af tal, og \JavaInline{String[]} er en liste af strenge. Denne
+    sidste har I allerede set i signaturen af \JavaInline{main}
+    funktionen.
+
+    Vi kan tilgå element nummer \(n\) i listen \(a\) med
+    \JavaInline{a[n]}.  Lister i Java er underlige, de er nemlig
+    nul-indekseret. Det betyder at det første element i listen har
+    index \(0\), det andet element har index \(1\),
+    ovs.\footnote{Tilbage i 1960erne, var det vigtigt at bruge
+    computere så effektivt som muligt. Nogle kloge hoveder
     fandt ud af at det var hurtigere på deres computere at starte
     lister med 0. Nu-til-dags er det ikke meget hurtigere, og
     bibevares blot for traditionens skyld.}
