@@ -6,7 +6,10 @@ Indtil videre har vi kigget kort på vores MainActivity som er entry point for e
 
 \section{Activities}
 
-Dybere forklaring af MainActivity.
+En activity er et komponent i en app, typisk er apps bygget op af flere aktiviteter hvor hver activity har sin egen brugergrænseflade og layout, dermed kan en activity lidt sammenlignes med et vindue man åbner på sin computer. Activities ligger som en stak i applikationen, hvilket betyder at når man åbner en activity svarer det til man åbner et nyt vindue der ligger over det gamle (og ofte skjuler det) og når den nye activity lukkes kommer man så tilbage til den activity man i sin tid åbnede den fra.
+
+MainActivity er altid der vi starter. Når vi åbner en app, så det der egentlig sker er, at vi starter vores MainActivity.
+
 
 \subsection{Activity life cycle}
 
@@ -18,7 +21,9 @@ Dybere forklaring af MainActivity.
 	\end{center}
 \end{figure}
 
-Ovenstående figur viser de forskellige stadier en activity er i, og kan hjælpe til at give et overblik over hvornår de forskellige metoder bliver kaldt, og dermed også hvad man gerne vil have skal ske ide forskellige steps undervejs.
+Ovenstående figur viser de forskellige stadier en activity er i, og kan hjælpe til at give et overblik over hvornår de forskellige metoder bliver kaldt, og dermed også hvad man gerne vil have skal ske i de forskellige steps undervejs.
+
+En activity vil typisk befinde sig i et af 4 stadier. Når activity'en er i forgrunden og brugeren kan interagere med den siger vi at den kører (running). Hvis en anden activity startes i forgrunden men den gamle stadig er synlig siger vi at den er paused. Hvis en anden activity åbnes så den gamle activity ikke længere kan ses siger vi det er stopped. Paused og stopped activities kan lukkes af systemet for at frigøre hukommelse, i det tilfælde skal activity'en genstartes når den skal bruges igen.
 
 \subsection{Oprettelse af nye activities}
 
@@ -78,24 +83,162 @@ De implicitte intents fortæller ikke præcist hvilket komponent man vil have ti
 
 \subsection{Start en activity med en Intent}
 
-hvordan det virker + hvor man gør det henne
+Først laves det intent vi vil starte vores activity med, her benyttes et explicit intent da det skal benyttes til at starte en specifik activity i vores applikation. For at vores intent er explicit skal vi definere hvilken klasse den skal sendes til. For at starte den valgte activity kalder vi derefter startActivity.
 
-eksempel kode
+\begin{example}\noindent
+	\begin{JavaCode}{Eksempel på et intent}{explicit-intent}
+		Intent intent = new Intent(this, PopUpActivity.class);
+		startActivity(intent);
+	\end{JavaCode}
+\end{example}
 
-sende beskeder med intents
+Vi kan sende en besked med vores itent ved at benytte putExtra metoden der tager en nøgle og en værdi som input.
+
+\begin{example}\noindent
+	\begin{JavaCode}{Sende en besket med et intent}{putExtra-intent}
+		public static final String POPUP_MESSAGE = "com.example.lukas.myapplication.POPUP_MESSAGE";
+		...
+		Intent intent = new Intent(this, PopUpActivity.class);
+		intent.putExtra(POPUP_MESSAGE, "Hello World!");
+		startActivity(intent);
+	\end{JavaCode}
+\end{example}
+
+\subsubsection{Adgang til meddelelsen fra et intent}
+
+For at få fat i den besked vi sender med vha putExtra kan vi benytte getIntent fra den activity der bliver startet med vores intent. Vi kan få fat i værdien i beskeden med intent.get(Type)Extra(key) hvor "(Type)" skal udskiftes med typen på den værdi man vil have fat i.
+
+\begin{example}\noindent
+	\begin{JavaCode}{Adgang til beskeden fra et intent}{getExtra-intent}
+		public class PopUpActivity extends Activity {
+			
+			@Override
+			protected void onCreate(Bundle savedInstanceState) {
+				super.onCreate(savedInstanceState);
+				setContentView(R.layout.activity_popup);
+				
+				Intent intent = getIntent();
+				String message = intent.getStringExtra(MainActivity.POPUP_MESSAGE);
+				TextView textView = (TextView)findViewById(R.id.messageView);
+				textView.setText(message);
+				textView.invalidate();
+			}
+		}
+	\end{JavaCode}
+\end{example}
 
 \subsection{Start en activity fra en anden app med en Intent}
 
-implicit intents
+Vi kan inkorporere aktiviteter fra andre apps, hvis de lytter efter intents. Et eksempel er en e-mail-app, vi kan bruge den indbyggede e-mail-klient (eller en anden e-mail-klient) til at sende en email fra vores app. Vi skal bruge implicitte intents til dette formål, da vi ikke nødvendigvis kender de klasse samt sti til e-mail-klientens aktivitet, og vi vil muligvis gerne have brugeren til at vælge den e-mail-app, som de bedst kan lide.
 
-eksempel kode på send mail der benytter indbygget mailklient
+For at skabe sådan en implicit intent skaber vi simpelthen en ny intent, sætter den relevante handling og giver den de nødvendige metadata, så aktiviteten, der modtager intent'en, kan fuldføre opgaven.
+
+Vi vil genbruge e-mail-eksemplet. Hvis vi ønsker at sende en email fra vores app, bruger vi handlingen Intent.ACTION\_SEND. Handlingen ACTION\_SEND betyder, at vi vil sende nogle data.
+
+\begin{example}\noindent
+	\begin{JavaCode}{Eksempel på et implicit intent}{implicit-intent}
+		Intent mailIntent = new Intent();
+		mailIntent.setAction(Intent.ACTION_SEND);
+	\end{JavaCode}
+\end{example}
+
+Nu, at vi har en intent med den relevante handling, skal vi indstille metadataene for vores intent således at den modtagende aktivitet ved, hvad de skal gøre med intent'en. Hvis du sender en mail, skal du sætte typen af intent'en til "text/html" og e-mail-adresse, emne og indhold til e-mailen tilføjes som vist i eksempel 6.7:
+
+\begin{example}\noindent
+	\begin{JavaCode}{Eksempel på et mail sendende intent}{mailsending-intent}
+		public void sendMail(View view) {
+			Intent mailIntent = new Intent();
+			mailIntent.setAction(Intent.ACTION_SEND);
+			mailIntent.setType("text/html");
+			mailIntent.putExtra(Intent.EXTRA_EMAIL, "test@someone.com");
+			mailIntent.putExtra(Intent.EXTRA_SUBJECT, "NEWS");
+			mailIntent.putExtra(Intent.EXTRA_TEXT, "Some mail content");
+			startActivity(Intent.createChooser(mailIntent, "Send Mail"));
+		}
+	\end{JavaCode}
+\end{example}
 
 \subsection{Start en activity med en Intent fra en anden app}
 
-modtag implicitte intents fra andre apps
+For at modtage en implicit intent skal du oprette den activity, der skal modtage intent'en, for eksempel kan det være en activity, der fanger "send" intent'en, men i stedet for at sende den, viser den faktisk mailen.
 
-broadcastrecievers
+Først skal du oprette activity'en. Bare lav en tom aktivitet som denne:
 
+\begin{example}\noindent
+	\begin{JavaCode}{Tom activity}{empty-activity}
+		public class FakeMailActivity extends Activity {
+			@Override
+			protected void onCreate(Bundle savedInstanceState) {
+				super.onCreate(savedInstanceState);
+			}
+		}
+	\end{JavaCode}
+\end{example}
+
+Tilføj nu den nye activity til manifestet, og giv den et filter, der fanger intents sendt for "text/html" mimeTypes.
+
+\begin{example}\noindent
+	\begin{XmlCode}{XML der tilføjer FakeMailActivity til manifestet}{add-activity-with-filter-to-manifest}
+		<activity android:name=".FakeMailActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:mimeType="text/html" />
+			</intent-filter>
+		</activity>
+	\end{XmlCode}
+\end{example}
+
+Nu, når du sender "Send" intent'en for "text/html", vil den spørge, om du vil bruge Mail-appen eller vores egen app.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=7cm]{email_chooser.png}
+		\caption{Email vælger}
+		\label{fig:android:activities:email_chooser}
+	\end{center}
+\end{figure}
+
+\subsubsection{broadcastrecievers}
+
+Din app kan sende en intent som en broadcast, og Android-systemet sender hele tiden broadcasts. For at modtage en sådan broadcast har du brug for en BroadcastReceiver-klasse, som kan se sådan ud:
+
+\begin{example}\noindent
+	\begin{JavaCode}{Broadcastreciever}{broadcast-reciever}
+		public class NoPhoneCallsReceiver extends BroadcastReceiver {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+			}
+		}
+	\end{JavaCode}
+\end{example}
+
+Vi kunne få denne broadcastreciever til, modtage broadcasten "OutgoingCalls", vi skal blot tilføje den til manifestet (på samme sted hvor du ville tilføje en ny aktivitet) og give det et intentfilter som i nedenstående eksempel:
+
+\begin{example}\noindent
+	\begin{XmlCode}{Broadcastreciever til opkald}{add-broadcastreciever-to-manifest}
+		<receiver android:name=".NoPhoneCallsReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+			</intent-filter>
+		</receiver>
+	\end{XmlCode}
+\end{example}
+
+Opsnapning af disse udgående telefonopkald broadcasts, kan have mange anvendelser, såsom at ringe dine venner via VoIP i stedet for via telefonnetværket, eller man kan sørge for, at den korrekte områdekode er vedhæftet, eller for at blokere alle opkald til numre, der ikke er på en forældrekontrol whitelist.
+
+En sjov ting at gøre kunne også være at få denne broadcastreciever til at stoppe alle udgående telefonsamtaler, som sådan:
+
+\begin{example}\noindent
+	\begin{JavaCode}{At stoppe udgående opkald}{no-calls-reciever}
+		public class NoPhoneCallsReceiver extends BroadcastReceiver {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				setResultData(null);
+			}
+		}
+	\end{JavaCode}
+\end{example}
 
 \begin{exercise}
 	Lav en app der har en main activity, og en anden activity der viser et billede. Tilføj en knap til din main activity, der åbner din anden activity.
