@@ -15,9 +15,6 @@
 
 	\todo{Baser opgaver på nogle af disse: \url{https://adriann.github.io/programming_problems.html}}
 
-	\todo{Note til Lukas: Kan vi bruge en mono-spaced font til kode, både
-	inline og til blokke? Den nuværende er hæslig til begge dele. Er meget tilfreds med lstautogobble!}
-
 	\todo{Hvordan skriver vi til deltagerne? Skriver vi \emph{I}? Undgår vi at rette os mod dem?}
 
 	\todo{@Beatrice: Kan du ikke tage for-each løkker? Måske som ekstra?}
@@ -79,9 +76,9 @@
 
 		Anatomien af en \JavaInline{while}-udstryk er meget lig det af et
 		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
-		\JavaInline{while}, som kan ses i eksempel~\ref{lst:while-example-1}.
+		\JavaInline{while}, som kan ses i \autoref{lst:while-example-1}.
 
-		\begin{JavaCode}{???}{lst:while-example-1}
+		\begin{JavaCode}{Et eksempel på en \texttt{while}-løkke}{lst:while-example-1}
 			while (betingelse) {
 				krop;
 			}
@@ -97,8 +94,8 @@
         enden, så spørger man igen om betingelsen er \emph{sand}, hvis
         ja, køres kroppen igen, hvis ikke, fortsætter vi efter løkken.
         Denne process er illustreret i
-        tegning~\ref{fig:while-loop-illustrated}. Et eksempel på en
-        løkke kan findes i eksempel~\ref{lst:white-example-3}.
+        \autoref{fig:while-loop-illustrated}. Et eksempel på en
+        løkke kan findes i \autoref{lst:while-example-3}.
 
         \begin{figure}
         \center
@@ -126,7 +123,7 @@
 			}
 		\end{JavaCode}
 
-        Eksempel~\ref{lst:white-example-3} stopper efter 10
+        \autoref{lst:while-example-3} stopper efter 10
         iterationer, men det er muligt at lave while-løkker der aldrig
         stopper.  Det er faktisk så nemt at de fleste, ved uheld,
         kommer til at lave en nu og da. Se
@@ -197,7 +194,7 @@
         \JavaInline{for}-løkken, som samler den information i
 		èt sted.
 
-		\begin{JavaCode}{???}{lst:for-example-1}
+		\begin{JavaCode}{Et eksempel på en \texttt{for}-løkke}{lst:for-example-1}
 			for (definition; betingelse; opdatering) {
 				krop;
 			}
@@ -340,7 +337,7 @@
         Ligesom man ind i mellem gerne vil hoppe ud af en løkke, vil
         vi ind i mellem gerne oppe over en specifik iteration. Dette gøres med \JavaInline{continue}-keyword.
 
-		\begin{JavaCode}{Kode der anvender \emph{continue} til at kun vise de lige tal.}{lst:unknown-a}
+		\begin{JavaCode}{Kode der anvender \texttt{continue} til at kun vise de lige tal.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
 				if (i % 2 == 0)  continue;
 				System.out.println(i);
@@ -390,11 +387,11 @@
 
         Dens signatur er \JavaInline{public static void main(String[] args)}
         delen.  Dette fortælles os lidt om funktionen: dens
-        navn \emph{main}; dens retur-værdi \emph{void} (ingenting); og
-        dens argumenter \emph{String[] args}, hvilket er en liste af
-        strenge, som funktionen kalder \emph{args}.  Signaturen for
-        \emph{main} siger også at den er \emph{static} og
-        \emph{public}. Disse egenskaber kan ignoreres for nu, da de
+        navn \JavaInline{main}; dens retur-værdi \JavaInline{void} (ingenting); og
+        dens argumenter \JavaInline{String[] args}, hvilket er en liste af
+        strenge, som funktionen kalder \JavaInline{args}.  Signaturen for
+        \JavaInline{main} siger også at den er \JavaInline{static} og
+        \JavaInline{public}. Disse egenskaber kan ignoreres for nu, da de
         først bliver relevant når man kender til klasser.
 
         En funktions krop er \JavaInline{// Ting her...} delen. Alt
@@ -408,7 +405,7 @@
         Signaturen er hvordan man skal snakke med funktionen, og
         kroppen er hvad den egentlig gør. Læg mærke til at hvis
         funktionen ikke skal have en retur-værdi, skal den gives
-        retur-typen \emph{void}.
+        retur-typen \JavaInline{void}.
 
 	\subsection{Eksempel funktion: faktoriel}
 
@@ -500,7 +497,7 @@
             }
         \end{JavaCode}
 
-        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \emph{f} ændrer i værdien af \emph{a}, så ændrer den også i værdien af \emph{num}. Dette er fordi at \emph{num} og \emph{a} er de samme objekter i dette tilfælde.}{lst:call-by-value-example}
+        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{a}, så ændrer den også i værdien af \texttt{num}. Dette er fordi at \texttt{num} og \texttt{a} er de samme objekter i dette tilfælde.}{lst:call-by-value-example}
             public class Num {
                 public int inner;
                 public Num (int a) { inner = a; }
@@ -521,9 +518,9 @@
 
         Det vigtige at tage væk fra dette, er at når man kalder en
         funktion, så bliver typer der starter på et småt bogstav
-        (\emph{int}, \emph{boolean}, \emph{float}) kopieret
+        (\JavaInline{int}, \JavaInline{boolean}, \JavaInline{float}) kopieret
         (\emph{call-by-value}), mens at typer der starter på store
-        bogstaver (\emph{String}, \emph{List}) bliver ikke kopieret
+        bogstaver (\JavaInline{String}, \JavaInline{List}) bliver ikke kopieret
         (\emph{call-by-reference}.)
 
         \todo{Tilføj en opgave eller to.}
@@ -556,7 +553,7 @@
         Selvom vi tidligere har skrevet en version af
         faktorial-funktionen som virker ved en \JavaInline{for}-løkke,
         kan vi sagtens lave en version som kalder sig selv rekursivt.
-        Se eksempel~\ref{lst:factorial-recursive} nedenfor.
+        Se \autoref{lst:factorial-recursive} nedenfor.
 
         \begin{JavaCode}{Rekursiv Fakultet. Læg specielt mærke til hvor meget kode ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
@@ -572,7 +569,7 @@
         forstå, og det forventes ikke at I bruger det i jeres projekt.
 
         \begin{exercise}
-            Fibonnaci sekvensen er en liste af tal (\(1, 1, 2, 3, 5,
+            Fibonnaci sekvensen er en liste af tal \newline (\(1, 1, 2, 3, 5,
             8, 13, 21, \dots\)), hvor de to første elementer er
             begge \(1\), og derefter er hvert element i listen,
             summen af de to foregående tal. Vi kan formulere dette

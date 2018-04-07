@@ -73,6 +73,32 @@ Det her er hvad jeg har skrevet i min activity.
 	\label{fig:Java}
 \end{figure}
 
+\begin{JavaCode}{2}{a}
+	public class MainActivity extends AppCompatActivity {
+		int gold = 0;
+		
+		Button button;
+		TextView textView;
+		
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_main);
+			
+			button = (Button) findViewById(R.id.mainbutton);
+			textView = (TextView) findViewById(R.id.gold);
+			
+			button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					gold++;
+					textView.setText("Gold: " + gold);	
+				}
+			});
+		}
+	}
+\end{JavaCode}
+
 Jeg har sat en variabel gold som har styr på guld beholdningen. 
 
 Derefter har jeg lavet de to variabler Knap og tekst. 
