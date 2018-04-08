@@ -64,15 +64,15 @@ En intent er en besked man kan sende for at bede en anden komponent om at gøre 
 
 \subsubsection{Starte en anden activity}
 
-Man kan starte en ny instans af en activity ved at sende en intent med som parameter til startActivity(). 
+Man kan starte en ny instans af en activity ved at sende en intent med som parameter til \JavaInline|startActivity()|. 
 
 \subsubsection{Starte en service}
 
-En service er et komponent der kører i baggrunden og ikke har noget interface. Man starter en service på lidt samme måde som en activity, nemlig ved at sende en intent med som parameter til metoden startService().
+En service er et komponent der kører i baggrunden og ikke har noget interface. Man starter en service på lidt samme måde som en activity, nemlig ved at sende en intent med som parameter til metoden \JavaInline|startService()|.
 
 \subsubsection{Sende en broadcast}
 
-En broadcast er en besked som enhver app kan modtage. Der er forskellelige broadcasts for system events som fx foretag opkald eller opladning igang. Man kan sende en broadcast ved at sende en intent med som parameter til sendBroadcast() eller sendOrderesBroadcast().
+En broadcast er en besked som enhver app kan modtage. Der er forskellelige broadcasts for system events som fx foretag opkald eller opladning igang. Man kan sende en broadcast ved at sende en intent med som parameter til \JavaInline|sendBroadcast()| eller \JavaInline|sendOrderedBroadcast()|.
 En standard broadcast kan ikke blive stoppet, og kan ikke videregive resultater. En orderedBroadcast vil sende broadcasten til alle relevante BroadCastRecievers en af gangen og tillade resultatet at propagere.
 
 \subsection{Explicit vs Implicit}
@@ -83,7 +83,7 @@ De implicitte intents fortæller ikke præcist hvilket komponent man vil have ti
 
 \subsection{Start en activity med en Intent}
 
-Først laves det intent vi vil starte vores activity med, her benyttes et explicit intent da det skal benyttes til at starte en specifik activity i vores applikation. For at vores intent er explicit skal vi definere hvilken klasse den skal sendes til. For at starte den valgte activity kalder vi derefter startActivity.
+Først laves det intent vi vil starte vores activity med, her benyttes et explicit intent da det skal benyttes til at starte en specifik activity i vores applikation. For at vores intent er explicit skal vi definere hvilken klasse den skal sendes til. For at starte den valgte activity kalder vi derefter \JavaInline|startActivity|.
 
 \begin{example}\noindent
 	\begin{JavaCode}{Eksempel på et intent}{explicit-intent}
@@ -92,7 +92,7 @@ Først laves det intent vi vil starte vores activity med, her benyttes et explic
 	\end{JavaCode}
 \end{example}
 
-Vi kan sende en besked med vores itent ved at benytte putExtra metoden der tager en nøgle og en værdi som input.
+Vi kan sende en besked med vores itent ved at benytte \JavaInline|putExtra| metoden der tager en nøgle og en værdi som input.
 
 \begin{example}\noindent
 	\begin{JavaCode}{Sende en besket med et intent}{putExtra-intent}
@@ -106,7 +106,7 @@ Vi kan sende en besked med vores itent ved at benytte putExtra metoden der tager
 
 \subsubsection{Adgang til meddelelsen fra et intent}
 
-For at få fat i den besked vi sender med vha putExtra kan vi benytte getIntent fra den activity der bliver startet med vores intent. Vi kan få fat i værdien i beskeden med intent.get(Type)Extra(key) hvor "(Type)" skal udskiftes med typen på den værdi man vil have fat i.
+For at få fat i den besked vi sender med vha \JavaInline|putExtra| kan vi benytte \JavaInline|getIntent| fra den activity der bliver startet med vores intent. Vi kan få fat i værdien i beskeden med \JavaInline|intent.get(Type)Extra(key)| \todo{intent.get(Type)Extra(key)?} hvor ``\JavaInline|(Type)|'' skal udskiftes med typen på den værdi man vil have fat i.
 
 \begin{example}\noindent
 	\begin{JavaCode}{Adgang til beskeden fra et intent}{getExtra-intent}
@@ -133,7 +133,7 @@ Vi kan inkorporere aktiviteter fra andre apps, hvis de lytter efter intents. Et 
 
 For at skabe sådan en implicit intent skaber vi simpelthen en ny intent, sætter den relevante handling og giver den de nødvendige metadata, så aktiviteten, der modtager intent'en, kan fuldføre opgaven.
 
-Vi vil genbruge e-mail-eksemplet. Hvis vi ønsker at sende en email fra vores app, bruger vi handlingen Intent.ACTION\_SEND. Handlingen ACTION\_SEND betyder, at vi vil sende nogle data.
+Vi vil genbruge e-mail-eksemplet. Hvis vi ønsker at sende en email fra vores app, bruger vi handlingen \JavaInline|Intent.ACTION_SEND|. Handlingen \JavaInline|ACTION_SEND| betyder, at vi vil sende nogle data.
 
 \begin{example}\noindent
 	\begin{JavaCode}{Eksempel på et implicit intent}{implicit-intent}
@@ -142,7 +142,7 @@ Vi vil genbruge e-mail-eksemplet. Hvis vi ønsker at sende en email fra vores ap
 	\end{JavaCode}
 \end{example}
 
-Nu, at vi har en intent med den relevante handling, skal vi indstille metadataene for vores intent således at den modtagende aktivitet ved, hvad de skal gøre med intent'en. Hvis du sender en mail, skal du sætte typen af intent'en til "text/html" og e-mail-adresse, emne og indhold til e-mailen tilføjes som vist i eksempel 6.7:
+Nu, at vi har en intent med den relevante handling, skal vi indstille metadataene for vores intent således at den modtagende aktivitet ved, hvad de skal gøre med intent'en. Hvis du sender en mail, skal du sætte typen af intent'en til ``text/html'' og e-mail-adresse, emne og indhold til e-mailen tilføjes som vist i eksempel 6.7:
 
 \begin{example}\noindent
 	\begin{JavaCode}{Eksempel på et mail sendende intent}{mailsending-intent}
@@ -160,7 +160,7 @@ Nu, at vi har en intent med den relevante handling, skal vi indstille metadataen
 
 \subsection{Start en activity med en Intent fra en anden app}
 
-For at modtage en implicit intent skal du oprette den activity, der skal modtage intent'en, for eksempel kan det være en activity, der fanger "send" intent'en, men i stedet for at sende den, viser den faktisk mailen.
+For at modtage en implicit intent skal du oprette den activity, der skal modtage intent'en, for eksempel kan det være en activity, der fanger ``send'' intent'en, men i stedet for at sende den, viser den faktisk mailen.
 
 Først skal du oprette activity'en. Bare lav en tom aktivitet som denne:
 
@@ -175,7 +175,7 @@ Først skal du oprette activity'en. Bare lav en tom aktivitet som denne:
 	\end{JavaCode}
 \end{example}
 
-Tilføj nu den nye activity til manifestet, og giv den et filter, der fanger intents sendt for "text/html" mimeTypes.
+Tilføj nu den nye activity til manifestet, og giv den et filter, der fanger intents sendt for ``text/html'' mimeTypes.
 
 \begin{example}\noindent
 	\begin{XmlCode}{XML der tilføjer FakeMailActivity til manifestet}{add-activity-with-filter-to-manifest}
@@ -189,7 +189,7 @@ Tilføj nu den nye activity til manifestet, og giv den et filter, der fanger int
 	\end{XmlCode}
 \end{example}
 
-Nu, når du sender "Send" intent'en for "text/html", vil den spørge, om du vil bruge Mail-appen eller vores egen app.
+Nu, når du sender ``Send'' intent'en for ``text/html'', vil den spørge, om du vil bruge Mail-appen eller vores egen app.
 
 \begin{figure}[H]
 	\begin{center}
@@ -201,7 +201,7 @@ Nu, når du sender "Send" intent'en for "text/html", vil den spørge, om du vil 
 
 \subsubsection{broadcastrecievers}
 
-Din app kan sende en intent som en broadcast, og Android-systemet sender hele tiden broadcasts. For at modtage en sådan broadcast har du brug for en BroadcastReceiver-klasse, som kan se sådan ud:
+Din app kan sende en intent som en broadcast, og Android-systemet sender hele tiden broadcasts. For at modtage en sådan broadcast har du brug for en \JavaInline|BroadcastReceiver|-klasse, som kan se sådan ud:
 
 \begin{example}\noindent
 	\begin{JavaCode}{Broadcastreciever}{broadcast-reciever}
@@ -213,7 +213,7 @@ Din app kan sende en intent som en broadcast, og Android-systemet sender hele ti
 	\end{JavaCode}
 \end{example}
 
-Vi kunne få denne broadcastreciever til, modtage broadcasten "OutgoingCalls", vi skal blot tilføje den til manifestet (på samme sted hvor du ville tilføje en ny aktivitet) og give det et intentfilter som i nedenstående eksempel:
+Vi kunne få denne broadcastreciever til, modtage broadcasten ``OutgoingCalls'', vi skal blot tilføje den til manifestet (på samme sted hvor du ville tilføje en ny aktivitet) og give det et intentfilter som i nedenstående eksempel:
 
 \begin{example}\noindent
 	\begin{XmlCode}{Broadcastreciever til opkald}{add-broadcastreciever-to-manifest}
@@ -245,7 +245,7 @@ En sjov ting at gøre kunne også være at få denne broadcastreciever til at st
 \end{exercise}
 
 \begin{exercise}
-	Lav en app der har en main activity, og en anden activity med et EditText felt. Tilføj en knap og et EditText felt til din main activity, der åbner din anden activity og viser teksten fra EditText i din main activity.
+	Lav en app der har en main activity, og en anden activity med et EditText felt. Tilføj en knap og et \JavaInline|EditText|felt til din main activity, der åbner din anden activity og viser teksten fra \JavaInline|EditText| i din main activity.
 \end{exercise}
 
 \begin{exercise}
@@ -257,10 +257,10 @@ En sjov ting at gøre kunne også være at få denne broadcastreciever til at st
 \end{exercise}
 
 \begin{exercise}
-	Lav en BroadCastReciever, der blokerer alle udgående opkald.
+	Lav en \JavaInline|BroadCastReciever|, der blokerer alle udgående opkald.
 \end{exercise}
 
 \begin{exercise}
-	Lav en activity der sender en Broadcast, og en BroadCastReciever der modtager den givne BroadCast.
+	Lav en activity der sender en \JavaInline|Broadcast|, og en \JavaInline|BroadCastReciever| der modtager den givne \JavaInline|BroadCast|.
 \end{exercise}
 
