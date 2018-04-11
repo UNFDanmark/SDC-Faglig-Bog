@@ -9,13 +9,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Kontrol og Metoder}
-
-	\todo{Java er smart, men ikke smart nok.}
-
-	\todo{Baser opgaver på nogle af disse: \url{https://adriann.github.io/programming_problems.html}}
+% Gode opgaver:
+%    https://adriann.github.io/programming_problems.html
 
 	\todo{Hvordan skriver vi til deltagerne? Skriver vi \emph{I}? Undgår vi at rette os mod dem?}
+\chapter{Kontrol og Metoder}
 
 	\todo{@Beatrice: Kan du ikke tage for-each løkker? Måske som ekstra?}
 
@@ -38,8 +36,6 @@
 	Det er vigtigt at tage i mende at programmører er dåvne dyr, og vil gerne
 	udtrykke sig selv nemt. Derfor har Java rigtig mange mekanismer som teknisk
 	set kan gøre det samme, men som er mere bekvemme i visse situationer.
-
-    \todo{Find ud af hvad man kalder ``mekanismer''/dele af programmeringssprog, med et kort ord.}
 
     Dette kapitel vil dække mange af disse mekanismer. Du behøver ikke
     lære dem alle med de samme. Selv de bedste programmører glemmer
@@ -69,11 +65,6 @@
 		Dette er i modsætning til \JavaInline{if}-udstryk, hvor der udtrykkes
 		``Hvis A gælder, gør B èn enkelt gang.''
 
-		\todo{ Skal fyldes mere på. Sektion: \JavaInline{while} }
-
-		\todo{ En illustration som denne kunne være brugbar:
-		\url{https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg} }
-
 		Anatomien af en \JavaInline{while}-udstryk er meget lig det af et
 		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
 		\JavaInline{while}, som kan ses i \autoref{lst:while-example-1}.
@@ -96,6 +87,9 @@
         Denne process er illustreret i
         \autoref{fig:while-loop-illustrated}. Et eksempel på en
         løkke kan findes i \autoref{lst:while-example-3}.
+
+        % Følgende er baseret på:
+        %    https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg
 
         \begin{figure}
         \center
@@ -170,19 +164,19 @@
 		\end{exercise}
 
 		\begin{exercise}
-            Brug en \JavaInline{while}-løkke til at summerer tallene
-            fra 1 til 100, men ignorer tal der ikke deles af 3 eller
-            5. Så \(1, 2, 4, 7, 8, \dots\) skal ikke inkluderes, mens
-            at \(3, 5, 6, 9, 10, 12, \dots\) skal. I får brug for et
-            \JavaInline{if}-udtryk.
-		\end{exercise}
-
-		\begin{exercise}
             Skriv et program som tæller op fra \(1\) til \(100\), og
             for hvert tal, vis tallet, og hvis det kan deles af 3 vis
             ``foo'', og hvis det kan deles af 5 vis ``bar''. Hvis det
-            deles af både 3 og 5, vis ``foobar''.
-		\end{exercise}
+            deles af både 3 og 5, vis ``foobar''.  I får brug for et
+            \JavaInline{if}-udtryk.
+        \end{exercise}
+
+		\begin{exercise}
+            Brug en \JavaInline{while}-løkke til at summerer tallene
+            fra 1 til 100, men ignorer tal der ikke deles af 3 eller
+            5. Så \(1, 2, 4, 7, 8, \dots\) skal ikke inkluderes, mens
+            at \(3, 5, 6, 9, 10, 12, \dots\) skal.
+        \end{exercise}
 
 	\subsection{For-løkker}
 
@@ -203,26 +197,25 @@
         \begin{figure}
         \center
         \tikzstyle{flow} = [draw, very thick, rounded corners]
-        \begin{tikzpicture}[node distance = 4cm, auto]
+        \begin{tikzpicture}[node distance = 3cm, auto]
             \node[statement] (previous) {Før};
             \node[expression, right of=previous]   (definition) {Definition};
             \node[expression, right of=definition] (condition)  {Betingelse};
             \node[expression, below of=definition, node distance=1.5cm]  (update)     {Opdatering};
             \node[statement, below of=condition, node distance=1.5cm] (body) {Krop};
-            \node[statement, right of=condition] (after) {Efter};
+            \node[statement, right of=condition, node distance=4cm] (after) {Efter};
+            \coordinate[below right of=definition, node distance=1.061cm] (updtocond);
 
             \path [flow, ->] (previous.east)   -- (definition.west);
             \path [flow, ->] (definition.east) -- (condition.west);
             \path [flow, ->] (condition.east) -- node[auto, swap, near end] {false} (after.west);
             \path [flow, ->] (condition.east) -- +(right:3mm) |- node {true} (body.east);
             \path [flow, ->] (body.west) -- (update.east);
-            \path [flow, ->] (update.north) -- (condition.west);
+            \path [flow] (condition.west) -- +(left:3mm) |- (updtocond) -| (update.north);
         \end{tikzpicture}
         \caption{For-løkker}
         \label{fig:for-loop-illustrated}
         \end{figure}
-
-		\todo{ Uddyb og udfyl. }
 
 		Strukturen af for-løkker er ret involveret, men det hjælper at
 		sammenligne med \JavaInline{while}-udstryk, og se hvordan at forskellige
@@ -238,13 +231,20 @@
 
 		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{lst:while-example-3}.}{lst:for-example-1}
 			for (int n = 1; n <= 10; n++) {
-				System.out.println(n + " linjer af ligegyldig data.");
+				do-System.out.println(n + " linjer af ligegyldig data.");
 			}
 		\end{JavaCode}
 
         For-løkker er bare en anderledes måde at skrive while-løkker
         på, hvor al informationen som løkken anvender, samles i et
         sted, og gør det derfor nemmere at læse koden.
+
+		\begin{exercise}
+            Brug en \JavaInline{for}-løkke til at summerer tallene
+            fra 1 til 100, men ignorer tal der ikke deles af 3 eller
+            5. Overvej forskellen mellem \JavaInline{while} versionen
+            fra sidste afsnit, og denne version.
+        \end{exercise}
 
 		\begin{exercise}
 			Det er ofte fortalt hvordan at Gauss i sine unge dage, forpurrerede sin
@@ -267,8 +267,6 @@
 		\end{exercise}
 
 	\subsection{Break-udtryk}
-
-		\todo{Udvid sektion}
 
 		Sommetider vil man gerne gå ud af en løkke tidligt. Dette tillader
         \JavaInline{break}-keywordet os at gøre. Når koden rammer en
@@ -295,15 +293,13 @@
 
 	\subsection{!EXTRA! Do ... while}
 
-		\todo{Udvid sektion}
-
         While-løkker tjekker betingelsen før hver iteration, men nogle
         gang vil vi gerne tjekke betingelsen, efter vi har kørt
         iterationen. For eksempel kunne vi lave en beregning, og
         baseret på den beslutte om vi ville videre. Dette løser
         \emph{do-while} udtryk på en pæn måde. Sammenlign
         eksempel~\ref{lst:dowhile-example-1} og
-        \ref{lst:dowhile-example-2}.
+        \ref{lst:dowhile-example-2}. Se figur~\ref{fig:do-while-loop-illustrated}.
 
 		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
 			while (false) {
@@ -316,6 +312,26 @@
 				System.out.println("Hej med dig");
 			} while (false)
 		\end{JavaCode}
+
+        \begin{figure}
+        \center
+        \tikzstyle{flow} = [draw, very thick, rounded corners]
+        \begin{tikzpicture}[node distance = 3cm, auto]
+            \node[statement] (previous) {Tidligere kode};
+            \node[statement, right of=previous] (body) {Krop};
+            \node[expression, right of=body, node distance=2cm] (condition) {Betingelse};
+            \node[statement, right of=condition, node distance=4cm] (after) {Senere kode};
+            \coordinate[below of=condition, node distance=1cm] (loop);
+
+            \path [flow, ->] (previous.east)  -- (body.west);
+            \path [flow, ->] (body.east)      -- (condition.west);
+            \path [flow, ->] (condition.east) -- node[auto, swap, near end] {false} (after.west);
+            \path [flow]     (condition.east) -- +(right:3mm) |- node {true} (loop);
+            \path [flow]     (body.west)      -- +(left:3mm)  |- (loop);
+        \end{tikzpicture}
+        \caption{Do-while-løkker}
+        \label{fig:do-while-loop-illustrated}
+        \end{figure}
 
 		For eksempel:
 
@@ -335,11 +351,12 @@
 	\subsection{Continue}
 
         Ligesom man ind i mellem gerne vil hoppe ud af en løkke, vil
-        vi ind i mellem gerne oppe over en specifik iteration. Dette gøres med \JavaInline{continue}-keyword.
+        vi ind i mellem gerne oppe over en specifik iteration. Dette
+        gøres med \JavaInline{continue}-keyword.
 
-		\begin{JavaCode}{Kode der anvender \texttt{continue} til at kun vise de lige tal.}{lst:unknown-a}
+        \begin{JavaCode}{Kode der anvender \texttt{continue} til at kun vise de lige tal. Læg mærke til at derp giver resten a divideret med b, også kaldt \texttt{modulo}.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
-				if (i % 2 == 0)  continue;
+				if (i \% 2 == 0)  continue;
 				System.out.println(i);
 			}
 		\end{JavaCode}
@@ -361,16 +378,7 @@
     kalder hvad vi giver den, dvs. det som sættes mellem paranteser,
     for funktionens \emph{argumenter}.
 
-    \todo{@Bamse: Dækker du disse definitioner?} \todo{@Beatrice: Husk
-    at forklare \emph{private} og \emph{public}.}
-
-    \todo{ Denne sektion vil dække \emph{metode-definitioner},
-    \emph{retur-typer}, \emph{argument-lister} og \JavaInline{return}.
-    Jeg vil ikke dække statiske metoder, overloading, eller andre
-    advanceret emner, da disse igen er ret niché, og kræver
-    introduktion til nye koncepter.  }
-
-	\todo{Snak om Java-filer og deres forhold til funktioner?}
+    \todo{@Beatrice: Husk at forklare \texttt{private} og \texttt{public}.}
 
 	\subsection{En funktions udseene}
 
@@ -398,14 +406,23 @@
         mellem krølleparanteserne er funktionens krop, og beskriver
         hvad funktionen gør.  Hvis funktionen har en retur-type, skal
         \JavaInline{return}-keywordet opstå mindst én gang i kroppen.
-        Det er denne som stopper funktionen, og returnerer. Man kan se
-        \JavaInline{return} som en \JavaInline{break} for funktioner,
-        i stedet for løkker.
+        \JavaInline{return} er hvordan man går ud af en funktion,
+        samtidig med at give en retur-værdi.  \JavaInline{return} kan
+        ses som en \JavaInline{break} for funktioner.
+        \JavaInline{main} funktionen ovenover behøver ikke en
+        \JavaInline{return}, men eksempel~\ref{lst:guarenteed-random}
+        skal have en, da den har en retur-type.
+
+		\begin{JavaCode}{xkcd 221}{lst:guarenteed-random}
+			public int getRandomNumber() {
+				return 4;  // chosen by fair dice roll.
+			}
+		\end{JavaCode}
 
         Signaturen er hvordan man skal snakke med funktionen, og
         kroppen er hvad den egentlig gør. Læg mærke til at hvis
         funktionen ikke skal have en retur-værdi, skal den gives
-        retur-typen \JavaInline{void}.
+        retur-typen \JavaInline{void}, hvilket står for ``jeg har ingen retur-type''.
 
 	\subsection{Eksempel funktion: faktoriel}
 
@@ -460,7 +477,18 @@
         måde at gøre ting på.\footnote{Det er derfor at folk kalder
         programmering en kunst.}
 
-        \todo{Tilføj 3-4 opgaver.}
+        \begin{exercise}
+            Lav funktionen \JavaInline{bool is_divisible (int num, int div)}
+            som tjekker om det givne tal \JavaInline{num} kan
+            divideres med \JavaInline{div}.
+        \end{exercise}
+
+        \begin{exercise}
+            Lav funktionen \JavaInline{bool is_even (int num)} som
+            tjekker om det givne tal \JavaInline{num} er et lige
+            heltal.  Brug meget gerne funktionen
+            \JavaInline{is_divisible} fra den forrige opgave.
+        \end{exercise}
 
         \begin{exercise}
             Lav en funktion med signaturen \JavaInline{void f ()}. Lad
@@ -473,31 +501,52 @@
     \subsection{!Extra! Call-by-reference}
 
         \todo{
-            \emph{pass-by-value} vs. \emph{pass-by-reference} bør nok dækkes, da det
-            garenteret vil dukke op. Det er bare ikke specielt relevant før de kender
-            til objekter. Antager ikke de vil rende ind i problemet før under projektet.
             Jeg er ikke vild med at introducere dem til sådanne niché fagtermer, men
             det vil være nemmere for en hjælper at kunne sige ``læs dette stykke om
             hvorfor dit program ikke fungere korrekt.''
         }
 
-        \todo{Ved ikke om det giver mening at have denne subsektion her!?!?}
+        \todo{Ved ikke om det giver mening at have denne subsektion her? Måske flyt den til klasser og objekter kaptilet.}
 
-        \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \emph{num} ikke ændrer sig, når man ændrer i \emph{a}.}{lst:call-by-value-example}
+        Indtil videre har vi holdt os på et højt abstraktionsnivaue.
+        Vi har ignoreret hvordan at computeren ser den kode i skriver,
+        for at fokusere på at lære at kode. I denne sektion vil vi
+        kigge kort på en koncept, som har undsluppet de lave lag af
+        komputeren, for at skabe konsekvenser for hvordan I skriver
+        kode.
+
+        Overvej koden i eksempel~\ref{lst:call-by-value-example}. Her
+        repræsenterer de to variabler \texttt{a} to forskellige værdier,
+        selv om de har samme navn, og værdien af \texttt{a} i \texttt{f}
+        starter ud med at være en kopi af den i \texttt{main}. Når
+        værdien kopieres på denne måde kaldes det
+        \emph{call-by-value}.
+
+        \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \texttt{a} i \texttt{main} ikke ændrer sig, når man ændrer på \texttt{a} i \texttt{f}.}{lst:call-by-value-example}
             public int f (int a) {
                 a += 2
                 System.out.println("a is "+a);
             }
 
             public static void main(String[] args) {
-                int num = 10;
+                int a = 10;
                 System.out.println("num is "+num);
-                f(num);
+                f(a);
                 System.out.println("num is still "+num);
             }
         \end{JavaCode}
 
-        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{a}, så ændrer den også i værdien af \texttt{num}. Dette er fordi at \texttt{num} og \texttt{a} er de samme objekter i dette tilfælde.}{lst:call-by-value-example}
+        En komputer forstår faktisk ikke helt andet end heltal, og kan
+        ikke nemt arbejde med store ting, som for eksempel filer, som
+        fylder meget. Komputeren vil ofte lade som om at filen består
+        af en masse heltal, og give stor ting et navn, dvs. et unikt
+        heltal.
+
+        Overvej koden i eksempel~\ref{lst:call-by-reference-example}.
+        Her er \texttt{a} ikke en kopi; den er faktisk \texttt{num}! Hvis
+        du ændrer i \texttt{a} ændrer du i \texttt{num}, vise versa.
+
+        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{a}, så ændrer den også i værdien af \texttt{num}.}{lst:call-by-value-example}
             public class Num {
                 public int inner;
                 public Num (int a) { inner = a; }
@@ -523,13 +572,7 @@
         bogstaver (\JavaInline{String}, \JavaInline{List}) bliver ikke kopieret
         (\emph{call-by-reference}.)
 
-        \todo{Tilføj en opgave eller to.}
-
 	\subsection{!Extra! Rekursion}
-
-        \todo{Dette kaldes rekursion, og det minder lidt om induktion, som i nok kender til
-
-        -- Kurt til Datalogi-russerne, under deres først forelæsning.}
 
         En af opgaverne længere \todo{Ref til opgaven?} oppe
         involverer at lave en funktion som kalder sig selv. Dette er
@@ -555,7 +598,7 @@
         kan vi sagtens lave en version som kalder sig selv rekursivt.
         Se \autoref{lst:factorial-recursive} nedenfor.
 
-        \begin{JavaCode}{Rekursiv Fakultet. Læg specielt mærke til hvor meget kode ligner den matematiske definition.}{lst:factorial-recursive}
+        \begin{JavaCode}{Rekursiv Fakultet. Læg mærke til at koden ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
                 if (n == 1)   return 1;
                 return n * factorial(n-1);
@@ -569,8 +612,8 @@
         forstå, og det forventes ikke at I bruger det i jeres projekt.
 
         \begin{exercise}
-            Fibonnaci sekvensen er en liste af tal \newline (\(1, 1, 2, 3, 5,
-            8, 13, 21, \dots\)), hvor de to første elementer er
+            Fibonnaci sekvensen er en liste af tal \[1, 1, 2, 3, 5,
+            8, 13, 21, \dots\] hvor de to første elementer er
             begge \(1\), og derefter er hvert element i listen,
             summen af de to foregående tal. Vi kan formulere dette
             matematisk som:
@@ -588,48 +631,38 @@
             bagefter forsøge en version uden rekursion.
         \end{exercise}
 
-        \begin{exercise}
-            Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
-            Ulige tal er så alle de andre heltal. Disse to mængder kan også defineres
-            rekursivt.
+        \todo{
+            Jeg er ikke helt tilfreds med denne opgave. (mutual) Rekursion er
+            måske lidt for advanceret. Desuden tvivler jeg på at forholdet
+            mellem lige og ulige tal forklares ordentligt. Syntes hellerer ikke
+            at der lægges godt nok op til hvad de skal gøre.
 
-            Vi ved at et tal er lige, hvis det forrige tal var ulige. Så hvis vi ved
-            at \(5\) er ulige, så ved vi at \(6\) er lige. Ulige tal er omvendt, vi
-            ved at \(5\) er ulige, hvis vi ved at \(4\) er lige.
+            \begin{exercise}
+                Lige tal er de tal der kan deles med \(2\), dvs. \(0, 2, 4, \dots\).
+                Ulige tal er så alle de andre heltal. Disse to mængder kan også defineres
+                rekursivt.
 
-            Men vi er nødt til at stoppe på et tidspunkt. Derfor definerer vi
-            \(0\) til at være lige.
+                Vi ved at et tal er lige, hvis det forrige tal var ulige. Så hvis vi ved
+                at \(5\) er ulige, så ved vi at \(6\) er lige. Ulige tal er omvendt, vi
+                ved at \(5\) er ulige, hvis vi ved at \(4\) er lige.
 
-            Lav to funktioner \JavaInline{odd} og \JavaInline{even}, som modellere
-            denne process ved at kalde hinanden. Begge bør tage et heltal, og give
-            tilbage en boolesk værdi.
+                Men vi er nødt til at stoppe på et tidspunkt. Derfor definerer vi
+                \(0\) til at være lige.
 
-            \todo{
-                Jeg er ikke helt tilfreds med denne opgave. (mutual) Rekursion er
-                måske lidt for advanceret. Desuden tvivler jeg på at forholdet
-                mellem lige og ulige tal forklares ordentligt. Syntes hellerer ikke
-                at der lægges godt nok op til hvad de skal gøre.
-            }
+                Lav to funktioner \JavaInline{odd} og \JavaInline{even}, som modellere
+                denne process ved at kalde hinanden. Begge bør tage et heltal, og give
+                tilbage en boolesk værdi.
+            \end{exercise}
+        }
 
-        \end{exercise}
 
 \section{Arrays}
 
-	\todo{Denne sektion er omkring Arrays. Skriv den!}
-
-	\todo{
-		Lister er en fundamentel datastruktur, sandeligt er datamaten selv en
-		kæmpe liste af data.
-		Denne sektion vil dække arrays, f.eks. \JavaInline{int[]}.
-		Kræver introduktion til arrays og subscripts.
-	}
-
     Indtil videre har I kun arbejdet med enkelte værdier. Disse er
-    brugbare, men hvad gøres man har rigtig mange værdier? Har du
+    brugbare, men hvad gøres når man har rigtig mange værdier? Have
     en enkelt variable for hver værdi? Det bliver mange variabler.
     Derfor er der noget der hedder \emph{arrays} ellers \emph{lister}.
-    Disse har typen \JavaInline{undertype[]}. Læg mærke til
-    \JavaInline|[]|-delen.
+    Disse har typen \JavaInline{undertype[]}.
 
     For eksempel er en variable med typen \JavaInline{int[]} en liste
     af tal, og \JavaInline{String[]} er en liste af strenge. Denne
@@ -672,6 +705,12 @@
         }
     \end{JavaCode}
 
+	\begin{exercise}
+        Prøv at lave en liste, vælg selv længden og værdierne, og prøv
+        at tilgå indgange der ikke eksisterer. Hvad sker der når I
+        tilgår en indgang meget større end længden af jeres list?
+        Indgangen lig længden af listen? Eller en negativ indgang?
+	\end{exercise}
 
 	\begin{exercise}
 		Lav en funktion, som givet en liste af tal, finder det største tal i den
@@ -683,9 +722,8 @@
         den er skabt, den er evigt af en vis længde.  Det er dog
         muligt at lave en ny liste med en anden størrelse, og kopiere
         elementer fra den gamle ind i den nye.
-        Lav en funktion \JavaInline{append} der tager en liste af tal
-        \(l\), og et tal \(n\), og giver en ny liste af tal med \(n\)
-        smidt på enden.
+        Lav funktionen \JavaInline{public int[] append (int[] l, int n)},
+        der'laver en ny liste hvor \(n\) er smidt på enden af \(l\).
     \end{exercise}
 
     \begin{exercise}
@@ -696,19 +734,19 @@
     \end{exercise}
 
 	\begin{exercise}
-		\todo{Forbedre første sætning.}
-		Et heltal \(n\) er et primtal, hvis det kun er \(1\) og \(n\) selv som
-		deler \(n\). Disse tal var originalt en tal-teoretisk kuriositet, men
-		anvendes nu til dags i kryptografien, hvor det er vigtigt at finde store
-		primtal.
+        Et heltal \(n\) er et primtal, hvis det kun er \(1\) og \(n\)
+        selv som deler \(n\). Disse tal var originalt en tal-teoretisk
+        kuriositet, men anvendes nu til dags i kryptografien, hvor det
+        er vigtigt at finde store primtal.
 
-		En klassisk \emph{algoritme} til at finde primtal, kaldet
-		\emph{Eratosthenes' si}, involverer at have en liste af heltal fra \(1\)
-		til \(n\), hvor man starter med at fjerner alle multiplum af
-		\(2, 3, 4, \dots, n\). Hvad man ender med til slut er en liste af primtal.
+        En klassisk \emph{algoritme} til at finde primtal, kaldet
+        \emph{Eratosthenes' si}, involverer at have en liste af heltal
+        fra \(1\) til \(n\), hvor man starter med at fjerner alle
+        multiplum af \(2, 3, 4, \dots, n\). Hvad man ender med til
+        slut er en liste af primtal.
 
-		Implementer \emph{Eratosthenes' si} op til \(100\) ved brug af et
-		array, og to for-løkker. Bare sæt ikke-primtal til \(0\).
+        Implementer \emph{Eratosthenes' si} op til \(100\) ved brug af
+        et array, og to for-løkker. Bare sæt ikke-primtal til \(0\).
 	\end{exercise}
 
     \begin{exercise}
@@ -719,7 +757,8 @@
         men skal selvfølgelig have plads til at indeholde flere
         primtal.
 
-        Find de første 100 primtal.
+        Find de første 100 primtal ved brug af denne metode. Sammenlig
+        med \emph{Eratosthenes' si}.
     \end{exercise}
 
 \section{!Extra! Checked Exceptions}
