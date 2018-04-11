@@ -121,7 +121,7 @@
         iterationer, men det er muligt at lave while-løkker der aldrig
         stopper.  Det er faktisk så nemt at de fleste, ved uheld,
         kommer til at lave en nu og da. Se
-        eksempel~\ref{lst:while-hello-forever} for et program som
+        \autoref{lst:while-hello-forever} for et program som
         gentagende skriver ``hej''. Det er selvfølgelig ikke så
         brugbart et program, men det viser en problematik: Hvad gør vi
         hvis vores program aldrig stopper? I har sikkert oplevet et
@@ -155,7 +155,7 @@
 			Copenhagen Suborbitals har kontaktet dig, for at lave en maskine til
             at tæller ned fra 10, og vise "Affyring!", i stedet for 0.
             Tag gerne inspiration fra
-            eksempel~\ref{lst:while-example-3}.
+            \autoref{lst:while-example-3}.
 		\end{exercise}
 
 		\begin{exercise}
@@ -229,7 +229,7 @@
         færdi, køres opdateringen. Denne sætte værdien af variablen
         til hvad den skal være i den næste iteration.
 
-		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{lst:while-example-3}.}{lst:for-example-1}
+		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med \autoref{lst:while-example-3}.}{lst:for-example-1}
 			for (int n = 1; n <= 10; n++) {
 				do-System.out.println(n + " linjer af ligegyldig data.");
 			}
@@ -282,8 +282,8 @@
 			}
 		\end{JavaCode}
 
-        Læg mærke til at eksempel~\ref{lst:break-example-1},
-        \ref{lst:for-example-1} og \ref{lst:while-example-3}, alle
+        Læg mærke til at \autoref{lst:break-example-1},
+        \autoref{lst:for-example-1} og \autoref{lst:while-example-3}, alle
         sammen gør præcis det samme når de køres, selvom de ser
         anderledes ud. Dette illustrerer hvordan der altid er flere
         måder at gøre ting på.
@@ -298,8 +298,8 @@
         iterationen. For eksempel kunne vi lave en beregning, og
         baseret på den beslutte om vi ville videre. Dette løser
         \emph{do-while} udtryk på en pæn måde. Sammenlign
-        eksempel~\ref{lst:dowhile-example-1} og
-        \ref{lst:dowhile-example-2}. Se figur~\ref{fig:do-while-loop-illustrated}.
+        \autoref{lst:dowhile-example-1} og
+        \autoref{lst:dowhile-example-2}. Se \autoref{fig:do-while-loop-illustrated}.
 
 		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
 			while (false) {
@@ -410,7 +410,7 @@
         samtidig med at give en retur-værdi.  \JavaInline{return} kan
         ses som en \JavaInline{break} for funktioner.
         \JavaInline{main} funktionen ovenover behøver ikke en
-        \JavaInline{return}, men eksempel~\ref{lst:guarenteed-random}
+        \JavaInline{return}, men \autoref{lst:guarenteed-random}
         skal have en, da den har en retur-type.
 
 		\begin{JavaCode}{xkcd 221}{lst:guarenteed-random}
@@ -515,7 +515,7 @@
         komputeren, for at skabe konsekvenser for hvordan I skriver
         kode.
 
-        Overvej koden i eksempel~\ref{lst:call-by-value-example}. Her
+        Overvej koden i \autoref{lst:call-by-value-example}. Her
         repræsenterer de to variabler \texttt{a} to forskellige værdier,
         selv om de har samme navn, og værdien af \texttt{a} i \texttt{f}
         starter ud med at være en kopi af den i \texttt{main}. Når
@@ -542,7 +542,7 @@
         af en masse heltal, og give stor ting et navn, dvs. et unikt
         heltal.
 
-        Overvej koden i eksempel~\ref{lst:call-by-reference-example}.
+        Overvej koden i \autoref{lst:call-by-reference-example}.
         Her er \texttt{a} ikke en kopi; den er faktisk \texttt{num}! Hvis
         du ændrer i \texttt{a} ændrer du i \texttt{num}, vise versa.
 
