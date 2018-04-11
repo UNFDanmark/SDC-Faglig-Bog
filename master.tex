@@ -33,8 +33,10 @@
 	%% Indsæt forsiden.
 	\input{title-page}
 	
+	%% Indsæt forfatterlisten
 	\input{author-page}
 	
+	%% Indsæt forord
 	\input{preface}
 
 	%% Print indholdsfortegnelsen
@@ -80,6 +82,8 @@
 	
 	\graphicspath{{figures/}}
 	
+	%% Indsæt ``glossary'', altså ordlisten, over alle de ord der er indsat ved 
+	%% hjælp af \gls macroerne.
 	\ifdraftmode
 		\glsaddall
 	\fi
