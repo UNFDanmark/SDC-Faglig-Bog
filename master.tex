@@ -20,6 +20,7 @@
 %% bogen.
 \begin{document}
 	
+	\graphicspath{{figures/}}
 	%% Indsæt forsiden.
 	\input{title-page}
 
@@ -64,6 +65,8 @@
 	\graphicspath{{sections/android/animations/figures/}}
 	\input{sections/android/animations/chapter}
 	
+	\graphicspath{{figures/}}
+	
 	\ifdraftmode
 		\glsaddall
 	\fi
@@ -72,5 +75,8 @@
 	%% Indsæt ``indexet'' som er et overblik over emner bogen indeholder, der 
 	%% skabes ved hjælp af \index makroen.
 	\input{index}
+	
+	%% Indsæt bagsiden.
+	\input{butt-page}
 
 \end{document}
