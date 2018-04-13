@@ -21,19 +21,19 @@ Ud fra disse rammer kan vi så regne hvor langt vi skal være nået på et givet
 \end{example}
 Vi skal nu ikke til at udregene en hel masse funktioner for animationen. Det gør Android for os.
 \section{En helt simpel animation i Android}
-For at lave en animation bruger vi den klasse der hedder ValueAnimator. Du kan tænke på et objekt af ValueAnimator som en animation. Du opretter en ValueAnimator således:
+For at lave en animation bruger vi den klasse der hedder ValueAnimator. Du kan tænke på et objekt af ValueAnimator som en animation. Du opretter en ValueAnimator som vist i \autoref{animation1}
 \begin{JavaCode}{Oprettelse af ValueAnimator}{animation1}
 	ValueAnimator minAnimation = ValueAnimator.ofInt(startInt, slutInt);
 \end{JavaCode}
 \marginnote{Noter at du ikke skal skrive new. Den tekniske grund hertil er at ofInt() er en metode som returnerer en ny ValueAnimator.}
 ofInt() tager to integers som er din startværdi og din slutværdi. Det kunne f.eks. være 0 og 360 hvis man ville lave en animere et View til at rotere 360 grader. \\
-Det næste din animation har brug for er hvor lang tid den skal køre. Den sættes således:
+Det næste din animation har brug for er hvor lang tid den skal køre. Den sættes som vist i \autoref{animation2}
 \begin{JavaCode}{Sæt duration}{animation2}
 	minAnimation.setDuration(1000);	
 \end{JavaCode}
 Tiden er i millisekunder. Altså betyder 1000 et sekund. Fem sekunder ville være 5000 og et kvart sekund ville være 250. Værdien skal være af typen long. Altså et heltal.
 \subsection{At lave et billede}
-Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid animationen skal tage. Nu skal vi så fortælle Android om den skal flytte noget, rotere noget eller gøre noget helt tredje. Dette gør vi ved at skrive en funktion som bliver kaldt hver gang billedet skal animeres endnu et hak. Altså skal vi programmere hvad der sker hver gang det er tid til et nyt billede. Koden ser således ud:
+Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid animationen skal tage. Nu skal vi så fortælle Android om den skal flytte noget, rotere noget eller gøre noget helt tredje. Dette gør vi ved at skrive en funktion som bliver kaldt hver gang billedet skal animeres endnu et hak. Altså skal vi programmere hvad der sker hver gang det er tid til et nyt billede. Koden ser ud som i \autoref{animation3}
 \begin{JavaCode}{Opsæt metode til at lave et billede}{animation3}
 	minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 		@Override
@@ -47,7 +47,7 @@ Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid anima
 Her bruges noget advanceret kode som I ikke behøver at forstå. Den korte version er at vi giver Android en funktionen onAnimationUpdate() og fortæller ValueAnimator at den skal kalde funktionen når den vil have et nyt billede.\\
 \marginnote{Hvis I vil have den længere udgave så spørg os eller internettet om anonyme klasser}
 Den anden ting der sker er at vi får en integer fra animationen, som repræsenterer hvor langt vi er i animationen. Det er den variabel der hedder "vaerdiTilBillede" som man får fra getAnimatedValue(). Vi udfører så ændringen på vores view med denne værdi, i eksemplet sætter vi rotationen med setRotation, men I kan bruge denne værdi til lige hvad I vil. De mulige måder at ændre views på kommer om lidt.\\
-Til sidst skal du kalde .start() på din ValueAnimator og så kører animationen. Her er et fuldt eksempel på en animation: 
+Til sidst skal du kalde .start() på din ValueAnimator og så kører animationen. Et fuldt eksempel på en animation kan ses i \autoref{animation4}
 \begin{JavaCode}{420 Rotate it}{animation4}
 	ValueAnimator minAnimation = ValueAnimator.ofInt(0, 420);
 	minAnimation.setDuration(1337);
@@ -69,32 +69,32 @@ Nu hvor det helt basale er på plads kan vi udvide med nogle flere teknikker
 Her er der så en liste over hvad man kan lave med Views:\\
 \begin{itemize}
 	\item Rotation \\
-	I kan sætte et views rotation med:
+	I kan sætte et views rotation som i \autoref{animationroter}
 	\begin{JavaCode}{Roter et view}{animationroter}
 		mitView.setRotation(jeresRotation);
 	\end{JavaCode}
 	Rotationen er i grader. 0 er normal rotation og 180 grader er på hovedet. Rotationen er en float. 
 	\\
 	\item Position \\
-	Her sættes vertikal og horizontal position seperat. Koden er således:
+	Her sættes vertikal og horizontal position seperat. Koden ses i \autoref{animationflyt}
 	\begin{JavaCode}{Flyt et view}{animationflyt}
 		mitView.setTranslationX(jeresPositionX);
 		mitView.setTranslationY(jeresPositionY);
 	\end{JavaCode}
-	Her skal det noteres at det er \textbf{øverste} venstre hjørne der er position (0,0). Ligeledes er det viewets øverste venstre hjørne der placeres. Hvis I vil placere et view op af skærmens højre side skal i altså sætte X til skærmbredden minus viewets bredde. I kan få bredden og højden af jeres view med:
+	Her skal det noteres at det er \textbf{øverste} venstre hjørne der er position (0,0). Ligeledes er det viewets øverste venstre hjørne der placeres. Hvis I vil placere et view op af skærmens højre side skal i altså sætte X til skærmbredden minus viewets bredde. I kan få bredden og højden af jeres view som i \autoref{animationbredde}
 	\begin{JavaCode}{Få bredden af jeres view}{animationbredde}
 		mitView.getWidth();
 		mitView.getHeight();
 	\end{JavaCode}
 	\item Størrelse \\
-	I kan sætte størrelsen med: 
+	I kan sætte størrelsen som i \autoref{animationscale} 
 	\begin{JavaCode}{Sæt størrelsen af jeres view}{animationscale}
 		mitView.setScaleX(jeresStoerlseX);
 		mitView.setScaleY(jeresStoerlseY);
 	\end{JavaCode}
 	Her er 1 den størrelse som viewet starter med. Skal størrelsen fordobles skal I give slutværdien 2. Skal den halveres skal I give slutværdi 0.5 etc. Hvis i vil sætte størrelsen til et præcist antal pixels skal i lave en udregning ud fra viewets nuværende størrelse. \\
 	\item Gennemsigtighed \\
-	Et view kan gøres gennemsigtigt (Man kan stadig interagere med det) med denne metode:
+	Et view kan gøres gennemsigtigt (Man kan stadig interagere med det) med denne metoden set i \autoref{animationgennemsigtig}
 	\begin{JavaCode}{Sæt et views gennemsigtighed}{animationgennemsigtig}
 		mitView.setAlpha(jeresGennemsigtighed);
 	\end{JavaCode}
@@ -107,7 +107,7 @@ Der findes mange forskellige Android mobiler, og de har mange forskellige skærm
 \end{example}
 Det gælder derfor om altid at arbejde ud fra skærmens størrelse. Jeres view i eksemplet skal bevæge sig en hel skærmbredde. En figur som står i baggrunden og hopper skal hoppe 1/3 af skærmenhøjden. Etc.\\
 
-Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at få fat på. Men nej, koden for at få skærmstørrelsen ser således ud:
+Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at få fat på. Men nej, koden for at få skærmstørrelsen ser ud som i \autoref{animation5}
 \begin{JavaCode}{Kode til at få skærmstørrelse}{animation5}
 	final View layout = findViewById(R.id.layout);
 	ViewTreeObserver observer = layout.getViewTreeObserver();
@@ -126,7 +126,7 @@ Dette skal stå inde i onCreate(). I skal også give jeres yderste layout et ID 
 Grunden hertil er at Android ikke har udregnet hvordan grafikken placeres når OnCreate bliver kaldt. Vi får den så til at kalde onGlobalLayout når den har fundet størrelsen af layoutet.
 \subsection{Interpolatorer}
 Det vi har defineret for Android er egentlig kun startpunkt, slutpunkt og tid imellem dem. Hvordan funktionen mellem de to punkter ser ud kan også defineres. Det kan være at den bare er lineær, men den kunne også være en exponentionel funktion hvor hastigheden starter med at være er langsom og så derefter bliver hurtigere. 
-Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator således:
+Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator som i \autoref{animation6:}
 \begin{JavaCode}{Kode til at sætte interpolatoren}{animation6}
 	animator.setInterpolator(new LinearInterpolator());
 \end{JavaCode}
@@ -135,7 +135,7 @@ Du kan sætte interpolatoren mellem at du opretter animationen og starter den.
 De helt basale muligheder er LinearInterpolator, AccelerateInterpolator, DecelerateInterpolator og så selvfølgelig AccelerateDecelerateInterpolator. Der findes dog flere som man kan finde online.
 %TODO Illustrationer til interpolators
 \subsection{Startdelay, pause, resume og andre kontrolmetoder}
-Animator har yderligere en række metoder som går den lettere at arbejde med. Du kan sætte animationen til først at starte noget tid efter at du kalder .start() ved at kalde: \\
+Animator har yderligere en række metoder som går den lettere at arbejde med. Du kan sætte animationen til først at starte noget tid efter at du kalder .start() ved at kalde koden i \autoref{animation7} \\
 \begin{JavaCode}{Kode til at sætte et startDelay}{animation7}
 	minAnimation.setStartDelay(minForsinkelse);
 \end{JavaCode}
@@ -144,7 +144,7 @@ Yderligere er der metoderne .pause(), .resume(), .cancel(),  .end() og .reverse(
 \section{Mere advancerede teknikker}
 Her kommer vi omkring nogle lidt mere advancerede teknikker
 \subsection{Flere animationer samlet}
-Vi kan samle flere animationer i en, så vi kan flytte vores view diagonalt, eller få det til at ændre farve og rotere samtidig. Til dette bruger vi AnimatorSet. Det virker sådan her:
+Vi kan samle flere animationer i en, så vi kan flytte vores view diagonalt, eller få det til at ændre farve og rotere samtidig. Til dette bruger vi AnimatorSet. Det virker som set i \autoref{animation8}:
 \begin{JavaCode}{Kode til at køre flere animationer samtidigt}{animation8}
 AnimatorSet mitAnimationSet = new AnimatorSet();
 mitAnimatorSet.playTogether(minAnimation, minAndenAnimation);
@@ -158,7 +158,7 @@ Desuden kan man lave et AnimatorSet af andre AnimatorSets. Altså give et Animat
 \end{JavaCode}
 
 \subsection{Animationer i rækkefølge}
-Vi kan også spille animationer efter hinanden. Her bruger vi igen AnimatorSet:
+Vi kan også spille animationer efter hinanden. Her bruger vi igen AnimatorSet som ses i \autoref{animation10}
 \begin{JavaCode}{Kode til at køre flere animationer efter hinanden}{animation10}
 	AnimatorSet mitAnimationSet = new AnimatorSet();
 	mitAnimatorSet.playSequentially(minAnimation, minAndenAnimation);
@@ -170,12 +170,12 @@ Så kører minAnimation først og derefter kører minAndenAnimation. Igen kan ma
 	mitAnimatorSet.playSequentially(minAnimation, minAndenAnimation, minTrejdeAnimation);
 \end{JavaCode}
 \subsection{Gentagelser}
-Vi kan også sætte vores animationer til at gentage. Det er meget simpelt:
+Vi kan også sætte vores animationer til at gentage. Det er meget simpelt, se \autoref{animation12}
 \begin{JavaCode}{Kode til at lave gentagelser}{animation12}
 	minAnimation.setRepeatCount(antalGentagelser);
 \end{JavaCode}
 Her er det værd at notere at hvis man sætter antalGentagelser til 1 så afspiller animationen \textbf{2 gange} i alt.
-Man kan også sætte at:
+Man kan også sætte gentagelsen som i \autoref{animation13}
 \begin{JavaCode}{Sæt animationen til at køre tilbage}{animation13}
 	minAnimation.setRepeatMode(ValueAnimator.REVERSE);
 \end{JavaCode}
@@ -186,15 +186,15 @@ Hvilket gør at den på gentagelsen ikke går tilbage og kører forfra, men går
 \section{Hurtig guide}
 Her er en lille 4 skridts guide til at lave en animation.
 \begin{enumerate}
-	\item Opret en ValueAnimator med enten ofInt() eller ofFloat()
+	\item Opret en ValueAnimator med enten ofInt() eller ofFloat() \autoref{animationguide1}
 	\begin{JavaCode}{Opret animator}{animationguide1}
 	ValueAnimator minAnimation = ValueAnimator.ofFloat(startFloat, slutFloat);
 	\end{JavaCode}
-	\item Sæt en varighed i millisekunder
+	\item Sæt en varighed i millisekunder \autoref{animationguide2}
 	\begin{JavaCode}{Sæt varighed}{animationguide2}
 	minAnimation.setDuration(varighed);
 	\end{JavaCode}
-	\item Lav onAnimationUpdate og få den til at lave din ændring
+	\item Lav onAnimationUpdate og få den til at lave din ændring \autoref{animationsguide3}
 	\begin{JavaCode}{Lav et billede}{animationsguide3}
 		minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 			@Override
@@ -205,7 +205,7 @@ Her er en lille 4 skridts guide til at lave en animation.
 			}
 		});
 	\end{JavaCode}
-	\item Start animationen
+	\item Start animationen \autoref{animationguide4}
 	\begin{JavaCode}{Start animationen}{animationguide4}
 		minAnimation.start();
 	\end{JavaCode}
