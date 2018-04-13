@@ -134,7 +134,7 @@ Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateI
 Du kan sætte interpolatoren mellem at du opretter animationen og starter den.
 De helt basale muligheder er LinearInterpolator, AccelerateInterpolator, DecelerateInterpolator og så selvfølgelig AccelerateDecelerateInterpolator. Der findes dog flere som man kan finde online.
 %TODO Illustrationer til interpolators
-\subsection{Startdelay, pause, resume og andre kontrolmetoder}
+\subsection{Kontrolmetoder}
 Animator har yderligere en række metoder som går den lettere at arbejde med. Du kan sætte animationen til først at starte noget tid efter at du kalder .start() ved at kalde koden i \autoref{animation7} \\
 \begin{JavaCode}{Kode til at sætte et startDelay}{animation7}
 	minAnimation.setStartDelay(minForsinkelse);
@@ -210,7 +210,8 @@ Her er en lille 4 skridts guide til at lave en animation.
 		minAnimation.start();
 	\end{JavaCode}
 \end{enumerate}
-\section{Opgaver}
+
+\subsubsection{Animationsopgaver}
 Der er ingen tid afsat til specifikt at lave opgaver i animation, men programmering er et praktisk fag så det gælder om at øve sig. Her er nogle forslag til ting at øve sig med, men du kan også selv finde på udfordringer at øve dig på, inklusiv bare at gå direkte i gang med projektet. Hvis det ikke går godt så husk at tage små skridt og lave en ting af gangen.
 \begin{exercise}
 	Start helt fra bunden. Få en knap til at rotere 360 grader når du trykker på den.

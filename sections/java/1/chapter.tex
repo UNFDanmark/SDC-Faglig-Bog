@@ -1,7 +1,7 @@
 \chapter{Introduktion til Java}
 Java er det programmeringssprog som I vil lære at bruge til at programmere apps med. Det er vidt anvendeligt. Det har i mange år været, og er stadig, det mest anvendte programmeringssprog på verdensplan.
 
-\section{Hvad er et program, egentlig?}
+\subsubsection{Hvad er et program, egentlig?}
 Et program er en serie af instruktioner som skal udføres i rækkefølge. Typisk skrives instruktionerne som helt almindelig tekst, hvor hver instruktion står på sin egen linje.
 
 \section{Sådan skriver du programmer}
@@ -21,7 +21,7 @@ Et program I kommer til at bruge til at skrive Java-kode i, er IntelliJ. Det kan
 	Til sidst kan du køre programmet ved at skrive \texttt{java Test}.
 \end{remark}
 
-\section{Hello World!}
+\subsection{Hello World!}
 Et "Hello World!" program er ofte det første man prøver i et nyt programmeringssprog, for at få en lille smule føling med, hvordan sproget skrives.
 
 \begin{JavaCode}{A Hello World program in Java}{lst:helloworld}
@@ -94,7 +94,7 @@ På linje 7 opdaterer vi, hvad der er i variablen penge. Vi refererer variablen 
 
 Til sidst demonstreres vigtigheden af at "papkassen" kun kan "huske", hvad der sidst blev lagt i den. Hvis vi lader som om vi lige har "tjent" 30 kr som vi gerne vil gemme i "papkassen", så skal vi lægge det til det der var i i forvejen. Hvis ikke vi gør det, så bliver det gamle "glemt" fordi det bliver overskrevet. Det kan ses på linje 11, hvor penge opdateres til 30. Det vil fremgå af output at vi til sidst kun har 30 kr, men måske var meningen i virkeligheden at de skulle være lagt til, så vi havde 100 kr.
 
-\section{Typer}
+\subsection{Typer}
 Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel på tekst og tal. Man siger at tekst og tal er forskellige typer. Der er nogle grundlæggende typer som man bliver nødt til at lære sig, men det er ikke så slemt, når man har brugt dem lidt.
 
 \begin{itemize}
@@ -165,7 +165,7 @@ Her er nogle eksempler på forskellige operationer og brug af operatorer på de 
 
 \todo{Ovenstående skal måske anvende noget JavaCode i stedet...}
 
-\section{Logik}
+\subsection{Logik}
 Nu hvor vi har lært om typen \JavaInline|boolean|, så kan vi lære om forskellige logiske udtryk. Man kan f.eks. få en boolsk værdi ved at "spørge", om 1 er større end 2, hvilket vi ved er falsk, så den boolske værdi er \JavaInline|false|. Det smarte er, at når vi sammensætter forskellige logiske udtryk, så får vi et nyt logisk udtryk som til sidst giver en boolsk værdi. Vi sammensætter som regel enten med AND eller OR, i Java repræsenteret med hhv. \JavaInline|&&| og \JavaInline?||?. Husk at man også her kan bruge variabler, f.eks. kan det være man gerne vil vide om man skal købe et hus, så man spørger om man har penge nok og om man i forvejen har nok huse. 
 
 \begin{JavaCode}{Logik}{lst:logik}
