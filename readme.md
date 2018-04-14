@@ -4,4 +4,4 @@ Velkommen til repository for faglig bog til SDC. Vi har brugt LaTeX til at skriv
 
 `master.tex` er så-at-sige hovedfilen, det er den der skal compiles og som inkluderer alle de andre relevante filer. Projektet er designet til at blive udviklet i TexStudio, men enhver TeX editor/compiler kan bruges. For at compile glossary skal man have Perl installeret.
 
-Projektet er startet op i 2018, og det nuværende hold med ansvar for indhold kan kontaktes på faglig@software.unf.dk
+Projektet er startet op i 2018, og det oprindelige hold bag bogen kan kontaktes på faglig-2018@software.unf.dk
