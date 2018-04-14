@@ -127,6 +127,31 @@ For at få fat i den besked vi sender med vha \JavaInline|putExtra| kan vi benyt
 	\end{JavaCode}
 \end{example}
 
+\subsection{At få ting tilbage fra intents}
+Hvad så hvis man vil have ting retur fra den activity man kalder? Du kan tilføje extras som ellers, men istedet for at kalde startActivity kalder du funktionen som i \autoref{forResultCall},
+\begin{JavaCode}{Start en activity som giver et resultat}{forResultCall}
+	startActivityForResult(intent, REQUEST_CODE);
+\end{JavaCode}
+Hvor request koden er en integer. Den bruger vi senere så husk den. Vi laver så en metode til at modtage resultatet i den activity vi kalder startActivityForResult i. Denne metode ser ud som i \autoref{onActivityResult}
+\begin{JavaCode}{Få resultatet}{onActivityResult}
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+		//Soerg for at requestcode er lig den request code du sendte
+		//og at resultcode er lig Activity.RESULT_OK
+		//Det resultat du faar ligger i intentet som extra
+		//Her er et eksempel med en string
+		intent.getStringExtra("resultat");
+	}
+\end{JavaCode}
+
+Og hvordan skal det så se ud i den activity du kalder? Her skal det se ud som i \autoref{resultatTilbage}.
+\begin{JavaCode}{Send et resultat tilbage}{resultatTilbage}
+	Intent intentresult = new Intent();
+	intent.putExtra("resultat", resultat);
+	setResult(REQUEST_CODE, intent)
+	finish();
+\end{JavaCode}
+Request code er til hvis en aktivitet skal modtage fra eller returnere til flere andre activities. Så kan man kende forskel på dem med request code. 
+
 \subsection{Start en activity fra en anden app med en Intent}
 
 Vi kan inkorporere aktiviteter fra andre apps, hvis de lytter efter intents. Et eksempel er en e-mail-app, vi kan bruge den indbyggede e-mail-klient (eller en anden e-mail-klient) til at sende en email fra vores app. Vi skal bruge implicitte intents til dette formål, da vi ikke nødvendigvis kender de klasse samt sti til e-mail-klientens aktivitet, og vi vil muligvis gerne have brugeren til at vælge den e-mail-app, som de bedst kan lide.
