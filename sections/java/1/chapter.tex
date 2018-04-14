@@ -1,6 +1,10 @@
 \chapter{Introduktion til Java}
 Java er det programmeringssprog som I vil lære at bruge til at programmere apps med. Det er vidt anvendeligt. Det har i mange år været, og er stadig, det mest anvendte programmeringssprog på verdensplan.
 
+Det kan være lidt besværligt at komme igang med Java, men vi vil gøre vores bedste for at lære dig alle de ting du har brug for, for at komme grundigt igang.
+
+\todo{Addresserer vi "du/dig" eller "I/jer?"}
+
 \section{Hvad er et program, egentlig?}
 Et program er en serie af instruktioner som skal udføres i rækkefølge. Typisk skrives instruktionerne som helt almindelig tekst, hvor hver instruktion står på sin egen linje.
 
@@ -14,17 +18,19 @@ Et program I kommer til at bruge til at skrive Java-kode i, er IntelliJ. Det kan
 \begin{remark}
 	Hvis du har lyst til en lille udfordring, så prøv at skriv et program i notesblok eller tilsvarende, og kør programmet ved at bruge en terminal (kaldet kommandoprompt på Windows). 
 	
-	Dette gør du ved først at navigere til den mappe, hvor du har gemt dit program ved hjælp af commandoen \texttt{cd} (change directory), skriv \texttt{cd test} hvis du vil ind i mappen der hedder test. Hvis du gerne vil se hvilke mapper du har i den mappe du er i, så brug kommandoen \texttt{dir} på Windows, eller \texttt{ls} på de fleste andre systemer. 
+	Dette gør du ved først at navigere til den mappe, hvor du har gemt dit program ved hjælp af kommandoen \texttt{cd} (change directory), skriv \texttt{cd test} hvis du vil ind i mappen der hedder test, \texttt{cd ..} går et mappeniveau op. Hvis du gerne vil se hvilke mapper du har i den mappe du er i, så brug kommandoen \texttt{dir} på Windows, eller \texttt{ls} på de fleste andre systemer. 
 	
 	Når du er i den rigtige mappe skal du kompilere dit program ved at skrive \texttt{javac Test.java} (c'et er for compile), hvis dit program hedder "Test" (det er vigtigt at Java-programmer slutter på ".java"), dette laver en fil ved navn \texttt{Test.class}, som er dit færdige program. 
 	
 	Til sidst kan du køre programmet ved at skrive \texttt{java Test}.
 \end{remark}
 
+\todo{Anførselstegn fjerner mellemrum efterfølgende?}
+
 \section{Hello World!}
 Et "Hello World!" program er ofte det første man prøver i et nyt programmeringssprog, for at få en lille smule føling med, hvordan sproget skrives.
 
-\begin{JavaCode}{A Hello World program in Java}{lst:helloworld}
+\begin{JavaCode}{Et Hello World program i Java}{lst:helloworld}
 	public class Hello {
 		public static void main(String[] args) {
 			System.out.println("Hello World!");
@@ -97,7 +103,7 @@ Til sidst demonstreres vigtigheden af at "papkassen" kun kan "huske", hvad der s
 Computeren skal vide, hvordan den skal forstå visse ting, f.eks. er der forskel på tekst og tal. Man siger at tekst og tal er forskellige typer. Der er nogle grundlæggende typer som man bliver nødt til at lære sig, men det er ikke så slemt, når man har brugt dem lidt.
 
 \begin{itemize}
-	\item \texttt{int} er standard typen for heltal, altså 1, 2, 3, osv. Det er forkortet af det engelske ord "integer" som betyder netop heltal.
+	\item \texttt{int} er standard typen for heltal både positivie og negative, altså 0, 1, -2, osv. Det er forkortet af det engelske ord "integer" som betyder netop heltal.
 	\item \texttt{double} er standard typen for kommatal/decimaltal, altså 0.1, 1.5, 3.14, osv. Normaltvis hed kommatal "float", men da man ønskede at kunne repræsentere flere decimaler for at øge præcisionen, lavede man en ny type med dobbelt så mange bits, dermed navnet "double".
 	\item \texttt{String} er standard typen for tekst, som vi nogen gange kalder tekst-strenge. Det skyldes at tekst egentlig bare er en sekvens (streng) af enkelte tegn.
 	\item \texttt{boolean} er typen for sandhedsværdier også kaldet boolske værdier, dvs. \texttt{true} eller \texttt{false}. Navnet kommer fra manden George Boole, som var den første til at formalisere denne form for logik.
