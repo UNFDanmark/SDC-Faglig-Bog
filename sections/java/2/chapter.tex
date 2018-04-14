@@ -12,6 +12,7 @@
 % Gode opgaver:
 %    https://adriann.github.io/programming_problems.html
 
+	\todo{Hvordan skriver vi til deltagerne? Skriver vi \emph{I}? Undgår vi at rette os mod dem?}
 \chapter{Kontrol og Metoder}
 
 	\todo{@Beatrice: Kan du ikke tage for-each løkker? Måske som ekstra?}
@@ -66,9 +67,9 @@
 
 		Anatomien af en \JavaInline{while}-udstryk er meget lig det af et
 		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
-		\JavaInline{while}, som kan ses i eksempel~\ref{lst:while-example-1}.
+		\JavaInline{while}, som kan ses i \autoref{lst:while-example-1}.
 
-		\begin{JavaCode}{???}{lst:while-example-1}
+		\begin{JavaCode}{Et eksempel på en \texttt{while}-løkke}{lst:while-example-1}
 			while (betingelse) {
 				krop;
 			}
@@ -84,8 +85,8 @@
         enden, så spørger man igen om betingelsen er \emph{sand}, hvis
         ja, køres kroppen igen, hvis ikke, fortsætter vi efter løkken.
         Denne process er illustreret i
-        tegning~\ref{fig:while-loop-illustrated}. Et eksempel på en
-        løkke kan findes i eksempel~\ref{lst:white-example-3}.
+        \autoref{fig:while-loop-illustrated}. Et eksempel på en
+        løkke kan findes i \autoref{lst:while-example-3}.
 
         % Følgende er baseret på:
         %    https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg
@@ -116,11 +117,11 @@
 			}
 		\end{JavaCode}
 
-        Eksempel~\ref{lst:white-example-3} stopper efter 10
+        \autoref{lst:while-example-3} stopper efter 10
         iterationer, men det er muligt at lave while-løkker der aldrig
         stopper.  Det er faktisk så nemt at de fleste, ved uheld,
         kommer til at lave en nu og da. Se
-        eksempel~\ref{lst:while-hello-forever} for et program som
+        \autoref{lst:while-hello-forever} for et program som
         gentagende skriver ``hej''. Det er selvfølgelig ikke så
         brugbart et program, men det viser en problematik: Hvad gør vi
         hvis vores program aldrig stopper? I har sikkert oplevet et
@@ -154,7 +155,7 @@
 			Copenhagen Suborbitals har kontaktet dig, for at lave en maskine til
             at tæller ned fra 10, og vise "Affyring!", i stedet for 0.
             Tag gerne inspiration fra
-            eksempel~\ref{lst:while-example-3}.
+            \autoref{lst:while-example-3}.
 		\end{exercise}
 
 		\begin{exercise}
@@ -187,7 +188,7 @@
         \JavaInline{for}-løkken, som samler den information i
 		èt sted.
 
-		\begin{JavaCode}{???}{lst:for-example-1}
+		\begin{JavaCode}{Et eksempel på en \texttt{for}-løkke}{lst:for-example-1}
 			for (definition; betingelse; opdatering) {
 				krop;
 			}
@@ -228,7 +229,7 @@
         færdi, køres opdateringen. Denne sætte værdien af variablen
         til hvad den skal være i den næste iteration.
 
-		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med eksempel~\ref{lst:while-example-3}.}{lst:for-example-1}
+		\begin{JavaCode}{Et ``brugbart'' for program. Sammenlign med \autoref{lst:while-example-3}.}{lst:for-example-1}
 			for (int n = 1; n <= 10; n++) {
 				do-System.out.println(n + " linjer af ligegyldig data.");
 			}
@@ -281,8 +282,8 @@
 			}
 		\end{JavaCode}
 
-        Læg mærke til at eksempel~\ref{lst:break-example-1},
-        \ref{lst:for-example-1} og \ref{lst:while-example-3}, alle
+        Læg mærke til at \autoref{lst:break-example-1},
+        \autoref{lst:for-example-1} og \autoref{lst:while-example-3}, alle
         sammen gør præcis det samme når de køres, selvom de ser
         anderledes ud. Dette illustrerer hvordan der altid er flere
         måder at gøre ting på.
@@ -290,15 +291,15 @@
         \todo{Tilføj en opgave, som viser at man godt kan klare sig
         uden break, men at break er pænere.}
 
-	\subsection{!EXTRA! Do ... while}
+	\subsection{Do ... while}
 
         While-løkker tjekker betingelsen før hver iteration, men nogle
         gang vil vi gerne tjekke betingelsen, efter vi har kørt
         iterationen. For eksempel kunne vi lave en beregning, og
         baseret på den beslutte om vi ville videre. Dette løser
         \emph{do-while} udtryk på en pæn måde. Sammenlign
-        eksempel~\ref{lst:dowhile-example-1} og
-        \ref{lst:dowhile-example-2}. Se figur~\ref{fig:do-while-loop-illustrated}.
+        \autoref{lst:dowhile-example-1} og
+        \autoref{lst:dowhile-example-2}. Se \autoref{fig:do-while-loop-illustrated}.
 
 		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
 			while (false) {
@@ -353,7 +354,7 @@
         vi ind i mellem gerne oppe over en specifik iteration. Dette
         gøres med \JavaInline{continue}-keyword.
 
-        \begin{JavaCode}{Kode der anvender \emph{continue} til at kun vise de lige tal. Læg mærke til at derp giver resten a divideret med b, også kaldt \emph{modulo}.}{lst:unknown-a}
+        \begin{JavaCode}{Kode der anvender \texttt{continue} til at kun vise de lige tal. Læg mærke til at derp giver resten a divideret med b, også kaldt \texttt{modulo}.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
 				if (i \% 2 == 0)  continue;
 				System.out.println(i);
@@ -377,9 +378,9 @@
     kalder hvad vi giver den, dvs. det som sættes mellem paranteser,
     for funktionens \emph{argumenter}.
 
-    \todo{@Beatrice: Husk at forklare \emph{private} og \emph{public}.}
+    \todo{@Beatrice: Husk at forklare \texttt{private} og \texttt{public}.}
 
-	\subsection{En funktions udseene}
+	\subsection{En funktions udseende}
 
 		I har allerede set en funktion, nemlig \JavaInline{main}-funktionen, hvor i
 		indtil videre har skrevet alle jeres programmer i:
@@ -394,11 +395,11 @@
 
         Dens signatur er \JavaInline{public static void main(String[] args)}
         delen.  Dette fortælles os lidt om funktionen: dens
-        navn \emph{main}; dens retur-værdi \emph{void} (ingenting); og
-        dens argumenter \emph{String[] args}, hvilket er en liste af
-        strenge, som funktionen kalder \emph{args}.  Signaturen for
-        \emph{main} siger også at den er \emph{static} og
-        \emph{public}. Disse egenskaber kan ignoreres for nu, da de
+        navn \JavaInline{main}; dens retur-værdi \JavaInline{void} (ingenting); og
+        dens argumenter \JavaInline{String[] args}, hvilket er en liste af
+        strenge, som funktionen kalder \JavaInline{args}.  Signaturen for
+        \JavaInline{main} siger også at den er \JavaInline{static} og
+        \JavaInline{public}. Disse egenskaber kan ignoreres for nu, da de
         først bliver relevant når man kender til klasser.
 
         En funktions krop er \JavaInline{// Ting her...} delen. Alt
@@ -409,7 +410,7 @@
         samtidig med at give en retur-værdi.  \JavaInline{return} kan
         ses som en \JavaInline{break} for funktioner.
         \JavaInline{main} funktionen ovenover behøver ikke en
-        \JavaInline{return}, men eksempel~\ref{lst:guarenteed-random}
+        \JavaInline{return}, men \autoref{lst:guarenteed-random}
         skal have en, da den har en retur-type.
 
 		\begin{JavaCode}{xkcd 221}{lst:guarenteed-random}
@@ -418,12 +419,12 @@
 			}
 		\end{JavaCode}
 
-        Signaturen af en funktion forklarer hvordan man kalder
-        funktionen, og kroppen er hvad den egentlig gør.
-        En funktion uden en retur-værdi, gives retur-typen
-        \emph{void}, hvilket står for ``jeg har ingen retur-type''.
+        Signaturen er hvordan man skal snakke med funktionen, og
+        kroppen er hvad den egentlig gør. Læg mærke til at hvis
+        funktionen ikke skal have en retur-værdi, skal den gives
+        retur-typen \JavaInline{void}, hvilket står for ``jeg har ingen retur-type''.
 
-	\subsection{Eksempel funktion: faktoriel}
+	\subsection{Eksempel funktion: fakultet}
 
         Hvis vi skulle skrive \emph{faktoriel}-funktionen som en
         funktion i Java, ville vi først spørge os selv: ``hvad
@@ -497,7 +498,7 @@
             programmet. Hvad sker der?
         \end{exercise}
 
-    \subsection{!Extra! Call-by-reference}
+    \subsection{Call-by-reference}
 
         \todo{
             Jeg er ikke vild med at introducere dem til sådanne niché fagtermer, men
@@ -514,14 +515,14 @@
         komputeren, for at skabe konsekvenser for hvordan I skriver
         kode.
 
-        Overvej koden i eksempel~\ref{lst:call-by-value-example}. Her
-        repræsenterer de to variabler \emph{a} to forskellige værdier,
-        selv om de har samme navn, og værdien af \emph{a} i \emph{f}
-        starter ud med at være en kopi af den i \emph{main}. Når
+        Overvej koden i \autoref{lst:call-by-value-example}. Her
+        repræsenterer de to variabler \texttt{a} to forskellige værdier,
+        selv om de har samme navn, og værdien af \texttt{a} i \texttt{f}
+        starter ud med at være en kopi af den i \texttt{main}. Når
         værdien kopieres på denne måde kaldes det
         \emph{call-by-value}.
 
-        \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \emph{a} i \emph{main} ikke ændrer sig, når man ændrer på \emph{a} i \emph{f}.}{lst:call-by-value-example}
+        \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \texttt{a} i \texttt{main} ikke ændrer sig, når man ændrer på \texttt{a} i \texttt{f}.}{lst:call-by-value-example}
             public int f (int a) {
                 a += 2
                 System.out.println("a is "+a);
@@ -541,11 +542,11 @@
         af en masse heltal, og give stor ting et navn, dvs. et unikt
         heltal.
 
-        Overvej koden i eksempel~\ref{lst:call-by-reference-example}.
-        Her er \emph{a} ikke en kopi; den er faktisk \emph{num}! Hvis
-        du ændrer i \emph{a} ændrer du i \emph{num}, vise versa.
+        Overvej koden i \autoref{lst:call-by-reference-example}.
+        Her er \texttt{a} ikke en kopi; den er faktisk \texttt{num}! Hvis
+        du ændrer i \texttt{a} ændrer du i \texttt{num}, vise versa.
 
-        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \emph{f} ændrer i værdien af \emph{a}, så ændrer den også i værdien af \emph{num}.}{lst:call-by-value-example}
+        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{a}, så ændrer den også i værdien af \texttt{num}.}{lst:call-by-value-example}
             public class Num {
                 public int inner;
                 public Num (int a) { inner = a; }
@@ -566,12 +567,12 @@
 
         Det vigtige at tage væk fra dette, er at når man kalder en
         funktion, så bliver typer der starter på et småt bogstav
-        (\emph{int}, \emph{boolean}, \emph{float}) kopieret
+        (\JavaInline{int}, \JavaInline{boolean}, \JavaInline{float}) kopieret
         (\emph{call-by-value}), mens at typer der starter på store
-        bogstaver (\emph{String}, \emph{List}) bliver ikke kopieret
+        bogstaver (\JavaInline{String}, \JavaInline{List}) bliver ikke kopieret
         (\emph{call-by-reference}.)
 
-	\subsection{!Extra! Rekursion}
+	\subsection{Rekursion}
 
         En af opgaverne længere \todo{Ref til opgaven?} oppe
         involverer at lave en funktion som kalder sig selv. Dette er
@@ -595,7 +596,7 @@
         Selvom vi tidligere har skrevet en version af
         faktorial-funktionen som virker ved en \JavaInline{for}-løkke,
         kan vi sagtens lave en version som kalder sig selv rekursivt.
-        Se eksempel~\ref{lst:factorial-recursive} nedenfor.
+        Se \autoref{lst:factorial-recursive} nedenfor.
 
         \begin{JavaCode}{Rekursiv Fakultet. Læg mærke til at koden ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
@@ -760,7 +761,7 @@
         med \emph{Eratosthenes' si}.
     \end{exercise}
 
-\section{!Extra! Checked Exceptions}
+\section{Checked Exceptions}
 
 	Nogle funktioner kan fejle, for eksempel hvis den gør ting over internettet.
 	Men hvad skal Java gør hvis programmet fejler? Programmøren vil ofte gerne

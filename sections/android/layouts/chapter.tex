@@ -42,7 +42,7 @@ Android apps består af mange forskellige dele. De primære dele kan dog deles o
 Ressourcer er indstillinger, billeder, layouts (se \autoref{sec:android:layouts}) og alt mulig andet data der bruges i en app. De findes i mappen \texttt{res/} og har forskellige undermapper, afhængig af hvilken type ressource det er.
 
 \subsubsection{Activities}
-Activities er aktiviteter man kan foretage sig i app'en. Der kan f.eks. være en "tag billede" activity, en "gem billedet" activity og en "se dit galleri af billeder" activity. Disse activities vil blive udforsket yderligere i \autoref{activities kapitel}.
+Activities er aktiviteter man kan foretage sig i app'en. Der kan f.eks. være en "tag billede" activity, en "gem billedet" activity og en "se dit galleri af billeder" activity. Disse activities vil blive udforsket yderligere i \autoref{cha:activities-intents}.
 
 \subsubsection{Manifest}
 Et app-manifest er en beskrivelse af app'en som Android styresystemet gør brug af når den kører app'en på mobilen. I manifestet beskriver man hvilke rettigheder app'en har brug for, samt hvilke teknologier den gør brug af.
@@ -81,15 +81,11 @@ attributtens værdi. Denne værdi er typisk skrevet inden i to gåse-øjne ("). 
 eksempel på et opening-tag med en attribut er følgende: 
 \XmlInline|<Button Text="Hej med dig!">|.
 
-Et eksempel på et XML dokument ses herunder. Det beskriver et vindue, med en 
-``label'' dvs. et kort stykke tekst, med to knapper. Vi har skrevet de tags, 
-der hører til vores label og knapperne, imellem vinduets opening- og 
-closing-tags. Dette betyder at de kommer til at høre til vinduet, altså at 
-vinduet har en label og to knapper. Denne relation bliver ofte beskrevet som at 
+Et eksempel på et XML dokument, kan ses i \autoref{lst:first-valid-xml-document}. Det beskriver et vindue, med en ``label'' dvs. et kort stykke tekst, med to knapper. Vi har skrevet de tags, der hører til vores label og knapperne, imellem vinduets opening- og closing-tags. Dette betyder at de kommer til at høre til vinduet, altså at vinduet har en label og to knapper. Denne relation bliver ofte beskrevet som at 
 vinduet er forældreren til de tre børn (label og de to knapper).
 
 \begin{example}
-	\begin{XmlCode}{Et lille XML dokument}{first-valid-xml-document}
+	\begin{XmlCode}{Et lille XML dokument}{lst:first-valid-xml-document}
 		<Window>
 			<Label Text="Vil du lukke vinduet?"></Label>
 			<Button Text="Ja"></Button>
@@ -102,10 +98,10 @@ vinduet er forældreren til de tre børn (label og de to knapper).
 For at simplificere XML dokumentet, kan vi udnytte os af et så-kaldt 
 self-closing tag. Altså et opening-tag der lukkes med det samme, uden man 
 behøver at bruge et closing-tag. Dette skrives ved at putte en skrå-streg ind 
-før ``større-end'' tegnet:
+før ``større-end'' tegnet. Se \autoref{lst:self-closing-tags-document}
 
 \begin{example}
-	\begin{XmlCode}{Et lille XML dokument med self-closing tags}{self-closing-tags-dokument}
+	\begin{XmlCode}{Et lille XML dokument med self-closing tags}{lst:self-closing-tags-document}
 		<Window>
 			<Label Text="Vil du lukke vinduet?"/>
 			<Button Text="Ja"/>
@@ -155,9 +151,7 @@ andet.
 	\end{center}
 \end{figure}
 
-\clearpage
-
-\begin{XmlCode}{Det layout der giver udseendet i \autoref{fig:android:layouts:frame-layout}}{frame-layout}
+\begin{XmlCode}{Det layout der giver udseendet i \autoref{fig:android:layouts:frame-layout}}{lst:frame-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<FrameLayout 
 		xmlns:android=
@@ -192,6 +186,9 @@ andet.
 	</FrameLayout>
 \end{XmlCode}
 
+\clearpage
+\FloatBarrier
+
 \subsubsection{Linear layouts}
 Lineære layouts er det simpleste layout man kan bruge. Det tager alle sine 
 børn, og arrangere dem således at de ligger enten under hinanden (vertikalt) 
@@ -213,8 +210,6 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 		\label{fig:android:layouts:linear-layout}
 	\end{center}
 \end{figure}
-
-\clearpage
 
 \begin{XmlCode}{Det layout der giver udseendet i %
 \autoref{fig:android:layouts:linear-layout}}{linear-layout}
@@ -261,11 +256,11 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 
 \clearpage
 
+\FloatBarrier
 \subsubsection{Table layouts}
 Table layouts arrangerer sine børn i rækker og kolonner. De er simple og 
 bruge, og er rigtig gode hvis man skal have noget der ligner en tabel men de er 
 meget rigide. Alt man laver med tabular-layout vil se ud som en tabel.
- 
  
 I \autoref{fig:android:layouts:table-layout} er der et eksempel på et table 
 layout. Der er 3 rækker og 3 kolonner i layoutet. Man laver nye rækker ved at 
@@ -279,10 +274,8 @@ putte det der skal være i rækken inden i et ``TableRow'' tag.
 	\end{center}
 \end{figure}
  
-\clearpage
- 
 \begin{XmlCode}{Det layout der giver udseendet i %
- 		\autoref{fig:android:layouts:table-layout}}{linear-layout}
+ 		\autoref{fig:android:layouts:table-layout}}{lst:linear-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<TableLayout 
 		xmlns:android=
@@ -349,6 +342,7 @@ putte det der skal være i rækken inden i et ``TableRow'' tag.
 
 \clearpage
 
+\FloatBarrier
 \subsubsection{Relative layouts}
 Relative layouts er et meget fleksibelt og stærkt værktøj. De kan arrangere 
 deres børn relativt til hinanden. F.eks. får man mulighed for at sige ``den 
@@ -363,10 +357,8 @@ ikke kan med relative layouts.
 	\end{center}
 \end{figure}
 
-\clearpage
-
 \begin{XmlCode}{Det layout der giver udseendet i %
-		\autoref{fig:android:layouts:relative-layout}}{relative-layout}
+		\autoref{fig:android:layouts:relative-layout}}{lst:relative-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<RelativeLayout 
 		xmlns:android=
@@ -425,6 +417,7 @@ ikke kan med relative layouts.
 
 \cleardoublepage
 
+\FloatBarrier
 \section{Listeners}
 I Android app-udvikling finder der noget der hedder en ``listener'', som navnet 
 antyder så er der tale om noget der lytter. I app'ens \gls{interface}, er der 
@@ -503,7 +496,7 @@ $x$ værdi, vil den flytte sig $10$ ``pixels'' til højre.
 \clearpage
 
 
-\begin{XmlCode}{Et layout med en knap der kalder ``buttonClicked'' funktionen% 
+\begin{XmlCode}{Et layout med en knap der kalder ``buttonClicked'' funktionen % 
 når den bliver trykket på.}{lst:button-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<RelativeLayout 
