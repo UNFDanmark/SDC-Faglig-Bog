@@ -23,6 +23,7 @@
 
 \input{glossary}
 
+\setcounter{chapter}{0}
 
 %% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
@@ -50,11 +51,15 @@
 	%% sections/<part>/<chapter>/chapter.tex
 	%% sections/<part>/<chapter>/figures/
 
-	\part{Java udvikling}
 
+	\part{Java udvikling}
 	% Hvis vi arbejder i draft mode, så inkluderer vi en eksempel side der 
 	% viser nogle af de elementer der er i denne bog.
 	\ifdraftmode
+		
+		%% Denne kommando kan sørge for at vi starter med kapitel 0
+		\setcounter{chapter}{-1}
+		
 		\graphicspath{{sections/manual/example/figures/}}
 		\input{sections/manual/example/chapter}
 	\fi
