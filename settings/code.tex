@@ -15,6 +15,8 @@
 
 \usepackage{xcolor}
 
+\renewcommand{\lstlistingname}{Kode-stykke}
+
 \newif\ifsyntaxcolor
 \syntaxcolortrue
 \ifsyntaxcolor
@@ -32,12 +34,14 @@
 \fi
 
 % macro to select a scaled-down version of Bera Mono (for instance)
-\makeatletter
-\newcommand\BeraMonottfamily{%
-	\def\fvm@Scale{0.75}% scales the font down
-	\fontfamily{fvm}\selectfont% selects the Bera Mono font
-}
-\makeatother
+%\makeatletter
+%\newcommand\BeraMonottfamily{%
+%	\def\fvm@Scale{0.75}% scales the font down
+%	\fontfamily{fvm}\selectfont% selects the Bera Mono font
+%}
+%\makeatother
+
+\usepackage[scaled=0.75]{beramono}
 
 \lstdefinestyle{basic}{
 	%% Syntax color
@@ -46,7 +50,7 @@
 	keywordstyle=\color{code-keyword},
 	numberstyle=\color{code-number},
 	stringstyle=\color{code-string},
-	basicstyle=\BeraMonottfamily,
+	basicstyle=\ttfamily,
 	%% Line numbers
 	numbers=left,
 	numbersep=5pt,
@@ -56,24 +60,24 @@
 	%% Hide spaces in strings
 	showstringspaces=false,
 	%% Tabsize
-	tabsize=4,
+	tabsize=3,
 	autogobble
 }
 
 \lstnewenvironment{JavaCode}[2]
-	{\lstset{language=Java, style=basic, caption={#1}, label=#2}\noindent}
+	{\lstset{language=Java, style=basic, caption={#1}, label=#2, float, floatplacement=H}\noindent}
 	{}
 	
 \newcommand{\JavaInline}{\lstset{language=Java, style=basic}\lstinline}
 	
 \lstnewenvironment{XmlCode}[2]
-	{\lstset{language=XML, style=basic, caption={#1}, label=#2}\noindent}
+	{\lstset{language=XML, style=basic, caption={#1}, label=#2, float, floatplacement=H}\noindent}
 	{}
 	
 \newcommand{\XmlInline}{\lstset{language=Xml, style=basic}\lstinline}
 	
 \lstnewenvironment{LaTeXCode}[2]
-	{\lstset{language=[LaTeX]TeX, style=basic, caption={#1}, label=#2}\noindent}
+	{\lstset{language=[LaTeX]TeX, style=basic, caption={#1}, label=#2, float, floatplacement=H}\noindent}
 	{}
 
 \newcommand{\LaTeXInline}{\lstset{language=[LaTeX]TeX, style=basic}\lstinline}
