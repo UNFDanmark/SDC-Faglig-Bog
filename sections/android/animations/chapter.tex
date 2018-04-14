@@ -84,14 +84,15 @@ Her er der så en liste over hvad man kan lave med Views:\\
 	\item View position
 	Her sættes vertikal og horizontal position seperat. Koden ses i \autoref{animationflyt}
 	\begin{JavaCode}{Flyt et view}{animationflyt}
-		mitView.setTranslationX(jeresPositionX);
-		mitView.setTranslationY(jeresPositionY);
+		mitView.setX(jeresPositionX);
+		mitView.setY(jeresPositionY);
 	\end{JavaCode}
 	Her skal det noteres at det er \textbf{øverste} venstre hjørne der er position (0,0). Ligeledes er det viewets øverste venstre hjørne der placeres. Hvis I vil placere et view op af skærmens højre side skal i altså sætte X til skærmbredden minus viewets bredde. I kan få bredden og højden af jeres view som i \autoref{animationbredde}
 	\begin{JavaCode}{Få bredden af jeres view}{animationbredde}
 		mitView.getWidth();
 		mitView.getHeight();
 	\end{JavaCode}
+	Man kan også placere et views position ud fra at (0,0) er viewets startposition med funktionerne getTranslationX() og getTranslationY().
 	\item View størrelse
 	I kan sætte størrelsen som i \autoref{animationscale} 
 	\begin{JavaCode}{Sæt størrelsen af jeres view}{animationscale}
