@@ -75,7 +75,17 @@ En service er et komponent der kører i baggrunden og ikke har noget interface. 
 En broadcast er en besked som enhver app kan modtage. Der er forskellelige broadcasts for system events som fx foretag opkald eller opladning igang. Man kan sende en broadcast ved at sende en intent med som parameter til \JavaInline|sendBroadcast()| eller \JavaInline|sendOrderedBroadcast()|.
 En standard broadcast kan ikke blive stoppet, og kan ikke videregive resultater. En orderedBroadcast vil sende broadcasten til alle relevante BroadCastRecievers en af gangen og tillade resultatet at propagere.
 
-\subsection{Explicit vs Implicit}
+\subsubsection{Toasts}
+
+En toast er en lill besked som popper op på skærmen de sættes ind ved hjælp af de her funktioner  \begin{JavaCode}{Her kan man f.eks. vælge mellem en lang og en kort toast}{lst:toast-example}
+	Toast toast = Toast.makeText(getActivity(), "Det her er min toast besked!", Toast.LENGTH_LONG.show(););
+	toast.show();
+	// Eller Toast.LENGTH_SHORT.show();
+\end{JavaCode}
+
+Som man kan se i \autoref{lst:toast-example} har toasteren brug for en activity, en besked og, hvor lang tid den skal vises.
+	
+\endJavaCode{}\subsection{Explicit vs Implicit}
 
 Der er to typer intents explicitte og implicitte. I explicitte intents specificerer man præcist hvilket komponent man vil have til at reagere. Da man kender navngivningen i ens egen app, vil dette være den typeske måde at håndtere kommunikationen indenfor ens egen app, som at starte nye activities inde i appen.
 
