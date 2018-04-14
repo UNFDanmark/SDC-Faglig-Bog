@@ -426,28 +426,28 @@
 
 	\subsection{Eksempel funktion: fakultet}
 
-        Hvis vi skulle skrive \emph{faktoriel}-funktionen som en
+        Hvis vi skulle skrive \emph{\gls{factorial}en} som en
         funktion i Java, ville vi først spørge os selv: ``hvad
-        returnerer faktoriel og hvad er dens argumenter?'' Det virker
+        returnerer fakultet og hvad er dens argumenter?'' Det virker
         måske trivielt, i dette eksempel, men stadig et vigtigt
         spørgsmål. Derefter skal vi spørge: ``Men hvad er det den
         gør?''
 
-        Faktoriellen er defineret som \(a! = a \cdot (a-1) \cdot \dots
+        Fakultet er defineret som \(a! = a \cdot (a-1) \cdot \dots
         \cdot 2 \cdot 1\), f.eks. \(5! = 5 \cdot 4 \cdot 3 \cdot 2
         \cdot 1\). Ud fra definitionen er det tydeligt at den får et
         enkelt heltal, og giver et enkelt heltal tilbage. Så
-        faktoriellens signatur ser sådan ud:
+        \gls{factorial}en signatur ser sådan ud:
 
-		\begin{JavaCode}{Signaturen af en faktoriel-funktion}{lst:factorial-signature}
+		\begin{JavaCode}{Signaturen af en \gls{factorial}}{lst:factorial-signature}
 			int factorial (int a)
 		\end{JavaCode}
 
-		Men hvad gør faktoriel funktionen? Den ganger det givne heltal med alle mindre
+		Men hvad gør \gls{factorial}en? Den ganger det givne heltal med alle mindre
 		heltal. Vi behøver at finde alle mindre heltal og gange det på. En version
-		af faktorial-kroppen kunne ligne:
+		af \gls{factorial}-kroppen kunne ligne:
 
-		\begin{JavaCode}{Kroppen af en faktoriel-funktion}{lst:factorial-body}
+		\begin{JavaCode}{Kroppen af en \gls{factorial}}{lst:factorial-body}
 			int product = 1;
 			for (int i = a; i >= 1; i--)
 				product *= i;
@@ -460,7 +460,7 @@
 
 		Kombinationen af signaturen og kroppen resulterer i:
 
-		\begin{JavaCode}{En faktoriel-funktion}{lst:factorial-function}
+		\begin{JavaCode}{En \gls{factorial}}{lst:factorial-function}
 			int factorial (int a) {
 				int product = 1;
 				for (int i = a; i >= 1; i--)
