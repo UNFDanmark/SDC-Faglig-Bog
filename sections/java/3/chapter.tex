@@ -142,7 +142,42 @@ I dette eksempel er det muligt at ændre prisen, og der er ikke nødvendigt at k
 
 \subsection{Nedarvning}
 
-Nedarvning er en central del af Java. Alle klasser vi selv skriver nedarver fra Objekt klassen. Dette er ikke noget vi mærker så meget til, men det giver os nogle inbyggede funktionaliteter som vi ofte gør brug af, som fx \JavaInline|toString()|. Ved at benytte nedarvning bliver det muligt for os at undgå problemer med kode duplikering, gennem at skabe klasser, der er forlængelser af hinanden. For eksempel kan du have to klasser, en kaldet \JavaInline{Car} og en anden, kaldet \JavaInline{Bicycle}. Her kan vi bruge nedarvning til at oprette en ny klasse kaldet \JavaInline{Vehicles}, som indeholder snitfladen mellem de to klasser, dermed behøver klasserne \JavaInline{Car} og \JavaInline{Bicycle} kun indeholdende aspekter, der er unikke for den klasse. Dette giver os mulighed for kun at beskrive de fælles funktioner en gang. 
+Nedarvning er en central del af Java. Alle klasser vi selv skriver nedarver fra \JavaInline|Objekt| klassen. Dette er ikke noget vi mærker så meget til, men det giver os noget indbygget funktionalitet som vi ofte gør brug af, som fx \JavaInline|toString()|. Brugen af nedarvning giver os muligheden for at undgå kode duplikation, dette gøres ved at lave klasser der kan være en udvidelse af en anden, på denne måde bruge koden i en anden klasse i en udvidet klasse. For eksempel kan du have to klasser, en der er kaldet \JavaInline|Car| og en anden kaldet \JavaInline|Bicycle|. Her kan vi bruge nedarvning til at lave en ny klasse kaldet \JavaInline|Vehicles|. Denne vil så indeholde de ting som både \JavaInline|Bicycle| og \JavaInline|Car| indeholder, på denne måde kan \JavaInline|Car| og \JavaInline|Bicycle| så indeholde de ting der gør dem unikke. Hvormed kode duplikation kan undgås.
+
+Kode duplikation er en term der bruges til at omtale hvis sektioner af kode bliver gentaget i et udviklet program. Sådanne tilfælde er generelt uønsket og dårligt design, da det gør det sværere at arbejde videre med programmet eller fikse forskellige bugs opstået fra kode der er duplikeret, da ændringen så skal laves alle steder koden er duplikeret og derved skal programmøren finde alle tilfælde af kode duplikationen for at fikse en bug. Kode duplikation øger derved risikoen for at bugs måske kun bliver løst halvt, dette kunne for eksempel ske hvis man havde forskellige NPCs i et computerspil og så havde kopieret angrebsfunktionen ind i den enkelte NPC, hvis denne funktion var buggy skulle man så finde den alle steder, og kunne nemt komme til at glemme det i nogle af dem. Så selvom det virker nemmere og mere simpelt at kopiere et stykke kode, så burde man designe sig ud af at have kode duplikation, da du ellers, med al sandsynlighed, skal arbejde ekstra meget senere hen for at have det nemt nu.
+
+Den følgende tekst vil sætte dig ind i nedarvning i Java og hvordan dette gøres. I \autoref{lst:inheritance-vehicle} kan du se \JavaInline|Vehicle| klassen.
+
+\begin{JavaCode}{Vehicle klassen}{lst:inheritance-vehicle}
+	public class Vehicle
+	{
+		private String Owner;
+		private int NumberOfWheels;
+		//...
+	}
+\end{JavaCode}
+	
+I \autoref{lst:inheritance-car} kan du se \JavaInline|Car| klassen.
+
+\begin{JavaCode}{Car klassen}{lst:inheritance-car}
+	public class Car extends Vehicles
+	{
+		private String NumberPlate;
+		//...
+	}
+\end{JavaCode}
+
+I Car klassen kan termen \JavaInline|extends| ses, dette er for at klargøre nedarvning forholdet for de to klasser. Hvilket her specificerer at \JavaInline|Car| er en underklasse til \JavaInline|Vehicle| klassen. \JavaInline|extends| gør det derved muligt at tilgå aspekter til en bil gennem \JavaInline|Vehicle| klassen, som ikke er direkte defineret i \JavaInline|Car| klassen og vice versa, dog kun de dele af klasserne der er public. Betydende at private attributter ikke kan tilgås i den en klasse fra den anden.
+
+Når man gerne vil implementere en metode der allerede findes i den klasse man nedarver fra, så gøres det med at tilføje @Override lige over metode definitionen. Et eksempel på dette kan ses i \autoref{lst:inheritance-override}
+
+\begin{JavaCode}{Eksempel på override}{lst:inheritance-override}
+	@Override
+	public String toString() {
+		String returnString = //what you want to return goes here
+		return returnString;
+	}
+\end{JavaCode}
 
 \section{Objekter}
 
