@@ -118,13 +118,31 @@ Vi har nu taget en kort intro til XML, det er faktisk et meget mere komplekst sp
 
 Hvis man gerne vil lære mere om XML, kan man besøge W3Schools: \url{https://www.w3schools.com/xml/}.
 
+\subsection{Views}
+Et view er så et af de elementer som brugerfladen er bygget af. En knap er et view. Et stykke tekst er et view. Et billede er et view. I kan finde alle de forskellige elementer i menuen som er markeret med en rød grænse i \autoref{fig:android:layouts:viewmenu}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=5cm]{view_menu.png}
+		\caption{menuen med views}
+		\label{fig:android:layouts:viewmenu}
+	\end{center}
+\end{figure}
+
+Man kan specificere egenskaberne (properties) på elementerne ved at flytte på elementerne i Design tabben, eller specificere egenskaberne i XML filen. For størrelsen af viewet kan man anvende:
+\begin{itemize}
+	\item wrap\_content , som fortæller dit view at det skal reguleres efter den størrelse som er fastsat af indholdet (evt. teksten på en knap).
+	\item match\_parent , som fylder det viewet er indeni ud.\\
+	\item density-independent pixels (dp) , er en relativ størrelse som kan sættes for at nærmere præcisere lokationen på dit element, eksempelvis højden, bredden, relationen til andre elementer (hvis du bruger relative layout).
+\end{itemize}
+
+Vi kommer ind på hvordan du bruger programmering til at ændre på hvordan dine views ser ud (såsom teksten) i næste kapitel.
 
 \subsection{Hvad er layouts?}
-Layouts er, som nævnt, en måde at beskrive app'ens udseende på igennem det strukturelle sprog XML.
+Layouts er, som nævnt, en måde at beskrive app'ens udseende på igennem det strukturelle sprog XML. Layouts er også de elementer man bruger til at organisere views. Så hvis man vil have nogle views til at sidde på en speciel måde ligger man dem ind i et layout.
 
 Vi lægger layouts i ressource mappen \texttt{res/layout/}, og et layout er 
-faktisk bare et XML-tag der kan indeholde andre tags. De beskriver hvordan 
-flere visuelle elementer skal pladseres i forhold til hinanden.
+faktisk bare et XML-tag der kan indeholde andre tags som repræsenterer views.
 
 I Android Studio er der mulighed for at arbejde med disse layouts igennem en 
 visuel editor, så man slipper for at rode med XML-kode. Det er dog stadig en 
