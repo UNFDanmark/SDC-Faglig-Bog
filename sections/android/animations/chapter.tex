@@ -65,12 +65,11 @@ I kan nu lave animationer i Android. Huzzah!
 \section{Flere grundteknikker}
 Nu hvor det helt basale er på plads kan vi udvide med nogle flere teknikker
 \subsection{Brug af decimaltal}
-%TODO Introduktion af Floats hvis de ikke allerede er introduceret
-Man kan også oprette en ValueAnimator som bruger float istedet for int. Koden til dette ses i \autoref{animationfloat}
+Man kan også oprette en ValueAnimator som bruger decimaltal i form af typen float istedet for at bruge int. Koden til dette ses i \autoref{animationfloat}
 \begin{JavaCode}{decimaltal}{animationfloat}
 	ValueAnimator minAnimation = ValueAnimator.ofFloat(0.0, 1.0);
 \end{JavaCode}
-På denne måde kan man få noget mere præcist animation.
+På denne måde kan man få noget mere præcist animation istedet for at alting afrundes til heltal.
 
 \subsection{Hvad kan vi ændre}
 Her er der så en liste over hvad man kan lave med Views:\\
