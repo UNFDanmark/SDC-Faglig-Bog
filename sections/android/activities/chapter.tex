@@ -25,6 +25,39 @@ I \autoref{fig:android:activities:activitylifecycle} viser de forskellige stadie
 
 En activity vil typisk befinde sig i et af 4 stadier. Når activity'en er i forgrunden og brugeren kan interagere med den siger vi at den kører (running). Hvis en anden activity startes i forgrunden men den gamle stadig er synlig siger vi at den er paused. Hvis en anden activity åbnes så den gamle activity ikke længere kan ses siger vi det er stopped. Paused og stopped activities kan lukkes af systemet for at frigøre hukommelse, i det tilfælde skal activity'en genstartes når den skal bruges igen.
 
+\subsection{Opsæt Views som objekter i Java}
+Så skal vi endelig sætte layout og programmering sammen. Når I laver views så har hvert view et ID. Det er den I skal bruge når vi skal finde dem i Java. Det vi så gør er at erklære viewet som variabel og så får android til at finde den med \JavaInline|findViewByID|. Koden for at hente en knap ser ud som i \autoref{findviewbyid}
+
+\begin{JavaCode}{Opsætte en knap i Java}{findviewbyid}
+	Button button;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		button = (Button) findViewById(R.id.button);
+	}
+\end{JavaCode}
+
+Ligesom alle objekter har knappen så nogle metoder som man bruger til at ændre eller få information om knappen. Der er eksempler på nogle af disse metoder i \autoref{buttonmethods}
+\begin{JavaCode}{Metoder for button}{buttonmethods}
+	button.setEnabled(false);
+	//Deaktiver knappen saa den ikke kalder sin metode naar man trykker paa den
+	
+	button.setText("Klik mig");
+	//Aendrer teksten paa knappen 
+	
+    button.setVisibility(View.INVISIBLE);
+    //Goer knappen usynling. Den kan stadig trykkes paa
+    
+    button.setVisibility(View.VISIBLE);
+    //Goer knappen synlig igen.
+	
+\end{JavaCode}
+Der er mange flere metoder, og hver eneste view-element har sine specielle metoder. Vi kan på ingen måde liste dem alle sammen så søg på internettet efter elementernes metoder og hvad de gør. 
+
+
 \subsection{Oprettelse af nye activities}
 
 For at oprette en ny activity starter vi med at lave en ny java fil ved siden af MainActivity.java (i ??? folderen) En ny activity skal altid nedarve fra Activity, ligesom MainActivity. 
