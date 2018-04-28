@@ -12,11 +12,10 @@
 %% Er der nogen spørgsmål, eller tvivl, til bogen og hvordan LaTeX koden fungerer,
 %% så kan jeg formentlig findes med en Google søgning efter ``LukasPJ'' eller på
 %% lup@unf.dk. I værste fald, så prøv lpjoergensen@gmail.com.
-
 %% Sæt dokumentet til draft-mode. Dette gør to-do's synlige, viser alle elementer i 
 %% glossary og tilføjer ``example'' kapitlet.
 \newif\ifdraftmode
-\draftmodefalse
+\draftmodetrue
 
 %% Dette indlæser vores ``preamble'' som er den fil der sørger for opsætningen
 %% af vores dokument.
@@ -24,6 +23,7 @@
 
 \input{glossary}
 
+\setcounter{chapter}{0}
 
 %% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
@@ -51,11 +51,15 @@
 	%% sections/<part>/<chapter>/chapter.tex
 	%% sections/<part>/<chapter>/figures/
 
-	\part{Java udvikling}
 
+	\part{Java udvikling}
 	% Hvis vi arbejder i draft mode, så inkluderer vi en eksempel side der 
 	% viser nogle af de elementer der er i denne bog.
 	\ifdraftmode
+		
+		%% Denne kommando kan sørge for at vi starter med kapitel 0
+		\setcounter{chapter}{-1}
+		
 		\graphicspath{{sections/manual/example/figures/}}
 		\input{sections/manual/example/chapter}
 	\fi
