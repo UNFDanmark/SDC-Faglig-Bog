@@ -25,6 +25,39 @@ I \autoref{fig:android:activities:activitylifecycle} viser de forskellige stadie
 
 En activity vil typisk befinde sig i et af 4 stadier. Når activity'en er i forgrunden og brugeren kan interagere med den siger vi at den kører (running). Hvis en anden activity startes i forgrunden men den gamle stadig er synlig siger vi at den er paused. Hvis en anden activity åbnes så den gamle activity ikke længere kan ses siger vi det er stopped. Paused og stopped activities kan lukkes af systemet for at frigøre hukommelse, i det tilfælde skal activity'en genstartes når den skal bruges igen.
 
+\subsection{Opsæt Views som objekter i Java}
+Så skal vi endelig sætte layout og programmering sammen. Når I laver views så har hvert view et ID. Det er den I skal bruge når vi skal finde dem i Java. Det vi så gør er at erklære viewet som variabel og så får android til at finde den med \JavaInline|findViewByID|. Koden for at hente en knap ser ud som i \autoref{findviewbyid}
+
+\begin{JavaCode}{Opsætte en knap i Java}{findviewbyid}
+	Button button;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		button = (Button) findViewById(R.id.button);
+	}
+\end{JavaCode}
+
+Ligesom alle objekter har knappen så nogle metoder som man bruger til at ændre eller få information om knappen. Der er eksempler på nogle af disse metoder i \autoref{buttonmethods}
+\begin{JavaCode}{Metoder for button}{buttonmethods}
+	button.setEnabled(false);
+	//Deaktiver knappen saa den ikke kalder sin metode naar man trykker paa den
+	
+	button.setText("Klik mig");
+	//Aendrer teksten paa knappen 
+	
+    button.setVisibility(View.INVISIBLE);
+    //Goer knappen usynling. Den kan stadig trykkes paa
+    
+    button.setVisibility(View.VISIBLE);
+    //Goer knappen synlig igen.
+	
+\end{JavaCode}
+Der er mange flere metoder, og hver eneste view-element har sine specielle metoder. Vi kan på ingen måde liste dem alle sammen så søg på internettet efter elementernes metoder og hvad de gør. 
+
+
 \subsection{Oprettelse af nye activities}
 
 For at oprette en ny activity starter vi med at lave en ny java fil ved siden af MainActivity.java (i ??? folderen) En ny activity skal altid nedarve fra Activity, ligesom MainActivity. 
@@ -98,7 +131,9 @@ Først laves det intent vi vil starte vores activity med, her benyttes et explic
 	startActivity(intent);
 \end{JavaCode}
 
-Vi kan sende en besked med vores itent ved at benytte \JavaInline|putExtra| metoden der tager en nøgle og en værdi som input.
+Man kan så afslutte en activity og gå tilbage til den forrige activity ved at kalde metoden \JavaInline|finish|. Man kan også lukke ens app helt ved at kalde \JavaInline|finish| i ens main activity.
+
+Vi kan sende en besked med vores intent ved at benytte \JavaInline|putExtra| metoden der tager en nøgle og en værdi som input.
 
 \begin{JavaCode}{Sende en besket med et intent}{putExtra-intent}
 	public static final String POPUP_MESSAGE = "com.example.lukas.myapplication.POPUP_MESSAGE";
@@ -128,6 +163,31 @@ For at få fat i den besked vi sender med vha \JavaInline|putExtra| kan vi benyt
 		}
 	}
 \end{JavaCode}
+
+\subsection{At få ting tilbage fra intents}
+Hvad så hvis man vil have ting retur fra den activity man kalder? Du kan tilføje extras som ellers, men istedet for at kalde startActivity kalder du funktionen som i \autoref{forResultCall},
+\begin{JavaCode}{Start en activity som giver et resultat}{forResultCall}
+	startActivityForResult(intent, REQUEST_CODE);
+\end{JavaCode}
+Hvor request koden er en integer. Den bruger vi senere så husk den. Vi laver så en metode til at modtage resultatet i den activity vi kalder startActivityForResult i. Denne metode ser ud som i \autoref{onActivityResult}
+\begin{JavaCode}{Få resultatet}{onActivityResult}
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+		//Soerg for at requestcode er lig den request code du sendte
+		//og at resultcode er lig Activity.RESULT_OK
+		//Det resultat du faar ligger i intentet som extra
+		//Her er et eksempel med en string
+		intent.getStringExtra("resultat");
+	}
+\end{JavaCode}
+
+Og hvordan skal det så se ud i den activity du kalder? Her skal det se ud som i \autoref{resultatTilbage}.
+\begin{JavaCode}{Send et resultat tilbage}{resultatTilbage}
+	Intent intentresult = new Intent();
+	intent.putExtra("resultat", resultat);
+	setResult(REQUEST_CODE, intent)
+	finish();
+\end{JavaCode}
+Request code er til hvis en aktivitet skal modtage fra eller returnere til flere andre activities. Så kan man kende forskel på dem med request code. 
 
 \subsection{Start en activity fra en anden app med en Intent}
 

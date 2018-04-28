@@ -4,16 +4,16 @@
 Animation handler om at få ting til at bevæge sig og ændre udseende. Mere specifikt lærer I at få Views til at flytte sig på skærmen, rotere, ændre størrelse og på andre måder ændre udseende.
 \section{Grundlæggende teori om animation}
 Før vi går igang med at lave animationer i Android skal vi lige have på plads hvordan animationer virker.
-Animationer og video generelt er en række af billeder som skifter så hurtigt at det ligner en flydende bevægelse. \\
+Animationer og video generelt er en række af \gls{frame}s som skifter så hurtigt at det ligner en flydende bevægelse. \\
 %TODO Illustration af still frames i række
-Når man laver en animation foregår det altså ved at man laver små ændringer af billedet så hurtigt efter hinanden at det bliver "flydende". En anden måde at sige det på er at billedet ændrer sig i små hak, og man gør de hak så små at det ikke kan ses at der arbejdes i hak. Det vi skal lave er altså noget der virker ligsom stopmotion. \\
-Grunden til at man arbejder i hak er at det tager en hel del arbejde for en computer \marginnote{En mobil er også en computer} at udregne hvordan den skal vise et billede, så det gælder om at finde en balance mellem udseende og hvor meget af computerens regnekraft animationen tager. Det animation vi arbejder med har nu et fastsat tempo for hvor hurtigt billedet ændrer sig, så I skal ikke overveje denne balance.
+Når man laver en animation foregår det altså ved at man laver små ændringer i layoutet så hurtigt efter hinanden at det bliver "flydende". En anden måde at sige det på er at billedet ændrer sig i små hak, og man gør de hak så små at det ikke kan ses at der arbejdes i hak. Det vi skal lave er altså noget der virker ligsom stopmotion. \\
+Grunden til at man arbejder i hak er at det tager en hel del arbejde for en computer \marginnote{En mobil er også en computer} at udregne hvordan den skal vise et frame, så det gælder om at finde en balance mellem udseende og hvor meget af computerens regnekraft animationen tager. Det animation vi arbejder med har nu et fastsat tempo for hvor hurtigt billedet ændrer sig, så I skal ikke overveje denne balance.
 \subsection{Animationens rammer}
-En animation starter et sted og slutter på et andet sted. Det kan både være at den ændrer sin position på skærmen, at starter med at være lille og slutter med at være stor eller at det roterer en omgang.
-Animationen tager også et stykke tid. Det kunne være et halvt sekund eller ti sekunder det tager for den at nå fra start til slut. Her gælder det om at lave en balance mellem at animationen tager tid nok så brugeren kan nå at se hvad der sker, og at brugeren ikke sidder og venter på at animationen bliver færdig. Hvis der ikke er stor forskel på start og slut i din animation kan det være at det slet ikke er nødvendigt at sætte en animation op, men bare at sætte dit View til slutpunktet med det samme. \marginnote{Hvis du bare vil have en oversigt over mulighederne for et view så se sektionen "Hvad kan vi ændre"} \\
+En animation starter et sted og slutter på et andet sted. Det kan både være at ens view starter i bunden af skærmen og flytter sig til toppen, at det starter med at være lille og slutter med at være stor eller at det starter på hovedet og roterer til den står lige.
+Animationen tager også et stykke tid. Det kunne være et halvt sekund eller ti sekunder det tager for den at nå fra start til slut. Her gælder det om at lave en balance mellem at animationen tager tid nok så brugeren kan nå at se hvad der sker, og at brugeren ikke sidder og venter på at animationen bliver færdig. Hvis der ikke er stor forskel på start og slut i din animation kan det være at det slet ikke er nødvendigt at sætte en animation op, men bare at sætte dit View til slutpunktet med det samme. \marginnote{Hvis du bare vil have en oversigt over mulighederne for at ændre ens view så se sektionen "Hvad kan vi ændre"} \\
 Ud fra disse rammer kan vi så regne hvor langt vi skal være nået på et givet tidspunkt i animationen. 
 \begin{example}
-	Vi skal rykke et View fra 30 til 50 pixels horizontalt på 2 sekunder. Vi skal vide hvilken pixel vi er kommet til efter 0,5 sekunder, 1 sekund, 1,23 sekunder etc. Det vi kan gøre er at plotte en funktion, hvilket er meget simpelt hvis den er lineær:
+	Vi skal rykke et View fra 30 til 50 pixels horisontalt på 2 sekunder. Vi skal vide hvilken pixel vi er kommet til efter 0,5 sekunder, 1 sekund, 1,23 sekunder etc. Det vi kan gøre er at plotte en funktion, hvilket er meget simpelt hvis den er lineær:
 	\begin{equation}
 	pixel=10\cdot tid+30
 	\end{equation}
@@ -31,22 +31,22 @@ Det næste din animation har brug for er hvor lang tid den skal køre. Den sætt
 \begin{JavaCode}{Sæt duration}{animation2}
 	minAnimation.setDuration(1000);	
 \end{JavaCode}
-Tiden er i millisekunder. Altså betyder 1000 et sekund. Fem sekunder ville være 5000 og et kvart sekund ville være 250. Værdien skal være af typen long. Altså et heltal.
-\subsection{At lave et billede}
-Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid animationen skal tage. Nu skal vi så fortælle Android om den skal flytte noget, rotere noget eller gøre noget helt tredje. Dette gør vi ved at skrive en funktion som bliver kaldt hver gang billedet skal animeres endnu et hak. Altså skal vi programmere hvad der sker hver gang det er tid til et nyt billede. Koden ser ud som i \autoref{animation3}
-\begin{JavaCode}{Opsæt metode til at lave et billede}{animation3}
+Tiden er i millisekunder. Altså betyder 1000 et sekund. Fem sekunder ville være 5000 og et kvart sekund ville være 250. Værdien skal være et heltal.
+\subsection{At lave en frame}
+Nu har vi fortalt Android hvor den skal starte og slutte, og hvor lang tid animationen skal tage. Nu skal vi så fortælle Android om den skal flytte noget, rotere noget eller gøre noget helt tredje. Dette gør vi ved at skrive en funktion som bliver kaldt hver gang billedet skal animeres endnu et hak. Altså skal vi programmere hvad der sker hver gang det er tid til en ny frame. Koden ser ud som i \autoref{animation3}
+\begin{JavaCode}{Opsæt metode til at lave et frame}{animation3}
 	minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 		@Override
 		public void onAnimationUpdate(ValueAnimator animation) {
-			int vaerdiTilBillede = (int) animation.getAnimatedValue();
+			int vaerdiTilFrame = (int) animation.getAnimatedValue();
 			
-			mitView.setRotation(vaerdiTilBillede);
+			mitView.setRotation(vaerdiTilFrame);
 		}
 	});
 \end{JavaCode}
-Her bruges noget advanceret kode som I ikke behøver at forstå. Den korte version er at vi giver Android en funktionen onAnimationUpdate() og fortæller ValueAnimator at den skal kalde funktionen når den vil have et nyt billede.\\
+Her bruges noget advanceret kode som I ikke behøver at forstå. Den korte version er at vi giver Android funktionen onAnimationUpdate() og fortæller ValueAnimator at den skal kalde funktionen når den vil have en ny frame.\\
 \marginnote{Hvis I vil have den længere udgave så spørg os eller internettet om anonyme klasser}
-Den anden ting der sker er at vi får en integer fra animationen, som repræsenterer hvor langt vi er i animationen. Det er den variabel der hedder "vaerdiTilBillede" som man får fra getAnimatedValue(). Vi udfører så ændringen på vores view med denne værdi, i eksemplet sætter vi rotationen med setRotation, men I kan bruge denne værdi til lige hvad I vil. De mulige måder at ændre views på kommer om lidt.\\
+Den anden ting der sker er at vi får en integer fra animationen, som repræsenterer hvor langt vi er i animationen. Det er den variabel der hedder "vaerdiTilFrame" som man får fra getAnimatedValue(). Vi udfører så ændringen på vores view med denne værdi, i eksemplet sætter vi rotationen med setRotation, men I kan bruge denne værdi til lige hvad I vil. De mulige måder at ændre views på kommer om lidt.\\
 Til sidst skal du kalde .start() på din ValueAnimator og så kører animationen. Et fuldt eksempel på en animation kan ses i \autoref{animation4}
 \begin{JavaCode}{420 Rotate it}{animation4}
 	ValueAnimator minAnimation = ValueAnimator.ofInt(0, 420);
@@ -54,8 +54,8 @@ Til sidst skal du kalde .start() på din ValueAnimator og så kører animationen
 	minAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 		@Override
 		public void onAnimationUpdate(ValueAnimator animation) {
-			int vaerdiTilBillede = (int) animation.getAnimatedValue();
-			mitView.setRotation(vaerdiTilBillede);
+			int vaerdiTilFrame = (int) animation.getAnimatedValue();
+			mitView.setRotation(vaerdiTilFrame);
 		}
 	});
 	minAnimation.start();
@@ -64,36 +64,43 @@ I kan nu lave animationer i Android. Huzzah!
 
 \section{Flere grundteknikker}
 Nu hvor det helt basale er på plads kan vi udvide med nogle flere teknikker
-%TODO Introduktion af Floats hvis de ikke allerede er introduceret
+\subsection{Brug af decimaltal}
+Man kan også oprette en ValueAnimator som bruger decimaltal i form af typen float istedet for at bruge int. Koden til dette ses i \autoref{animationfloat}
+\begin{JavaCode}{decimaltal}{animationfloat}
+	ValueAnimator minAnimation = ValueAnimator.ofFloat(0.0, 1.0);
+\end{JavaCode}
+På denne måde kan man få noget mere præcist animation istedet for at alting afrundes til heltal.
+
 \subsection{Hvad kan vi ændre}
 Her er der så en liste over hvad man kan lave med Views:\\
 \begin{itemize}
-	\item Rotation \\
+	\item View rotation
 	I kan sætte et views rotation som i \autoref{animationroter}
 	\begin{JavaCode}{Roter et view}{animationroter}
 		mitView.setRotation(jeresRotation);
 	\end{JavaCode}
 	Rotationen er i grader. 0 er normal rotation og 180 grader er på hovedet. Rotationen er en float. 
 	\\
-	\item Position \\
+	\item View position
 	Her sættes vertikal og horizontal position seperat. Koden ses i \autoref{animationflyt}
 	\begin{JavaCode}{Flyt et view}{animationflyt}
-		mitView.setTranslationX(jeresPositionX);
-		mitView.setTranslationY(jeresPositionY);
+		mitView.setX(jeresPositionX);
+		mitView.setY(jeresPositionY);
 	\end{JavaCode}
 	Her skal det noteres at det er \textbf{øverste} venstre hjørne der er position (0,0). Ligeledes er det viewets øverste venstre hjørne der placeres. Hvis I vil placere et view op af skærmens højre side skal i altså sætte X til skærmbredden minus viewets bredde. I kan få bredden og højden af jeres view som i \autoref{animationbredde}
 	\begin{JavaCode}{Få bredden af jeres view}{animationbredde}
 		mitView.getWidth();
 		mitView.getHeight();
 	\end{JavaCode}
-	\item Størrelse \\
+	Man kan også placere et views position ud fra at (0,0) er viewets startposition med funktionerne getTranslationX() og getTranslationY().
+	\item View størrelse
 	I kan sætte størrelsen som i \autoref{animationscale} 
 	\begin{JavaCode}{Sæt størrelsen af jeres view}{animationscale}
 		mitView.setScaleX(jeresStoerlseX);
 		mitView.setScaleY(jeresStoerlseY);
 	\end{JavaCode}
 	Her er 1 den størrelse som viewet starter med. Skal størrelsen fordobles skal I give slutværdien 2. Skal den halveres skal I give slutværdi 0.5 etc. Hvis i vil sætte størrelsen til et præcist antal pixels skal i lave en udregning ud fra viewets nuværende størrelse. \\
-	\item Gennemsigtighed \\
+	\item View gennemsigtighed
 	Et view kan gøres gennemsigtigt (Man kan stadig interagere med det) med denne metoden set i \autoref{animationgennemsigtig}
 	\begin{JavaCode}{Sæt et views gennemsigtighed}{animationgennemsigtig}
 		mitView.setAlpha(jeresGennemsigtighed);
@@ -109,6 +116,7 @@ Det gælder derfor om altid at arbejde ud fra skærmens størrelse. Jeres view i
 
 Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at få fat på. Men nej, koden for at få skærmstørrelsen ser ud som i \autoref{animation5}
 \begin{JavaCode}{Kode til at få skærmstørrelse}{animation5}
+	//Inde i onCreate()
 	final View layout = findViewById(R.id.layout);
 	ViewTreeObserver observer = layout.getViewTreeObserver();
 	observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -117,16 +125,16 @@ Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at f
 			screenHeight = layout.getHeight();
 			screenWidth = layout.getWidth();
 			//kode der bruger height og width her
-			boardLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+			layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 		}
 	});
 \end{JavaCode}
 
-Dette skal stå inde i onCreate(). I skal også give jeres yderste layout et ID og hente det med findViewByID(). Og så skal i have screenHeight og screenWidth som feltvariabler. Og hvis I skal bruge størrelsen af skærmen i onCreate() skal den kode også stå inde i onGlobalLayout().
+I skal også give jeres yderste layout et ID og hente det med findViewByID(). Og så skal i have screenHeight og screenWidth som feltvariabler. Og hvis I skal bruge størrelsen af skærmen i onCreate() skal den kode også stå inde i onGlobalLayout().
 Grunden hertil er at Android ikke har udregnet hvordan grafikken placeres når OnCreate bliver kaldt. Vi får den så til at kalde onGlobalLayout når den har fundet størrelsen af layoutet.
 \subsection{Interpolatorer}
-Det vi har defineret for Android er egentlig kun startpunkt, slutpunkt og tid imellem dem. Hvordan funktionen mellem de to punkter ser ud kan også defineres. Det kan være at den bare er lineær, men den kunne også være en exponentionel funktion hvor hastigheden starter med at være er langsom og så derefter bliver hurtigere. 
-Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator som i \autoref{animation6:}
+Det vi har defineret for Android er egentlig kun startpunkt, slutpunkt og tid imellem dem. Hvordan funktionen mellem de to punkter ser ud kan også defineres. Det kan være at den bare er lineær, men den kunne også være en exponentionel funktion hvor hastigheden starter med at være langsom og så derefter bliver hurtigere. Man styrer dette ved at sætte en interpolator. 
+Hvis du ikke sætter en interpolator så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator som i \autoref{animation6}
 \begin{JavaCode}{Kode til at sætte interpolatoren}{animation6}
 	animator.setInterpolator(new LinearInterpolator());
 \end{JavaCode}
@@ -140,7 +148,7 @@ Animator har yderligere en række metoder som går den lettere at arbejde med. D
 	minAnimation.setStartDelay(minForsinkelse);
 \end{JavaCode}
 Forsinkelsen er igen i millisekunder, præcist som setDuration. 
-Yderligere er der metoderne .pause(), .resume(), .cancel(),  .end() og .reverse() som meget vel giver sig selv. .end() sætter animationen til slutværdien mens de andre efterlader animationen ved den værdi den er på når de bliver kaldt.
+Yderligere er der metoderne .pause(), .resume(), .cancel(),  .end() og .reverse() som meget vel giver sig selv. .end() sætter animationen til slutværdien og .cancel() efterlader den hvor den er nået til.
 \section{Mere advancerede teknikker}
 Her kommer vi omkring nogle lidt mere advancerede teknikker
 \subsection{Flere animationer samlet}
@@ -174,14 +182,12 @@ Vi kan også sætte vores animationer til at gentage. Det er meget simpelt, se \
 \begin{JavaCode}{Kode til at lave gentagelser}{animation12}
 	minAnimation.setRepeatCount(antalGentagelser);
 \end{JavaCode}
-Her er det værd at notere at hvis man sætter antalGentagelser til 1 så afspiller animationen \textbf{2 gange} i alt.
+Her er det værd at notere at hvis man sætter antalGentagelser til 2 så afspiller animationen \textbf{3 gange} i alt. Den gentager 2 gange.
 Man kan også sætte gentagelsen som i \autoref{animation13}
 \begin{JavaCode}{Sæt animationen til at køre tilbage}{animation13}
 	minAnimation.setRepeatMode(ValueAnimator.REVERSE);
 \end{JavaCode}
 Hvilket gør at den på gentagelsen ikke går tilbage og kører forfra, men går fra slutværdien til startværdien. Den vil så igen gå fra start til slut på anden gentagelse etc.
-
-%TODO Flere kodeeksempler?
 
 \section{Hurtig guide}
 Her er en lille 4 skridts guide til at lave en animation.
@@ -240,3 +246,6 @@ Der er ingen tid afsat til specifikt at lave opgaver i animation, men programmer
 \begin{exercise}
 	Få helt styr på at arbejde med skærmens størrelse. Placer en knap i øverste venstre hjørne, og få den til at tage en fuld runde langs telefonens kant når du trykker på den. 
 \end{exercise}
+
+%Ordliste
+%Frame
