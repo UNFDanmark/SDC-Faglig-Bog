@@ -2,8 +2,8 @@
 \chapter{Android udvikling}
 
 Når vi snakker om Android, så snakker vi om et "styresystem". Det kan man 
-anskue som et kæmpe stort program, der administrerer alle de apps der kører på 
-mobil-telefonen. I denne bog, bruger vi begreberne "styresystem" og "platform" 
+anskue som et kæmpe stort program, der administrerer alle de apps, der kører på 
+mobil-telefonen. I denne bog bruger vi begreberne "styresystem" og "platform" 
 i flæng.
 
 De eneste relevante styresystemer til mobiler er, pt., de følgende to:
@@ -13,67 +13,67 @@ De eneste relevante styresystemer til mobiler er, pt., de følgende to:
 	\item Android (Samsung, HTC, Sony etc.)
 \end{itemize}
 
-På SDC, kigger vi på den sidste af de to, nemlig Android platformen. Selvom 
+På SDC kigger vi på den sidste af de to, nemlig Android platformen. Selvom 
 app-udvikling til IOS og Android minder meget om hinanden, så er der en række 
-væsentlige forskelle i de værktøjer man bruger. Derfor kigger vi kun på den ene 
+væsentlige forskelle i de værktøjer, man bruger. Derfor kigger vi kun på den ene 
 af de to styresystemer.
 
 \section{Hvad er Android apps?}
 
 \marginfigure{xkcd_app.png}{Billede lånt af: \url{https://xkcd.com}}
 
-Når man skal beskrive hvad en ``Android app'' er, så kan det gøres lidt 
+Når man skal beskrive, hvad en ``Android app'' er, så kan det gøres lidt 
 simplere ved at forstå hvad en ``app'' er. App er en forkortelse for 
 applikation, hvilket i denne kontekst er synonymt med ``et program''. Når vi 
 snakker om en app, snakker vi derfor om et computer program, som er kodet med 
-en række instruktioner. Derfor er de programmer du har på din mobil, som 
-WordFeud, SnapChat og Facebook, alle eksempler på apps. Computerspil, som 
-Farming Simulator 2017 og Battlefield 4 er faktisk også eksempler på apps, så 
+en række instruktioner. Derfor er de programmer, du har på din mobil, som 
+WordFeud, SnapChat og Facebook, alle eksempler på apps. Computerspil som 
+Farming Simulator 2017 og Battlefield 4 er også eksempler på apps, så 
 det er faktisk et meget vidt begreb. 
 
 I Android verdenen, er stort set alt apps. Lige fra låseskærmen og 
 ``indstillinger''-menuen til Super Mario Go, og Farmville. Derfor er der meget 
-få grænser for hvad man kan opnå ved app-udvikling til Android.
+få grænser for, hvad man kan opnå ved app-udvikling til Android.
 
 \subsection{Anatomien af en Android app}
 Android apps består af mange forskellige dele. De primære dele kan dog deles op i følgende tre kategorier:
 
 \subsubsection{Ressourcer}
-Ressourcer er indstillinger, billeder, layouts (se \autoref{sec:android:layouts}) og alt mulig andet data der bruges i en app. De findes i mappen \texttt{res/} og har forskellige undermapper, afhængig af hvilken type ressource det er.
+Ressourcer er indstillinger, billeder, layouts (se \autoref{sec:android:layouts}) og alt muligt andet data, der bruges i en app. De findes i mappen \texttt{res/} og har forskellige undermapper, afhængig af hvilken type ressource det er.
 
 \subsubsection{Activities}
-Activities er aktiviteter man kan foretage sig i app'en. Der kan f.eks. være en "tag billede" activity, en "gem billedet" activity og en "se dit galleri af billeder" activity. Disse activities vil blive udforsket yderligere i \autoref{cha:activities-intents}.
+Activities er aktiviteter, man kan foretage sig i app'en. Der kan f.eks. være en "tag billede" activity, en "gem billedet" activity og en "se dit galleri af billeder" activity. Disse activities vil blive udforsket yderligere i \autoref{cha:activities-intents}.
 
 \subsubsection{Manifest}
-Et app-manifest er en beskrivelse af app'en som Android styresystemet gør brug af når den kører app'en på mobilen. I manifestet beskriver man hvilke rettigheder app'en har brug for, samt hvilke teknologier den gør brug af.
+Et app-manifest er en beskrivelse af app'en som Android styresystemet gør brug af, når den kører app'en på mobilen. I manifestet beskriver man, hvilke rettigheder app'en har brug for, samt hvilke teknologier den gør brug af.
 
-Derudover kan manifestet indeholde information om hvordan andre apps kan kommunikere med denne app, og andre indstillinger der binder app'en sammen med resten af platformen.
+Derudover kan manifestet indeholde information om, hvordan andre apps kan kommunikere med denne app, og andre indstillinger, der binder app'en sammen med resten af platformen.
 
 \section{Layouts}
 \label{sec:android:layouts}
 
-Layouts er en ressource som app'en gør brug af når den skal vise den 
+Layouts er en ressource som app'en gør brug af, når den skal vise den 
 \gls{interface}\footnote{En \gls{interface} er, i denne kontekst, det grafiske 
-design som brugeren interagerer med. Det kan f.eks. være en menu med knapper 
-eller et billede.} som brugeren skal se på inde i app'en. Det er en beskrivelse 
+design, som brugeren interagerer med. Det kan f.eks. være en menu med knapper 
+eller et billede.}, som brugeren skal se på inde i app'en. Det er en beskrivelse 
 af strukturen i app'ens \gls{interface}.
 
-For bedre at forstå layouts, skal vi først forstå den måde vi skriver et layout på. Ligesom med programmeringssprog, hvor vi har forskellige sprog til at beskrive kode på (som f.eks. Java), findes der forskellige måder at beskrive strukturer og layouts. Vi kalder disse sprog for \textit{strukturelle sprog}, en af de mere udbredte af sådanne sprog er det man kalder for \textit{XML}\footnote{e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage}.
+For bedre at forstå layouts, skal vi først forstå den måde, vi skriver et layout på. Ligesom med programmeringssprog, hvor vi har forskellige sprog til at beskrive kode på (som f.eks. Java), findes der forskellige måder at beskrive strukturer og layouts. Vi kalder disse sprog for \textit{strukturelle sprog}, en af de mere udbredte af sådanne sprog, er det man kalder for \textit{XML}\footnote{e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage}.
 
 \subsection{XML}
 I sin kerne er XML et meget simpelt sprog. Det er bygget op af ``tags'', hvoraf 
 der findes to slags tags: et ``opening-tag'' og et ``closing-tag''. 
-Opening-tags er skrevet ved at have et ``mindre-end'' tegn ($<$), efterfulgt af 
-noget tekst og så afsluttet med et ``større-end'' tegn ($>$). For eksempel, er 
+Opening-tags er skrevet ved, at have et ``mindre-end'' tegn ($<$), efterfulgt af 
+noget tekst og så afsluttet med et ``større-end'' tegn ($>$). For eksempel er 
 følgende et opening-tag: \XmlInline|<Button>|.
 
 Closing-tags er meget lig opening-tags, der er blot en skråstreg efter 
-``mindre-end'' tegnet, for at indikere at dette tag lukker et opening-tag der 
+``mindre-end'' tegnet, for at indikere at dette tag lukker et opening-tag, der 
 er skrevet tidligere i dokumentet. Et eksempel på et closing-tag, der lukker 
-det opening-tag der var i det tidligere eksempel, kan ses her: 
+det opening-tag, der var i det tidligere eksempel, kan ses her: 
 \XmlInline|</Button>|.
 
-Det er vigtigt at man altid lukker sine tags. Man må aldrig have et opening-tag uden at det bliver lukket, og man må aldrig have et closing-tag der ikke har noget opening-tag at lukke.
+Det er vigtigt, at man altid lukker sine tags. Man må aldrig have et opening-tag uden, at det bliver lukket, og man må aldrig have et closing-tag, der ikke har noget opening-tag at lukke.
 
 Man kan tilknytte ``attributter'' til sine opening-tags. Det gør man ved at 
 skrive navnet på attributten, efterfulgt af et lig-med tegn, efterfulgt af 
@@ -81,7 +81,7 @@ attributtens værdi. Denne værdi er typisk skrevet inden i to gåse-øjne ("). 
 eksempel på et opening-tag med en attribut er følgende: 
 \XmlInline|<Button Text="Hej med dig!">|.
 
-Et eksempel på et XML dokument, kan ses i \autoref{lst:first-valid-xml-document}. Det beskriver et vindue, med en ``label'' dvs. et kort stykke tekst, med to knapper. Vi har skrevet de tags, der hører til vores label og knapperne, imellem vinduets opening- og closing-tags. Dette betyder at de kommer til at høre til vinduet, altså at vinduet har en label og to knapper. Denne relation bliver ofte beskrevet som at 
+Et eksempel på et XML dokument, kan ses i \autoref{lst:first-valid-xml-document}. Det beskriver et vindue med en ``label'' dvs. et kort stykke tekst, med to knapper. Vi har skrevet de tags, der hører til vores label og knapperne imellem vinduets opening- og closing-tags. Dette betyder, at de kommer til at høre til vinduet, altså at vinduet har en label og to knapper. Denne relation bliver ofte beskrevet som, at 
 vinduet er forældreren til de tre børn (label og de to knapper).
 
 \begin{example}
@@ -96,12 +96,12 @@ vinduet er forældreren til de tre børn (label og de to knapper).
 
 
 For at simplificere XML dokumentet, kan vi udnytte os af et så-kaldt 
-self-closing tag. Altså et opening-tag der lukkes med det samme, uden man 
+self-closing tag. Altså et opening-tag, der lukkes med det samme, uden man 
 behøver at bruge et closing-tag. Dette skrives ved at putte en skrå-streg ind 
 før ``større-end'' tegnet. Se \autoref{lst:self-closing-tags-document}
 
 \begin{example}
-	\begin{XmlCode}{Et lille XML dokument med self-closing tags}{lst:self-closing-tags-document}
+	\begin{XmlCode}{Et lille XML dokument med self-closing tags.}{lst:self-closing-tags-document}
 		<Window>
 			<Label Text="Vil du lukke vinduet?"/>
 			<Button Text="Ja"/>
@@ -111,10 +111,10 @@ før ``større-end'' tegnet. Se \autoref{lst:self-closing-tags-document}
 \end{example}
 
 \begin{remark}
-	Bemærk at vi ikke kunne bruge et self-closing tag til vores \XmlInline|<Window>| tag, fordi at det ikke skulle lukkes med det samme, da det skulle indeholde dets tre børn.
+	Bemærk at vi ikke kunne bruge et self-closing tag til vores \XmlInline|<Window>| tag, fordi det ikke skulle lukkes med det samme, da det skulle indeholde dets tre børn.
 \end{remark}
 
-Vi har nu taget en kort intro til XML, det er faktisk et meget mere komplekst sprog end det vi har gennemgået her, men det burde ikke blive nødvendigt at forstå det hele for det vi skal arbejde med her.
+Vi har nu taget en kort intro til XML, det er faktisk et meget mere komplekst sprog, end det, vi har gennemgået her, men det burde ikke blive nødvendigt, at forstå det hele for det vi skal arbejde med her.
 
 Hvis man gerne vil lære mere om XML, kan man besøge W3Schools: \url{https://www.w3schools.com/xml/}.
 
@@ -142,34 +142,34 @@ Vi kommer ind på hvordan du bruger programmering til at ændre på hvordan dine
 Layouts er, som nævnt, en måde at beskrive app'ens udseende på igennem det strukturelle sprog XML. Layouts er også de elementer man bruger til at organisere views. Så hvis man vil have nogle views til at sidde på en speciel måde ligger man dem ind i et layout.
 
 Vi lægger layouts i ressource mappen \texttt{res/layout/}, og et layout er 
-faktisk bare et XML-tag der kan indeholde andre tags som repræsenterer views.
+faktisk bare et XML-tag, der kan indeholde andre tags som repræsenterer views.
 
-I Android Studio er der mulighed for at arbejde med disse layouts igennem en 
+I Android Studio er der mulighed for, at arbejde med disse layouts igennem en 
 visuel editor, så man slipper for at rode med XML-kode. Det er dog stadig en 
-god idé at forstå hvordan de fungerer i koden, både for forståelsens skyld og 
-for at kunne rette fejl hvis det visuelle redigeringsværktøj driller.
+god idé, at forstå hvordan de fungerer i koden, både for forståelsens skyld og 
+for at kunne rette fejl, hvis det visuelle redigeringsværktøj driller.
 
 \subsubsection{Frame layouts}
 
-Det første eksempel på et layout er det såkaldte \textit{frame layout}, det er et meget simeplt og effektivt layout der er designet til at pladsere et enkelt element et specifikt sted på skærmen.
+Det første eksempel på et layout, er det såkaldte \textit{frame layout}, det er et meget simpelt og effektivt layout, der er designet til at pladsere et enkelt element et specifikt sted på skærmen.
 
-Det er svært at håndtere dette layout hvis det har mere end et barn. Derfor bør 
+Det er svært at håndtere dette layout, hvis det har mere end et barn. Derfor bør 
 det typisk kun indeholde et enkelt barn. Deraf kommer navnet ``frame'', det 
 bruges som en ``ramme'' til et andet element.
 
-I \autoref{fig:android:layouts:frame-layout} er der et eksempel på hvordan man 
+I \autoref{fig:android:layouts:frame-layout} er der et eksempel på, hvordan man 
 kan have to ``børn'' indeni et frame layout, for at placere det ene oven på det 
 andet.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=5cm]{frame_layout.png}
-		\caption{Et frame layout i en app}
+		\caption{Et frame layout i en app.}
 		\label{fig:android:layouts:frame-layout}
 	\end{center}
 \end{figure}
 
-\begin{XmlCode}{Det layout der giver udseendet i \autoref{fig:android:layouts:frame-layout}}{lst:frame-layout}
+\begin{XmlCode}{Det layout, der giver udseendet i \autoref{fig:android:layouts:frame-layout}}{lst:frame-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<FrameLayout 
 		xmlns:android=
@@ -208,11 +208,11 @@ andet.
 \FloatBarrier
 
 \subsubsection{Linear layouts}
-Lineære layouts er det simpleste layout man kan bruge. Det tager alle sine 
-børn, og arrangere dem således at de ligger enten under hinanden (vertikalt) 
+Linear layouts er det simpleste layout, man kan bruge. Det tager alle sine 
+børn, og arrangerer dem således, at de ligger enten under hinanden (vertikalt) 
 eller ved siden af hinanden (horisontalt).
 
-Der er ikke meget der kan ændres på hvordan dette layout virker, men det er 
+Der er ikke meget, der kan ændre på, hvordan dette layout virker, men det er 
 rigtig simpelt til at vise f.eks. lister eller at pladsere elementer ved siden 
 af hinanden.
 
@@ -224,12 +224,12 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=5cm]{linear_layout.png}
-		\caption{Et lineært layout i en app}
+		\caption{Et lineært layout i en app.}
 		\label{fig:android:layouts:linear-layout}
 	\end{center}
 \end{figure}
 
-\begin{XmlCode}{Det layout der giver udseendet i %
+\begin{XmlCode}{Det layout, der giver udseendet i %
 \autoref{fig:android:layouts:linear-layout}}{linear-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout 
@@ -276,13 +276,13 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 
 \FloatBarrier
 \subsubsection{Table layouts}
-Table layouts arrangerer sine børn i rækker og kolonner. De er simple og 
-bruge, og er rigtig gode hvis man skal have noget der ligner en tabel men de er 
-meget rigide. Alt man laver med tabular-layout vil se ud som en tabel.
+Table layouts arrangerer sine børn i rækker og kolonner. De er simple at 
+bruge, og er rigtig gode, hvis man skal have noget, der ligner en tabel, men de er 
+meget rigide. Alt man laver med tabular-layout, vil se ud som en tabel.
  
 I \autoref{fig:android:layouts:table-layout} er der et eksempel på et table 
 layout. Der er 3 rækker og 3 kolonner i layoutet. Man laver nye rækker ved at 
-putte det der skal være i rækken inden i et ``TableRow'' tag.
+putte det, der skal være i rækken inden i et ``TableRow'' tag.
  
 \begin{figure}[h]
 	\begin{center}
@@ -364,13 +364,13 @@ putte det der skal være i rækken inden i et ``TableRow'' tag.
 \subsubsection{Relative layouts}
 Relative layouts er et meget fleksibelt og stærkt værktøj. De kan arrangere 
 deres børn relativt til hinanden. F.eks. får man mulighed for at sige ``den 
-røde kasse skal være til højre for den blå kasse''. Der er næsten ikke det man 
+røde kasse skal være til højre for den blå kasse''. Der er næsten ikke det, man 
 ikke kan med relative layouts.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=5cm]{relative_layout.png}
-		\caption{Et relative layout i en app}
+		\caption{Et relative layout i en app.}
 		\label{fig:android:layouts:relative-layout}
 	\end{center}
 \end{figure}
@@ -437,19 +437,19 @@ ikke kan med relative layouts.
 
 \FloatBarrier
 \section{Listeners}
-I Android app-udvikling finder der noget der hedder en ``listener'', som navnet 
-antyder så er der tale om noget der lytter. I app'ens \gls{interface}, er der 
-tale om elementer der lytter efter brugerens input. F.eks. hvis man gerne vil 
-skrive noget kode der reagerer på at brugeren trykker på en knap, er der tale 
+I Android app-udvikling findes der noget, der hedder en ``listener'', som navnet 
+antyder, så er der tale om noget, der lytter. I app'ens \gls{interface}, er der 
+tale om elementer, der lytter efter brugerens input. F.eks. hvis man gerne vil 
+skrive noget kode, der reagerer på, at brugeren trykker på en knap, er der tale 
 om en ``On-Click-Listener''.
 
-Disse listeners er altså måden hvorpå vi kan knytte vores \gls{interface} 
-sammen med den kode vi gerne vil køre. Indtil videre har vi kun snakket om 
+Disse listeners er altså måden, hvorpå vi kan knytte vores \gls{interface} 
+sammen med den kode, vi gerne vil køre. Indtil videre har vi kun snakket om 
 layouts, hvordan de virker og ser ud. I praksis er et layout næsten altid 
 knyttet sammen med en Activity, som vi snakker mere om i 
-\autoref{cha:activities-intents}. Lad os indtil videre antage at der kun er et 
-layout (activity\_main.xml) og en activity (MainActivity.java). Hvis vi ikke 
-har ændret i vores Activity, men blot bruger den Activity som Android Studio 
+\autoref{cha:activities-intents}. Lad os, indtil videre antage at der kun er et 
+layout (activity\_main.xml) og én activity (MainActivity.java). Hvis vi ikke 
+har ændret i vores Activity, men blot bruger den Activity, som Android Studio 
 har lavet til os, vil koden se således ud:
 
 \begin{JavaCode}{En tom MainActivity}{main-activity}
@@ -475,25 +475,25 @@ skærmen, som vist i \autoref{fig:android:layouts:button-layout}.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=5cm]{button_layout.png}
-		\caption{Et relative layout med en knap i midten}
+		\caption{Et relative layout med en knap i midten.}
 		\label{fig:android:layouts:button-layout}
 	\end{center}
 \end{figure}
 
-Hvis vi nu gerne vil have at app'en reagerer på at vi trykker på denne knap, så 
-kan vi tilføje ``android:onClick'' attributten til knappen og give den attribut 
-en værdi der svarer til den funktion vi gerne vil have til at køre når vi 
+Hvis vi nu gerne vil have at app'en reagerer på, at vi trykker på denne knap, så 
+kan vi tilføje ``android:onClick'' attributten til knappen, og give den attribut 
+en værdi, der svarer til den funktion vi gerne vil have til at køre, når vi 
 trykker på knappen. Et eksempel på dette kan ses i \autoref{lst:button-layout}.
 Herefter kan vi blot tilføje den funktion vi tilføjede i ``onClick'' 
 attributten til vores activity, som vist i \autoref{lst:button-activity}.
 
 Vi kan se at ``buttonClicked'' funktionen får et ``View'' med som argument. 
-Dette View er det element i app'ens \gls{interface} der har udløst funktionen. 
-I dette tilfælde er det knappen man trykkede på. Hvis vi lægger $10$ til dens 
+Dette View er det element i app'ens \gls{interface}, der har udløst funktionen. 
+I dette tilfælde er det knappen, man trykkede på. Hvis vi lægger $10$ til dens 
 $x$ værdi, vil den flytte sig $10$ ``pixels'' til højre.
 
 \begin{exercise}
-	Implementer layoutet beskrevet i \autoref{lst:button-layout} og aktiviteten 
+	Implementér layoutet beskrevet i \autoref{lst:button-layout} og aktiviteten 
 	i \autoref{lst:button-activity}.
 \end{exercise}
 
@@ -507,14 +507,14 @@ $x$ værdi, vil den flytte sig $10$ ``pixels'' til højre.
 \end{exercise}
 
 \begin{exercise}
-	Lav et layout med to knapper, den ene skal flytte sig op når man trykker, 
+	Lav et layout med to knapper, den ene skal flytte sig op, når man trykker, 
 	den anden skal flytte sig mod højre.
 \end{exercise}
 
 \clearpage
 
 
-\begin{XmlCode}{Et layout med en knap der kalder ``buttonClicked'' funktionen % 
+\begin{XmlCode}{Et layout med en knap, der kalder ``buttonClicked'' funktionen, % 
 når den bliver trykket på.}{lst:button-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<RelativeLayout 
@@ -539,7 +539,7 @@ når den bliver trykket på.}{lst:button-layout}
 
 \clearpage
 
-\begin{JavaCode}{En activity der flytter en knap nedad når den bliver trykket %
+\begin{JavaCode}{En activity, der flytter en knap nedad, når den bliver trykket %
 på.}{lst:button-activity}
 	public class MainActivity extends AppCompatActivity {
 		
