@@ -359,7 +359,7 @@
 
         \begin{JavaCode}{Kode, der anvender \texttt{continue} til kun at vise de lige tal. Læg mærke til at procenttegn giver resten, a divideret med b, også kaldet \texttt{modulo}.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
-				if (i \% 2 == 0)  continue;
+				if (i \% 2 == 0) continue;
 				System.out.println(i);
 			}
 		\end{JavaCode}
@@ -419,7 +419,7 @@
 
 		\begin{JavaCode}{xkcd 221}{lst:guarenteed-random}
 			public int getRandomNumber() {
-				return 4;  // chosen by fair dice roll.
+				return 4; // chosen by fair dice roll.
 			}
 		\end{JavaCode}
 
@@ -603,7 +603,7 @@
 
         \begin{JavaCode}{Rekursiv Fakultet. Læg mærke til at koden ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
-                if (n == 1)   return 1;
+                if (n == 1) return 1;
                 return n * factorial(n-1);
             }
         \end{JavaCode}

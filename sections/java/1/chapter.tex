@@ -70,6 +70,11 @@ Det eneste, der sker i dit program, er præcis de ting, der står mellem \{ \} e
 	}
 \end{JavaCode}
 
+\begin{exercise}
+	Lav et program der printer jeres navne på skærmen. 
+	Tip: Man kan lave linjeskift med \textbackslash n
+\end{exercise}
+
 \section{Variabler}
 Tit vil man gerne referere til en bestemt værdi flere gange, og måske vil man gerne ændre værdien undervejs i sit program. Til det bruger man variabler. 
 
@@ -139,6 +144,11 @@ Java kræver, at man fortæller, hvilken type en variabel har første gang, man 
 	}
 \end{JavaCode}
 
+\begin{exercise}
+	Opret variable for værdierne 10, 10.6, 'a', true og "UNF". Kør jeres kode for at tjekke det virker.
+	Note: brug ikke nogen access modifiers, såsom private eller public
+\end{exercise}
+
 \subsection{Aritmetik/regneregler}
 Her er nogle eksempler på forskellige operationer og brug af operatorer på de typer, vi har set. Mange af dem virker nok ret indlysende.
 
@@ -170,6 +180,16 @@ Her er nogle eksempler på forskellige operationer og brug af operatorer på de 
 \end{itemize}
 
 \todo{Ovenstående skal måske anvende noget JavaCode i stedet...}
+
+\begin{exercise}
+	Opret 3 variable a, b og c som heltal. Lav nu en ny variabel d som har værdien af resultatet hvis man ganger a med b, lægger c til og trækker a fra. 
+	Print d så i kan se om den gør som i forventer.
+\end{exercise}
+
+\begin{exercise}
+	Lav to variable hight og weight som reelle tal. Beregn BMI og print dette.
+	Hint: BMI regnes ved at tage ens vægt i kg og dividere med højde i meter to gange.
+\end{exercise}
 
 \subsection{Logik}
 Nu hvor vi har lært om typen \JavaInline|boolean|, så kan vi lære om forskellige logiske udtryk. Man kan f.eks. få en boolsk værdi ved at "spørge", om 1 er større end 2, hvilket vi ved er falsk, så den boolske værdi er \JavaInline|false|. Det smarte er, at når vi sammensætter forskellige logiske udtryk, så får vi et nyt logisk udtryk, som til sidst giver en boolsk værdi. Vi sammensætter som regel enten med AND eller OR, i Java repræsenteret med hhv. \JavaInline|&&| og \JavaInline?||?. Husk at man også her, kan bruge variabler, f.eks. kan det være, man gerne vil vide, om man skal købe et hus, så man spørger, om man har penge nok og om man i forvejen har nok huse. 
@@ -224,6 +244,10 @@ Jeg håber, du kan se at denne mulighed skaber mange flere muligheder for, at sk
 		System.out.println("You are young.");
 	}
 \end{JavaCode}
+
+\begin{exercise}
+	Gammel nok til at komme ind på diskotekerne i Gaden? lav en variabel alder og brug en if-else sætning til at printe ja hvis alderen er høj nok, ellers nej.
+\end{exercise}
 
 \section{Metoder}
 Nogen gange har man noget kode, som man gerne vil genbruge flere steder i sin kode, så kan det være en god idé, at lave det til en såkaldt funktion. I Java er alle funktioner også kaldet metoder, så det er ikke så vigtigt, hvad man siger. Heldigvis er der nogen, der har lavet nogle brugbare metoder for os, så vi kan lære, hvordan man bruger dem, før vi selv skal lære at lave dem. 

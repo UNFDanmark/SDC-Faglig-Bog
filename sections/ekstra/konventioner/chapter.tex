@@ -1,11 +1,11 @@
 \chapter{Clean code}
 
-Clean code handler om at skrive kode som er let at læse og analysere. At skrive clean code får altså ikke din kode til at fungere bedre, men gør det meget lettere at finde ud af hvordan den virker når man skal fikse det. Det tager længere at skrive clean code, så man skal lade være med at skrive clean code direkte, men ændre kode man har fået til at virke til at være clean lige efter man har skrevet det. På den måde skal man ikke smide endnu mere arbejde væk hvis der er en fejl i den måde man prøver at løse et problem på. Givet hvor tidspresset I er under campen er det nok heller ikke en god ide at ændre jeres projekt til clean code før efter campen. \\
+Clean code handler om at skrive kode, som er let at læse og analysere. At skrive clean code får altså ikke din kode til at fungere bedre, men gør det meget lettere at finde ud af, hvordan den virker, når man skal fikse det. Det tager længere tid at skrive clean code, så man skal lade være med at skrive clean code direkte, men ændre kode man har fået til at virke, til at være clean, lige efter man har skrevet det. På den måde skal man ikke smide endnu mere arbejde, væk hvis der er en fejl i den måde, man prøver at løse et problem på. Givet hvor tidspressede I er under campen er det nok heller ikke en god idé, at ændre jeres projekt til clean code før efter campen. \\
 Men vi vil alligevel meget gerne give jer nogle clean code principper med. 
 
 \section{Brug beskrivende variabelnavne}
-Hvad gør metoden "gpit()". Ja det er da selvfølgelig "getPlayerInTurn" som giver hvilken spillers tur det er. \\
-Lad være med at forkorte metode- og variabelnavne og sørg for at bruge beskrivende navne. Det er virkeligt et tidsspild at navigere til en metode for at finde ud af hvad den gør hvis det kan beskrives i to ord.
+Hvad gør metoden "gpit()". Ja det er da selvfølgelig "getPlayerInTurn", som giver hvilken spillers tur det er. \\
+Lad være med at forkorte metode- og variabelnavne og sørg for at bruge beskrivende navne. Det er virkelig et tidsspild at navigere til en metode, for at finde ud af, hvad den gør, hvis det kan beskrives med to ord.
 
 \section{Navngiv if sætninger}
 \begin{JavaCode}{if navngivning}{clean1}
@@ -20,10 +20,10 @@ Lad være med at forkorte metode- og variabelnavne og sørg for at bruge beskriv
 		//...
 	}
 \end{JavaCode}
-Navngivning i if-sætninger kan også gøre koden mere let læselig, et eksempel på dette kan ses i \autoref{clean1}
+Navngivning i if-sætninger kan også gøre koden mere let læselig, et eksempel på dette kan ses i \autoref{clean1}.
 
 \section{Bail out fast}
-Også kendt som "undgå 5 if sætninger inden i hinanden". Det kan være meget svært at holde overblik over kode som deler sig i en hel masse spor ud fra if-sætninger, så det gælder om at eliminere disse spor meget hurtigt. Et eksempel på dette kan ses i \autoref{clean2}
+Også kendt som "undgå 5 if sætninger inden i hinanden". Det kan være meget svært at holde overblik over kode, som deler sig i en hel masse spor ud fra if-sætninger, så det gælder om at eliminere disse spor meget hurtigt. Et eksempel på dette kan ses i \autoref{clean2}.
 \begin{JavaCode}{bail out fast}{clean2}
 	boolean xPositionIndenforBoard = (xpos >= 0);
 	if(xPositionIndenforBoard){
