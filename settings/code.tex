@@ -73,6 +73,11 @@
 	autogobble
 }
 
+%% Ikke-floating JavaCode
+\lstnewenvironment{JavaCodeH}[2]
+	{\lstset{language=Java, style=basic, caption={#1}, label=#2}\noindent}
+	{}
+
 \lstnewenvironment{JavaCode}[2]
 	{\lstset{language=Java, style=basic, caption={#1}, label=#2, float, floatplacement=H}\noindent}
 	{}

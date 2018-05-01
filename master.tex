@@ -15,7 +15,7 @@
 %% Sæt dokumentet til draft-mode. Dette gør to-do's synlige, viser alle elementer i 
 %% glossary og tilføjer ``example'' kapitlet.
 \newif\ifdraftmode
-\draftmodefalse
+\draftmodetrue
 
 %% Dette indlæser vores ``preamble'' som er den fil der sørger for opsætningen
 %% af vores dokument.
@@ -23,7 +23,8 @@
 
 \input{glossary}
 
-\setcounter{chapter}{0}
+%% Start med et ``kapitel 0'' der forklarer elementerne i bogen.
+\setcounter{chapter}{-1}
 
 %% Her er vores ``hoved-dokument''. Den sørger for den over-ordnede struktur af
 %% bogen.
@@ -50,16 +51,15 @@
 	%% Filstrukturen er designet til at være:
 	%% sections/<part>/<chapter>/chapter.tex
 	%% sections/<part>/<chapter>/figures/
+	
+	\graphicspath{{sections/introduction/figures/}}
+	\input{sections/introduction/chapter}
 
 
 	\part{Java udvikling}
 	% Hvis vi arbejder i draft mode, så inkluderer vi en eksempel side der 
 	% viser nogle af de elementer der er i denne bog.
 	\ifdraftmode
-		
-		%% Denne kommando kan sørge for at vi starter med kapitel 0
-		\setcounter{chapter}{-1}
-		
 		\graphicspath{{sections/manual/example/figures/}}
 		\input{sections/manual/example/chapter}
 	\fi

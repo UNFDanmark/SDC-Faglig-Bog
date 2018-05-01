@@ -79,6 +79,13 @@
 %% figurer flyder for langt væk fra deres sektion.
 \usepackage{placeins}
 
+%% Understøt QR-koder
+\ifdraftmode
+	\usepackage[draft]{qrcode}
+\else
+	\usepackage{qrcode}
+\fi
+
 %% Hjælpe kommando, der kan sørge for at lave tomme sider indtil vi er på en side 
 %% til venstre.
 \newcommand*\cleartoleftpage{%
