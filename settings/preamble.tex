@@ -78,3 +78,10 @@
 %% Denne pakke giver os mulighed for at lave FloatBarriers, så vi kan forhindre at 
 %% figurer flyder for langt væk fra deres sektion.
 \usepackage{placeins}
+
+%% Hjælpe kommando, der kan sørge for at lave tomme sider indtil vi er på en side 
+%% til venstre.
+\newcommand*\cleartoleftpage{%
+	\clearpage
+	\ifodd\value{page}\hbox{}\newpage\fi
+}

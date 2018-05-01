@@ -42,18 +42,18 @@ Så skal vi endelig sætte layout og programmering sammen. Når I laver views s�
 
 Ligesom alle objekter har knappen så nogle metoder som man bruger til at ændre eller få information om knappen. Der er eksempler på nogle af disse metoder i \autoref{buttonmethods}
 \begin{JavaCode}{Metoder for button}{buttonmethods}
+	// Deaktiver knappen så den ikke kalder sin metode 
+	// når man trykker på den.
 	button.setEnabled(false);
-	//Deaktiver knappen saa den ikke kalder sin metode naar man trykker paa den
-	
+
+	// Ændrer teksten på knappen.
 	button.setText("Klik mig");
-	//Aendrer teksten paa knappen 
 	
+    // Gør knappen usynlig. Den kan stadig trykkes på.	
     button.setVisibility(View.INVISIBLE);
-    //Goer knappen usynling. Den kan stadig trykkes paa
     
+    // Gør knappen synlig igen.
     button.setVisibility(View.VISIBLE);
-    //Goer knappen synlig igen.
-	
 \end{JavaCode}
 Der er mange flere metoder, og hver eneste view-element har sine specielle metoder. Vi kan på ingen måde liste dem alle sammen så søg på internettet efter elementernes metoder og hvad de gør. 
 
@@ -69,12 +69,11 @@ For at oprette en ny activity starter vi med at lave en ny java fil ved siden af
 	import android.os.bundle;
 	
 	public class PopUpActivity extends Activity {
- 
- @Override
- protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_popup);
- }
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_popup);
+		}
 	}
 \end{JavaCode}
 
@@ -109,9 +108,11 @@ En standard broadcast kan ikke blive stoppet, og kan ikke videregive resultater.
 En toast er en lill besked som popper op på skærmen de sættes ind ved hjælp af de her funktioner  
 
 \begin{JavaCode}{Her kan man f.eks. vælge mellem en lang og en kort toast}{lst:toast-example}
-	Toast toast = Toast.makeText(getActivity(), "Det her er min toast besked!", Toast.LENGTH_LONG.show(););
+	Toast toast = Toast.makeText(getActivity(), 
+								"Det her er min toast besked!",
+								Toast.LENGTH_LONG);
 	toast.show();
-	// Eller Toast.LENGTH_SHORT.show();
+	// Eller Toast.LENGTH_SHORT
 \end{JavaCode}
 
 Som man kan se i \autoref{lst:toast-example} har toasteren brug for en activity, en besked og, hvor lang tid den skal vises.

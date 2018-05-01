@@ -149,6 +149,27 @@ visuel editor, så man slipper for at rode med XML-kode. Det er dog stadig en
 god idé at forstå hvordan de fungerer i koden, både for forståelsens skyld og 
 for at kunne rette fejl hvis det visuelle redigeringsværktøj driller.
 
+\begin{remark}
+	I de næste kodestykker, udelader vi nogle ``standard'' elementer, for at mindske størrelsen af koden.
+	
+	Vi udelader den første linje: \\
+	\XmlInline|<?xml version="1.0" encoding="utf-8"?>|\\
+	Såvel som følgende attributter på vores layouts:
+	\begin{itemize}
+		\item \XmlInline|xmlns:android="http://schemas.android..."|
+		\item \XmlInline|android:layout_width="match_parent"|
+		\item \XmlInline|android:layout_height="match_parent"|
+		\item \XmlInline|android:paddingBottom="@dimen/activity_..."|
+		\item \XmlInline|android:paddingLeft="@dimen/activity_..."|
+		\item \XmlInline|android:paddingRight="@dimen/activity_..."|
+		\item \XmlInline|android:paddingTop="@dimen/activity_..."|
+		\item \XmlInline|tools:context="com.example..."|
+	\end{itemize}
+\end{remark}
+
+\cleartoleftpage
+\FloatBarrier
+
 \subsubsection{Frame layouts}
 
 Det første eksempel på et layout er det såkaldte \textit{frame layout}, det er et meget simeplt og effektivt layout der er designet til at pladsere et enkelt element et specifikt sted på skærmen.
@@ -161,33 +182,19 @@ I \autoref{fig:android:layouts:frame-layout} er der et eksempel på hvordan man
 kan have to ``børn'' indeni et frame layout, for at placere det ene oven på det 
 andet.
 
-\begin{figure}[h]
+%\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}[!b]
 	\begin{center}
-		\includegraphics[width=5cm]{frame_layout.png}
+		\includegraphics[width=0.4\linewidth]{frame_layout.png}
 		\caption{Et frame layout i en app}
 		\label{fig:android:layouts:frame-layout}
 	\end{center}
 \end{figure}
+%\end{wrapfigure}
+
 
 \begin{XmlCode}{Det layout der giver udseendet i \autoref{fig:android:layouts:frame-layout}}{lst:frame-layout}
-	<?xml version="1.0" encoding="utf-8"?>
-	<FrameLayout 
-		xmlns:android=
-			"http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:paddingBottom=
-			"@dimen/activity_vertical_margin"
-		android:paddingLeft=
-			"@dimen/activity_horizontal_margin"
-		android:paddingRight=
-			"@dimen/activity_horizontal_margin"
-		android:paddingTop=
-			"@dimen/activity_vertical_margin"
-		tools:context=
-			"com.example.lukas.myapplication.MainActivity">
-	
+	<FrameLayout>
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -223,7 +230,7 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=5cm]{linear_layout.png}
+		\includegraphics[width=0.4\linewidth]{linear_layout.png}
 		\caption{Et lineært layout i en app}
 		\label{fig:android:layouts:linear-layout}
 	\end{center}
@@ -231,25 +238,7 @@ det første. Til sidst fylder det nederste og sidste element resten af skærmen.
 
 \begin{XmlCode}{Det layout der giver udseendet i %
 \autoref{fig:android:layouts:linear-layout}}{linear-layout}
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout 
-		xmlns:android=
-			"http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-		android:paddingBottom=
-			"@dimen/activity_vertical_margin"
-		android:paddingLeft=
-			"@dimen/activity_horizontal_margin"
-		android:paddingRight=
-			"@dimen/activity_horizontal_margin"
-		android:paddingTop=
-			"@dimen/activity_vertical_margin"
-		tools:context=
-			"com.example.lukas.myapplication.MainActivity">
-		
+	<LinearLayout>
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -286,7 +275,7 @@ putte det der skal være i rækken inden i et ``TableRow'' tag.
  
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=5cm]{table_layout.png}
+		\includegraphics[width=0.4\linewidth]{table_layout.png}
 		\caption{Et table layout i en app}
 		\label{fig:android:layouts:table-layout}
 	\end{center}
@@ -294,25 +283,7 @@ putte det der skal være i rækken inden i et ``TableRow'' tag.
  
 \begin{XmlCode}{Det layout der giver udseendet i %
  		\autoref{fig:android:layouts:table-layout}}{lst:linear-layout}
-	<?xml version="1.0" encoding="utf-8"?>
-	<TableLayout 
-		xmlns:android=
-			"http://schemas.android.com/apk/res/android"
-		xmlns:tools=
-			"http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:paddingBottom=
-			"@dimen/activity_vertical_margin"
-		android:paddingLeft=
-			"@dimen/activity_horizontal_margin"
-		android:paddingRight=
-			"@dimen/activity_horizontal_margin"
-		android:paddingTop=
-			"@dimen/activity_vertical_margin"
-		tools:context=
-			"com.example.lukas.myapplication.MainActivity">
-		
+	<TableLayout>
 		<TableRow>
 			<TextView
 			android:text="Row 1 column 1"
@@ -369,7 +340,7 @@ ikke kan med relative layouts.
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=5cm]{relative_layout.png}
+		\includegraphics[width=0.4\linewidth]{relative_layout.png}
 		\caption{Et relative layout i en app}
 		\label{fig:android:layouts:relative-layout}
 	\end{center}
@@ -377,25 +348,7 @@ ikke kan med relative layouts.
 
 \begin{XmlCode}{Det layout der giver udseendet i %
 		\autoref{fig:android:layouts:relative-layout}}{lst:relative-layout}
-	<?xml version="1.0" encoding="utf-8"?>
-	<RelativeLayout 
-		xmlns:android=
-			"http://schemas.android.com/apk/res/android"
-		xmlns:tools=
-			"http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:paddingBottom=
-			"@dimen/activity_vertical_margin"
-		android:paddingLeft=
-			"@dimen/activity_horizontal_margin"
-		android:paddingRight=
-			"@dimen/activity_horizontal_margin"
-		android:paddingTop=
-			"@dimen/activity_vertical_margin"
-		tools:context=
-			"com.example.lukas.myapplication.MainActivity">
-		
+	<RelativeLayout>
 		<TextView
 			android:id="@+id/text1"
 			android:layout_width="wrap_content"
@@ -448,29 +401,26 @@ sammen med den kode vi gerne vil køre. Indtil videre har vi kun snakket om
 layouts, hvordan de virker og ser ud. I praksis er et layout næsten altid 
 knyttet sammen med en Activity, som vi snakker mere om i 
 \autoref{cha:activities-intents}. Lad os indtil videre antage at der kun er et 
-layout (activity\_main.xml) og en activity (MainActivity.java). Hvis vi ikke 
+layout (\texttt{activity\_main.xml}) og en activity (\texttt{MainActivity.java}). Hvis vi ikke 
 har ændret i vores Activity, men blot bruger den Activity som Android Studio 
-har lavet til os, vil koden se således ud:
+har lavet til os, vil koden se ud som i \autoref{lst:main-activity}.
 
-\begin{JavaCode}{En tom MainActivity}{main-activity}
+\begin{JavaCode}{En tom MainActivity}{lst:main-activity}
 	public class MainActivity extends AppCompatActivity {
-		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_main);
 		}
-	
 	}
 \end{JavaCode}
 
-Læg mærke til dette stykke kode: 
-\JavaInline|setContentView(R.layout.activity_main)|. I den linje knytter vi 
-vores layout (activity\_main.xml) sammen med vores MainActivity, ved at sætte 
-MainActivity's indhold til at være activity\_main layoutet.
+\noindent
+Læg mærke til dette stykke kode: \\
+\JavaInline|setContentView(R.layout.activity_main)|. \\
+I den linje knytter vi vores layout (activity\_main.xml) sammen med vores MainActivity, ved at sætte MainActivity's indhold til at være activity\_main layoutet.
 
-Vi kan nu ændre vores activity\_main layout, ved at tilføje en knap i midten af 
-skærmen, som vist i \autoref{fig:android:layouts:button-layout}.
+Vi kan nu ændre vores activity\_main layout, ved at tilføje en knap i midten af skærmen, som vist i \autoref{fig:android:layouts:button-layout}.
 
 \begin{figure}[h]
 	\begin{center}
