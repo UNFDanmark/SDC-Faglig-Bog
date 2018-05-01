@@ -6,12 +6,14 @@
 %% Sæt dokumentet op til at være skrift-størrelse 12 og af typen 'book'.
 \documentclass[12pt]{book}
 
-%% Sæt dokumentet til dansk
-\usepackage[danish]{babel}
 %% Brug UTF8 encoding.
 \usepackage[utf8]{inputenc}
+
 %% Brug 8-bit encoding der har 256 glyphs, something something accenter.
 \usepackage[T1]{fontenc}
+
+%% Sæt dokumentet til dansk
+\input{settings/danish}
 
 %% blindtext lader os generere place-holder ``lorem-ipsum'' tekst.
 \usepackage{blindtext}
@@ -32,8 +34,6 @@
 %% Dette er den gennemgående farve i dokumentet som vores ``settings'' filer
 %% benytter. Den er pt. sat til ``UNF-blå'' fra logoet.
 \definecolor{ocre}{RGB}{19,67,149}
-
-\input{settings/danish}
 
 %% Dette indeholder al vores opsætning af code-highlighting.
 \input{settings/code}

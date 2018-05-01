@@ -494,6 +494,7 @@
         \end{exercise}
 
         \begin{exercise}
+        	\label{ex:infinite-loop}
             Lav en funktion med signaturen \JavaInline{void f ()}. Lad
             kroppen af denne funktion være et kald til funktionen
             selv. Sørg for at funktionen kaldes fra \JavaInline{main}.
@@ -527,15 +528,15 @@
 
         \begin{JavaCode}{Call-by-value demonsteret. Læg mærke til at værdien af \texttt{a} i \texttt{main} ikke ændrer sig, når man ændrer på \texttt{a} i \texttt{f}.}{lst:call-by-value-example}
             public int f (int a) {
-                a += 2
-                System.out.println("a is "+a);
+                a += 2;
+                System.out.println("In f, a is " + a);
             }
 
             public static void main(String[] args) {
                 int a = 10;
-                System.out.println("num is "+num);
+                System.out.println("In main, a is " + num);
                 f(a);
-                System.out.println("num is still "+num);
+                System.out.println("In main, a is still " + num);
             }
         \end{JavaCode}
 
@@ -546,25 +547,25 @@
         heltal.
 
         Overvej koden i \autoref{lst:call-by-reference-example}.
-        Her er \texttt{a} ikke en kopi; den er faktisk \texttt{num}! Hvis
-        du ændrer i \texttt{a} ændrer du i \texttt{num}, vise versa.
+        Her er \texttt{n} ikke en kopi; den er faktisk \texttt{num}! Hvis
+        du ændrer i \texttt{n} ændrer du i \texttt{num}, vise versa.
 
-        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{a}, så ændrer den også i værdien af \texttt{num}.}{lst:call-by-value-example}
+        \begin{JavaCode}{Call-by-reference demonsteret. Læg mærke til at når \texttt{f} ændrer i værdien af \texttt{n.a}, så bliver den også ændret i \texttt{main}.}{lst:call-by-reference-example}
             public class Num {
-                public int inner;
-                public Num (int a) { inner = a; }
+                public int a;
             }
 
-            public int f (Num a) {
-                a.inner += 2;
-                System.out.println("a is "+a.inner);
+            public int f (Num n) {
+                n.a += 2;
+                System.out.println("In f, n.a is " + n.a);
             }
 
             public static void main(String[] args) {
-                Num num = new Num(10);
-                System.out.println("num is "+num.inner);
+                Num num = new Num();
+                num.a = 10;
+                System.out.println("In main, num.a is " + num.a);
                 f(num);
-                System.out.println("num is still "+num.inner);
+                System.out.println("In main, num.a is now " + num.a);
             }
         \end{JavaCode}
 
@@ -573,14 +574,12 @@
         (\JavaInline{int}, \JavaInline{boolean}, \JavaInline{float}) kopieret
         (\emph{call-by-value}), mens typer der starter på store
         bogstaver (\JavaInline{String}, \JavaInline{List}) ikke bliver kopieret
-        (\emph{call-by-reference}.)
+        (\emph{call-by-reference}).
 
 	\subsection{Rekursion}
 
-        En af opgaverne længere \todo{Ref til opgaven?} oppe
-        involverer at lave en funktion, som kalder sig selv. Dette er
-        lidt sejt, da man ofte ser matematiske formler som udtrykkes i
-        forhold til sig selv. For eksempel kan faktoriel funktionen
+        \autoref{ex:infinite-loop} involverer at lave en funktion, som kalder sig selv. Dette er lidt sejt, da man ofte ser matematiske formler som udtrykkes i
+        forhold til sig selv. For eksempel kan \gls{factorial}en
         udtrykkes matematisk som:
 
         \begin{equation}
