@@ -69,7 +69,7 @@ En constructor er en særlig metode, der bliver kaldt når man opretter et objek
 		private int publishYear;
 		
 		//constructor
-		public book(String title, int publishedIn) {
+		public Book(String title, int publishedIn) {
 			this.title = title;
 			publishYear = publishedIn;
 		}
@@ -114,7 +114,7 @@ Vi ender dermed med den fulde klassedefinition, der kan ses i \autoref{lst:book-
 		private double price;
 		
 		//constructor
-		public book(String title, int publishedIn) {
+		public Book(String title, int publishedIn) {
 			this.title = title;
 			publishYear = publishedIn;
 			price = 0.0;
@@ -151,8 +151,8 @@ Den følgende tekst vil sætte dig ind i nedarvning i Java og hvordan dette gør
 \begin{JavaCode}{Vehicle klassen}{lst:inheritance-vehicle}
 	public class Vehicle
 	{
-		private String Owner;
-		private int NumberOfWheels;
+		private String owner;
+		private int numberOfWheels;
 		//...
 	}
 \end{JavaCode}
@@ -162,7 +162,7 @@ I \autoref{lst:inheritance-car} kan du se \JavaInline|Car| klassen.
 \begin{JavaCode}{Car klassen}{lst:inheritance-car}
 	public class Car extends Vehicles
 	{
-		private String NumberPlate;
+		private String numberPlate;
 		//...
 	}
 \end{JavaCode}
@@ -179,19 +179,48 @@ Når man gerne vil implementere en metode der allerede findes i den klasse man n
 	}
 \end{JavaCode}
 
+\JavaInline|toString| metoden findes på alle klasser, da den er defineret i \JavaInline|Object| klassen som alle klasser nedarver fra, det vil derfor altid være et override hvis man implementerer denne metode.
+
 \section{Objekter}
 
-Hvad har vi allerede set af eksempler på
+Objekter er i bund og grund bare variable hvor typen er en klasse såsom \JavaInline|Book| klassen set i \autoref{lst:book-class}
 
 \subsection{Oprettelse af objekter}
 
-Eksempel: lav bøger
+Objekter adskiller sig fra de simple typer vi tidligere har set, ved at de skal oprettes når vi bruger variable af den givne type, dette gøres ved hjælp af \JavaInline|new| keywordet. Hvis vi fx vil lave en variabel af typen \JavaInline|Book| vil det se ud som i \autoref{lst:object-new}
+
+\begin{JavaCode}{Oprettelse af objekt}{lst:object-new}
+	//varible of type book
+	Book book = new Book("Nineteen Eighty-Four", 1949);
+}
+\end{JavaCode}
+
+Bemærk typen er her navnet på klassen, og objektet blever oprettet ved at kalde constructoren med \JavaInline|new| keywordet, det er også derfor at den her tager imod en streng og et heltal, da constructoren har to parametre netop af typerne streng og heltal.
 
 \subsection{Kalde metoder på objekter}
 
-Eksempel: get og set stuff på bog
+Når vi interagerer med vores objekt gør vi det ved at kalde de metoder vi har defineret i vores klasse. Vi har tidligere set eksemplere på dette når vi fx kalder \JavaInline|.equals()| på strenge. Metoder på objekter bliver altid kaldt ved at skrive navnet på variablen efter fulgt a et . efterfulgt af metoden. Et eksempel på kald af metoder på \JavaInline|book| objektet fra tidligere kan ses i \autoref{lst:object-methods}.
+
+\begin{JavaCode}{Oprettelse af objekt}{lst:object-methods}
+	//varible of type book
+	Book book = new Book("Nineteen Eighty-Four", 1949);
+	
+	//using the get method to store title of book in variable
+	String bookTitle = book.getTitle();
+	
+	//setting the price of the book to 100
+	book.setPrice(100.00);
+	
+}
+\end{JavaCode}
+
+Bemærk at \JavaInline|get| metoderne returnerer en værdi vi kan gemme i en variabel, mens \JavaInline|set| metoden ændrer objektet uden at returnere noget. Dette er grunden til at man ofte omtaler \JavaInline|get| metoder som accessor methods fordi man får adgang til data i objektet, og \JavaInline|set| metoder som mutator methods fordi man ændrer det data der ligger inde i objektet.
 
 \subsection{Casting}
+
+noget med nedarvning gør Java ikke kender typen, men vi gør, dermed caster vi.
+
+
 
 \section{Klasser i Java, der er gode at kende}
 
