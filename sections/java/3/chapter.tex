@@ -1,5 +1,7 @@
 
 \newcommand\sillynote[1]{\footnote{#1}}
+\newcommand\importantnote[1]{\begin{remark} #1 \end{remark}}
+\newcommand\referencenote[1]{\footnote{#1}}
 
 \chapter{Objekter og klasser}
 
@@ -24,26 +26,33 @@ dette ved hjælp af et eksempel på at simulere en boghandel.
     Mechanics''\sillynote{Classical Mechanics, John R. Taylor.}, er
     objekter af klassen \emph{bøger}.
 
-    Men hvad med ting som titel, genre, formatter, eller udgivelsesdato? \todo{Mere her!!}
-
-    Alle ovenstående spørgsmål giver kun mening i forbindelse med en
-    enkelt bog. Dette skyldes, at "bog" i denne sammenhæng refererer
-    til klassen Bog, mens en enkelt bog er et objekt af denne klasse.
-    En enkelt genstand henvises til som et eksempel. Du kan oprette
-    flere forekomster af en klasse, som i ovenstående eksempel vil
-    give os mulighed for at lave mange forskellige bøger i mange
-    forskellige genrer med forskellige titler, forfattere og
-    publikationsdatoer.
+    Hver bog har jo koncepter som titel, genre, formatter, og
+    udgivelsesdato, associaceret med dem. Disse koncepter udtrykker
+    man som \emph{feltvariabler}, værdier der indeholdes i hver bog.
+    Disse giver kun mening i forbindelse med en enkelt bog. Dette
+    skyldes, at ``bog'' i denne sammenhæng refererer til klassen Bog,
+    mens en enkelt bog er et objekt af denne klasse.  En enkelt
+    genstand henvises til som et eksempel. Du kan oprette flere
+    forekomster af en klasse, som i ovenstående eksempel vil give os
+    mulighed for at lave mange forskellige bøger i mange forskellige
+    genrer med forskellige titler, forfattere og publikationsdatoer.
 \end{example}
 
+\importantnote{Hvad der er klasser, hvad der er objekter, og hvordan
+de hænger sammen, varierer baseret på problemdomænen. Noget der er et
+objekt i et problemdomæne, kunne være en klasse i en anden. God
+sammensætning af disse koncepter, er ikke noget denne bog
+dækker.\referencenote{For videre læsning, læs
+\href{Flexible, Reliable Software}{http://www.baerbak.com/} af
+\href{http://pure.au.dk/portal/da/hbc@cs.au.dk}{Henrik Bærbak Christensen}}}
+
 \begin{exercise}
-    \todo{Opgave om at klassifiere koncepter i klasser og specifikke objekter.}
+    Overvej om følgende koncepter burde være klasser eller objekter,
+    og i hvilke problemdomæner: \emph{Bøger}, \emph{SDC Faglig
+    Kompedium}, \emph{denne kopi af SDC Falig Kompedium},
+    \emph{æbler}, \emph{frugter}, \emph{dig som læser denne sætning},
+    \emph{versionen af dig som eksisterede i går}.
 \end{exercise}
-
-
-
-
-
 
 \section{Klasser}
 
@@ -55,7 +64,7 @@ ny fil \verb|Book.java|. Se \autoref{lst:book-class-header} for et eksempel.
 \begin{JavaCode}{Eksempel på en klasse deklaration der emulerer en bog.}{lst:book-class-header}
 	public class Book {
 		// Dette er klassens krop.
-        // Her definerer vi klassens feltvariabler og methoder.
+        // Her definerer vi klassens feltvariabler og methoder...
 	}
 \end{JavaCode}
 
@@ -64,108 +73,47 @@ modifier (\JavaInline|public|), der definerer hvorfra man kan få
 adgang til klassen, derefter \JavaInline|class|-keyword, der definerer,
 at det er en klasse vi laver, sidst har vi navnet på vores klasse
 (\JavaInline|Book|). Bemærk at klassenavnet er altid skrevet med stort
-forbogstav. Mellem de to tuborgklammer er klassens krop, hvor klassens funktion
-defineres, og bestemmer hvad klassen rent faktisk kan bidrage med.
+forbogstav, og at Java klager hvis filnavnet og klassenavnet ikke
+stemmer overens. Mellem de to tuborgklammer er klassens krop, hvor
+klassens funktion defineres, og bestemmer hvad klassen rent faktisk
+kan bidrage med.
 
-I følgende sektion vil dækkes følgende koncepter:
-
-\begin{description}
-\item [Feltvariabler]  Data som et objekt indeholder.
-\item [Metoder]        Hvordan anden kode interagerer med objekter.
-\end{description}
-
-\subsection{Access modifiers}
-
-\todo{Flyt længere ned. Ikke utrolig vigtig for SDC. Feltvariabler og metoder er vigtigere.}
-
-I har set flere eksempler på brug af access modifiers allerede, både
-når vi definerer nye klasser, men også når vi definerer metoder.
-Access modifiers definerer hvorfra i vores kode, vi vil kunne få fat i
-vores klasser og metoder. Der er 4 forskellige acces modifiers:
+Denne sektion vil dækkes følgende koncepter:
 
 \begin{description}
-\item [private]     De variabler og metoder der er private kan kun tilgås inde
-                    i den klasse de er defineret, altså mellem de tuborgklammerne
-                    der udgør klassens krop.
-\item [public]      Når noget er public kan det tilgås fra alle steder i koden,
-                    det betyder at en metode i en klasse kan kaldes fra andre
-                    klasser, dermed også fra main metoden.
-\item [protected]   Metoder, constructorer og variable kan have access modifier
-                    protected. Når de er protected kan de kun tilgås fra kode
-                    der ligger i samme pakke, medmindre der er tale om
-                    nedarvning.
-\item [default]     Hvis man ikke skriver en access modifier vil Java selv vælge
-                    en default hvor alt kode i den givne pakke har adgang.
+\item [Feltvariabler]    Data som et objekt indeholder.
+\item [Metoder]          Hvordan anden kode interagerer med objekter.
+\item [Konstruktør]      En methode som skaber nye objekter.
+\item [Access modifier]  Specificering af hvilken kode kan tilgå hvad.
+\item [Nedarvning]       Koncept som tillader genbrug af kode, fra andre klasser.
 \end{description}
 
 \subsection{Feltvariabler}
 
 En klasse kan have en række variable, der kan holde information, om
-hvilket state klassen er i lige nu, men også til at holde al den
-information, der er fælles for alle instanser af den givne klasse, men
-hvis værdi vil variere fra instans til instans disse betegnes fields.
-Når vi kigger på en bog, så har den en titel, en forfatter, en genre,
-måske et årstal, alle bøger har dette, men det vil ikke være det samme
-for hver bog, vi kan derfor have det som fields i vores bog klasse, se
-\autoref{lst:book-class-variables}
+hvilket tilstand objekter af den klasse er i lige nu. Disse variabler
+kaldes for feltvariabler. Når vi kigger på en bog, så har den en
+titel, en forfatter, en genre, måske et årstal. Alle bøger har disse
+egenskaber, men det vil ikke være det samme for hver bog. Se
+\autoref{lst:book-class-variables} for et eksempel på en klasse med
+nogle feltvariabler.
 
 \begin{JavaCode}{Book klasse fields}{lst:book-class-variables}
 	public class Book {
-		//fields
+
+		// Feltvariabler
 		private String title;
 		private String author;
 		private String genre;
 		private int publishYear;
 
-		//rest of class body
+		// Resten af klasse kroppen...
 	}
 \end{JavaCode}
 
-Læg mærke til at variablerne er private, dette er af hensyn til, at de
-så ikke kan ændres udefra, men kun er tilgængelige for de metoder, der
-ligger inde i klassen.
-
-\subsection{Constructor}
-
-\todo{Flyt under metoder.}
-
-En constructor er en særlig metode, der bliver kaldt når man opretter
-et objekt af den givne klasse. Det er her, vi gerne instantierer alle
-variable, vi skal bruge i den givne klasse, og generelt sætter klassen
-op, så den er klar til brug. Constructoren varierer fra andre metoder,
-i at metodenavnet skal være det samme som klassenavnet, ellers
-fungerer det ligesom andre metoder, der kan have nogle parametre. En
-constructor kan dog aldrig returnere noget. Et eksempel på en
-constructor kan ses i \autoref{lst:book-class-constructor}
-
-\begin{JavaCode}{Book klasse constructor}{lst:book-class-constructor}
-	public class Book {
-		//fields
-		private String title;
-		private int publishYear;
-
-		//constructor
-		public Book(String title, int publishedIn) {
-			this.title = title;
-			publishYear = publishedIn;
-		}
-
-		//rest of class body
-	}
-\end{JavaCode}
-
-Constructoren tager imod nogle parametre, vi gemmer i vores fields, på
-den måde er vores bog initialiseret med en titel og udgivelsesår,
-hvilket vi kan benytt,e når vi senere hen skal til at lave andre
-metoder i klassen. Bemærk at der står \JavaInline|this.title| for at
-referere til title field, dette skyldes at vi fortæller constructoren,
-at vi vil assigne værdien af parametrer title til field'et title, hvis
-vi ikke skrev \JavaInline|this.| ,så ville den assigne værdien til sig
-selv, og vores field ville stadig være tomt. Det er derfor ikke
-nødvendigt at skrive \JavaInline|this.| foran
-\JavaInline|publishYear|, da der ikke er noget sammenfald i
-navgivningen og der ikke kan være tvivl om, hvad der menes, det er dog
-helt i orden at gøre alligevel.
+\todo{ Læg mærke til at variablerne er private, dette er af hensyn
+til, at de så ikke kan ændres udefra, men kun er tilgængelige for de
+metoder, der ligger inde i klassen. }
 
 \subsection{Metoder}
 
@@ -208,19 +156,20 @@ Vi ender dermed med den fulde klassedefinition, der kan ses i
 
 \begin{JavaCode}{Book klasse}{lst:book-class}
 	public class Book {
-		//fields
+
+		// Feltvariabler
 		private String title;
 		private int publishYear;
 		private double price;
 
-		//constructor
+		// Konstruktør
 		public Book(String title, int publishedIn) {
-			this.title = title;
+			this.title  = title;
 			publishYear = publishedIn;
-			price = 0.0;
+			price       = 0.0;
 		}
 
-		//get methods
+		// Get metoder
 		public String getTitle() {
 			return title;
 		}
@@ -231,7 +180,7 @@ Vi ender dermed med den fulde klassedefinition, der kan ses i
 			return price;
 		}
 
-		//set methods
+		// Set metoder
 		public void setPrice(double price) {
 			this.price = price;
 		}
@@ -246,6 +195,69 @@ så det er muligt at spørge klassen, om hvad titlen, udgivelsesåret og
 prisen er på bogen. Der er kun oprettet set metode til prisen, da det
 ikke giver mening at kunne ændre titel og udgivelsesår efter en bog er
 udgivet, hvis disse skulle ændres, ser vi det som en ny bog.
+
+\subsection{Konstruktøren}
+
+En constructor er en særlig metode, der bliver kaldt når man opretter
+et objekt af den givne klasse. Det er her, vi gerne instantierer alle
+variable, vi skal bruge i den givne klasse, og generelt sætter klassen
+op, så den er klar til brug. Kontruktøren varierer fra andre metoder,
+i at metodenavnet skal være det samme som klassenavnet, ellers
+fungerer det ligesom andre metoder, der kan have nogle parametre. En
+constructor kan dog aldrig returnere noget. Et eksempel på en
+constructor kan ses i \autoref{lst:book-class-constructor}
+
+\begin{JavaCode}{Book klasse constructor}{lst:book-class-constructor}
+	public class Book {
+
+		// Feltvariabler
+		private String title;
+		private int publishYear;
+
+		// Konstruktør
+		public Book(String title, int publishedIn) {
+			this.title = title;
+			publishYear = publishedIn;
+		}
+
+		// Resten af klasse krop...
+	}
+\end{JavaCode}
+
+Konstruktøren tager imod nogle parametre, vi gemmer i vores fields, på
+den måde er vores bog initialiseret med en titel og udgivelsesår,
+hvilket vi kan benytt,e når vi senere hen skal til at lave andre
+metoder i klassen. Bemærk at der står \JavaInline|this.title| for at
+referere til title field, dette skyldes at vi fortæller constructoren,
+at vi vil assigne værdien af parametrer title til field'et title, hvis
+vi ikke skrev \JavaInline|this.| ,så ville den assigne værdien til sig
+selv, og vores field ville stadig være tomt. Det er derfor ikke
+nødvendigt at skrive \JavaInline|this.| foran
+\JavaInline|publishYear|, da der ikke er noget sammenfald i
+navgivningen og der ikke kan være tvivl om, hvad der menes, det er dog
+helt i orden at gøre alligevel.
+
+\subsection{Access modifiers}
+
+I har set flere eksempler på brug af access modifiers allerede, både
+når vi definerer nye klasser, men også når vi definerer metoder.
+Access modifiers definerer hvorfra i vores kode, vi vil kunne få fat i
+vores klasser og metoder. Der er 4 forskellige acces modifiers:
+
+\begin{description}
+\item [private]     De variabler og metoder der er private kan kun tilgås inde
+                    i den klasse de er defineret, altså mellem de tuborgklammerne
+                    der udgør klassens krop.
+\item [public]      Når noget er public kan det tilgås fra alle steder i koden,
+                    det betyder at en metode i en klasse kan kaldes fra andre
+                    klasser, dermed også fra main metoden.
+\item [protected]   Metoder, constructorer og variable kan have access modifier
+                    protected. Når de er protected kan de kun tilgås fra kode
+                    der ligger i samme pakke, medmindre der er tale om
+                    nedarvning.
+\item [default]     Hvis man ikke skriver en access modifier vil Java selv vælge
+                    en default hvor alt kode i den givne pakke har adgang.
+\end{description}
 
 \subsection{Nedarvning}
 
@@ -285,10 +297,11 @@ dette gøres. I \autoref{lst:inheritance-vehicle} kan du se
 \JavaInline|Vehicle| klassen.
 
 \begin{JavaCode}{Vehicle klassen}{lst:inheritance-vehicle}
-	public class Vehicle
-	{
+	public class Vehicle {
+
 		private String owner;
 		private int numberOfWheels;
+
 		//...
 	}
 \end{JavaCode}
@@ -296,26 +309,40 @@ dette gøres. I \autoref{lst:inheritance-vehicle} kan du se
 I \autoref{lst:inheritance-car} kan du se \JavaInline|Car| klassen.
 
 \begin{JavaCode}{Car klassen}{lst:inheritance-car}
-	public class Car extends Vehicles
-	{
+	public class Car extends Vehicles {
+
 		private String numberPlate;
-		//...
+
+		// ...
 	}
 \end{JavaCode}
 
-I Car klassen kan termen \JavaInline|extends| ses, dette er for at klargøre nedarvning forholdet for de to klasser. Hvilket her specificerer at \JavaInline|Car| er en underklasse til \JavaInline|Vehicle| klassen. \JavaInline|extends| gør det derved muligt at tilgå aspekter til en bil gennem \JavaInline|Vehicle| klassen, som ikke er direkte defineret i \JavaInline|Car| klassen og vice versa, dog kun de dele af klasserne der er public. Betydende at private attributter ikke kan tilgås i den en klasse fra den anden.
+I Car klassen kan termen \JavaInline|extends| ses, dette er for at
+klargøre nedarvning forholdet for de to klasser. Hvilket her
+specificerer at \JavaInline|Car| er en underklasse til
+\JavaInline|Vehicle| klassen. \JavaInline|extends| gør det derved
+muligt at tilgå aspekter til en bil gennem \JavaInline|Vehicle|
+klassen, som ikke er direkte defineret i \JavaInline|Car| klassen og
+vice versa, dog kun de dele af klasserne der er public. Betydende at
+private attributter ikke kan tilgås i den en klasse fra den anden.
 
-Når man gerne vil implementere en metode der allerede findes i den klasse man nedarver fra, så gøres det med at tilføje @Override lige over metode definitionen. Et eksempel på dette kan ses i \autoref{lst:inheritance-override}
+Når man gerne vil implementere en metode der allerede findes i den
+klasse man nedarver fra, så gøres det med at tilføje @Override lige
+over metode definitionen. Et eksempel på dette kan ses i
+\autoref{lst:inheritance-override}
 
 \begin{JavaCode}{Eksempel på override}{lst:inheritance-override}
 	@Override
 	public String toString() {
-		String returnString = //what you want to return goes here
+		String returnString = ""   // Hvordan du gerne vil have dit objekt se ud som en streng.
 		return returnString;
 	}
 \end{JavaCode}
 
-\JavaInline|toString| metoden findes på alle klasser, da den er defineret i \JavaInline|Object| klassen som alle klasser nedarver fra, det vil derfor altid være et override hvis man implementerer denne metode.
+\JavaInline|toString| metoden findes på alle klasser, da den er
+defineret i \JavaInline|Object| klassen som alle klasser nedarver fra,
+det vil derfor altid være et override hvis man implementerer denne
+metode.
 
 
 
@@ -336,7 +363,7 @@ variabel af typen \JavaInline|Book| vil det se ud som i
 \autoref{lst:object-new}
 
 \begin{JavaCode}{Oprettelse af objekt}{lst:object-new}
-	//varible of type book
+	// En variable af type bog.
 	Book book = new Book("Nineteen Eighty-Four", 1949);
 }
 \end{JavaCode}
@@ -357,13 +384,13 @@ fulgt a et . efterfulgt af metoden. Et eksempel på kald af metoder på
 \autoref{lst:object-methods}.
 
 \begin{JavaCode}{Oprettelse af objekt}{lst:object-methods}
-	//varible of type book
+	// En variable af type bog
 	Book book = new Book("Nineteen Eighty-Four", 1949);
 
-	//using the get method to store title of book in variable
+	// Vi bruger getTitle til at få navnet.
 	String bookTitle = book.getTitle();
 
-	//setting the price of the book to 100
+	// Vi ændrer prisen på bogen til 100.
 	book.setPrice(100.00);
 
 }
@@ -387,10 +414,13 @@ objekter, så kan vi caste vores object som i
 \autoref{lst:object-casting}
 
  \begin{JavaCode}{Casting af objekt}{lst:object-methods}
- 	//this works because of inheritance
+ 	// Vi definerer en ny variable, som kræver et køretøj.
+    // Da en bil er et køretøj, kan vi sagtens sætte variablen.
  	Vehicle vehicleCar = new Car();
- 	//casting car as Car
- 	Car car = (Car)vehicleCar;
+
+ 	// Her påkræver vi at variablen car skal være en bil.
+    // Java vil klage meget hvis vehicleCar ikke er en bil.
+ 	Car car = (Car) vehicleCar;
  }
 \end{JavaCode}
 
@@ -422,10 +452,10 @@ Arraylists fungerer som andre klasser i forhold til hvordan man
 opretter instanser af disse, i \autoref{lst:arraylist-new} kan du se
 et eksempel på at oprette en ArrayList. Ligesom med Arrays skal
 ArrayListen vide hvad type objekter man kommer ind i den, dette gøres
-mellem de to <>.
+mellem de to klammer \verb|<>|.
 
 \begin{JavaCode}{Oprettelse af ArrayList}{lst:arraylist-new}
-	//varible of type ArrayList
+	// En liste af strenge.
 	ArrayList<String> list = new ArrayList<String>();
 }
 \end{JavaCode}
@@ -435,28 +465,29 @@ hente noget ud benyttes get metoden, eksempler på dette, samt andre
 gode funktioner kan ses i \autoref{lst:arraylist-methods}
 
 \begin{JavaCode}{Oprettelse af ArrayList}{lst:arraylist-methods}
-	//varible of type ArrayList
+	// En liste af strenge
 	ArrayList<String> list = new ArrayList<String>();
 
-	//add an element to the list
+	// Tilføj strenge til listen
 	list.add("Alice");
 	list.add("Eve");
+    // Nu ser listen ud som: ["Alice", "Eve"]
 
-	//add an element at a specific position
+	// Tilføj strengen "Bob i starten af listen.
 	list.add(0, "Bob");
+    // Nu ser listen ud som: ["Bob", "Alice", "Eve"]
 
-	//remove an element from the list from the given position
-	list.remove(0);
-	//this removes Bob because he is in place 0
+	// Fjern strengen på placeringen 1. Husk at Java er 0-baseret.
+	list.remove(1);
+	// Overstående fjerner "Alice", så listen er: ["Bob", "Eve"]
 
-	//get the object at a position
-	String alice = get(0);
-	// this gets alice because she is the one in place 0 after
-	//Bob was removed
+	// Få fat i strengen på position 0.
+	String bob = get(0);
+    // Dette skaffer "Bob". Listen har ikke ændret sig.
 
-	//get the size
+	// Skaf størrelsen af listen.
 	int size = list.size();
-	//size is 2 (Alice and Eve)
+	// size er selvfølgelig 2.
 }
 \end{JavaCode}
 
@@ -466,13 +497,16 @@ gode funktioner kan ses i \autoref{lst:arraylist-methods}
 
 \todo{Verbatum.}
 
-Et HashMap er næsten ligesom en Arrayliste. Det er en datastruktur.
-Altså en måde, at organizere en samling variabler på. Forskellen
-mellem en HashMap og en ArrayListe, er hvordan man tilgår de gemte
-variabler. En ArrayListe giver simpelt hver variabel et tal, og så kan
-man bruge minArrayListe.get(tal); Ved HashMaps bestemmer I hvad hver
-variabel har af "nøgle" til at blive tilgået. i \autoref{hashmap1} er
-et eksempel med en simpel telefonliste.
+Et \emph{HashMap} er næsten ligesom en \emph{List}. Det er en
+datastruktur, altså en måde at organizere en samling af værdier på.
+Forskellen mellem en \emph{HashMap} og en \emph{List}, er hvordan man
+tilgår de gemte værdier. En \emph{List} giver hver værdi en placering,
+og man skal så huske den placering, for at tilgå værdien, med
+\JavaInline{List.get(int)} metoden. Ind i mellem vil man gerne tilgå
+værdier, uden at skulle huske på placeringen. Det er præcis hvad en
+\emph{HashMap} tillader. Med et \emph{HashMap} bestemmer man hvad hver
+værdi har af ``nøgle'' til at blive tilgået. Se \autoref{hashmap1} for
+et eksempel på en simpel telefonliste.
 
 \begin{JavaCode}{TelefonListe}{hashmap1}
 	HashMap<String, Integer> telefonliste = new HashMap<>();
@@ -500,26 +534,35 @@ HashMap, som bruger integers som nøgler. Yderligere funktionalitet for
 HashMaps kan ses i \autoref{hashmap2}
 
 \begin{JavaCode}{Metoder for Hashmap}{hashmap2}
+    // Få alle værdier i telefonliste
 	ArrayList<Integer> alleNumre = telefonliste.values();
-	//Faa alle variabler i hashmappet som en arrayliste
 
+    // Tilføj værdien 88888888 med nøglen "Snehvide".
+    telefonliste.put("Snehvide", 88888888);
+
+    // Fjern værdien med nøglen "Klods Hans", fra telefonliste.
 	telefonliste.remove("Klods Hans");
-	//Fjern en variabel fra hashmappet
 
-	boolean harLeasy = telefonliste.containsValue(88888888);
-	//True hvis variablen ligger i hashmappet
+    // Hvis vi tilføjer en ny værdi, med en gammel nøgle, overskrives
+    // den gamle værdi.
+    telefonliste.put("Snehvide", 12345678);
 
+    // Tjek om telefonlisten indeholder en nøgle.
 	boolean harSnehvide = telefonliste.containsKey("Snehvide");
-	//True hvis noeglen ligger i hashmappet
+    // harSnehvide = true
 
+    // Tjek om telefonlisten indeholder en værdi.
+	boolean harLeasy = telefonliste.containsValue(88888888);
+    // harLeasy er falsk, da "Snehvide" nøglen, der tidligere
+    // indholdte 88888888, senere blev overskrevet.
+
+    // Tjek hvor mange værdier der er i listen.
 	telefonliste.size();
-	//Antal variabler i listen
 \end{JavaCode}
 
-En sidste bemærkning er at der kun kan være en variabel for hver
-nøgle. Hvis du putter en varibel med en nøgle som allerede er i
-mappet, fjernes den gamle variabel som havde den nøgle. Altså den
-overskrives.
+\importantnote{Som også demonstreret i \autoref{hashmap}, kan der kun
+være en enkelt værdi for hver nøgle. Værdier overskrives, hvis man
+bruger \JavaInline{put} på en nøgle, der allerede har en værdi.}
 
 \todo{Opgave}
 

@@ -8,4 +8,6 @@
 -   **streng** (_string_): Typen af tekst værdier.
 -   **løkke** (_loop_): F.eks. en `for` løkke eller en `while` løkke.
     Man kan godt konstruere løkker gennem rekursion.
+-   **Tilstand** (_state_)
+-   **Feltvariable** (_field_, _attribute_)
 

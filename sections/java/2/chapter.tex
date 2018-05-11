@@ -359,7 +359,7 @@
 
         \begin{JavaCode}{Kode, der anvender \texttt{continue} til kun at vise de lige tal. Læg mærke til at procenttegn giver resten, a divideret med b, også kaldet \texttt{modulo}.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
-				if (i \% 2 == 0) continue;
+				if (i % 2 == 0) continue;
 				System.out.println(i);
 			}
 		\end{JavaCode}
@@ -683,13 +683,13 @@
 
     \begin{JavaCode}{Et eksempel på at arbejde med lister af tal. Læg specielt mærke til hvordan listen laves og nul-indekseringen.}{lst:array-example}
         public static void main(String[] args) {
-            int[] tal = new int[3];
-            tal[0] = 10;
-            tal[1] = 20;
-            tal[2] = 30;
+            int[] numbers = new int[3];
+            numbers[0] = 10;
+            numbers[1] = 20;
+            numbers[2] = 30;
             for (i = 0; i < 3; i++) {
-                System.out.println((i+1) + ". tal: "
-                                         + tal[i]);
+                System.out.println((i+1) + ". numbers: "
+                                         + numbers[i]);
             }
         }
     \end{JavaCode}
