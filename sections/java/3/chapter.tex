@@ -270,7 +270,7 @@ gøres ved at lave klasser der kan være en udvidelse af en anden, på
 denne måde bruge koden i en anden klasse i en udvidet klasse. For
 eksempel kan du have to klasser, en der er kaldet \JavaInline|Car| og
 en anden kaldet \JavaInline|Bicycle|. Her kan vi bruge nedarvning til
-at lave en ny klasse kaldet \JavaInline|Vehicles|. Denne vil så
+at lave en ny klasse kaldet \JavaInline|Vehicle|. Denne vil så
 indeholde de ting som både \JavaInline|Bicycle| og \JavaInline|Car|
 indeholder, på denne måde kan \JavaInline|Car| og \JavaInline|Bicycle|
 så indeholde de ting der gør dem unikke. Hvormed kode duplikation kan
@@ -309,7 +309,7 @@ dette gøres. I \autoref{lst:inheritance-vehicle} kan du se
 I \autoref{lst:inheritance-car} kan du se \JavaInline|Car| klassen.
 
 \begin{JavaCode}{Car klassen}{lst:inheritance-car}
-	public class Car extends Vehicles {
+	public class Car extends Vehicle {
 
 		private String numberPlate;
 
@@ -520,18 +520,18 @@ et eksempel på en simpel telefonliste.
 	}
 \end{JavaCode}
 
-Lad os gå igennem eksemplet. HashMaps skal have to typer, hvor
-ArrayLister kun skal have en. \marginnote{Ved en faktisk
-implementation ville man nok bruge en anden type til et telefonnummer
-for at sikre at der er 8 cifre}Dette er fordi, Hashmaps både skal
-kende typen af nøglen, og typen af den variabel der gemmes. Her er
+Lad os gå igennem eksemplet. \emph{HashMap} skal have to typer, hvor
+ArrayLister kun skal have en. \sillynote{En ordentlig
+implementation ville nok bruge en anden type til et telefonnummer, for
+at sikre at der er 8 cifre.} Dette er fordi, Hashmaps både skal
+kende typen af nøglen, og typen af den værdi der gemmes. Her er
 nøglen sat til en string, da vi forbinder de gemte telefonnumre til et
-navn. Og den gemte variabel er en integer for, at  der er et nummer.
-For at tilføje elementer til listen bruger vi .put(nøgle, variabel);
-og for at få en variabel bruger vi .get(nøgle); Nøglen kan være af
-alle de normale typer, så man kan faktisk lave en ArrayListe med et
-HashMap, som bruger integers som nøgler. Yderligere funktionalitet for
-HashMaps kan ses i \autoref{hashmap2}
+navn.
+For at tilføje elementer til listen bruger vi \JavaInline{.put(nøgle,
+værdi)} og for at få en variabel bruger vi \JavaInline{.get(nøgle)}.
+Typen af en nøgle kan være alle normale typer, så man kan faktisk lave en
+ArrayListe med et HashMap, som bruger integers som nøgler. Yderligere
+funktionalitet for HashMaps kan ses i \autoref{hashmap2}.
 
 \begin{JavaCode}{Metoder for Hashmap}{hashmap2}
     // Få alle værdier i telefonliste
