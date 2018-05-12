@@ -5,17 +5,22 @@
 
 \chapter{Objekter og klasser}
 
-Kernen af objekt-orienteret programmering\sillynote{Ofte forkortet OOP},
-er de to nøglebegreber: \emph{objekter} og \emph{klasser}. Disse
-koncepter er intuitive analogier til den virkelig verden, tiltænkt at
-gøre programmering mere forståelig. En klasse repræsenter en samling
-af objekter, for eksempel en person, en hund, eller et land. Objekter
-repræsenterer specifikke forkomst af en klasse. For eksempel: ``Jeppe
-er en person'', ``Fiddo er en hund'', og ``Danmark er et land''.
-Når man skriver i et objektorienteret sprog, vil klasserne og
-objekterne udgør de dele af modellen, som dit computerprogram forsøger
-at emulere. Dette kan virke lidt abstrakt, så lad os forsøge at forstå
-dette ved hjælp af et eksempel på at simulere en boghandel.
+Tidligere kapitler beskriver brugen af \emph{Java}s indbyggede typer, som
+\emph{int}, \emph{bool} og \emph{String}. Brugen af klasser, tillader
+programmøren at definere sine egne typer, hvilket er kernen af
+objekt-orienteret programmering\sillynote{Ofte forkortet OOP}.
+
+Hertil er det vigtigt at forstå nøglebegreberne: \emph{objekter} og
+\emph{klasser}. Disse koncepter er intuitive analogier til den
+virkelig verden, tiltænkt at gøre programmering mere forståelig. En
+klasse repræsenter en samling af objekter, for eksempel en person, en
+hund, eller et land. Objekter repræsenterer specifikke forkomst af en
+klasse. For eksempel: ``Jeppe er en person'', ``Fiddo er en hund'', og
+``Danmark er et land''.  Når man skriver i et objektorienteret sprog,
+vil klasserne og objekterne udgør de dele af modellen, som dit
+computerprogram forsøger at emulere. Dette kan virke lidt abstrakt, så
+lad os forsøge at forstå dette ved hjælp af et eksempel på at simulere
+en boghandel.
 
 \begin{example}
     Hvis vi ønsker at skrive et computerprogram, der er en simpel
@@ -23,7 +28,7 @@ dette ved hjælp af et eksempel på at simulere en boghandel.
     klasser, hvoraf en kunne være bøger. Konceptet \emph{bøger} kunne
     derved repræsenteres som en klasse, hvoraf specifikke bøger, som
     ``SDC Faglig Kompendie'' eller ``Classical
-    Mechanics''\sillynote{Classical Mechanics, John R. Taylor.}, er
+    Mechanics''\referencenote{Classical Mechanics, John R. Taylor.}, er
     objekter af klassen \emph{bøger}.
 
     Hver bog har jo koncepter som titel, genre, formatter, og
@@ -43,7 +48,7 @@ de hænger sammen, varierer baseret på problemdomænen. Noget der er et
 objekt i et problemdomæne, kunne være en klasse i en anden. God
 sammensætning af disse koncepter, er ikke noget denne bog
 dækker.\referencenote{For videre læsning, læs
-\href{Flexible, Reliable Software}{http://www.baerbak.com/} af
+\href{http://www.baerbak.com/}{Flexible, Reliable Software} af
 \href{http://pure.au.dk/portal/da/hbc@cs.au.dk}{Henrik Bærbak Christensen}}}
 
 \begin{exercise}
@@ -61,7 +66,7 @@ Vi skal kalde filen det, vi gerne vil kalde klassen, så hvis vi gerne
 vil oprette en klasse \JavaInline|Book| så starter vi med at lave en
 ny fil \verb|Book.java|. Se \autoref{lst:book-class-header} for et eksempel.
 
-\begin{JavaCode}{Eksempel på en klasse deklaration der emulerer en bog.}{lst:book-class-header}
+\begin{JavaCode}{Eksempel på en klasse deklaration. Dette er en helt korrekt klassedefintion, men er ikke specielt brugbar.}{lst:book-class-header}
 	public class Book {
 		// Dette er klassens krop.
         // Her definerer vi klassens feltvariabler og methoder...
@@ -76,9 +81,8 @@ at det er en klasse vi laver, sidst har vi navnet på vores klasse
 forbogstav, og at Java klager hvis filnavnet og klassenavnet ikke
 stemmer overens. Mellem de to tuborgklammer er klassens krop, hvor
 klassens funktion defineres, og bestemmer hvad klassen rent faktisk
-kan bidrage med.
-
-Denne sektion vil dækkes følgende koncepter:
+kan bidrage med. Denne sektion dækker følgende koncepter, som er
+forskellige måder at udfylde en klasse:
 
 \begin{description}
 \item [Feltvariabler]    Data som et objekt indeholder.
@@ -87,6 +91,28 @@ Denne sektion vil dækkes følgende koncepter:
 \item [Access modifier]  Specificering af hvilken kode kan tilgå hvad.
 \item [Nedarvning]       Koncept som tillader genbrug af kode, fra andre klasser.
 \end{description}
+
+\subsection{Objekter og hvordan man opretter dem}
+
+De indebyggede typer, som \JavaInline{int} og \JavaInline{String}, har
+speciel syntaks til at definere nye værdier. For eksempel
+\JavaInline{42} eller \JavaInline{"En streng"}. Nye værdier af en
+klasse skabes ved bruge \JavaInline{new}-keywordet, efterfulgt af
+klassenavnet, og en argumentliste. Se \autoref{lst:object-new} for
+et eksempel. Dette ligner på et funktionskald, hvilket det faktisk er.
+Vi vil ignorere dette faktum, indtil \autoref{subsec:constructor}.
+
+\begin{JavaCode}{Oprettelse af et objekt af typen Book.}{lst:object-new}
+	// En variable af type bog.
+	Book book = new Book("Nineteen Eighty-Four", 1949);
+}
+\end{JavaCode}
+
+Bemærk typen af \JavaInline|book| her er navnet på klassen, og
+objektet blever oprettet ved at ``kalde'' klassen med
+\JavaInline|new| keywordet, det er også derfor at den her tager imod
+en streng og et heltal, da constructoren har to parametre netop af
+typerne streng og heltal.
 
 \subsection{Feltvariabler}
 
@@ -114,6 +140,40 @@ nogle feltvariabler.
 \todo{ Læg mærke til at variablerne er private, dette er af hensyn
 til, at de så ikke kan ændres udefra, men kun er tilgængelige for de
 metoder, der ligger inde i klassen. }
+
+
+\subsection{Kalde metoder på objekter}
+
+Når vi interagerer med vores objekt gør vi det ved at kalde de metoder
+vi har defineret i vores klasse. Vi har tidligere set eksemplere på
+dette når vi fx kalder \JavaInline|.equals()| på strenge. Metoder på
+objekter bliver altid kaldt ved at skrive navnet på variablen efter
+fulgt a et . efterfulgt af metoden. Et eksempel på kald af metoder på
+\JavaInline|book| objektet fra tidligere kan ses i
+\autoref{lst:object-methods}.
+
+\begin{JavaCode}{Oprettelse af objekt}{lst:object-methods}
+	// En variable af type bog
+	Book book = new Book("Nineteen Eighty-Four", 1949);
+
+	// Vi bruger getTitle til at få navnet.
+	String bookTitle = book.getTitle();
+
+	// Vi ændrer prisen på bogen til 100.
+	book.setPrice(100.00);
+
+}
+\end{JavaCode}
+
+Bemærk at \JavaInline|get| metoderne returnerer en værdi vi kan gemme
+i en variabel, mens \JavaInline|set| metoden ændrer objektet uden at
+returnere noget. Dette er grunden til at man ofte omtaler
+\JavaInline|get| metoder som accessor methods fordi man får adgang til
+data i objektet, og \JavaInline|set| metoder som mutator methods fordi
+man ændrer det data der ligger inde i objektet.
+
+\todo{Opgave}
+
 
 \subsection{Metoder}
 
@@ -197,6 +257,7 @@ ikke giver mening at kunne ændre titel og udgivelsesår efter en bog er
 udgivet, hvis disse skulle ændres, ser vi det som en ny bog.
 
 \subsection{Konstruktøren}
+\label{subsec:constructor}
 
 En constructor er en særlig metode, der bliver kaldt når man opretter
 et objekt af den givne klasse. Det er her, vi gerne instantierer alle
@@ -349,62 +410,6 @@ metode.
 
 
 
-\section{Objekter}
-
-Objekter er i bund og grund bare variable hvor typen er en klasse
-såsom \JavaInline|Book| klassen set i \autoref{lst:book-class}
-
-\subsection{Oprettelse af objekter}
-
-Objekter adskiller sig fra de simple typer vi tidligere har set, ved
-at de skal oprettes når vi bruger variable af den givne type, dette
-gøres ved hjælp af \JavaInline|new| keywordet. Hvis vi fx vil lave en
-variabel af typen \JavaInline|Book| vil det se ud som i
-\autoref{lst:object-new}
-
-\begin{JavaCode}{Oprettelse af objekt}{lst:object-new}
-	// En variable af type bog.
-	Book book = new Book("Nineteen Eighty-Four", 1949);
-}
-\end{JavaCode}
-
-Bemærk typen er her navnet på klassen, og objektet blever oprettet ved
-at kalde constructoren med \JavaInline|new| keywordet, det er også
-derfor at den her tager imod en streng og et heltal, da constructoren
-har to parametre netop af typerne streng og heltal.
-
-\subsection{Kalde metoder på objekter}
-
-Når vi interagerer med vores objekt gør vi det ved at kalde de metoder
-vi har defineret i vores klasse. Vi har tidligere set eksemplere på
-dette når vi fx kalder \JavaInline|.equals()| på strenge. Metoder på
-objekter bliver altid kaldt ved at skrive navnet på variablen efter
-fulgt a et . efterfulgt af metoden. Et eksempel på kald af metoder på
-\JavaInline|book| objektet fra tidligere kan ses i
-\autoref{lst:object-methods}.
-
-\begin{JavaCode}{Oprettelse af objekt}{lst:object-methods}
-	// En variable af type bog
-	Book book = new Book("Nineteen Eighty-Four", 1949);
-
-	// Vi bruger getTitle til at få navnet.
-	String bookTitle = book.getTitle();
-
-	// Vi ændrer prisen på bogen til 100.
-	book.setPrice(100.00);
-
-}
-\end{JavaCode}
-
-Bemærk at \JavaInline|get| metoderne returnerer en værdi vi kan gemme
-i en variabel, mens \JavaInline|set| metoden ændrer objektet uden at
-returnere noget. Dette er grunden til at man ofte omtaler
-\JavaInline|get| metoder som accessor methods fordi man får adgang til
-data i objektet, og \JavaInline|set| metoder som mutator methods fordi
-man ændrer det data der ligger inde i objektet.
-
-\todo{Opgave}
-
 \subsection{Casting}
 
 Hvis vi har et objekt af typen \JavaInline|Vehicle| og vi ved det er
@@ -527,8 +532,8 @@ at sikre at der er 8 cifre.} Dette er fordi, Hashmaps både skal
 kende typen af nøglen, og typen af den værdi der gemmes. Her er
 nøglen sat til en string, da vi forbinder de gemte telefonnumre til et
 navn.
-For at tilføje elementer til listen bruger vi \JavaInline{.put(nøgle,
-værdi)} og for at få en variabel bruger vi \JavaInline{.get(nøgle)}.
+For at tilføje elementer til listen bruger vi \JavaInline{.put(nøgle, værdi)}
+og for at få en variabel bruger vi \JavaInline{.get(nøgle)}.
 Typen af en nøgle kan være alle normale typer, så man kan faktisk lave en
 ArrayListe med et HashMap, som bruger integers som nøgler. Yderligere
 funktionalitet for HashMaps kan ses i \autoref{hashmap2}.
