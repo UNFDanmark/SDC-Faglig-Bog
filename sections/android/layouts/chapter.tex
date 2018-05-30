@@ -142,13 +142,33 @@ Vi kommer ind på hvordan du bruger programmering til at ændre på hvordan dine
 \subsection{Hvad er layouts?}
 Layouts er, som nævnt, en måde at beskrive app'ens udseende på igennem det strukturelle sprog XML. Layouts er også de elementer man bruger til at organisere views. Så hvis man vil have nogle views til at sidde på en speciel måde ligger man dem ind i et layout.
 
-Vi lægger layouts i ressource mappen \texttt{res/layout/}, og et layout er 
+Vi lægger layouts i ressource mappen \texttt{res/layout/} (se \autoref{fig:android:layouts:layout_folder}), og et layout er 
 faktisk bare et XML-tag, der kan indeholde andre tags som repræsenterer views.
-
 I Android Studio er der mulighed for, at arbejde med disse layouts igennem en 
 visuel editor, så man slipper for at rode med XML-kode. Det er dog stadig en 
 god idé, at forstå hvordan de fungerer i koden, både for forståelsens skyld og 
 for at kunne rette fejl, hvis det visuelle redigeringsværktøj driller.
+
+\begin{figure}[h]
+	\begin{center}
+		\marginnote{\qrcode{https://raw.githubusercontent.com/UNFDanmark/SDC-Faglig-Bog/master/sections/android/layouts/figures/layout_folder.png}}
+		\includegraphics[width=0.95\textwidth]{layout_folder.png}
+		\caption{Mappen hvori man kan finde layout-filerne}
+		\label{fig:android:layouts:layout_folder}
+	\end{center}
+\end{figure}
+
+Vi kan vælge mellem at arbejde med layouts visuelt, eller ved at redigere i XML kode. I Android Studio, kan man let og hurtigt skifte mellem de to måder at arbejde på, ved et tryk på en knap når man har åbnet sit layout. (Se \author{fig:android:layouts:layout_edit_button})
+
+\begin{figure}[h]
+	\begin{center}
+		\marginnote{\qrcode{https://raw.githubusercontent.com/UNFDanmark/SDC-Faglig-Bog/master/sections/android/layouts/figures/layout_edit_button.png}}
+		\includegraphics[width=0.95\textwidth]{layout_edit_button.png}
+		\caption{Knappen til at skifte mellem visuel og XML redigeringsværktøj.}
+		\label{fig:android:layouts:layout_edit_button}
+	\end{center}
+\end{figure}
+
 
 \begin{remark}
 	I de næste kodestykker, udelader vi nogle ``standard'' elementer, for at mindske størrelsen af koden.
@@ -276,7 +296,7 @@ putte det, der skal være i rækken inden i et ``TableRow'' tag.
  
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.4\linewidth]{table_layout.png}
+		\includegraphics[width=0.35\linewidth]{table_layout.png}
 		\caption{Et table layout i en app}
 		\label{fig:android:layouts:table-layout}
 	\end{center}

@@ -5,6 +5,14 @@
 % Så pil ikke ved noget, medmindre du ved hvad du laver!
 %
 
+\newenvironment{absolutelynopagebreak}
+{\par\nobreak\vfil\penalty0\vfilneg
+	\vtop\bgroup}
+{\par\xdef\tpd{\the\prevdepth}\egroup
+	\prevdepth=\tpd}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Legrand Orange Book
@@ -102,7 +110,7 @@ linewidth=4pt]{eBox}
 
 % Creates an environment for each type of theorem and assigns it a theorem text 
 %style from the "Theorem Styles" section above and a colored box from above
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+\newenvironment{exercise}{\begin{absolutelynopagebreak}\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}\end{absolutelynopagebreak}}
 
 
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
