@@ -405,11 +405,22 @@ ikke kan med relative layouts.
 	</RelativeLayout>
 \end{XmlCode}
 
+\cleardoublepage
+
 \FloatBarrier
-\section{Opsæt Views som objekter i Java}
-Så skal vi endelig sætte layout og programmering sammen. Når I laver views så har hvert view et ID. Det er den I skal bruge når vi skal finde dem i Java. Den måde som Java er sat op på i Android er i Activities. Dem hører I mere om i næste kapitel. Lad os indtil videre antage at der kun er et 
-layout (\texttt{activity\_main.xml}) og én activity (\texttt{MainActivity.java}). 
-Hvis vi ikke har ændret i vores Activity, men blot bruger den Activity som Android Studio har lavet til os, vil koden se ud som i \autoref{lst:main-activity}.
+\section{Listeners}
+I Android app-udvikling findes der noget, der hedder en ``listener'', som navnet 
+antyder, så er der tale om noget, der lytter. I app'ens \gls{interface}, er der 
+tale om elementer, der lytter efter brugerens input. F.eks. hvis man gerne vil 
+skrive noget kode, der reagerer på, at brugeren trykker på en knap, er der tale 
+om en ``On-Click-Listener''.
+
+Disse listeners er altså måden, hvorpå vi kan knytte vores \gls{interface} 
+sammen med den kode, vi gerne vil køre. Indtil videre har vi kun snakket om 
+layouts, hvordan de virker og ser ud. I praksis er et layout næsten altid 
+knyttet sammen med en Activity, som vi snakker mere om i 
+\autoref{cha:activities-intents}. Lad os indtil videre antage at der kun er et 
+layout (\texttt{activity\_main.xml}) og én activity (\texttt{MainActivity.java}). Hvis vi ikke har ændret i vores Activity, men blot bruger den Activity som Android Studio har lavet til os, vil koden se ud som i \autoref{lst:main-activity}.
 
 \begin{JavaCode}{En tom MainActivity}{lst:main-activity}
 	public class MainActivity extends AppCompatActivity {
@@ -435,48 +446,6 @@ Vi kan nu ændre vores activity\_main layout, ved at tilføje en knap i midten a
 		\label{fig:android:layouts:button-layout}
 	\end{center}
 \end{figure}
-For så at få fat i præcis denne knap i aktiviteten så erklærer vi viewet som variabel og så får android til at finde den med \JavaInline|findViewByID|. Koden for at hente en knap ser ud som i \autoref{findviewbyid}
-
-\begin{JavaCode}{Opsætte en knap i Java}{findviewbyid}
-	Button button;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		button = (Button) findViewById(R.id.button);
-	}
-\end{JavaCode}
-
-Ligesom alle objekter har knappen så nogle metoder som man bruger til at ændre eller få information om knappen. Der er eksempler på nogle af disse metoder i \autoref{buttonmethods}
-\begin{JavaCode}{Metoder for button}{buttonmethods}
-	// Deaktiver knappen så den ikke kalder sin metode 
-	// når man trykker på den.
-	button.setEnabled(false);
-	
-	// Ændrer teksten på knappen.
-	button.setText("Klik mig");
-	
-	// Gør knappen usynlig. Den kan stadig trykkes på.	
-	button.setVisibility(View.INVISIBLE);
-	
-	// Gør knappen synlig igen.
-	button.setVisibility(View.VISIBLE);
-\end{JavaCode}
-Der er mange flere metoder, og hver eneste view-element har sine specielle metoder. Vi kan på ingen måde liste dem alle sammen så søg på internettet efter elementernes metoder og hvad de gør. 
-
-\cleardoublepage
-
-\FloatBarrier
-\section{Listeners}
-I Android app-udvikling findes der noget, der hedder en ``listener'', som navnet 
-antyder, så er der tale om noget, der lytter. I app'ens \gls{interface}, er der 
-tale om elementer, der lytter efter brugerens input. F.eks. hvis man gerne vil 
-skrive noget kode, der reagerer på, at brugeren trykker på en knap, er der tale 
-om en ``On-Click-Listener''.
-
-Disse listeners er altså måden, hvorpå vi kan reagere på brugerens input. 
 
 Hvis vi nu gerne vil have at app'en reagerer på, at vi trykker på denne knap, så 
 kan vi tilføje ``android:onClick'' attributten til knappen, og give den attribut 
@@ -485,16 +454,35 @@ trykker på knappen. Et eksempel på dette kan ses i \autoref{lst:button-layout}
 Herefter kan vi blot tilføje den funktion vi tilføjede i ``onClick'' 
 attributten til vores activity, som vist i \autoref{lst:button-activity}.
 
-Vi kan se at ``buttonClicked'' funktionen får et View med som argument. 
-Dette View er det element i app'ens \gls{interface}, der har udløst funktionen og det er vigtigt at funktionen har denne og kun denne som argument samt at dens retur værdi er void.
+Vi kan se at ``buttonClicked'' funktionen får et ``View'' med som argument. 
+Dette View er det element i app'ens \gls{interface}, der har udløst funktionen. 
 I dette tilfælde er det knappen, man trykkede på. Hvis vi lægger $10$ til dens 
 $x$ værdi, vil den flytte sig $10$ ``pixels'' til højre.
+
+\begin{exercise}
+	Implementér layoutet beskrevet i \autoref{lst:button-layout} og aktiviteten 
+	i \autoref{lst:button-activity}.
+\end{exercise}
+
+\begin{exercise}
+	Hvorfor skal vi lægge noget til $x$ for at flytte knappen mod højre? Hvad 
+	betyder $x$?
+\end{exercise}
+
+\begin{exercise}
+	Hvordan flytter man i stedet knappen op, ned eller til venstre?
+\end{exercise}
+
+\begin{exercise}
+	Lav et layout med to knapper, den ene skal flytte sig op, når man trykker, 
+	den anden skal flytte sig mod højre.
+\end{exercise}
 
 \clearpage
 
 
 \begin{XmlCode}{Et layout med en knap, der kalder ``buttonClicked'' funktionen, % 
-		når den bliver trykket på.}{lst:button-layout}
+når den bliver trykket på.}{lst:button-layout}
 	<?xml version="1.0" encoding="utf-8"?>
 	<RelativeLayout 
 		xmlns:android=
@@ -519,43 +507,20 @@ $x$ værdi, vil den flytte sig $10$ ``pixels'' til højre.
 \clearpage
 
 \begin{JavaCode}{En activity, der flytter en knap nedad, når den bliver trykket %
-		på.}{lst:button-activity}
+på.}{lst:button-activity}
 	public class MainActivity extends AppCompatActivity {
-		Button button;
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_main);
-			
-			
-			button = (Button) findViewById(R.id.button);
 		}
 		
 		
 		public void buttonClicked(View view) {
-			button.setX(button.getX() + 10);
+			view.setX(view.getX() + 10);
 		}
 	}
 \end{JavaCode}
-
-\begin{exercise}
-	Implementér layoutet beskrevet i \autoref{lst:button-layout} og aktiviteten 
-	i \autoref{lst:button-activity}.
-\end{exercise}
-
-\begin{exercise}
-	Hvorfor skal vi lægge noget til $x$ for at flytte knappen mod højre? Hvad 
-	betyder $x$?
-\end{exercise}
-
-\begin{exercise}
-	Hvordan flytter man i stedet knappen op, ned eller til venstre?
-\end{exercise}
-
-\begin{exercise}
-	Lav et layout med to knapper, den ene skal flytte sig op, når man trykker, 
-	den anden skal flytte sig mod højre.
-\end{exercise}
 
 

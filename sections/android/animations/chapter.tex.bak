@@ -67,10 +67,6 @@ Til sidst skal du kalde .start() på din ValueAnimator, og så kører animatione
 \end{JavaCode}
 I kan nu lave animationer i Android. Huzzah!
 
-\begin{exercise}
-	Prøv at lave en hel simpel animation. Få en knap til at rotere 360 grader, når du trykker på den.
-\end{exercise}
-
 \section{Flere grundteknikker}
 Nu hvor det helt basale er på plads, kan vi udvide med nogle flere teknikker
 \subsection{Brug af decimaltal}
@@ -117,11 +113,6 @@ Her er der så en liste over, hvad man kan lave med Views:\\
 	\end{JavaCode}
 	Her er 0 usynlig og 1 er fuldt synlig. Værdien som tages, er selvfølgelig en float.
 \end{itemize}
-
-\begin{exercise}
-	Lav en knap, som bevæger sig yderligere 10 pixels til højre, hver gang man trykker på den. Hint: Her ændrer startInt sig for hver animation.
-\end{exercise}
-
 \subsection{Størrelsen af skærmen}
 Der findes mange forskellige Android mobiler, og de har mange forskellige skærmstørrelser, især hvis man også arbejder med tablets. 
 \begin{example}
@@ -150,11 +141,6 @@ Og siden skærmstørrelsen er så kritisk skulle man tro at den var lettere at f
 
 I skal også give jeres yderste layout et ID og hente det med findViewByID(). Så skal i have screenHeight og screenWidth, som feltvariabler. Hvis I skal bruge størrelsen af skærmen i onCreate(), skal den kode også stå inde i onGlobalLayout().
 Grunden hertil er, at Android ikke har udregnet hvordan grafikken placeres, når OnCreate bliver kaldt. Vi får den så til at kalde onGlobalLayout når den har fundet størrelsen af layoutet.
-
-\begin{exercise}
-	Lav en animation hvor en knap starter i venstre side af skærmen og så bevæger sig til midt på skærmen. Sørg for at det virker på mobiler med forskellig skærmstørrelse.
-\end{exercise}
-
 \subsection{Interpolatorer}
 Det, vi har defineret for Android, er egentlig kun startpunkt, slutpunkt og tid imellem dem. Hvordan funktionen mellem de to punkter ser ud kan også defineres. Det kan være at den bare er lineær, men den kunne også være en exponentiel funktion, hvor hastigheden starter med at være langsom og så derefter bliver hurtigere. Man styrer dette ved at sætte en interpolator. 
 Hvis du ikke sætter en interpolator, så vil Android bruge AccelerateDecelerateInterpolator. Altså vil hastigheden for animationen være langsommere i starten og slutningen og så være hurtig i midten. Du sætter en interpolator som i \autoref{animation6}
@@ -164,11 +150,7 @@ Hvis du ikke sætter en interpolator, så vil Android bruge AccelerateDecelerate
 
 Du kan sætte interpolatoren mellem, at du opretter animationen og starter den.
 De helt basale muligheder er LinearInterpolator, AccelerateInterpolator, DecelerateInterpolator og så selvfølgelig AccelerateDecelerateInterpolator. Der findes dog flere, som man kan finde online.
-
-\begin{exercise}
-	Tag animationen hvor knappen bevæger sig til midten og sæt dens interpolator til at være lineær.
-\end{exercise}
-
+%TODO Illustrationer til interpolators
 \subsection{Kontrolmetoder}
 Animator har yderligere en række metoder, som gør den lettere at arbejde med. Du kan sætte animationen til først at starte noget tid efter at du kalder .start() ved at kalde koden i \autoref{animation7}. \\
 \begin{JavaCode}{Kode til at sætte et startDelay}{animation7}
@@ -176,11 +158,6 @@ Animator har yderligere en række metoder, som gør den lettere at arbejde med. 
 \end{JavaCode}
 Forsinkelsen er igen i millisekunder, præcist som setDuration. 
 Yderligere er der metoderne .pause(), .resume(), .cancel(),  .end() og .reverse(), som meget vel giver sig selv. .end() sætter animationen til slutværdien, og .cancel() efterlader den hvor den er nået til.
-
-\begin{exercise}
-	Giv din forrige animation et startdelay, så der går et øjeblik, før den begynder.
-\end{exercise}
-
 \section{Mere advancerede teknikker}
 Her kommer vi omkring nogle lidt mere advancerede teknikker.
 \subsection{Flere animationer samlet}
@@ -215,11 +192,6 @@ Så kører minAnimation først og derefter kører minAndenAnimation. Igen kan ma
 											  minAndenAnimation, 
 											  minTrejdeAnimation);
 \end{JavaCode}
-
-\begin{exercise}
-	Kombinér de to første animationer, så knappen først bevæger sig sidelæns og så roterer.
-\end{exercise}
-
 \subsection{Gentagelser}
 Vi kan også sætte vores animationer til at gentage. Det er meget simpelt, se \autoref{animation12}.
 \begin{JavaCode}{Kode til at lave gentagelser.}{animation12}
@@ -231,11 +203,6 @@ Man kan også sætte gentagelsen som i \autoref{animation13}.
 	minAnimation.setRepeatMode(ValueAnimator.REVERSE);
 \end{JavaCode}
 Hvilket gør at den på gentagelsen ikke går tilbage og kører forfra, men går fra slutværdien til startværdien. Den vil så igen gå fra start til slut på anden gentagelse etc.
-
-
-\begin{exercise}
-	Sæt rotationen animationen til at gentage sig selv 2 gange. Sæt derefter dens repeatMode til at være reverse.
-\end{exercise}
 
 \section{Hurtig guide}
 Her er en lille 4 skridts guide til at lave en animation.
@@ -268,8 +235,31 @@ Her er en lille 4 skridts guide til at lave en animation.
 	\end{JavaCode}
 \end{enumerate}
 
+\subsubsection{Animationsopgaver}
+Der er ingen tid afsat til specifikt at lave opgaver i animation, men programmering er et praktisk fag, så det gælder om at øve sig. Her er nogle forslag til ting at øve sig med, men du kan også selv finde på udfordringer at øve dig på, inklusiv bare at gå direkte i gang med projektet. Hvis det ikke går godt så husk, at tage små skridt og lave én ting af gangen.
 \begin{exercise}
-	Tag din eksisterende animation og sæt knappen til at starte i øverste venstre hjørne. Få den til at bevæge sig lodret og vandret samtidigt til midt på skærmen, og derefter rotere en omgang. Noter hvordan, den lodrette bevægelse starter og slutter langsomt fordi den bruger den normale interpolator, mens den horizontale bevægelse er lineær (Hvis du fik sat dens interpolator korrekt).
+	Start helt fra bunden. Få en knap til at rotere 360 grader, når du trykker på den.
+\end{exercise}
+\begin{exercise}
+	Giv rotationen et startdelay, så der går et øjeblik, før den begynder at rotere.
+\end{exercise}
+\begin{exercise}
+	Sæt din knap til at starte i venstre side af skærmen og så bevæge sig til midt på skærmen, når du trykker på den.
+\end{exercise}
+\begin{exercise}
+	Sæt bevægelsens interpolator til at være lineær.
+\end{exercise}
+\begin{exercise}
+	Kombinér de to første animationer, så knappen først bevæger sig sidelæns og så derefter roterer
+\end{exercise}
+\begin{exercise}
+	Sæt nu knappen til at starte i øverste højre hjørne. Få den til at bevæge sig lodret og vandret samtidigt til midt på skærmen, og derefter rotere en omgang. Noter hvordan, den lodrette bevægelse starter og slutter langsomt fordi den bruger den normale interpolator, mens den horizontale bevægelse er lineær
+\end{exercise}
+\begin{exercise}
+	Få rotationen til at gentage sig selv 2 gange. Sæt derefter dens repeatMode til at være reverse.
+\end{exercise}
+\begin{exercise}
+	Lav en knap, som bevæger sig yderligere 10 pixels til højre, hver gang man trykker på den. Hint: Her ændrer startInt sig for hver animation.
 \end{exercise}
 \begin{exercise}
 	Få helt styr på at arbejde med skærmens størrelse. Placer en knap i øverste venstre hjørne og få den til at tage en fuld runde langs telefonens kant, når du trykker på den. 
