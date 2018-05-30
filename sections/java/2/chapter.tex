@@ -7,6 +7,8 @@
 \tikzstyle{statement}  = [rectangle, draw, rounded corners, fill=blue!20, text centered, very thick, minimum size=1cm]
 \tikzstyle{expression} = [rectangle, draw, rounded corners, fill=red!20,  text centered, very thick, minimum size=1cm]
 
+\newcommand\sillynotederp[1]{\footnote{#1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Gode opgaver:
@@ -28,7 +30,6 @@
     For eksempel vil vi gerne kunne sige ting som ``gør \emph{det her} indtil
 	\emph{dette} sker'' eller ``gør \emph{dette}, først for \emph{1}, og så for
 	\emph{2}, osv.''
-
 	Af denne grund indeholder mange programmerings-sprog, inklusiv Java,
 	mekanismer for at kunne udtrykke sådanne problemer, og det er disse
 	mekanismer, vi vil dække i dette kapitel.
@@ -36,17 +37,16 @@
 	Det er vigtigt at tage i mente at programmører er dovne dyr, og de vil gerne
 	udtrykke sig selv nemt. Derfor har Java rigtig mange mekanismer, som teknisk
 	set kan gøre det samme, men som er mere bekvemme i visse situationer.
-
     Dette kapitel vil dække mange af disse mekanismer. Du behøver ikke
     lære dem alle med det samme. Selv de bedste programmører glemmer,
     hvordan man skriver nogle af disse. Følgende overordnede emner er
     dækket i dette kapitel:
 
-	\begin{itemize} % Denne udgiver har også følgende selvhjælps-bøger på markedet:
-		\item Løkker: Sådan får du mere kontrol.
-		\item Funktioner: Forbedrer dine metoder.
-		\item Arrays: Få styr på dine variabler.
-	\end{itemize}
+	\begin{description} % Denne udgiver har også følgende selvhjælps-bøger på markedet:
+        \item [Løkker]      Sådan får du mere kontrol.
+        \item [Funktioner]  Forbedrer dine metoder.
+        \item [Arrays]      Få styr på dine variabler.
+	\end{description}
 
 \section{Løkker}
 
@@ -57,13 +57,34 @@
 
 	\subsection{While-løkker}
 
+        % Følgende er baseret på:
+        %    https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg
+
+        \begin{figure}
+        \center
+        \tikzstyle{flow} = [draw, very thick, rounded corners]
+        \begin{tikzpicture}[node distance = 4cm, auto]
+            \node[statement] (previous) {Tidligere kode};
+            \node[expression, right of=previous] (condition) {Betingelse};
+            \node[statement, below of=condition, node distance=1.5cm] (body) {Krop};
+            \node[statement, right of=condition] (after) {Senere kode};
+
+            \path [flow, ->] (previous.east) -- (condition.west);
+            \path [flow, ->] (condition.east) -- node[auto, swap] {false} (after.west);
+            \path [flow, <-] (condition.west) -- +(left:3mm) |- (body.west) ;
+            \path [flow, ->] (condition.east) -- +(right:3mm) |- node {true} (body.east);
+        \end{tikzpicture}
+        \caption{While-løkker}
+        \label{fig:while-loop-illustrated}
+        \end{figure}
+
+
+
         \JavaInline{while} er den simpleste type af løkke. Dette er ligesom at
-		sige: ``Mens at A gælder, sørg for at gøre B.'' For eksempel:
-
-		``Mens at gulvet er beskidt, bør du feje gulvet.''
-
-		Dette er i modsætning til \JavaInline{if}-udstryk, hvor der udtrykkes
-		``Hvis A gælder, gør B èn enkelt gang.''
+        sige: ``Mens at A gælder, sørg for at gøre B.'' For eksempel:
+        ``Mens at gulvet er beskidt, bør du feje gulvet,'' hvilket er
+        i modsætning til \JavaInline{if}-udstryk, hvor der udtrykkes
+        ``hvis A gælder, gør B èn enkelt gang.''
 
 		Anatomien af et \JavaInline{while}-udstryk, er meget lig den af et
 		\JavaInline{if}-udstryk, du skifter bare \JavaInline{if} ud med
@@ -88,27 +109,6 @@
         \autoref{fig:while-loop-illustrated}. Et eksempel på en
         løkke kan findes i \autoref{lst:while-example-3}.
 
-        % Følgende er baseret på:
-        %    https://upload.wikimedia.org/wikipedia/commons/4/43/While-loop-diagram.svg
-
-        \begin{figure}
-        \center
-        \tikzstyle{flow} = [draw, very thick, rounded corners]
-        \begin{tikzpicture}[node distance = 4cm, auto]
-            \node[statement] (previous) {Tidligere kode};
-            \node[expression, right of=previous] (condition) {Betingelse};
-            \node[statement, below of=condition, node distance=1.5cm] (body) {Krop};
-            \node[statement, right of=condition] (after) {Senere kode};
-
-            \path [flow, ->] (previous.east) -- (condition.west);
-            \path [flow, ->] (condition.east) -- node[auto, swap] {false} (after.west);
-            \path [flow, <-] (condition.west) -- +(left:3mm) |- (body.west) ;
-            \path [flow, ->] (condition.east) -- +(right:3mm) |- node {true} (body.east);
-        \end{tikzpicture}
-        \caption{While-løkker}
-        \label{fig:while-loop-illustrated}
-        \end{figure}
-
 		\begin{JavaCode}{Et program der næsten kun består af en while-løkke. Den gennemgår 10 iterationer før den stopper. Læg mærke til at n er alle tal op til 10 på forskellige tidspunkter.}{lst:while-example-3}
 			int n = 1;
 			while (n <= 10) {
@@ -128,7 +128,7 @@
         program, der stoppede med at reagere, og var nød til at blive
         ``dræbt'', for at I kunne fortsætte. Det er præcis det samme
         med jeres egne programmer, hvis de indeholder uendelige
-        løkker. \footnote{Et relateret spørgsmål er, ``kan man lave et
+        løkker. \sillynotederp{Et relateret spørgsmål er, ``kan man lave et
         program, som siger, om et program stopper eller ej?''. Det er
         muligt at lave et program, som svarer for \emph{nogle}
         programmer, men umuligt at lave et som kan svare for
@@ -145,7 +145,7 @@
 		\end{JavaCode}
 
         Det giver sjældent mening, at have sådanne uendelige
-        løkker\footnote{De fleste programmer, du kører på din computer
+        løkker\sillynotederp{De fleste programmer, du kører på din computer
         eller smartphone har uendelige løkker, gemt dybt i koden, da
         disse programmer skal køre indtil brugeren lukker dem.}, og de
         fleste løkkers betingelser bliver \emph{falsk} på et
@@ -219,9 +219,12 @@
 		Strukturen af for-løkker er ret involveret, men det hjælper at
 		sammenligne med \JavaInline{while}-udtryk, og se hvordan forskellige
 		dele af koden som tidligere var spredt, nu er samlet.
-		
+        For-løkker er bare en anderledes måde at skrive while-løkker
+        på, hvor al informationen, som løkken anvender, samles på et
+        sted, og gør det derfor nemmere at læse koden.
+
 		\todo{skal involveret skiftes med kompliceret ?}
-		
+
         For-løkker inkluderer ``definitioner'', ``betingelse'',
         ``krop'' og ``opdatering''. Når en for-løkke først ses, vil
         definitionen køres. Denne sætter ofte en variabel til en
@@ -235,10 +238,6 @@
 				do-System.out.println(n + " linjer af ligegyldig data.");
 			}
 		\end{JavaCode}
-
-        For-løkker er bare en anderledes måde at skrive while-løkker
-        på, hvor al informationen, som løkken anvender, samles på et
-        sted, og gør det derfor nemmere at læse koden.
 
 		\begin{exercise}
             Brug en \JavaInline{for}-løkke til at summere tallene
@@ -255,9 +254,9 @@
 			at løse problemet på, og udledte formularen \(\frac{n\cdot(n+1)}{2}\).
 			Han svarede hurtigt \(5050\), og så måtte læreren finde på en anden
 			kedelig opgave.
-			
+
 			\todo{han indså nok mere ??}
-			
+
 			Brug en \emph{for-løkke} til at beregne \(1^2+2^2+\dots+100^2\).
 		\end{exercise}
 
@@ -302,19 +301,8 @@
         baseret på den, beslutte om vi vil videre. Dette løser
         \emph{do-while} udtryk på en pæn måde. Sammenlign
         \autoref{lst:dowhile-example-1} og
-        \autoref{lst:dowhile-example-2}. Se \autoref{fig:do-while-loop-illustrated}.
-
-		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
-			while (false) {
-				System.out.println("Hej med dig");
-			}
-		\end{JavaCode}
-
-		\begin{JavaCode}{Vil skrive ``Hej med dig'' en enkelt gang.}{lst:dowhile-example-2}
-			do {
-				System.out.println("Hej med dig");
-			} while (false)
-		\end{JavaCode}
+        \autoref{lst:dowhile-example-2}. Yderligere se eksempel
+        \autoref{dowhile-example-3} for et mere komplekst eksempel.
 
         \begin{figure}
         \center
@@ -332,9 +320,21 @@
             \path [flow]     (condition.east) -- +(right:3mm) |- node {true} (loop);
             \path [flow]     (body.west)      -- +(left:3mm)  |- (loop);
         \end{tikzpicture}
-        \caption{Do-while-løkker}
+        \caption{Illustration af en do ... while ... løkke.}
         \label{fig:do-while-loop-illustrated}
         \end{figure}
+
+		\begin{JavaCode}{Vil skrive ``Hej med dig'' en enkelt gang.}{lst:dowhile-example-2}
+			do {
+				System.out.println("Hej med dig");
+			} while (false)
+		\end{JavaCode}
+
+		\begin{JavaCode}{Vil aldrig skrive ``Hej med dig''.}{lst:dowhile-example-1}
+			while (false) {
+				System.out.println("Hej med dig");
+			}
+		\end{JavaCode}
 
 		For eksempel:
 
@@ -359,7 +359,7 @@
 
         \begin{JavaCode}{Kode, der anvender \texttt{continue} til kun at vise de lige tal. Læg mærke til at procenttegn giver resten, a divideret med b, også kaldet \texttt{modulo}.}{lst:unknown-a}
 			for (int i = 1; i <= 10; i++) {
-				if (i \% 2 == 0) continue;
+				if (i % 2 == 0) continue;
 				System.out.println(i);
 			}
 		\end{JavaCode}
@@ -370,7 +370,7 @@
 
 \section{Funktioner}
 
-    Sidste kapitel introducerede \emph{funktioner}\footnote{Også
+    Sidste kapitel introducerede \emph{funktioner}\sillynotederp{Også
     kaldet \emph{metoder} eller \emph{procedurer}.} som sorte-bokse,
     der gør arbejde for dig. For eksempel \JavaInline{Math.abs}, som
     giver den absolutte værdi af hvadend den bliver givet. I denne
@@ -386,17 +386,16 @@
 
 	\subsection{En funktions udseende}
 
-		I har allerede set en funktion, nemlig \JavaInline{main}-funktionen, som i
-		indtil videre har skrevet alle jeres programmer i:
-
 		\begin{JavaCode}{Main funktion}{lst:main-function}
 			public static void main(String[] args) {
 				// Ting her...
 			}
 		\end{JavaCode}
 
-		En funktion består af dens \emph{signatur} og dens \emph{krop}.
+		I har allerede set en funktion, nemlig \JavaInline{main}-funktionen, som i
+        indtil videre har skrevet alle jeres programmer, som \autoref{lst:main-function}.
 
+		En funktion består af dens \emph{signatur} og dens \emph{krop}.
         Dens signatur er \JavaInline{public static void main(String[] args)}
         delen.  Dette fortæller os lidt om funktionen: dens
         navn \JavaInline{main}; dens retur-værdi \JavaInline{void} (ingenting); og
@@ -417,7 +416,7 @@
         \JavaInline{return}, men \autoref{lst:guarenteed-random}
         skal have en, da den har en retur-type.
 
-		\begin{JavaCode}{xkcd 221}{lst:guarenteed-random}
+        \begin{JavaCode}{\todo{xkcd 221}}{lst:guarenteed-random}
 			public int getRandomNumber() {
 				return 4; // chosen by fair dice roll.
 			}
@@ -430,40 +429,35 @@
 
 	\subsection{Eksempel funktion: fakultet}
 
-        Hvis vi skulle skrive \emph{\gls{factorial}en} som en
-        funktion i Java, ville vi først spørge os selv: ``hvad
-        returnerer fakultet, og hvad er dens argumenter?'' Det virker
-        måske trivielt, i dette eksempel, men er stadig et vigtigt
+    \newcommand\fakultet[0]{\gls{fakultet}\xspace}
+    \newcommand\factorial[0]{\glslink{fakultet}{\JavaInline{factorial}}\xspace}
+
+        Hvis vi skulle skrive en \fakultet{}-funktion, som en funktion i
+        Java, ville vi først spørge os selv: ``hvad returnerer
+        \fakultet{}, og hvad er dens argumenter?'' Det virker måske
+        trivielt, i dette eksempel, men er stadig et vigtigt
         spørgsmål. Derefter skal vi spørge: ``Men hvad er det, den
         gør?''
 
-        Fakultet er defineret som \(a! = a \cdot (a-1) \cdot \dots
+        \Gls{fakultet} er defineret som \(a! = a \cdot (a-1) \cdot \dots
         \cdot 2 \cdot 1\), f.eks. \(5! = 5 \cdot 4 \cdot 3 \cdot 2
         \cdot 1\). Ud fra definitionen er det tydeligt, at den får et
         enkelt heltal, og giver et enkelt heltal tilbage. Så
-        \gls{factorial}ens signatur ser sådan ud:
-        \todo{Kan der skrives faktoren ?}
+        \factorial{} signaturen ser sådan ud som
+        \autoref{lst:factorial-signature}.
 
-		\begin{JavaCode}{Signaturen af en \gls{factorial}}{lst:factorial-signature}
+        \begin{JavaCode}{Signaturen af en \fakultet{}s funktion.}{lst:factorial-signature}
 			int factorial (int a)
 		\end{JavaCode}
 
-		Men hvad gør \gls{factorial}en? Den tager et heltal, og ganger det heltal og alle de mindre heltal sammen. F.eks. ville vi, som vist matematisk ovenfor, for $5$, gange $4$, $3$, osv. ned til $1$ sammen. Så vi får $5\cdot4\cdot3\cdot2\cdot1$. En verison af \gls{factorial}-kroppen kunne se ud som i \autoref{lst:factorial-body}.
-
-		\begin{JavaCode}{Kroppen af en \gls{factorial}}{lst:factorial-body}
+        \begin{JavaCode}{Kroppen af en \fakultet{}s funktion.}{lst:factorial-body}
 			int product = 1;
 			for (int i = a; i >= 1; i--)
 				product *= i;
 			return product;
 		\end{JavaCode}
 
-        Læg mærke til \JavaInline{return}-keywordet. Denne siger ``nu
-        er funktionen færdig'', og resultatet af funktionen er værdien
-        der kommer lige bag efter \JavaInline{return}.
-
-		Kombinationen af signaturen og kroppen resulterer i:
-
-		\begin{JavaCode}{En \gls{factorial}}{lst:factorial-function}
+        \begin{JavaCode}{En \fakultet{}s funktion.}{lst:factorial-function}
 			int factorial (int a) {
 				int product = 1;
 				for (int i = a; i >= 1; i--)
@@ -472,12 +466,23 @@
 			}
 		\end{JavaCode}
 
-        Nu kan man kalde overstående med eksempelvis
+        Men hvad gør \fakultet{}? Den tager et heltal, og ganger
+        det heltal og alle de mindre heltal sammen. F.eks. ville vi,
+        som vist ovenfor, gange alle tallene \(5, 4, \dots, 1\)
+        sammen. En version af \factorial{}-kroppen kunne se ud som
+        i \autoref{lst:factorial-body}. Læg mærke til
+        \JavaInline{return}-keywordet. Denne siger ``nu er funktionen
+        færdig'', og resultatet af funktionen er værdien der kommer
+        lige bag efter \JavaInline{return}. Kombinationen af
+        signaturen og kroppen resulterer i \autoref{lst:factorial-function}.
+
+        Nu kan man kalde \factorial{} med eksempelvis
         \JavaInline{factorial(5)}, og få svar tilbage, at dette er
-        \(120\). Det er vigtigt, at vide, at overstående kunne have set
-        meget anderledes ud, og stadig have været korrekt. Java har
-        mange koncepter, som er ekvivalente, og der er ingen bedste
-        måde at gøre ting på.\footnote{Det er derfor at folk kalder
+        \(120\). Det er vigtigt, at vide, at
+        \autoref{lst:factorial-function} kunne have set meget
+        anderledes ud, og stadig have været korrekt. Java har mange
+        begreber, som er ekvivalente, og der er ingen bedste måde at
+        gøre ting på.\sillynotederp{Det er derfor at folk kalder
         programmering en kunst.}
 
         \begin{exercise}
@@ -578,9 +583,10 @@
 
 	\subsection{Rekursion}
 
-        \autoref{ex:infinite-loop} involverer at lave en funktion, som kalder sig selv. Dette er lidt sejt, da man ofte ser matematiske formler som udtrykkes i
-        forhold til sig selv. For eksempel kan \gls{factorial}en
-        udtrykkes matematisk som:
+        \autoref{ex:infinite-loop} involverer at lave en funktion, som
+        kalder sig selv. Dette er lidt sejt, da man ofte ser
+        matematiske formler som udtrykkes i forhold til sig selv. For
+        eksempel kan \fakultet{}s funktionen udtrykkes matematisk som:
 
         \begin{equation}
             n! = \begin{cases}
@@ -600,7 +606,7 @@
         kan vi sagtens lave en version, som kalder sig selv rekursivt.
         Se \autoref{lst:factorial-recursive} nedenfor.
 
-        \begin{JavaCode}{Rekursiv Fakultet. Læg mærke til at koden ligner den matematiske definition.}{lst:factorial-recursive}
+        \begin{JavaCode}{Rekursiv \Gls{fakultet} funktion. Læg mærke til at koden ligner den matematiske definition.}{lst:factorial-recursive}
             public int factorial (int n) {
                 if (n == 1) return 1;
                 return n * factorial(n-1);
@@ -675,7 +681,7 @@
     \JavaInline{a[n]}.  Lister i Java er underlige, de er nemlig
     nul-indekseret. Det betyder at det første element i listen har
     index \(0\), det andet element har index \(1\),
-    ovs.\footnote{Tilbage i 1960erne, var det vigtigt at bruge
+    ovs.\sillynotederp{Tilbage i 1960erne, var det vigtigt at bruge
     computere så effektivt som muligt. Nogle kloge hoveder
     fandt ud af, at det var hurtigere på deres computere at starte
     lister med 0. Nu-til-dags er det ikke meget hurtigere, og
@@ -683,13 +689,13 @@
 
     \begin{JavaCode}{Et eksempel på at arbejde med lister af tal. Læg specielt mærke til hvordan listen laves og nul-indekseringen.}{lst:array-example}
         public static void main(String[] args) {
-            int[] tal = new int[3];
-            tal[0] = 10;
-            tal[1] = 20;
-            tal[2] = 30;
+            int[] numbers = new int[3];
+            numbers[0] = 10;
+            numbers[1] = 20;
+            numbers[2] = 30;
             for (i = 0; i < 3; i++) {
-                System.out.println((i+1) + ". tal: "
-                                         + tal[i]);
+                System.out.println((i+1) + ". numbers: "
+                                         + numbers[i]);
             }
         }
     \end{JavaCode}
